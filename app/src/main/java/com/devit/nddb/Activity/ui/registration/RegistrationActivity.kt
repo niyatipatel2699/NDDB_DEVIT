@@ -2,6 +2,7 @@ package com.devit.nddb.Activity.ui.registration
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -19,7 +20,9 @@ import com.devit.nddb.databinding.ActivityRegistrationBinding
 import com.devit.nddb.model.StateCity
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.wajahatkarim3.imagine.utils.gone
 import com.wajahatkarim3.imagine.utils.showSnack
+import com.wajahatkarim3.imagine.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Matcher
 
@@ -53,6 +56,7 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         regBinding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(regBinding.root)
+        regBinding.progressReg.gone()
 
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
@@ -72,12 +76,17 @@ class RegistrationActivity : AppCompatActivity() {
 
         regBinding.btnSubmit.setOnClickListener {
 
+            if(registrationValidation()){
+                registrationViewModel.registerUser(first_name!!,
+                    last_name!!, user_type!!, state!!, city!!,gender,mobileNumber)
+            }
+
           /*  first_name = regBinding.edtFname.text.toString()
             last_name = regBinding.edtLname.text.toString()
             user_type = user_type_id
             state = state_id
             city = city_id
-*/
+*//*
             if(regBinding.edtFname.text.isEmpty())
             {
                 regBinding.relRegistration.showSnack(getString(R.string.validation_first_name))
@@ -110,7 +119,7 @@ class RegistrationActivity : AppCompatActivity() {
                 city = city_id
                 registrationViewModel.registerUser(first_name!!,
                     last_name!!, user_type!!, state!!, city!!,gender,mobileNumber)
-            }
+            }*/
            /* registrationViewModel.registerUser(first_name!!,
                 last_name!!, user_type!!, state!!, city!!,gender,mobileNumber)*/
 
@@ -157,6 +166,39 @@ class RegistrationActivity : AppCompatActivity() {
         })
     }
 
+    private fun registrationValidation(): Boolean {
+
+        return when {
+            TextUtils.isEmpty(regBinding.edtFname.getText().toString()) -> {
+                regBinding.relRegistration.showSnack(getString(R.string.validation_first_name))
+                return false
+            }
+            TextUtils.isEmpty(regBinding.edtLname.getText().toString()) -> {
+                regBinding.relRegistration.showSnack(getString(R.string.validation_last_name))
+                return false
+            }
+            user_type_id == null -> {
+                regBinding.relRegistration.showSnack(getString(R.string.select_usertype))
+                return false
+            }
+            state_id == null -> {
+                regBinding.relRegistration.showSnack(getString(R.string.select_state))
+                return false
+            }
+            city_id == null -> {
+                regBinding.relRegistration.showSnack(getString(R.string.select_city))
+                return false
+            }
+            gender == null -> {
+                regBinding.relRegistration.showSnack(getString(R.string.select_gender))
+                return false
+            }
+            else -> {
+                true
+            }
+        }
+    }
+
     private fun setEventListener() {
         regBinding.autoUsertype.setOnItemClickListener { adapterView, view, position, id ->
             val list: UserTypeData = userTypeList.get(position)
@@ -187,13 +229,16 @@ class RegistrationActivity : AppCompatActivity() {
         registrationViewModel.uiStateLiveData.observe(this) { state ->
             when (state) {
                 is LoadingState -> {
+                    regBinding.progressReg.visible()
                 }
 
                 is ContentState -> {
+                    regBinding.progressReg.gone()
                 }
 
                 is ErrorState -> {
-                    regBinding.relRegistration.showSnack(state.message!!)
+                    regBinding.progressReg.gone()
+                    regBinding.relRegistration.showSnack(state.message)
                 }
             }
         }

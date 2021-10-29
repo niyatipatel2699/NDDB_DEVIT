@@ -51,7 +51,7 @@ class RegistrationModel @Inject constructor(
         gender: String?,
         mobileNumber: String?,
     ) {
-
+        _uiState.postValue(LoadingState)
         viewModelScope.launch {
             registrationRepository.registerUser(first_name,last_name,user_type,state,city,
                 gender!!,mobileNumber!!,1).collect { dataState ->

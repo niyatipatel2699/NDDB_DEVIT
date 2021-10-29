@@ -30,7 +30,7 @@ class OtpViewModel @Inject constructor(
     val otpResponseLiveData : LiveData<OtpResponse> = _otpResponse
 
     fun otpValidation(/*otp : String,*/mobileNumber : String){
-
+        _uiState.postValue(LoadingState)
         viewModelScope.launch {
             otpRepository.otpValidation("0000",mobileNumber).collect { otpValidation ->
                 when (otpValidation) {
