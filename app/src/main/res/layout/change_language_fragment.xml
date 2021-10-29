@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/choose_lan"
+    android:id="@+id/changeRel"
     tools:context=".Activity.ChooseLanguageActivity">
 
     <RelativeLayout
@@ -49,6 +50,15 @@
             android:text="@string/next"
             android:fontFamily="@font/nunito_extrabold"
             android:textColor="@color/white" />
+
+        <ProgressBar
+            android:id="@+id/progressLanguage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            tools:ignore="MissingConstraints"
+            tools:visibility="gone" />
+
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

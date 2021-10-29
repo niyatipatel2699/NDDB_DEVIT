@@ -56,8 +56,9 @@ class LoginActivity : AppCompatActivity() {
             val r: Pattern = Pattern.compile(pattern)
 
             if (loginBinding.edtMobilenum.getText().toString().isEmpty()) {
-                Toast.makeText(this, getString(R.string.enter_mobile_number), Toast.LENGTH_SHORT)
-                    .show()
+                /*Toast.makeText(this, getString(R.string.enter_mobile_number), Toast.LENGTH_SHORT)
+                    .show()*/
+                loginBinding.relMain.showSnack(getString(R.string.enter_mobile_number))
             } else if (!loginBinding.edtMobilenum.getText().toString().isEmpty()) {
                 m = r.matcher(loginBinding.edtMobilenum.getText().toString().trim())
                 if (m!!.find()) {

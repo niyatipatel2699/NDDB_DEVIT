@@ -86,15 +86,18 @@ class RegistrationActivity : AppCompatActivity() {
             {
                 regBinding.relRegistration.showSnack(getString(R.string.validation_last_name))
             }
-            else if(state_id!!.isEmpty())
+            else if(user_type_id == null){
+                regBinding.relRegistration.showSnack(getString(R.string.select_usertype))
+            }
+            else if(state_id == null)
             {
                 regBinding.relRegistration.showSnack(getString(R.string.validation_state))
             }
-            else if(city_id!!.isEmpty())
+            else if(city_id == null)
             {
                 regBinding.relRegistration.showSnack(getString(R.string.validation_city))
             }
-            else if (gender!!.isEmpty())
+            else if (gender == null)
             {
                 regBinding.relRegistration.showSnack(getString(R.string.select_gender))
             }
