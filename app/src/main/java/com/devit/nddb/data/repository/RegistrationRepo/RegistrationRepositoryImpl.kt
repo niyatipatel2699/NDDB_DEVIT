@@ -23,8 +23,10 @@ import com.devit.nddb.data.remote.responses.Registration.DistrictResponse
 import com.devit.nddb.data.remote.responses.Registration.RegistrationResponse
 import com.devit.nddb.data.remote.responses.Registration.StateResponse
 import com.devit.nddb.data.remote.responses.Registration.UserTypeResponse
+import com.devit.nddb.data.remote.responses.StepCountResponse
 import com.wajahatkarim3.imagine.data.DataState
 import com.wajahatkarim3.imagine.data.remote.*
+import com.wajahatkarim3.imagine.data.room.entity.Steps
 import com.wajahatkarim3.imagine.utils.StringUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -158,6 +160,37 @@ class RegistrationRepositoryImpl @Inject constructor(
                 }
             }
         } as Flow<DataState<RegistrationResponse>>
+
+    }
+
+
+    override suspend fun stepCount(
+        stepsList : List<Steps>
+    ): Flow<DataState<StepCountResponse>> {
+
+        return flow {
+            apiService.stepCount(stepsList
+               ).apply {
+                this.onSuccessSuspend {
+                    data?.let {
+                        emit(DataState.success(it))
+                    }
+                }
+                // handle the case when the API request gets an error response.
+                // e.g. internal server error.
+            }.onErrorSuspend {
+                emit(DataState.error<StepCountResponse>(message()))
+
+                // handle the case when the API request gets an exception response.
+                // e.g. network connection error.
+            }.onExceptionSuspend {
+                if (this.exception is IOException) {
+                    emit(DataState.error<StepCountResponse>(stringUtils.noNetworkErrorMessage()))
+                } else {
+                    emit(DataState.error<StepCountResponse>(stringUtils.somethingWentWrong()))
+                }
+            }
+        } as Flow<DataState<StepCountResponse>>
 
     }
 }

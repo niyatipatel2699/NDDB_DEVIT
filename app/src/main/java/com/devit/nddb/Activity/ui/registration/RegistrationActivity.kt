@@ -66,7 +66,7 @@ class RegistrationActivity : AppCompatActivity() {
         initObservations()
         setEventListener()
 
-        regBinding.edtPhNo.setText(mobileNumber)
+        regBinding.tvRegMobile.setText(mobileNumber)
 
         regBinding.toolbar.tvToolbartitle.setText(R.string.registration)
         regBinding.toolbar.ivHome.setVisibility(View.INVISIBLE)
@@ -285,6 +285,10 @@ class RegistrationActivity : AppCompatActivity() {
                         ArrayAdapter(this, R.layout.dropdown_menu, R.id.textView, cityList)
                     regBinding.autoCity.setAdapter(cityArrayAdapter)
                 }
+            }
+            else
+            {
+                regBinding.relRegistration.showSnack(getString(R.string.no_city_msg))
             }
 
         }

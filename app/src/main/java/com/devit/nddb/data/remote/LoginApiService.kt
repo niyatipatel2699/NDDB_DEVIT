@@ -19,6 +19,8 @@ import com.devit.nddb.data.remote.responses.BaseResponse
 import com.devit.nddb.data.remote.responses.Language.LanguageResponse
 import com.devit.nddb.data.remote.responses.OtpValidation.OtpResponse
 import com.devit.nddb.data.remote.responses.Registration.*
+import com.devit.nddb.data.remote.responses.StepCountResponse
+import com.wajahatkarim3.imagine.data.room.entity.Steps
 import retrofit2.http.*
 
 interface LoginApiService {
@@ -65,6 +67,13 @@ interface LoginApiService {
         @Field("phone_number") phone_number : String,
         @Field("is_Registered") is_registered : Int
     ) : ApiResponse<RegistrationResponse>
+
+    @FormUrlEncoded
+    @POST("api/v1/stepscount/create")
+    suspend fun stepCount(
+        @Field("data") stepsList : List<Steps>,
+
+        ) : ApiResponse<StepCountResponse>
 
 
 

@@ -18,8 +18,16 @@ import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.devit.nddb.Activity.DrawerActivity
 import com.devit.nddb.BuildConfig
+import com.devit.nddb.MySharedPreferences
 import com.devit.nddb.R
 import com.devit.nddb.utils.StepDetector
+import com.wajahatkarim3.imagine.data.room.DatabaseBuilder
+import com.wajahatkarim3.imagine.data.room.DatabaseHelper
+import com.wajahatkarim3.imagine.data.room.DatabaseHelperImpl
+import com.wajahatkarim3.imagine.data.room.entity.Steps
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 class AutoStartService : Service, SensorEventListener, StepListener {
@@ -34,6 +42,8 @@ class AutoStartService : Service, SensorEventListener, StepListener {
     var running = false
     private var simpleStepDetector: StepDetector? = null
 
+    private lateinit var dbHelper: DatabaseHelper
+
     constructor(context: Context?) {
         Log.i(TAG, "AutoStartService: Here we Go!!!!!")
     }
@@ -43,6 +53,7 @@ class AutoStartService : Service, SensorEventListener, StepListener {
     override fun onCreate() {
         super.onCreate()
         val prfs = getSharedPreferences("AUTHENTICATION_FILE_NAME", MODE_PRIVATE)
+        dbHelper= DatabaseHelperImpl(DatabaseBuilder.getInstance(this))
         stepsWalked = prfs.getString("steps", "0")!!.toInt()
         val notificationIntent = Intent(this, DrawerActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(
@@ -176,6 +187,12 @@ class AutoStartService : Service, SensorEventListener, StepListener {
         stepsWalked++
 //        Toast.makeText(this, "STEPS  $stepsWalked", Toast.LENGTH_SHORT).show()
         broadcastActionBazSteps(this, stepsWalked.toString())
+        GlobalScope.launch (Dispatchers.Main) {
+            var lat= MySharedPreferences.getMySharedPreferences()!!.latitude
+            var lng= MySharedPreferences.getMySharedPreferences()!!.longitude
+            var address= MySharedPreferences.getMySharedPreferences()!!.longitude
+            dbHelper.insertSteps(Steps(Date(),stepsWalked,address,lat,lng,false))
+        }
 
         /* ADD STEPS IN SHARED PREFERENCE */
         val preferences: SharedPreferences = this.getSharedPreferences(

@@ -38,8 +38,17 @@ class SplashActivity : AppCompatActivity() {
             }
             else
             {
-                startActivity(Intent(this, ChooseLanguageActivity::class.java))
-                finish()
+                if (MySharedPreferences.getMySharedPreferences()!!.isLanguageSelected == true)
+                {
+                    startActivity(Intent(this, LoginActivity ::class.java))
+                    finish()
+                }
+                else
+                {
+                    startActivity(Intent(this, ChooseLanguageActivity::class.java))
+                    finish()
+                }
+
             }
            /* if (MySharedPreferences.getMySharedPreferences()!!.isLanguageSelected == true) {
                     startActivity(Intent(this,LoginActivity ::class.java))

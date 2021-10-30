@@ -101,6 +101,18 @@ class MySharedPreferences internal constructor(context: Context, gson: Gson) {
             editor.putString(RestConstant.DISTRICT, district).apply()
         }
 
+    var latitude: String
+        get() = sharedPreferences.getString(RestConstant.LATITUDE, "")!!
+        set(district) {
+            editor.putString(RestConstant.LATITUDE, district).apply()
+        }
+
+    var longitude: String
+        get() = sharedPreferences.getString(RestConstant.LONGITUDE, "")!!
+        set(district) {
+            editor.putString(RestConstant.LONGITUDE, district).apply()
+        }
+
     companion object {
         private var mySharedPreferences: MySharedPreferences? = null
 

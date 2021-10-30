@@ -22,7 +22,9 @@ import com.devit.nddb.data.remote.responses.Registration.DistrictResponse
 import com.devit.nddb.data.remote.responses.Registration.RegistrationResponse
 import com.devit.nddb.data.remote.responses.Registration.StateResponse
 import com.devit.nddb.data.remote.responses.Registration.UserTypeResponse
+import com.devit.nddb.data.remote.responses.StepCountResponse
 import com.wajahatkarim3.imagine.data.DataState
+import com.wajahatkarim3.imagine.data.room.entity.Steps
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -44,5 +46,7 @@ interface RegistrationRepository {
         phone_number: String,
         isRegistered: Int
     ): Flow<DataState<RegistrationResponse>>
+
+    suspend fun stepCount(stepsList : List<Steps>): Flow<DataState<StepCountResponse>>
 //    suspend fun searchPhotos(query: String, pageNumber: Int, pageSize: Int): Flow<DataState<List<PhotoModel>>>
 }
