@@ -18,4 +18,6 @@ object RestConstant {
     const val IS_LANG_SELECTED = "isLanguageSelected"
     const val LANG_NAME = "lang_name"
     const val GENDER = "gender"
+    const val LATITUDE = "latitude"
+    const val LONGITUDE = "longitude"
 }
