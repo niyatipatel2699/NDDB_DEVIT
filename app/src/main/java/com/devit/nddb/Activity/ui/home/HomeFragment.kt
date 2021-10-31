@@ -16,13 +16,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.devit.nddb.Activity.DrawerActivity
 import com.devit.nddb.Activity.FacilitatorActivity
+import com.devit.nddb.Activity.ui.event.EventViewModel
 import com.devit.nddb.Activity.ui.login.LoginActivity
+import com.devit.nddb.Activity.ui.registration.RegistrationModel
 import com.devit.nddb.Adapter.slider_adapter
 import com.devit.nddb.BuildConfig
 import com.devit.nddb.MySharedPreferences
@@ -43,12 +48,14 @@ import com.wajahatkarim3.imagine.data.room.DatabaseBuilder
 import com.wajahatkarim3.imagine.data.room.DatabaseHelper
 import com.wajahatkarim3.imagine.data.room.DatabaseHelperImpl
 import com.wajahatkarim3.imagine.data.room.entity.Steps
+import com.wajahatkarim3.imagine.utils.showSnack
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
-
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     var url1 = "https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg"
@@ -92,7 +99,8 @@ class HomeFragment : Fragment() {
      */
     private var mRequestingLocationUpdates: Boolean = false
 
-    private lateinit var homeViewModel: HomeViewModel
+   // private lateinit var homeViewModel: HomeViewModel
+   private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -101,14 +109,15 @@ class HomeFragment : Fragment() {
 
     private lateinit var dbHelper: DatabaseHelper
 
+   // private val registrationViewModel by viewModels<HomeViewModel>()
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -124,7 +133,7 @@ class HomeFragment : Fragment() {
         GlobalScope.launch (Dispatchers.Main) {
             dbHelper= activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
             var list=dbHelper.getStepsOnlyNotPass()
-
+            homeViewModel.stepCount(list)
             /*list.forEach {
                 //System.out.print(it)
                 var tempList:List<Steps> = emptyList()
@@ -135,13 +144,15 @@ class HomeFragment : Fragment() {
             }*/
         }
 
+
+
         return root
     }
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+//        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
 
         sliderDataArrayList.add(SliderData(url1))
@@ -180,6 +191,28 @@ class HomeFragment : Fragment() {
         if (!checkPlayServices()) return
         getDeviceLocation()
 
+        activity?.let {
+            homeViewModel.stepCountResponseLiveData.observe(it) { stepCountResponse ->
+                if (stepCountResponse.status == 1) {
+                    //Log.e("success",loginResponse.message!!)
+
+                    GlobalScope.launch (Dispatchers.Main) {
+                        dbHelper= activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
+                        var list=dbHelper.getStepsOnlyNotPass()
+                        list.forEach {
+                            if(!it.ispass)
+                            {
+                                dbHelper.updateSteps(it.id)
+                            }
+                        }
+                    }
+                } else {
+                    stepCountResponse.message?.let {
+                        //  binding.relRegistration.showSnack(it)
+                    }
+                }
+            }
+        }
 
     }
 

@@ -22,8 +22,12 @@ interface StepsDao {
     @Query("select * from Steps")
     fun getSteps(): List<Steps>
 
-    @Query("select * from Steps where ispass='false'")
+    @Query("select * from Steps where ispass=('false')")
     fun getStepsOnlyNotPass(): List<Steps>
+
+
+    @Query("UPDATE Steps SET ispass='true' WHERE id =:tblId")
+    fun updateItem(tblId:Int)
 
     /*@Query("SELECT * FROM Steps")
     suspend fun getAll(): List<Steps>

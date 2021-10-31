@@ -9,8 +9,10 @@ import com.devit.nddb.data.remote.responses.Registration.DistrictResponse
 import com.devit.nddb.data.remote.responses.Registration.RegistrationResponse
 import com.devit.nddb.data.remote.responses.Registration.StateResponse
 import com.devit.nddb.data.remote.responses.Registration.UserTypeResponse
+import com.devit.nddb.data.remote.responses.StepCountResponse
 import com.devit.nddb.data.repository.Registration.RegistrationRepository
 import com.wajahatkarim3.imagine.data.DataState
+import com.wajahatkarim3.imagine.data.room.entity.Steps
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -35,6 +37,10 @@ class RegistrationModel @Inject constructor(
 
     private var _cityResponse = MutableLiveData<DistrictResponse>()
     val cityResponseLiveData: LiveData<DistrictResponse> = _cityResponse
+
+
+    private var _stepCountResponse = MutableLiveData<StepCountResponse>()
+    val stepCountResponseLiveData : LiveData<StepCountResponse> = _stepCountResponse
 
     init {
         fetchUserType()
@@ -130,6 +136,7 @@ class RegistrationModel @Inject constructor(
             }
         }
     }
+
 
 
 }

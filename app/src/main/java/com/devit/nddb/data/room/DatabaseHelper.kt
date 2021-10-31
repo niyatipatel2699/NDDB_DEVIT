@@ -9,6 +9,8 @@ interface DatabaseHelper {
 
     suspend fun getStepsOnlyNotPass(): List<Steps>
 
+    suspend fun updateSteps(id:Int)
+
     suspend fun insertSteps(steps:Steps)
 
 }

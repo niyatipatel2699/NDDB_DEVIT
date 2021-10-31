@@ -16,6 +16,8 @@
 package com.wajahatkarim3.imagine.di.modules
 
 import android.app.Application
+import com.devit.nddb.data.repository.HomeRepo.HomeRepository
+import com.devit.nddb.data.repository.HomeRepo.HomeRepositoryImpl
 import com.devit.nddb.data.repository.Language.LanguageRepository
 import com.devit.nddb.data.repository.Language.LanguageRepositoryImpl
 import com.devit.nddb.data.repository.OtpValidation.OtpRepository
@@ -68,5 +70,11 @@ class RepositoryModule {
     @Provides
     fun provideRegistrationRepository(stringUtils: StringUtils, apiService: LoginApiService): RegistrationRepository {
         return RegistrationRepositoryImpl(stringUtils, apiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideHomeRepository(stringUtils: StringUtils, apiService: LoginApiService): HomeRepository {
+        return HomeRepositoryImpl(stringUtils, apiService)
     }
 }

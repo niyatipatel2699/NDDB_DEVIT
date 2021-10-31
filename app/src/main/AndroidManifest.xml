@@ -70,6 +70,15 @@
             android:exported="true"
             android:label="RestartServiceWhenStopped"
             android:permission="TODO" />
+
+        <receiver
+            android:name=".brodcastreceiver.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.devit.nddb.brodcastreceiver.AlarmReceiver" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

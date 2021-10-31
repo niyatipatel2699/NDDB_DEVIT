@@ -46,7 +46,5 @@ interface RegistrationRepository {
         phone_number: String,
         isRegistered: Int
     ): Flow<DataState<RegistrationResponse>>
-
-    suspend fun stepCount(stepsList : List<Steps>): Flow<DataState<StepCountResponse>>
 //    suspend fun searchPhotos(query: String, pageNumber: Int, pageSize: Int): Flow<DataState<List<PhotoModel>>>
 }
