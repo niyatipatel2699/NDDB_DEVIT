@@ -15,6 +15,7 @@
 */
 package com.devit.nddb.data.repository.Language
 
+import com.devit.nddb.data.remote.responses.BaseResponse
 import com.devit.nddb.data.remote.responses.Language.LanguageResponse
 import com.wajahatkarim3.imagine.data.DataState
 import kotlinx.coroutines.flow.Flow
@@ -26,5 +27,6 @@ import kotlinx.coroutines.flow.Flow
  */
 interface LanguageRepository {
     suspend fun getLanguage(): Flow<DataState<LanguageResponse>>
+    suspend fun updateLanguage(lang_id : Int) : Flow<DataState<LanguageResponse>>
 //    suspend fun searchPhotos(query: String, pageNumber: Int, pageSize: Int): Flow<DataState<List<PhotoModel>>>
 }

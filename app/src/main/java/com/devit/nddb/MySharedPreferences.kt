@@ -7,7 +7,7 @@ import com.google.gson.Gson
 
 class MySharedPreferences internal constructor(context: Context, gson: Gson) {
 
-    private val SP_NAME = "TempsEntryPrefs"
+    private val SP_NAME = "NDDBPrefs"
     private val editor: SharedPreferences.Editor
     var gson: Gson
     private lateinit var sharedPreferences: SharedPreferences
@@ -83,11 +83,11 @@ class MySharedPreferences internal constructor(context: Context, gson: Gson) {
             editor.putInt(RestConstant.LANG_ID, is_Registered).apply()
         }
 
-    var lang_name: String
+    /*var lang_name: String
         get() = sharedPreferences.getString(RestConstant.LANG_NAME, " ")!!
         set(lang_name) {
             editor.putString(RestConstant.LANG_NAME, lang_name).apply()
-        }
+        }*/
 
     var state: String
         get() = sharedPreferences.getString(RestConstant.STATE, "")!!

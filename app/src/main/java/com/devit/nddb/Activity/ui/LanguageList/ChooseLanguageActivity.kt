@@ -77,7 +77,7 @@ class ChooseLanguageActivity : AppCompatActivity() {
                 Log.e("langid-->",lang_id.toString())
                 MySharedPreferences.getMySharedPreferences()!!.isLanguageSelected = true
                 MySharedPreferences.getMySharedPreferences()!!.lang_id = lang_id!!.id
-                MySharedPreferences.getMySharedPreferences()!!.lang_name = lang_id!!.name.toString()
+                //MySharedPreferences.getMySharedPreferences()!!.lang_name = lang_id!!.name.toString()
 
                 /* if (lanAdapter.row_index == -1){
                      chooseLanguageBinding.relChooseLan.showSnack(getString(R.string.select_language))

@@ -15,6 +15,7 @@
 */
 package com.devit.nddb.data.repository.Language
 
+import com.devit.nddb.data.remote.responses.BaseResponse
 import com.devit.nddb.data.remote.responses.Language.LanguageResponse
 import com.wajahatkarim3.imagine.data.DataState
 import com.wajahatkarim3.imagine.data.remote.*
@@ -54,5 +55,24 @@ class LanguageRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun updateLanguage(lang_id: Int): Flow<DataState<LanguageResponse>> {
 
-}
+        return flow {
+            apiService.updateLanguage(lang_id).apply {
+                this.onSuccessSuspend {
+                    data?.let {
+                        emit(DataState.success(it))
+                    }
+                }
+            }.onErrorSuspend {
+                emit(DataState.error<LanguageResponse>(message()))
+            }.onExceptionSuspend {
+                if (this.exception is IOException) {
+                    emit(DataState.error<LanguageResponse>(stringUtils.noNetworkErrorMessage()))
+                } else {
+                    emit(DataState.error<LanguageResponse>(stringUtils.somethingWentWrong()))
+                }
+            }
+            }
+        }
+    }

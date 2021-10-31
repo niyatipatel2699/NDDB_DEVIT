@@ -19,6 +19,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devit.nddb.Activity.ui.change_language.ChangeLanguageUiState
 import com.devit.nddb.data.remote.responses.Language.LanguageResponse
 import com.devit.nddb.data.repository.Language.LanguageRepository
 import com.wajahatkarim3.imagine.data.DataState
@@ -34,6 +35,9 @@ class LanguageViewModel @Inject constructor(
 
     private var _uiState = MutableLiveData<LanguageUiState>()
     val uiStateLiveData: LiveData<LanguageUiState> = _uiState
+
+    private var ui_State = MutableLiveData<ChangeLanguageUiState>()
+    val lanStateLiveData : LiveData<ChangeLanguageUiState> = ui_State
 
     private var _lanResponse = MutableLiveData<LanguageResponse>()
     val lanResponseLiveData: LiveData<LanguageResponse> = _lanResponse

@@ -19,7 +19,9 @@ import com.devit.nddb.MySharedPreferences
 import com.devit.nddb.R
 import com.devit.nddb.databinding.ActivityDrawerBinding
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DrawerActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration

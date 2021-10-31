@@ -79,14 +79,18 @@ class OTPActivity : AppCompatActivity() {
         startSmsUserConsent()
 
         otpBinding.verifyOtpBtn.setOnClickListener {
-
-          /*  if(otpValidation()) {*/
+            if(otpValidation()) {
                 //otpViewModel.otpValidation(mobileNumber.toString())
-            /*}*/
-            val intent = Intent(this, RegistrationActivity::class.java)
+                MySharedPreferences.getMySharedPreferences()!!.isLogin = true
+                val intent = Intent(this, RegistrationActivity::class.java)
+                //val intent = Intent(this, DrawerActivity::class.java)
+                intent.putExtra("mobile",mobileNumber)
+                startActivity(intent)
+            }
+            /*val intent = Intent(this, RegistrationActivity::class.java)
             intent.putExtra("mobile",mobileNumber)
             startActivity(intent)
-        }
+*/        }
 
         otpBinding.textResend.setOnClickListener {
             startCountDown()
@@ -98,18 +102,30 @@ class OTPActivity : AppCompatActivity() {
         startCountDown()
     }
 
-   /* private fun otpValidation(): Boolean {
+    private fun otpValidation(): Boolean {
 
-       *//* if (! code!!.isNotEmpty()) {
-            otpBinding.relOTP.showSnack(getString(R.string.please_enter_))
-            return false
-        } else if (TextUtils.isEmpty(AppUtils.getText(loginBinding.activityLoginEdtPassword))) {
-            showSnackBar(activity, getString(R.string.please_enter_password))
-            return false
-        } else {
-            return true;
-        }*//*
-    }*/
+        return when {
+            TextUtils.isEmpty(otpBinding.otpEditBox1.getText().toString()) -> {
+                otpBinding.relOTP.showSnack(getString(R.string.please_enter_otp))
+                return false
+            }
+            TextUtils.isEmpty(otpBinding.otpEditBox2.getText().toString()) -> {
+                otpBinding.relOTP.showSnack(getString(R.string.please_enter_otp))
+                return false
+            }
+            TextUtils.isEmpty(otpBinding.otpEditBox3.getText().toString()) -> {
+                otpBinding.relOTP.showSnack(getString(R.string.please_enter_otp))
+                return false
+            }
+            TextUtils.isEmpty(otpBinding.otpEditBox4.getText().toString()) -> {
+                otpBinding.relOTP.showSnack(getString(R.string.please_enter_otp))
+                return false
+            }
+            else -> {
+                true
+            }
+        }
+    }
 
     private fun initObservations() {
 

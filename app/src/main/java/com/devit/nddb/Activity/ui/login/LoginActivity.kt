@@ -64,16 +64,10 @@ class LoginActivity : AppCompatActivity() {
                 if (m!!.find()) {
                     initObservations()
                     viewModel.loginWithOTP(loginBinding.edtMobilenum.text.toString(),lang_id)
-                    //Toast.makeText(this, "MATCH", Toast.LENGTH_LONG).show()
-                    /* val intent = Intent(this, OTPActivity::class.java)
-                    intent.putExtra("mobile", loginBinding.edtMobilenum.text.toString())
-                    startActivity(intent)*/
+
                 } else {
-                    Toast.makeText(
-                        this,
-                        getString(R.string.enter_valid_mobile_number),
-                        Toast.LENGTH_LONG
-                    ).show()
+                    //Toast.makeText(this, getString(R.string.enter_valid_mobile_number), Toast.LENGTH_LONG).show()
+                    loginBinding.relMain.showSnack(getString(R.string.enter_valid_mobile_number))
                 }
             } else {
                 /*  // call api.

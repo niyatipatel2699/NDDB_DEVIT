@@ -20,6 +20,7 @@ import com.devit.nddb.data.remote.responses.Language.LanguageResponse
 import com.devit.nddb.data.remote.responses.OtpValidation.OtpResponse
 import com.devit.nddb.data.remote.responses.Registration.*
 import com.devit.nddb.data.remote.responses.StepCountResponse
+import com.google.android.gms.common.api.Api
 import com.wajahatkarim3.imagine.data.room.entity.Steps
 import retrofit2.http.*
 
@@ -48,13 +49,9 @@ interface LoginApiService {
     @GET("api/v1/state/getState")
     suspend fun getState() : ApiResponse<StateResponse>
 
-    //https://fov9ery3oh.execute-api.ap-south-1.amazonaws.com/staging/api/v1/district/getDistrict/12
     @GET("api/v1/district/getDistrict/{stateId}")
     suspend fun getDistrict(@Path("stateId")  stateId:Int) : ApiResponse<DistrictResponse>
 
-    //https://fov9ery3oh.execute-api.ap-south-1.amazonaws.com/staging/api/v1/users/update-profile
-    //https://fov9ery3oh.execute-api.ap-south-1.amazonaws.com/staging/api/v1/users/update-profile
-    //https://fov9ery3oh.execute-api.ap-south-1.amazonaws.com/staging/api/v1/users/update-profile
     @FormUrlEncoded
     @POST("api/v1/users/update-profile")
     suspend fun registerUser(
@@ -67,6 +64,13 @@ interface LoginApiService {
         @Field("phone_number") phone_number : String,
         @Field("is_Registered") is_registered : Int
     ) : ApiResponse<RegistrationResponse>
+
+
+    @FormUrlEncoded
+    @POST("api/v1/userLanguage")
+    suspend fun updateLanguage(
+        @Field("lang_id") lang_id:Int) : ApiResponse<LanguageResponse>
+
 
     @FormUrlEncoded
     @POST("api/v1/stepscount/create")

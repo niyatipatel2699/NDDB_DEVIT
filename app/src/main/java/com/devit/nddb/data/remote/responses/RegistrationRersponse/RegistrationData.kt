@@ -9,5 +9,6 @@ data class RegistrationData (
     var lang_id : Int? = 0,
     var is_Registered : Int? = 0,
     var state: String? = null,
-    var district: String? = null
+    var district: String? = null,
+    var user_type : String? = null
 )

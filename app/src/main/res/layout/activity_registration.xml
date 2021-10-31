@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <LinearLayout
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_width="match_parent"

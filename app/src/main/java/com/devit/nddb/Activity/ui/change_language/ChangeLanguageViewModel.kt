@@ -3,17 +3,74 @@ package com.devit.nddb.Activity.ui.change_language
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.devit.nddb.Activity.ui.LanguageList.LanguageUiState
+import androidx.lifecycle.viewModelScope
+import com.devit.nddb.data.remote.responses.BaseResponse
 import com.devit.nddb.data.remote.responses.Language.LanguageResponse
+import com.devit.nddb.data.repository.Language.LanguageRepository
+import com.wajahatkarim3.imagine.data.DataState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ChangeLanguageViewModel : ViewModel() {
+@HiltViewModel
+class ChangeLanguageViewModel @Inject constructor(
+    private val languageRepository: LanguageRepository
+) : ViewModel() {
 
 
-    private var _uiState = MutableLiveData<ChangeLanguageUiState>()
-    val uiStateLiveData: LiveData<ChangeLanguageUiState> = _uiState
+    private var ui_State = MutableLiveData<ChangeLanguageUiState>()
+    val lanStateLiveData : LiveData<ChangeLanguageUiState> = ui_State
 
     private var _lanResponse = MutableLiveData<LanguageResponse>()
     val lanResponseLiveData: LiveData<LanguageResponse> = _lanResponse
 
-    // TODO: Implement the ViewModel
+    private var _change_lanResponse = MutableLiveData<LanguageResponse>()
+    val changelanResponseLiveData: LiveData<LanguageResponse> = _change_lanResponse
+
+
+    fun getLanguage() {
+
+        viewModelScope.launch {
+            languageRepository.getLanguage().collect { dataState ->
+                when (dataState) {
+                    is DataState.Success -> {
+                        // Any other page
+                        ui_State.postValue(ContentState)
+                        dataState.data.let {
+                            _lanResponse.postValue(it)
+                        }
+                    }
+
+                    is DataState.Error -> {
+                        ui_State.postValue(ErrorState(dataState.message))
+                    }
+
+                }
+            }
+        }
+    }
+
+    fun updateLanguage(langid : Int){
+
+        ui_State.postValue(LoadingState)
+        viewModelScope.launch {
+            languageRepository.updateLanguage(langid).collect { dataState ->
+                when (dataState) {
+                    is DataState.Success -> {
+                        // Any other page
+                        ui_State.postValue(ContentState)
+                        dataState.data.let {
+                            _change_lanResponse.postValue(it)
+                        }
+                    }
+
+                    is DataState.Error -> {
+                        ui_State.postValue(ErrorState(dataState.message))
+                    }
+
+                }
+            }
+        }
+    }
 }

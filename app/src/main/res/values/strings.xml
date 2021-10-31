@@ -6,7 +6,7 @@
     <string name="next">Next</string>
 
     <string name="enter_mobilenumber">Enter Mobile Number</string>
-    <string name="otp_will_be_send_to_mobile_number">OTP will be send to your mobile number</string>
+    <string name="otp_will_be_send_to_mobile_number">One-time verification OTP will be sent to the above mobile number</string>
     <string name="send_sms">send verifcation code</string>
     <string name="enter_mobile_number">Please enter mobile number</string>
     <string name="enter_valid_mobile_number">Please enter valid mobile number</string>
@@ -90,6 +90,8 @@
     <string name="select_gender">Select Gender</string>
     <string name="select_usertype">Select User Type</string>
     <string name="no_city_msg">no any city on selected state </string>
+    <string name="please_enter_otp">Please Enter OTP</string>
+    <string name="country_code">+91</string>
 
 
     <string-array name="user_type_array">
