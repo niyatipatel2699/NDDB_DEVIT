@@ -148,12 +148,12 @@
             android:layout_below="@+id/root_otp_layout"
             android:layout_centerHorizontal="true">
 
-            <!--  <TextView
+              <TextView
               android:id="@+id/text_otp_sec"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_centerHorizontal="true"
-              tools:text="Time remaining" />-->
+              tools:text="Time remaining" />
 
             <RelativeLayout
                 android:id="@+id/rl_resend"
@@ -182,6 +182,8 @@
                     android:fontFamily="@font/nunito_medium"
                     android:gravity="center_horizontal"
                     android:text="@string/resend"
+                    android:focusable="false"
+                    android:clickable="true"
                     android:textAllCaps="false"
                     android:textColor="@color/orange"
                     android:textSize="@dimen/_12sdp"

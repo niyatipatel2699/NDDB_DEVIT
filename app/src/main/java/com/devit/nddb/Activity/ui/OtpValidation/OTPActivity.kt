@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -80,20 +81,21 @@ class OTPActivity : AppCompatActivity() {
         otpBinding.verifyOtpBtn.setOnClickListener {
 
           /*  if(otpValidation()) {*/
-                otpViewModel.otpValidation(mobileNumber.toString())
+                //otpViewModel.otpValidation(mobileNumber.toString())
             /*}*/
-//            val intent = Intent(this, RegistrationActivity::class.java)
-//            intent.putExtra("mobile",mobileNumber)
-//            startActivity(intent)
+            val intent = Intent(this, RegistrationActivity::class.java)
+            intent.putExtra("mobile",mobileNumber)
+            startActivity(intent)
         }
 
         otpBinding.textResend.setOnClickListener {
+            startCountDown()
             otpViewModel.loginWithOTP(mobileNumber.toString(),1)
             /* Toast.makeText(this, getString(R.string.otp_will_be_send_to_mobile_number), Toast.LENGTH_SHORT)
                  .show()*/
         }
 
-//        startCountDown()
+        startCountDown()
     }
 
    /* private fun otpValidation(): Boolean {
@@ -256,19 +258,19 @@ class OTPActivity : AppCompatActivity() {
     }
 
 
-//    private fun startCountDown() {
-//        object : CountDownTimer(45000, 1000) {
-//            override fun onTick(millisUntilFinished: Long) {
-//                otpBinding.textOtpSec.setText(
-//                    "0:" + (millisUntilFinished / 1000).toString() + " " + "Remaining"
-//                )
-//            }
-//
-//            override fun onFinish() {
-//                otpBinding.textOtpResendOtp.setTextColor(resources.getColor(R.color.black))
-//                otpBinding.textOtpResendOtp.isEnabled = true
-//            }
-//        }.start()
-//    }
+    private fun startCountDown() {
+        object : CountDownTimer(60000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                otpBinding.textOtpSec.setText(
+                    "0:" + (millisUntilFinished / 1000).toString() + " " + "Remaining"
+                )
+            }
+
+            override fun onFinish() {
+                otpBinding.textOtpResendOtp.setTextColor(resources.getColor(R.color.black))
+                otpBinding.textOtpResendOtp.isEnabled = true
+            }
+        }.start()
+    }
 }
 

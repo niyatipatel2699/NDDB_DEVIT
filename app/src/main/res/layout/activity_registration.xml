@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relRegistration"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <include
@@ -12,21 +13,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:fillViewport="true"
+        android:background="@color/orange"
         android:overScrollMode="never"
-        android:scrollbars="none">
+        >
 
         <LinearLayout
+
+            android:layout_marginTop="@dimen/_20sdp"
             android:paddingLeft="@dimen/_10sdp"
-            android:paddingRight="@dimen/_100sdp"
+            android:paddingRight="@dimen/_10sdp"
             android:background="@drawable/registeration_rounded_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -118,6 +128,21 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundColor="@color/white">
+
+                <EditText
+                    android:id="@+id/edt_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:hint="@string/dob"
+                    android:inputType="number" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <!--<com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -153,7 +178,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_bold"
-                    android:padding="@dimen/_5sdp"
+                    android:padding="@dimen/_8sdp"
                     android:text="@string/gender"
                     android:textColor="@color/black" />
 
@@ -252,7 +277,7 @@
                 android:text="@string/next"
                 android:textAllCaps="false" />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
         android:id="@+id/progressReg"
