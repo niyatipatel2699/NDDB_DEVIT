@@ -21,6 +21,6 @@ object DatabaseBuilder {
             context.applicationContext,
             AppDatabase::class.java,
             "nddb_database"
-        ).build()
+        ).allowMainThreadQueries().build()
 
 }

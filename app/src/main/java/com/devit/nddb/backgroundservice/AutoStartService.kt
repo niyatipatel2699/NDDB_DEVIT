@@ -12,7 +12,6 @@ import android.os.Build
 import android.os.IBinder
 import android.os.ResultReceiver
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -28,6 +27,7 @@ import com.wajahatkarim3.imagine.data.room.entity.Steps
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.*
 
 class AutoStartService : Service, SensorEventListener, StepListener {
@@ -191,6 +191,10 @@ class AutoStartService : Service, SensorEventListener, StepListener {
             var lat= MySharedPreferences.getMySharedPreferences()!!.latitude
             var lng= MySharedPreferences.getMySharedPreferences()!!.longitude
             var address= MySharedPreferences.getMySharedPreferences()!!.longitude
+
+           /* val dateOnly = SimpleDateFormat("yyyy-MM-dd")
+            var formatedDate=dateOnly.format(Date())
+            val date = dateOnly.parse(formatedDate)*/
             dbHelper.insertSteps(Steps(Date(),stepsWalked,address,lat,lng,false))
         }
 

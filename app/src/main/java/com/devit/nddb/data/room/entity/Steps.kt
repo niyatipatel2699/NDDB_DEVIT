@@ -13,7 +13,7 @@ data class Steps(
     @ColumnInfo(name = "location") val location: String?,
     @ColumnInfo(name = "lat") val lat: String?,
     @ColumnInfo(name = "lng") val longitude: String?,
-    @ColumnInfo(name = "ispass") val ispass: Boolean?
+    @ColumnInfo(name = "ispass") val ispass: Boolean
 
 ){
     @PrimaryKey(autoGenerate = true)

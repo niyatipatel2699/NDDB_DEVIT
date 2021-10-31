@@ -39,6 +39,15 @@ import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.smarteist.autoimageslider.SliderView
+import com.wajahatkarim3.imagine.data.room.DatabaseBuilder
+import com.wajahatkarim3.imagine.data.room.DatabaseHelper
+import com.wajahatkarim3.imagine.data.room.DatabaseHelperImpl
+import com.wajahatkarim3.imagine.data.room.entity.Steps
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
 
@@ -90,6 +99,8 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     val binding get() = _binding!!
 
+    private lateinit var dbHelper: DatabaseHelper
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -109,6 +120,21 @@ class HomeFragment : Fragment() {
 //        homeViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
+
+        GlobalScope.launch (Dispatchers.Main) {
+            dbHelper= activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
+            var list=dbHelper.getStepsOnlyNotPass()
+
+            /*list.forEach {
+                //System.out.print(it)
+                var tempList:List<Steps> = emptyList()
+                if(!it.ispass)
+                {
+                    tempList.toMutableList().add(it)
+                }
+            }*/
+        }
+
         return root
     }
 
@@ -153,6 +179,8 @@ class HomeFragment : Fragment() {
 
         if (!checkPlayServices()) return
         getDeviceLocation()
+
+
     }
 
     override fun onDestroyView() {
@@ -923,6 +951,8 @@ class HomeFragment : Fragment() {
 
     private fun getLocationFunction(location: Location) {
         Log.d(TAG, "LOCATION Latitude ${location.latitude} Longitude${location.longitude}")
+        MySharedPreferences.getMySharedPreferences()!!.latitude =location.latitude.toString()
+        MySharedPreferences.getMySharedPreferences()!!.longitude =location.longitude.toString()
     }
 
 

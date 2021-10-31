@@ -22,6 +22,9 @@ interface StepsDao {
     @Query("select * from Steps")
     fun getSteps(): List<Steps>
 
+    @Query("select * from Steps where ispass='false'")
+    fun getStepsOnlyNotPass(): List<Steps>
+
     /*@Query("SELECT * FROM Steps")
     suspend fun getAll(): List<Steps>
 
