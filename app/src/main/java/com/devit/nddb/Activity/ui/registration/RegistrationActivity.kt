@@ -167,25 +167,29 @@ class RegistrationActivity : AppCompatActivity() {
     }
 
     private fun registrationValidation(): Boolean {
-
+        first_name = regBinding.edtFname.text.toString()
+        last_name = regBinding.edtLname.text.toString()
+        user_type = user_type_id
+        state = state_id
+        city = city_id
         return when {
-            TextUtils.isEmpty(regBinding.edtFname.getText().toString()) -> {
+            TextUtils.isEmpty(first_name) -> {
                 regBinding.relRegistration.showSnack(getString(R.string.validation_first_name))
                 return false
             }
-            TextUtils.isEmpty(regBinding.edtLname.getText().toString()) -> {
+            TextUtils.isEmpty(last_name) -> {
                 regBinding.relRegistration.showSnack(getString(R.string.validation_last_name))
                 return false
             }
-            user_type_id == null -> {
+            user_type == null -> {
                 regBinding.relRegistration.showSnack(getString(R.string.select_usertype))
                 return false
             }
-            state_id == null -> {
+            state == null -> {
                 regBinding.relRegistration.showSnack(getString(R.string.select_state))
                 return false
             }
-            city_id == null -> {
+            city == null -> {
                 regBinding.relRegistration.showSnack(getString(R.string.select_city))
                 return false
             }
