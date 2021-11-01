@@ -17,7 +17,7 @@ class walked_history_adapter(
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0.tv_Count?.text = stepslist[p1].step.toString()
-        val fDate: String = SimpleDateFormat("yyyy-MM-dd").format(stepslist[p1].date)
+        val fDate: String = stepslist[p1].date
         p0.tvDate?.text = fDate
     }
 

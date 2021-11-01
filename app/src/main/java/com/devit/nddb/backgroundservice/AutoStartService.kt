@@ -19,6 +19,7 @@ import com.devit.nddb.Activity.DrawerActivity
 import com.devit.nddb.BuildConfig
 import com.devit.nddb.MySharedPreferences
 import com.devit.nddb.R
+import com.devit.nddb.utils.Converters.Companion.FORMATTER
 import com.devit.nddb.utils.StepDetector
 import com.wajahatkarim3.imagine.data.room.DatabaseBuilder
 import com.wajahatkarim3.imagine.data.room.DatabaseHelper
@@ -43,6 +44,8 @@ class AutoStartService : Service, SensorEventListener, StepListener {
     private var simpleStepDetector: StepDetector? = null
 
     private lateinit var dbHelper: DatabaseHelper
+
+    var stepsId:Long=0;
 
     constructor(context: Context?) {
         Log.i(TAG, "AutoStartService: Here we Go!!!!!")
@@ -185,26 +188,33 @@ class AutoStartService : Service, SensorEventListener, StepListener {
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
     override fun step(timeNs: Long) {
         stepsWalked++
+        val preferences: SharedPreferences = this.getSharedPreferences(
+            "AUTHENTICATION_FILE_NAME",
+            Context.MODE_PRIVATE
+        )
 //        Toast.makeText(this, "STEPS  $stepsWalked", Toast.LENGTH_SHORT).show()
         broadcastActionBazSteps(this, stepsWalked.toString())
         GlobalScope.launch (Dispatchers.Main) {
             var lat= MySharedPreferences.getMySharedPreferences()!!.latitude
             var lng= MySharedPreferences.getMySharedPreferences()!!.longitude
             var address= MySharedPreferences.getMySharedPreferences()!!.longitude
-
-           /* val dateOnly = SimpleDateFormat("yyyy-MM-dd")
-            var formatedDate=dateOnly.format(Date())
-            val date = dateOnly.parse(formatedDate)*/
-            dbHelper.insertSteps(Steps(Date(),stepsWalked,address,lat,lng,false))
+            val currentDate = FORMATTER.format(Date())
+            var step=dbHelper.getStep(currentDate)
+            if(step!=null)
+            {
+                dbHelper.updatess(step.id,stepsWalked,address, lat, lng)
+            }
+            else
+            {
+                dbHelper.insertSteps(Steps(currentDate, stepsWalked, address, lat, lng, false))
+            }
         }
 
         /* ADD STEPS IN SHARED PREFERENCE */
-        val preferences: SharedPreferences = this.getSharedPreferences(
-            "AUTHENTICATION_FILE_NAME",
-            Context.MODE_PRIVATE
-        )
+
         val editor = preferences.edit()
         editor.putString("steps", stepsWalked.toString())
+
         editor.apply()
         /* ADD STEPS IN SHARED PREFERENCE */
 
