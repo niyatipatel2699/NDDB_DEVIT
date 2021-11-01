@@ -23,8 +23,8 @@ class OtpViewModel @Inject constructor(
     private var _uiState = MutableLiveData<OtpUiState>()
     val uiStateLiveData: LiveData<OtpUiState> = _uiState
 
-    private var _loginResponse = MutableLiveData<BaseResponse>()
-    val loginResponseLiveData: LiveData<BaseResponse> = _loginResponse
+  /*  private var _loginResponse = MutableLiveData<BaseResponse>()
+    val loginResponseLiveData: LiveData<BaseResponse> = _loginResponse*/
 
     private var _otpResponse = MutableLiveData<OtpResponse>()
     val otpResponseLiveData : LiveData<OtpResponse> = _otpResponse
@@ -59,7 +59,7 @@ class OtpViewModel @Inject constructor(
                         // Any other page
                         _uiState.postValue(ContentState)
                         dataState.data.let {
-                            _loginResponse.postValue(it)
+                            _otpResponse.postValue(it)
                         }
                     }
 

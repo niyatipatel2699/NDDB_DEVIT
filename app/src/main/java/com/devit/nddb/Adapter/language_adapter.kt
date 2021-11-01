@@ -15,7 +15,8 @@ import com.devit.nddb.data.remote.responses.Language.LanguageData
 
 class CustomRecyclerAdapter(
     val context: Context,
-    val languageData: ArrayList<LanguageData>
+    val languageData: ArrayList<LanguageData>,
+    val type: Int
 ) : RecyclerView.Adapter<CustomRecyclerAdapter.ViewHolder>() {
 
     var row_index = -1
@@ -31,18 +32,40 @@ class CustomRecyclerAdapter(
                 row_index=i
             }
         }*/
+
+
+
         if (row_index == p1) {
             p0.cardView.setCardBackgroundColor(Color.parseColor("#CA751B"))
             p0.txtTitle.setTextColor(Color.parseColor("#ffffff"))
         } else {
             p0.cardView.setCardBackgroundColor(Color.parseColor("#ffffff"))
             p0.txtTitle.setTextColor(Color.parseColor("#000000"))
+
+        }
+        if(type==2)
+        {
+            if (row_index == -1) {
+                if (langId == languageData[p1].id) {
+                    p0.cardView.setCardBackgroundColor(Color.parseColor("#CA751B"))
+                    p0.txtTitle.setTextColor(Color.parseColor("#ffffff"))
+                } else {
+                    p0.cardView.setCardBackgroundColor(Color.parseColor("#ffffff"))
+                    p0.txtTitle.setTextColor(Color.parseColor("#000000"))
+
+                }
+            }
         }
         p0.cardView!!.setOnClickListener {
-            row_index = p1
-            notifyDataSetChanged()
+            selectPostion(p1)
         }
 
+    }
+
+    fun selectPostion(pos:Int)
+    {
+        row_index = pos
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {

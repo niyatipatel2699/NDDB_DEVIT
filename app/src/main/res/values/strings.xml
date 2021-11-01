@@ -49,11 +49,14 @@
 
     <string name="message_no_network_connected_str">No network connected!</string>
     <string name="message_something_went_wrong_str">Something went wrong!</string>
-    <string name="your_total_step_walked">Your Total Step \nWalked</string>
-    <string name="your_rank">Your rank is</string>
-    <string name="among_participants">among all participants</string>
+    <string name="your_total_step_walked">Steps Walked</string>
+    <string name="your_rank">Congratulations! You currently rank\n</string>
+    <string name="among_participants">among all participants.</string>
+    <string name="thank_you">Thank you for your contribution. Keep walking.</string>
     <string name="log_in">Log In</string>
     <string name="for_the_best_experience_nwith_nddb_walkathos">For the best experience \nWith NDDB Walkathos</string>
+    <string name="virtual_walked">"Kadam for Kurien"is a virtual Walkathon to tribute the Milk Man of India - Dr. Verghese Kurien.</string>
+    <string name="contribute">To contribute your steps to the target of 200 million steps, click on start. To register your steps, click on stop once you have walked your mile.</string>
 
     <string name="error_alert">Alert</string>
     <string name="location_setting_cannot_be_fixed_here">Location settings are inadequate, and cannot be fixed here. Fix in Settings.</string>

@@ -77,14 +77,9 @@ class ChooseLanguageActivity : AppCompatActivity() {
                 Log.e("langid-->",lang_id.toString())
                 MySharedPreferences.getMySharedPreferences()!!.isLanguageSelected = true
                 MySharedPreferences.getMySharedPreferences()!!.lang_id = lang_id!!.id
-                //MySharedPreferences.getMySharedPreferences()!!.lang_name = lang_id!!.name.toString()
 
-                /* if (lanAdapter.row_index == -1){
-                     chooseLanguageBinding.relChooseLan.showSnack(getString(R.string.select_language))
-                 }*//*else {*/
                 val intent = Intent(this, LoginActivity::class.java)
-                intent.putExtra("lang_id",lang_id!!.id)
-                intent.putExtra("lan_name",lang_id.name)
+                intent.putExtra("lang_id",lanAdapter.row_index)
                 startActivity(intent)
                 finish()
             }
@@ -122,7 +117,7 @@ class ChooseLanguageActivity : AppCompatActivity() {
                 GridLayoutManager(this, 2, RecyclerView.VERTICAL, false).apply {
                     chooseLanguageBinding.rvEffectList.layoutManager = this
                 }
-                lanAdapter = CustomRecyclerAdapter(this, languageList!!)
+                lanAdapter = CustomRecyclerAdapter(this, languageList!!,1)
                 chooseLanguageBinding.rvEffectList.adapter = lanAdapter
 
             } else {

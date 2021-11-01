@@ -6,8 +6,12 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.devit.nddb.Activity.DrawerActivity
 import com.devit.nddb.Activity.ui.OtpValidation.OTPActivity
+import com.devit.nddb.Activity.ui.registration.RegistrationActivity
+import com.devit.nddb.MySharedPreferences
 import com.devit.nddb.R
+import com.devit.nddb.data.remote.responses.OtpValidation.OtpResponse
 import com.devit.nddb.databinding.ActivityLoginBinding
 import com.wajahatkarim3.imagine.ui.home.ContentState
 import com.wajahatkarim3.imagine.ui.home.ErrorState
@@ -28,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
     var pattern =
         "^\\s*(?:\\+?(\\d{1,3}))?[-. (]*(\\d{3})[-. )]*(\\d{3})[-. ]*(\\d{4})(?: *x(\\d+))?\\s*$"
     var m: Matcher? = null
-    var lang_id : Int? = null
+    var selected_lang_id : Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,23 +40,14 @@ class LoginActivity : AppCompatActivity() {
         setContentView(loginBinding.root)
         loginBinding.progressLogin.gone()
 
-        val bundle: Bundle? = intent.extras
+       /* val bundle: Bundle? = intent.extras
         if (bundle != null) {
-            lang_id = bundle.getInt("lang_id")
-        }
+            selected_lang_id = bundle.getInt("lang_id")
+
+        }*/
 
         loginBinding.verificationBtn.setOnClickListener {
-            /*val intent = Intent(this, OTPActivity::class.java)
-            startActivity(intent)*/
-            /* if (loginBinding.edtMobilenum.getText().toString().isEmpty()) {
-                Toast.makeText(this, getString(R.string.enter_mobile_number), Toast.LENGTH_SHORT)
-                    .show()
-            } else if (loginBinding.edtMobilenum.getText().length < 10) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.enter_valid_mobile_number),
-                    Toast.LENGTH_SHORT
-                ).show()*/
+
             val r: Pattern = Pattern.compile(pattern)
 
             if (loginBinding.edtMobilenum.getText().toString().isEmpty()) {
@@ -63,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
                 m = r.matcher(loginBinding.edtMobilenum.getText().toString().trim())
                 if (m!!.find()) {
                     initObservations()
-                    viewModel.loginWithOTP(loginBinding.edtMobilenum.text.toString(),lang_id)
+                    viewModel.loginWithOTP(loginBinding.edtMobilenum.text.toString(),MySharedPreferences.getMySharedPreferences()!!.lang_id)
 
                 } else {
                     //Toast.makeText(this, getString(R.string.enter_valid_mobile_number), Toast.LENGTH_LONG).show()
@@ -103,12 +98,27 @@ class LoginActivity : AppCompatActivity() {
                 intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
                 startActivity(intent)*/
             if (loginResponse.status == 1) {
-                val intent = Intent(this, OTPActivity::class.java)
-                intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
-                intent.putExtra("lang_id",lang_id)
+              /*  //val intent = Intent(this, OTPActivity::class.java)
+                val intent = Intent(this, DrawerActivity::class.java)
+                //intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
+               // intent.putExtra("lang_id",selected_lang_id)
                 Log.e("success",loginResponse.message!!)
                 startActivity(intent)
-                finish()
+                finish()*/
+                if(loginResponse.items!!.is_Registered == 1){
+                    setUserData(loginResponse)
+                    val intent = Intent(this, DrawerActivity::class.java)
+                    startActivity(intent)
+                    //finish()
+                }
+                else
+                {
+                    //  Log.e("data-->", validateOTP.items.toString())
+                    val intent = Intent(this, RegistrationActivity::class.java)
+                    intent.putExtra("mobile", loginResponse.items!!.user!!.phone_number)
+                    startActivity(intent)
+                    //finish()
+                }
             } else {
                 loginResponse.message?.let {
                     loginBinding.relMain.showSnack(it)
@@ -118,4 +128,20 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+        private fun setUserData(validateOTP : OtpResponse) {
+
+            MySharedPreferences.getMySharedPreferences()!!.isLogin = true
+            MySharedPreferences.getMySharedPreferences()!!.lang_id = validateOTP.items!!.user!!.lang_id
+            MySharedPreferences.getMySharedPreferences()!!.token = validateOTP.items!!.token.toString()
+            MySharedPreferences.getMySharedPreferences()!!.is_Registered = validateOTP.items!!.user!!.is_Registered
+            MySharedPreferences.getMySharedPreferences()!!.first_name = validateOTP.items!!.user!!.first_name.toString()
+            MySharedPreferences.getMySharedPreferences()!!.last_name = validateOTP.items!!.user!!.last_name.toString()
+            MySharedPreferences.getMySharedPreferences()!!.phone_number = validateOTP.items!!.user!!.phone_number.toString()
+            MySharedPreferences.getMySharedPreferences()!!.is_facilitator = validateOTP.items!!.user!!.is_facilitator
+            MySharedPreferences.getMySharedPreferences()!!.state = validateOTP.items!!.user!!.state.toString()
+            MySharedPreferences.getMySharedPreferences()!!.gender = validateOTP!!.items!!.user!!.gender.toString()
+            MySharedPreferences.getMySharedPreferences()!!.district = validateOTP.items!!.user!!.district.toString()
+            MySharedPreferences.getMySharedPreferences()!!.user_type = validateOTP!!.items!!.user!!.user_type.toString()
+
+        }
 }

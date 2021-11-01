@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.devit.nddb.Activity.DrawerActivity
 import com.devit.nddb.Activity.ui.login.LoginActivity
 import com.devit.nddb.Adapter.CustomRecyclerAdapter
 import com.devit.nddb.MySharedPreferences
@@ -130,10 +131,7 @@ class ChangeLanguageFragment : Fragment() {
                 languageList = lanResponse.items!! as ArrayList<LanguageData>
                var  gridLayoutManager:GridLayoutManager = GridLayoutManager(activity, 2, LinearLayoutManager.VERTICAL, false)
                 _binding!!.rvEffectList.layoutManager = gridLayoutManager
-                /*GridLayoutManager(this, 2, RecyclerView.VERTICAL, false).apply {
-
-                }*/
-                lanAdapter = CustomRecyclerAdapter(requireActivity(), languageList!!)
+                lanAdapter = CustomRecyclerAdapter(requireActivity(), languageList!!,2)
                 _binding!!.rvEffectList.adapter = lanAdapter
 
             } else {
@@ -151,8 +149,10 @@ class ChangeLanguageFragment : Fragment() {
                 _binding!!.changeRel.showSnack(lanResponse.message!!)
                 MySharedPreferences.getMySharedPreferences()!!.lang_id = updated_lang_id!!.id
 
-                val intent = Intent(activityContext, LoginActivity::class.java)
+                val intent = Intent(activityContext, DrawerActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
+
 
             } else {
                 lanResponse.message?.let {

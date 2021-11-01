@@ -26,12 +26,21 @@ import retrofit2.http.*
 
 interface LoginApiService {
 
-    @FormUrlEncoded
+  /*  @FormUrlEncoded
     @POST("api/v1/users/login-with-mobile-no")
     suspend fun loginWithOTP(
         @Field("phone_number") mobileNumber: String,
         @Field("lang_id") lang_id: Int?
     ): ApiResponse<BaseResponse>
+*/
+
+    @FormUrlEncoded
+    @POST("api/v1/users/login-with-mobile-no")
+    suspend fun loginWithOTP(
+        @Field("phone_number") mobileNumber: String,
+        @Field("lang_id") lang_id: Int?
+    ): ApiResponse<OtpResponse>
+
 
     @FormUrlEncoded
     @POST("api/v1/users/otp-validate")

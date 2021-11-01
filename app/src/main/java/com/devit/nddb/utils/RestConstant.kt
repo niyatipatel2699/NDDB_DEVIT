@@ -2,6 +2,7 @@ package com.devit.nddb.utils
 
 object RestConstant {
     //https://fov9ery3oh.execute-api.ap-south-1.amazonaws.com/staging/api/v1/district/getDistrict/12
+    //const val BASE_URLS = "https://fov9ery3oh.execute-api.ap-south-1.amazonaws.com/staging/"
     const val BASE_URLS = "https://fov9ery3oh.execute-api.ap-south-1.amazonaws.com/staging/"
 
     const val IS_LOGIN = "isLogin"

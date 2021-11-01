@@ -84,7 +84,7 @@
             <EditText
                 android:id="@+id/otp_edit_box1"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_70sdp"
+                android:layout_height="@dimen/_60sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:layout_weight="1"
                 android:background="@drawable/edittext_curve_bg"
@@ -100,7 +100,7 @@
             <EditText
                 android:id="@+id/otp_edit_box2"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_70sdp"
+                android:layout_height="@dimen/_60sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:layout_weight="1"
                 android:background="@drawable/edittext_curve_bg"
@@ -116,7 +116,7 @@
             <EditText
                 android:id="@+id/otp_edit_box3"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_70sdp"
+                android:layout_height="@dimen/_60sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:layout_weight="1"
                 android:background="@drawable/edittext_curve_bg"
@@ -132,7 +132,7 @@
             <EditText
                 android:id="@+id/otp_edit_box4"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_70sdp"
+                android:layout_height="@dimen/_60sdp"
                 android:layout_weight="1"
                 android:background="@drawable/edittext_curve_bg"
                 android:fontFamily="@font/nunito_bold"

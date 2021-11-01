@@ -20,6 +20,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devit.nddb.data.remote.responses.BaseResponse
+import com.devit.nddb.data.remote.responses.OtpValidation.OtpResponse
 import com.devit.nddb.utils.SingleLiveEvent
 import com.wajahatkarim3.imagine.data.DataState
 import com.wajahatkarim3.imagine.data.repository.LoginRepository
@@ -40,8 +41,11 @@ class LoginViewModel @Inject constructor(
     private var _uiState = MutableLiveData<LoginUiState>()
     val uiStateLiveData: LiveData<LoginUiState> = _uiState
 
-    private var _loginResponse = SingleLiveEvent<BaseResponse>()
-    val loginResponseLiveData: SingleLiveEvent<BaseResponse> = _loginResponse
+    /*private var _loginResponse = SingleLiveEvent<BaseResponse>()
+    val loginResponseLiveData: SingleLiveEvent<BaseResponse> = _loginResponse*/
+
+    private var _loginResponse = SingleLiveEvent<OtpResponse>()
+    val loginResponseLiveData: SingleLiveEvent<OtpResponse> = _loginResponse
 
     fun loginWithOTP(mobileNumber: String, lang_id: Int?) {
         _uiState.postValue(LoadingState)

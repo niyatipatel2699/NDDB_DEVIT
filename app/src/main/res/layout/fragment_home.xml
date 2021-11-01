@@ -15,7 +15,7 @@
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/slider"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
+            android:layout_height="@dimen/_130sdp"
             android:layout_centerInParent="true"
             app:sliderAnimationDuration="600"
             app:sliderAutoCycleDirection="back_and_forth"
@@ -39,16 +39,16 @@
 
         <RelativeLayout
             android:id="@+id/rl_ring"
-            android:layout_width="@dimen/_250sdp"
-            android:layout_height="@dimen/_250sdp"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/dashboard_ring">
 
             <ImageView
                 android:id="@+id/img_walk"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_above="@+id/tv_totalSteps"
                 android:layout_centerHorizontal="true"
                 android:padding="@dimen/_5sdp"
@@ -62,7 +62,7 @@
                 android:fontFamily="@font/nunito_bold"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_25sdp"
+                android:textSize="@dimen/_20sdp"
                 tools:text="1000" />
 
             <TextView
@@ -74,21 +74,42 @@
                 android:gravity="center"
                 android:text="@string/your_total_step_walked"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_10sdp" />
 
         </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_trophy"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_ring"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center"
+            android:src="@drawable/trophy" />
 
         <TextView
             android:id="@+id/tv_yourRank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_ring"
+            android:layout_below="@+id/iv_trophy"
             android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/nunito_semibold"
             android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp"
             tools:text="Your rank is 100 among all participants" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_yourRank"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/nunito_semibold"
+            android:gravity="center"
+            android:text="@string/thank_you"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10sdp" />
 
         <LinearLayout
             android:id="@+id/ll_gotoFacilitator"
@@ -97,6 +118,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:visibility="gone"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp">
 

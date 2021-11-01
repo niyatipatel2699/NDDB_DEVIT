@@ -42,11 +42,12 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initView() {
-        _binding!!.tvFLName.setText(MySharedPreferences.getMySharedPreferences()!!.first_name + " "+ MySharedPreferences.getMySharedPreferences()!!.last_name)
+       // _binding!!.tvFLName.setText(MySharedPreferences.getMySharedPreferences()!!.first_name + " "+ MySharedPreferences.getMySharedPreferences()!!.last_name)
         _binding!!.fragProfileFname.setText(MySharedPreferences.getMySharedPreferences()!!.first_name)
         _binding!!.fragProfileLname.setText(MySharedPreferences.getMySharedPreferences()!!.last_name)
         _binding!!.fragProfileUtype.setText(MySharedPreferences.getMySharedPreferences()!!.user_type)
         _binding!!.fragProfileState.setText(MySharedPreferences.getMySharedPreferences()!!.state)
+        _binding!!.fragmentProfileGenderTv.setText(MySharedPreferences.getMySharedPreferences()!!.gender)
         _binding!!.fragProfileDistrict.setText(MySharedPreferences.getMySharedPreferences()!!.district)
         _binding!!.fragProfileMobile.setText(MySharedPreferences.getMySharedPreferences()!!.phone_number)
     }
