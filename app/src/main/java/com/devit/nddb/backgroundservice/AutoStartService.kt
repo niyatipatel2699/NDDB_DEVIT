@@ -202,7 +202,7 @@ class AutoStartService : Service, SensorEventListener, StepListener {
             var step=dbHelper.getStep(currentDate)
             if(step!=null)
             {
-                dbHelper.updatess(step.id,stepsWalked,address, lat, lng)
+                dbHelper.updateSteps(step.id,stepsWalked,address, lat, lng,step.ispass)
             }
             else
             {

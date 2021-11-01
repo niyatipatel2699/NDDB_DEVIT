@@ -12,10 +12,10 @@ interface DatabaseHelper {
 
     suspend fun getStep(date: String): Steps
 
-    suspend fun updateSteps(id:Int)
+    /*suspend fun updateSteps(id:Int)*/
 
     suspend fun insertSteps(steps:Steps):Long
 
-    suspend fun updatess(id:Int,steps: Int,address:String, lat:String, lng:String)
+    suspend fun updateSteps(id:Int,steps: Int,address:String, lat:String, lng:String,ispass:Boolean)
 
 }

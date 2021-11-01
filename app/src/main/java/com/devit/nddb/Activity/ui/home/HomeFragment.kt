@@ -133,15 +133,11 @@ class HomeFragment : Fragment() {
         GlobalScope.launch (Dispatchers.Main) {
             dbHelper= activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
             var list=dbHelper.getStepsOnlyNotPass()
-            homeViewModel.stepCount(list)
-            /*list.forEach {
-                //System.out.print(it)
-                var tempList:List<Steps> = emptyList()
-                if(!it.ispass)
-                {
-                    tempList.toMutableList().add(it)
-                }
-            }*/
+            if(list.size > 0 )
+            {
+                homeViewModel.stepCount(list)
+            }
+
         }
 
 
@@ -202,7 +198,7 @@ class HomeFragment : Fragment() {
                         list.forEach {
                             if(!it.ispass)
                             {
-                                dbHelper.updateSteps(it.id)
+                                dbHelper.updateSteps(it.id,it.step!!,it.location!!,it.lat!!,it.longitude!!,true)
                             }
                         }
                     }
