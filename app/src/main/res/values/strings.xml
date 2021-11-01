@@ -2,7 +2,7 @@
     <string name="app_name">NDDB</string>
 
     <string name="welcome">Welcome MDDB App</string>
-    <string name="choose_lan">Choose your display language</string>
+    <string name="choose_lan">Choose your language</string>
     <string name="next">Next</string>
 
     <string name="enter_mobilenumber">Enter Mobile Number</string>
@@ -17,11 +17,11 @@
     <string name="resend_otp">Didn’t receive OTP?</string>
     <string name="resend"> Resend code</string>
 
-    <string name="fname">First name</string>
-    <string name="lname">Last name</string>
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
     <string name="dob">Date of Birth</string>
     <string name="submit">Submit</string>
-    <string name="user_type">User type</string>
+    <string name="user_type">User Type</string>
     <string name="select_state">Select State</string>
     <string name="select_city">Select City</string>
 
@@ -98,6 +98,8 @@
     <string name="no_city_msg">no any city on selected state </string>
     <string name="please_enter_otp">Please Enter OTP</string>
     <string name="country_code">+91</string>
+    <string name="log_out">Log Out</string>
+    <string name="kadam_for_kurien">Kadam for Kurien</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

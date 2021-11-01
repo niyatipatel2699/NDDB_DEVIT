@@ -61,11 +61,10 @@
 
             <ImageView
                 android:id="@+id/img_walk"
-                android:layout_width="@dimen/_45sdp"
+                android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_45sdp"
                 android:layout_above="@+id/tv_totalSteps"
                 android:layout_centerHorizontal="true"
-                android:padding="@dimen/_5sdp"
                 android:src="@drawable/shoes" />
 
             <TextView

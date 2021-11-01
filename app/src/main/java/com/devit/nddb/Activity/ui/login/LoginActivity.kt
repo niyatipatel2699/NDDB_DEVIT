@@ -3,6 +3,7 @@ package com.devit.nddb.Activity.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -39,6 +40,11 @@ class LoginActivity : AppCompatActivity() {
         loginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(loginBinding.root)
         loginBinding.progressLogin.gone()
+
+
+        loginBinding.toolbar.tvToolbartitle.setText(R.string.register)
+        loginBinding.toolbar.ivHome.setVisibility(View.INVISIBLE)
+        loginBinding.toolbar.ivBack.setVisibility(View.INVISIBLE)
 
        /* val bundle: Bundle? = intent.extras
         if (bundle != null) {

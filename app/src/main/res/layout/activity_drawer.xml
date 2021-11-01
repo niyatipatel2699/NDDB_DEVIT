@@ -53,7 +53,7 @@
                 android:fontFamily="@font/nunito_regular"
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
-                android:text="Log out" />
+                android:text="@string/log_out" />
         </LinearLayout>
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

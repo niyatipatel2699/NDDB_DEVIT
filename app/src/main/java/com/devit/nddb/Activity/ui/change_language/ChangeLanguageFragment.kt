@@ -26,6 +26,10 @@ import com.wajahatkarim3.imagine.utils.gone
 import com.wajahatkarim3.imagine.utils.showSnack
 import com.wajahatkarim3.imagine.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.appcompat.app.AppCompatActivity
+
+
+
 
 @AndroidEntryPoint
 class ChangeLanguageFragment : Fragment() {
@@ -56,6 +60,8 @@ class ChangeLanguageFragment : Fragment() {
         val root: View = binding.root
         activityContext = activity
         initView()
+
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title =  getString(R.string.choose_lan)
 
         return root
     }
@@ -149,10 +155,9 @@ class ChangeLanguageFragment : Fragment() {
                 _binding!!.changeRel.showSnack(lanResponse.message!!)
                 MySharedPreferences.getMySharedPreferences()!!.lang_id = updated_lang_id!!.id
 
-                val intent = Intent(activityContext, DrawerActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-
+//                val intent = Intent(activityContext, DrawerActivity::class.java)
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+//                startActivity(intent)
 
             } else {
                 lanResponse.message?.let {

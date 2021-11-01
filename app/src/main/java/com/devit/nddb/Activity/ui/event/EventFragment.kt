@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.devit.nddb.Adapter.slider_adapter
+import com.devit.nddb.R
 import com.devit.nddb.databinding.EventFragmentBinding
 import com.devit.nddb.model.SliderData
 import com.smarteist.autoimageslider.SliderView
@@ -47,6 +49,8 @@ class EventFragment : Fragment() {
 //        val stringResult =
 //            getString(R.string.your_rank) + " " + 100.toString() + " " + getString(R.string.among_participants)
 //        binding.tvYourRank.text = stringResult
+
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title =  getString(R.string.kadam_for_kurien)
 
         return root
     }
