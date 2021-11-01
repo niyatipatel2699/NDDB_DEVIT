@@ -85,6 +85,9 @@
     <string name="videos">Videos</string>
     <string name="registered_mobile">Registered Mobile</string>
     <string name="select_language">Please choose any language first</string>
+    <string name="are_you_sure_want_logout">Are you sure you want to Logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <string name="validation_first_name">First Name is Required</string>
     <string name="validation_last_name">Last Name is Required</string>
@@ -95,7 +98,6 @@
     <string name="no_city_msg">no any city on selected state </string>
     <string name="please_enter_otp">Please Enter OTP</string>
     <string name="country_code">+91</string>
-
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

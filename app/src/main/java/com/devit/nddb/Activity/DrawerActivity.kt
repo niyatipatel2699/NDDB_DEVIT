@@ -3,6 +3,7 @@ package com.devit.nddb.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.graphics.drawable.DrawableCompat
@@ -47,10 +48,11 @@ class DrawerActivity : AppCompatActivity() {
                 // APPLY FONT https://stackoverflow.com/questions/30668346/how-to-set-custom-typeface-to-items-in-navigationview
             }
 
-            MySharedPreferences.getMySharedPreferences()!!.isLogin = false
-            val i = Intent(this,LoginActivity :: class.java)
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(i)
+            showAlertDialog()
+//            MySharedPreferences.getMySharedPreferences()!!.isLogin = false
+//            val i = Intent(this,LoginActivity :: class.java)
+//            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+//            startActivity(i)
         }
 
         var background =
@@ -96,6 +98,24 @@ class DrawerActivity : AppCompatActivity() {
 //        return true
 //    }
 
+    private fun showAlertDialog() {
+        AlertDialog.Builder(this)
+            .setMessage(getString(R.string.are_you_sure_want_logout))
+            .setPositiveButton(
+                getString(R.string.yes)
+            ) { dialogInterface, i ->
+                dialogInterface.dismiss()
+                MySharedPreferences.getMySharedPreferences()!!.isLogin = false
+                val i = Intent(this,LoginActivity :: class.java)
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(i)
+            }
+            .setNegativeButton(
+                getString(R.string.no)
+            ) { dialogInterface, i -> dialogInterface.dismiss() }.show()
+
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_drawer)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
@@ -132,4 +152,6 @@ class DrawerActivity : AppCompatActivity() {
         }
 
     }
+
+
 }
