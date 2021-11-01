@@ -56,12 +56,12 @@ class GalleryFragment : Fragment() {
         var lanAdapter = gallery_adapter(requireContext(), list)
 
         binding.rvPhotos.layoutManager =
-            GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false)
+            GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false)
         binding.rvPhotos.adapter = lanAdapter
 
-        binding.rvVideos.layoutManager =
-            GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false)
-        binding.rvVideos.adapter = lanAdapter
+//        binding.rvVideos.layoutManager =
+//            GridLayoutManager(getActivity(), 1, GridLayoutManager.HORIZONTAL, false)
+//        binding.rvVideos.adapter = lanAdapter
     }
 
     override fun onDestroyView() {

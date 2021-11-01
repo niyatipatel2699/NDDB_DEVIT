@@ -62,6 +62,33 @@
                 android:text="18 Oct 2021"
                 android:textColor="@color/login_tx"
                 android:textSize="@dimen/_12sdp" />
+
+            <RelativeLayout
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/tv_date">
+
+                <ImageView
+                    android:id="@+id/iv_trophy"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/trophy"
+                    card_view:tint="@color/orange" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@+id/iv_trophy"
+                    android:text="Rank 10"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/orange"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

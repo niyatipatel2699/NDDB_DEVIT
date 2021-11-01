@@ -71,8 +71,8 @@
     <string name="label_yes">Yes</string>
     <string name="label_no">No</string>
     <string name="current_steps_nwalked">Current Steps \nWalked</string>
-    <string name="start">Start</string>
-    <string name="stop">Stop</string>
+    <string name="start">START</string>
+    <string name="stop">STOP</string>
     <string name="register_walkings">Register Walkings</string>
     <string name="step_walked">Steps Walked</string>
     <string name="facilitator">Facilitator</string>

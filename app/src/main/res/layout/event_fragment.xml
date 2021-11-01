@@ -115,6 +115,7 @@
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_80sdp"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:layout_centerHorizontal="true"
             android:background="@drawable/event_ring">
 
@@ -127,7 +128,7 @@
                 android:gravity="center_vertical"
                 android:text="@string/start"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_13sdp" />
 
         </RelativeLayout>
     </RelativeLayout>

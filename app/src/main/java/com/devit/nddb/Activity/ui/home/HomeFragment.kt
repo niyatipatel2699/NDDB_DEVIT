@@ -55,6 +55,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
+
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -99,8 +100,8 @@ class HomeFragment : Fragment() {
      */
     private var mRequestingLocationUpdates: Boolean = false
 
-   // private lateinit var homeViewModel: HomeViewModel
-   private lateinit var homeViewModel: HomeViewModel
+    // private lateinit var homeViewModel: HomeViewModel
+    private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -109,7 +110,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var dbHelper: DatabaseHelper
 
-   // private val registrationViewModel by viewModels<HomeViewModel>()
+    // private val registrationViewModel by viewModels<HomeViewModel>()
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -130,9 +131,10 @@ class HomeFragment : Fragment() {
 //            textView.text = it
 //        })
 
-        GlobalScope.launch (Dispatchers.Main) {
-            dbHelper= activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
-            var list=dbHelper.getStepsOnlyNotPass()
+        GlobalScope.launch(Dispatchers.Main) {
+            dbHelper =
+                activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
+            var list = dbHelper.getStepsOnlyNotPass()
             if(list.size > 0 )
             {
                 homeViewModel.stepCount(list)
@@ -162,9 +164,9 @@ class HomeFragment : Fragment() {
         binding.slider.isAutoCycle = true
         binding.slider.startAutoCycle()
 
-        if(MySharedPreferences.getMySharedPreferences()!!.is_facilitator == 0 ) {
+        if (MySharedPreferences.getMySharedPreferences()!!.is_facilitator == 0) {
             binding.verificationBtn.visibility = View.GONE
-        }else {
+        } else {
             binding.verificationBtn.visibility = View.VISIBLE
         }
 
@@ -173,12 +175,14 @@ class HomeFragment : Fragment() {
             getActivity()?.startActivity(intent)
         }
 
-        val filter = IntentFilter()
-        filter.addAction(AutoStartService.ACTION_FOO)
-        val bm = LocalBroadcastManager.getInstance(requireContext())
-        bm.registerReceiver(mBroadcastReceiver, filter)
+        if (AutoStartService.getInstance() == null) {
+            val filter = IntentFilter()
+            filter.addAction(AutoStartService.ACTION_FOO)
+            val bm = LocalBroadcastManager.getInstance(requireContext())
+            bm.registerReceiver(mBroadcastReceiver, filter)
 
-        RestartBroadcastReceiver.scheduleJob(requireContext())
+            RestartBroadcastReceiver.scheduleJob(requireContext())
+        }
 
         val prfs: SharedPreferences =
             requireContext().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE)
@@ -192,12 +196,12 @@ class HomeFragment : Fragment() {
                 if (stepCountResponse.status == 1) {
                     //Log.e("success",loginResponse.message!!)
 
-                    GlobalScope.launch (Dispatchers.Main) {
-                        dbHelper= activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
-                        var list=dbHelper.getStepsOnlyNotPass()
+                    GlobalScope.launch(Dispatchers.Main) {
+                        dbHelper = activity?.let { DatabaseBuilder.getInstance(it) }
+                            ?.let { DatabaseHelperImpl(it) }!!
+                        var list = dbHelper.getStepsOnlyNotPass()
                         list.forEach {
-                            if(!it.ispass)
-                            {
+                            if (!it.ispass) {
                                 dbHelper.updateSteps(it.id,it.step!!,it.location!!,it.lat!!,it.longitude!!,true)
                             }
                         }
@@ -215,6 +219,8 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        val bm = LocalBroadcastManager.getInstance(requireContext())
+        bm.unregisterReceiver(mBroadcastReceiver)
     }
 
     private val mBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -980,8 +986,8 @@ class HomeFragment : Fragment() {
 
     private fun getLocationFunction(location: Location) {
         Log.d(TAG, "LOCATION Latitude ${location.latitude} Longitude${location.longitude}")
-        MySharedPreferences.getMySharedPreferences()!!.latitude =location.latitude.toString()
-        MySharedPreferences.getMySharedPreferences()!!.longitude =location.longitude.toString()
+        MySharedPreferences.getMySharedPreferences()!!.latitude = location.latitude.toString()
+        MySharedPreferences.getMySharedPreferences()!!.longitude = location.longitude.toString()
     }
 
 

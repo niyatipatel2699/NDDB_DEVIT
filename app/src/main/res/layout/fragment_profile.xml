@@ -198,6 +198,7 @@
 
 
                 <TextView
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:id="@+id/fragment_profile_gender_tv"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="75dp"

@@ -45,8 +45,6 @@ class AutoStartService : Service, SensorEventListener, StepListener {
 
     private lateinit var dbHelper: DatabaseHelper
 
-    var stepsId:Long=0;
-
     constructor(context: Context?) {
         Log.i(TAG, "AutoStartService: Here we Go!!!!!")
     }
@@ -119,6 +117,7 @@ class AutoStartService : Service, SensorEventListener, StepListener {
         if (stopped) {
             return
         }
+        instance = null
         val broadcastIntent = Intent(this, RestartBroadcastReceiver::class.java)
         sendBroadcast(broadcastIntent)
         stoptimertask()
@@ -130,6 +129,7 @@ class AutoStartService : Service, SensorEventListener, StepListener {
         if (stopped) {
             return
         }
+        instance = null
         val broadcastIntent = Intent(this, RestartBroadcastReceiver::class.java)
         sendBroadcast(broadcastIntent)
         stoptimertask()
@@ -169,6 +169,7 @@ class AutoStartService : Service, SensorEventListener, StepListener {
     }
 
     fun stop() {
+        instance= null
         stoptimertask()
         stopForeground(true)
         stopSelf()
@@ -188,10 +189,6 @@ class AutoStartService : Service, SensorEventListener, StepListener {
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
     override fun step(timeNs: Long) {
         stepsWalked++
-        val preferences: SharedPreferences = this.getSharedPreferences(
-            "AUTHENTICATION_FILE_NAME",
-            Context.MODE_PRIVATE
-        )
 //        Toast.makeText(this, "STEPS  $stepsWalked", Toast.LENGTH_SHORT).show()
         broadcastActionBazSteps(this, stepsWalked.toString())
         GlobalScope.launch (Dispatchers.Main) {
@@ -211,10 +208,12 @@ class AutoStartService : Service, SensorEventListener, StepListener {
         }
 
         /* ADD STEPS IN SHARED PREFERENCE */
-
+        val preferences: SharedPreferences = this.getSharedPreferences(
+            "AUTHENTICATION_FILE_NAME",
+            Context.MODE_PRIVATE
+        )
         val editor = preferences.edit()
         editor.putString("steps", stepsWalked.toString())
-
         editor.apply()
         /* ADD STEPS IN SHARED PREFERENCE */
 
@@ -253,6 +252,13 @@ class AutoStartService : Service, SensorEventListener, StepListener {
 
         //        const val EXTRA_PARAM_A = "com.gahlot.neverendingservice.PARAM_A"
         const val EXTRA_PARAM_B = "${BuildConfig.APPLICATION_ID}.PARAM_B"
+
+
+        private var instance:AutoStartService? = null
+        fun getInstance(): AutoStartService? {
+            return instance
+        }
+
 //        fun broadcastActionBaz(context: Context?, param: String?) {
 //            val intent = Intent(ACTION_FOO)
 //            intent.putExtra(EXTRA_PARAM_A, param)
