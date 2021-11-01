@@ -46,7 +46,7 @@ class LoginViewModel @Inject constructor(
     fun loginWithOTP(mobileNumber: String, lang_id: Int?) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
-            loginRepository.loginWithOTP(mobileNumber,1).collect { dataState ->
+            loginRepository.loginWithOTP(mobileNumber, lang_id!!).collect { dataState ->
                 when (dataState) {
                     is DataState.Success -> {
                         // Any other page

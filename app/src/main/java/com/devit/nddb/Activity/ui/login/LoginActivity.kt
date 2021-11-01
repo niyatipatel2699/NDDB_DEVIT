@@ -105,6 +105,7 @@ class LoginActivity : AppCompatActivity() {
             if (loginResponse.status == 1) {
                 val intent = Intent(this, OTPActivity::class.java)
                 intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
+                intent.putExtra("lang_id",lang_id)
                 Log.e("success",loginResponse.message!!)
                 startActivity(intent)
                 finish()

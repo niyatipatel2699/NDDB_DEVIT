@@ -34,6 +34,7 @@ class OTPActivity : AppCompatActivity() {
 
     private var code: String? = null
     var mobileNumber: String? = null
+    var selected_langid : Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -46,6 +47,8 @@ class OTPActivity : AppCompatActivity() {
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
             mobileNumber = bundle.getString("mobile")
+            selected_langid = bundle.getInt("lang_id")
+
         }
         initObservations()
 
@@ -94,7 +97,7 @@ class OTPActivity : AppCompatActivity() {
 
         otpBinding.textResend.setOnClickListener {
             startCountDown()
-            otpViewModel.loginWithOTP(mobileNumber.toString(),1)
+            otpViewModel.loginWithOTP(mobileNumber.toString(), selected_langid!!)
             /* Toast.makeText(this, getString(R.string.otp_will_be_send_to_mobile_number), Toast.LENGTH_SHORT)
                  .show()*/
         }
