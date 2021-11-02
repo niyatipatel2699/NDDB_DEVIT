@@ -21,9 +21,14 @@ class ImageViewerActivity  : BaseActivity()
 
         }
 
-        Glide.with(this)
-            .load(imagePath)
-            .fitCenter()
-            .into(regBinding.imageSingle)
+        if (this::imagePath.isInitialized)
+        {
+            Glide.with(this)
+                .load(imagePath)
+                .fitCenter()
+                .into(regBinding.imageSingle)
+        }
+
+
     }
 }

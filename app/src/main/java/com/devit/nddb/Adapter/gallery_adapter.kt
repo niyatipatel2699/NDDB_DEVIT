@@ -37,7 +37,7 @@ class gallery_adapter(
             }
             else
             {
-                watchYoutubeVideo(context,"")
+                watchYoutubeVideo(context,"EHg--XWNr9I")
             }
 
 
