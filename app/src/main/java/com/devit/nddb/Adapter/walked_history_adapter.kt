@@ -21,7 +21,7 @@ class walked_history_adapter(
         p0.tv_Count?.text = stepslist[p1].step.toString()
         //val fDate: String = stepslist[p1].date
         val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val outputFormat: DateFormat = SimpleDateFormat("dd-MM-yyyy")
+        val outputFormat: DateFormat = SimpleDateFormat("dd-MMM-yyyy")
         val inputDateStr = stepslist[p1].date
         val date: Date = inputFormat.parse(inputDateStr)
         val outputDateStr: String = outputFormat.format(date)
