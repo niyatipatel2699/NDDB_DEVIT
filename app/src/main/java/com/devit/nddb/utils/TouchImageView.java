@@ -11,7 +11,8 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -21,12 +22,14 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.ImageView;
 import android.widget.OverScroller;
 import android.widget.Scroller;
 
-public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView {
+import androidx.appcompat.widget.AppCompatImageView;
 
+//https://github.com/MikeOrtiz/TouchImageView
+public class TouchImageView extends AppCompatImageView
+{
     private static final String DEBUG = "DEBUG";
 
     //
@@ -35,7 +38,7 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
     // min/max zoom boundary.
     //
     private static final float SUPER_MIN_MULTIPLIER = .75f;
-    private static final float SUPER_MAX_MULTIPLIER = 1.25f;
+    private static final float SUPER_MAX_MULTIPLIER = 2.25f;
 
     //
     // Scale of image ranges from minScale to maxScale, where minScale == 1
@@ -62,7 +65,7 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
     private Context context;
     private Fling fling;
 
-    private ImageView.ScaleType mScaleType;
+    private ScaleType mScaleType;
 
     private boolean imageRenderedAtLeastOnce;
     private boolean onDrawReady;
@@ -124,7 +127,7 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
     }
 
     @Override
-    public void setOnTouchListener(View.OnTouchListener l) {
+    public void setOnTouchListener(OnTouchListener l) {
         userTouchListener = l;
     }
 
@@ -388,11 +391,11 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
     /**
      * Set zoom parameters equal to another TouchImageView. Including scale, position,
      * and ScaleType.
-     * @param TouchImageView
+     * @param touchImageView
      */
-    public void setZoom(TouchImageView img) {
-        PointF center = img.getScrollPosition();
-        setZoom(img.getCurrentZoom(), center.x, center.y, img.getScaleType());
+    public void setZoom(TouchImageView touchImageView) {
+        PointF center = touchImageView.getScrollPosition();
+        setZoom(touchImageView.getCurrentZoom(), center.x, center.y, touchImageView.getScaleType());
     }
 
     /**
@@ -845,7 +848,7 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
             setImageMatrix(matrix);
 
             //
-            // User-defined OnTouchListener
+            // UserCO-defined OnTouchListener
             //
             if(userTouchListener != null) {
                 userTouchListener.onTouch(v, event);
@@ -1045,7 +1048,7 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
      * @param x x-coordinate of touch event
      * @param y y-coordinate of touch event
      * @param clipToBitmap Touch event may occur within view, but outside image content. True, to clip return value
-     *       to the bounds of the bitmap size.
+     * 			to the bounds of the bitmap size.
      * @return Coordinates of the point touched, in the coordinate system of the original drawable.
      */
     private PointF transformCoordTouchToBitmap(float x, float y, boolean clipToBitmap) {
@@ -1164,14 +1167,14 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    @TargetApi(VERSION_CODES.GINGERBREAD)
     private class CompatScroller {
         Scroller scroller;
         OverScroller overScroller;
         boolean isPreGingerbread;
 
         public CompatScroller(Context context) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD) {
+            if (VERSION.SDK_INT < VERSION_CODES.GINGERBREAD) {
                 isPreGingerbread = true;
                 scroller = new Scroller(context);
 
@@ -1231,9 +1234,9 @@ public class TouchImageView extends androidx.appcompat.widget.AppCompatImageView
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @TargetApi(VERSION_CODES.JELLY_BEAN)
     private void compatPostOnAnimation(Runnable runnable) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+        if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
             postOnAnimation(runnable);
 
         } else {

@@ -12,7 +12,7 @@ interface DatabaseHelper {
 
     suspend fun getStep(date: String): Steps
 
-    /*suspend fun updateSteps(id:Int)*/
+    suspend fun deleteSteps()
 
     suspend fun insertSteps(steps:Steps):Long
 

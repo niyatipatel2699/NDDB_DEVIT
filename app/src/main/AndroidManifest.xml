@@ -2,13 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.devit.nddb">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-
     <application
         android:name=".NDDBApp"
         android:allowBackup="true"
@@ -20,26 +13,26 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".Activity.FacilitatorActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.DrawerActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_drawer" />
+            android:label="@string/title_activity_drawer"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ui.OtpValidation.OTPActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ui.registration.RegistrationActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ui.login.LoginActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".Activity.ui.imageviewer.ImageViewerActivity"
@@ -47,12 +40,12 @@
             android:exported="true" />
         <activity
             android:name=".Activity.ui.LanguageList.ChooseLanguageActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.SplashActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -63,20 +56,12 @@
             android:name=".MainActivity"
             android:exported="true" />
 
-        <service
-            android:name=".backgroundservice.JobService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service
-            android:name=".backgroundservice.AutoStartService"
-            android:enabled="true" />
-
         <receiver
             android:name=".backgroundservice.RestartBroadcastReceiver"
             android:enabled="true"
             android:exported="true"
             android:label="RestartServiceWhenStopped"
             android:permission="TODO" />
-
         <receiver
             android:name=".brodcastreceiver.AlarmReceiver"
             android:enabled="true"
@@ -85,6 +70,20 @@
                 <action android:name="com.devit.nddb.brodcastreceiver.AlarmReceiver" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".backgroundservice.JobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".backgroundservice.AutoStartService"
+            android:enabled="true" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

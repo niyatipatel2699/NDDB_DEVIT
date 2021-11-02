@@ -4,6 +4,17 @@ import android.os.Bundle
 import com.bumptech.glide.Glide
 import com.devit.nddb.Activity.BaseActivity
 import com.devit.nddb.databinding.ActivityImageViewerBinding
+import android.graphics.Bitmap
+
+import com.bumptech.glide.request.target.SimpleTarget
+
+import android.graphics.drawable.Drawable
+import androidx.appcompat.content.res.AppCompatResources
+
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
+import com.devit.nddb.R
+
 
 class ImageViewerActivity  : BaseActivity()
 {
@@ -14,20 +25,27 @@ class ImageViewerActivity  : BaseActivity()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         regBinding = ActivityImageViewerBinding.inflate(layoutInflater)
+        setContentView(regBinding.root)
 
-        val bundle: Bundle? = intent.extras
-        if (bundle != null) {
-            imagePath = bundle.getString("imagePath").toString()
+        imagePath = intent.getStringExtra("imagePath").toString()
+        val requestOptions = RequestOptions()
+        requestOptions.placeholder(R.drawable.app_icon)
 
-        }
-
-        if (this::imagePath.isInitialized)
-        {
-            Glide.with(this)
-                .load(imagePath)
-                .fitCenter()
-                .into(regBinding.imageSingle)
-        }
+       /* Glide.with(context)
+            .setDefaultRequestOptions(requestOptions)
+            .load(url).into<Target<Drawable>>(holder.imageView)
+        */
+     /*   Glide.with(this)
+            .setDefaultRequestOptions(requestOptions)
+            .load(imagePath)
+            .dontAnimate()
+            .into(regBinding.imageSingle)
+*/
+        Glide.with(this)
+            .load(imagePath)
+            .placeholder(AppCompatResources.getDrawable(regBinding.imageSingle.getContext(), R.drawable.app_icon))
+            .dontAnimate()
+            .into(regBinding.imageSingle);
 
 
     }

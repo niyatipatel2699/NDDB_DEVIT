@@ -8,7 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.devit.nddb.R
 import com.wajahatkarim3.imagine.data.room.entity.Steps
+import java.text.DateFormat
 import java.text.SimpleDateFormat
+import java.util.*
 
 class walked_history_adapter(
     val context: Context,
@@ -17,8 +19,13 @@ class walked_history_adapter(
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0.tv_Count?.text = stepslist[p1].step.toString()
-        val fDate: String = stepslist[p1].date
-        p0.tvDate?.text = fDate
+        //val fDate: String = stepslist[p1].date
+        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val outputFormat: DateFormat = SimpleDateFormat("dd-MM-yyyy")
+        val inputDateStr = stepslist[p1].date
+        val date: Date = inputFormat.parse(inputDateStr)
+        val outputDateStr: String = outputFormat.format(date)
+        p0.tvDate?.text = outputDateStr
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {

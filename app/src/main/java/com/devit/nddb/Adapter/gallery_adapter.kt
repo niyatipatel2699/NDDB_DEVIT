@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.devit.nddb.Activity.ui.imageviewer.ImageViewerActivity
 import com.devit.nddb.R
 import com.devit.nddb.model.GalleryData
-import com.devit.nddb.utils.Helper
 
 class gallery_adapter(
     val context: Context,
@@ -22,10 +21,19 @@ class gallery_adapter(
 
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        Glide.with(p0.itemData)
-            .load(languageData[p1])
-            .fitCenter()
-            .into(p0.imageViewBackground)
+        if(languageData[p1].attachmentType.equals("Image"))
+        {
+         /*   val intent = Intent(context, ImageViewerActivity::class.java)
+            intent.putExtra("imagePath",languageData[p1].attachmentPath)
+            context.startActivity(intent)*/
+            Glide.with(p0.itemData)
+                .load(languageData[p1].attachmentPath)
+                .placeholder(R.drawable.app_icon)
+                .fitCenter()
+                .into(p0.imageViewBackground)
+        }else {
+            p0.imageViewBackground.setImageResource(R.drawable.ic_youtube_icon)
+        }
 
         p0.imageViewBackground.setOnClickListener {
 

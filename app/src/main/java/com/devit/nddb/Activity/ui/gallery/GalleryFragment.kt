@@ -16,9 +16,9 @@ class GalleryFragment : Fragment() {
 
     val list = listOf(
         GalleryData("https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg","Image"),
-        GalleryData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ54CE_FOgSo3all2YDRz1bJl6D5zrvpZ9vVw&usqp=CAU","Image"),
+        GalleryData("PtkqwslbLY8","Video"),
             GalleryData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuI22npaeSNOveFW2JEp-IFrSKwJZlMmqsJw&usqp=CAU","Image"),
-                GalleryData("https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg","Image"),
+                GalleryData("PtkqwslbLY8","Video"),
                     GalleryData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ54CE_FOgSo3all2YDRz1bJl6D5zrvpZ9vVw&usqp=CAU","Image"),
                         GalleryData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuI22npaeSNOveFW2JEp-IFrSKwJZlMmqsJw&usqp=CAU","Image"),
                             GalleryData("https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg","Image"),

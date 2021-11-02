@@ -10,6 +10,8 @@ class DatabaseHelperImpl(private val appDatabase: AppDatabase) : DatabaseHelper 
     override suspend fun getStepsOnlyNotPass(): List<Steps> = appDatabase.stepsDao().getStepsOnlyNotPass()
     override suspend fun getStep(date: String): Steps = appDatabase.stepsDao().getStep(date)
 
+    override suspend fun deleteSteps() = appDatabase.stepsDao().deleteSteps()
+
    /* override suspend fun updateSteps(id: Int) = appDatabase.stepsDao().updateItem(id)*/
 
     override suspend fun insertSteps(steps: Steps):Long = appDatabase.stepsDao().insert(steps)

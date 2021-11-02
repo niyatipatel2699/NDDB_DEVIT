@@ -312,7 +312,7 @@ class RegistrationActivity : BaseActivity() {
                 setUserData(registerResponse)
                 val i = Intent(this, DrawerActivity::class.java)
                 startActivity(i)
-                //finish()
+                finish()
             } else {
                 registerResponse.message?.let {
                     regBinding.relRegistration.showSnack(it)

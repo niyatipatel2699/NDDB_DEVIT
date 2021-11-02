@@ -116,7 +116,7 @@ class LoginActivity : BaseActivity() {
                     setUserData(loginResponse)
                     val intent = Intent(this, DrawerActivity::class.java)
                     startActivity(intent)
-                    //finish()
+                    finish()
                 }
                 else
                 {
@@ -124,7 +124,7 @@ class LoginActivity : BaseActivity() {
                     val intent = Intent(this, RegistrationActivity::class.java)
                     intent.putExtra("mobile", loginResponse.items!!.user!!.phone_number)
                     startActivity(intent)
-                    //finish()
+                    finish()
                 }
             } else {
                 loginResponse.message?.let {

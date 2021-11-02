@@ -3,9 +3,11 @@ package com.devit.nddb.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -15,24 +17,37 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.devit.nddb.Activity.ui.login.LoginActivity
+import com.devit.nddb.Adapter.walked_history_adapter
 import com.devit.nddb.MySharedPreferences
 import com.devit.nddb.R
 import com.devit.nddb.databinding.ActivityDrawerBinding
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import com.devit.nddb.MainActivity
+import com.devit.nddb.backgroundservice.AutoStartService
+import com.devit.nddb.backgroundservice.ServiceAdmin
+import com.wajahatkarim3.imagine.data.room.DatabaseBuilder
+import com.wajahatkarim3.imagine.data.room.DatabaseHelper
+import com.wajahatkarim3.imagine.data.room.DatabaseHelperImpl
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class DrawerActivity : BaseActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityDrawerBinding
-
+    private lateinit var dbHelper: DatabaseHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityDrawerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        dbHelper = DatabaseHelperImpl(DatabaseBuilder.getInstance(this))
 
         setSupportActionBar(binding.appBarDrawer.toolbar)
 
@@ -109,6 +124,17 @@ class DrawerActivity : BaseActivity() {
                 val i = Intent(this,LoginActivity :: class.java)
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(i)
+                //AutoStartService.stop
+                val prfs = getSharedPreferences("AUTHENTICATION_FILE_NAME", MODE_PRIVATE)
+                val editor = prfs.edit()
+                editor.putString("steps", "0")
+                editor.apply()
+                GlobalScope.launch (Dispatchers.Main) {
+                dbHelper.deleteSteps()
+                }
+                val serviceAdmin = ServiceAdmin()
+                serviceAdmin.stopService(this)
+
             }
             .setNegativeButton(
                 getString(R.string.no)

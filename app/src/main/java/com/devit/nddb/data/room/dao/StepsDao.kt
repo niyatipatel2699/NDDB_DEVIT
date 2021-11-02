@@ -18,8 +18,8 @@ interface StepsDao {
     fun delete(note: Steps)
 
     @Query("delete from Steps")
-    fun deleteAllNotes()
-    //SELECT * FROM Steps WHERE date('date') = '2021-12-12'
+    fun deleteSteps()
+
     @Query("select * from Steps")
     fun getSteps(): List<Steps>
 
