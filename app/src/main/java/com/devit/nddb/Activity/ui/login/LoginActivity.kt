@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.devit.nddb.Activity.BaseActivity
 import com.devit.nddb.Activity.DrawerActivity
 import com.devit.nddb.Activity.ui.OtpValidation.OTPActivity
 import com.devit.nddb.Activity.ui.registration.RegistrationActivity
@@ -25,7 +26,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
 
     private val viewModel: LoginViewModel by viewModels()
 

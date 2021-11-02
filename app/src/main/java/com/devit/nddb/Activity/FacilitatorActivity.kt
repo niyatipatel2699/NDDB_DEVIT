@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.devit.nddb.R
 import com.devit.nddb.databinding.ActivityFacilitatorBinding
 
-class FacilitatorActivity : AppCompatActivity() {
+class FacilitatorActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val facilitatorbinding = ActivityFacilitatorBinding.inflate(layoutInflater)

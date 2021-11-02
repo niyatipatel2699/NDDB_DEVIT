@@ -27,8 +27,7 @@ import com.wajahatkarim3.imagine.utils.showSnack
 import com.wajahatkarim3.imagine.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.appcompat.app.AppCompatActivity
-
-
+import com.devit.nddb.NDDBApp
 
 
 @AndroidEntryPoint
@@ -154,6 +153,13 @@ class ChangeLanguageFragment : Fragment() {
             if (lanResponse.status == 1) {
                 _binding!!.changeRel.showSnack(lanResponse.message!!)
                 MySharedPreferences.getMySharedPreferences()!!.lang_id = updated_lang_id!!.id
+
+                // Selected Language
+                NDDBApp.getLocaleManager(requireContext())
+                    ?.setNewLocale(requireContext(), "en");
+
+                val intent = Intent(requireContext(), DrawerActivity::class.java)
+                requireContext().startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
 
 //                val intent = Intent(activityContext, DrawerActivity::class.java)
 //                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)

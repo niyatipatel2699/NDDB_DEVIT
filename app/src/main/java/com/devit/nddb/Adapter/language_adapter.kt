@@ -26,12 +26,12 @@ class CustomRecyclerAdapter(
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0.txtTitle?.text = languageData[p1].name
         var langId= MySharedPreferences.getMySharedPreferences()!!.lang_id
-       /* for (i in languageData.indices) {
-            if(langId==languageData[i].id)
-            {
-                row_index=i
-            }
-        }*/
+        /* for (i in languageData.indices) {
+             if(langId==languageData[i].id)
+             {
+                 row_index=i
+             }
+         }*/
 
 
 

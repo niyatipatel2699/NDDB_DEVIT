@@ -25,6 +25,7 @@
         <activity
             android:name=".Activity.DrawerActivity"
             android:exported="true"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_drawer" />
         <activity

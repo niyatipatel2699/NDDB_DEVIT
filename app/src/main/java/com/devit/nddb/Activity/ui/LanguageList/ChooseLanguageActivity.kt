@@ -8,9 +8,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.devit.nddb.Activity.BaseActivity
 import com.devit.nddb.Activity.ui.login.LoginActivity
 import com.devit.nddb.Adapter.CustomRecyclerAdapter
 import com.devit.nddb.MySharedPreferences
+import com.devit.nddb.NDDBApp
 import com.devit.nddb.R
 import com.devit.nddb.data.remote.responses.Language.LanguageData
 import com.devit.nddb.databinding.ActivityChooseLanguageBinding
@@ -20,7 +22,7 @@ import com.wajahatkarim3.imagine.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ChooseLanguageActivity : AppCompatActivity() {
+class ChooseLanguageActivity : BaseActivity() {
 
     /* val list = listOf(
          "English",
@@ -77,6 +79,10 @@ class ChooseLanguageActivity : AppCompatActivity() {
                 Log.e("langid-->",lang_id.toString())
                 MySharedPreferences.getMySharedPreferences()!!.isLanguageSelected = true
                 MySharedPreferences.getMySharedPreferences()!!.lang_id = lang_id!!.id
+
+                // Selected Language
+                NDDBApp.getLocaleManager(this)
+                    ?.setNewLocale(this, "en");
 
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.putExtra("lang_id",lanAdapter.row_index)

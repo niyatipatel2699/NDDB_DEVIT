@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.devit.nddb.Activity.BaseActivity
 import com.devit.nddb.Activity.DrawerActivity
 import com.devit.nddb.Activity.ui.registration.RegistrationActivity
 import com.devit.nddb.MySharedPreferences
@@ -25,7 +26,7 @@ import com.wajahatkarim3.imagine.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OTPActivity : AppCompatActivity() {
+class OTPActivity : BaseActivity() {
 
     lateinit var smsBroadcastReceiver: SmsBroadcastReceiver
     lateinit var otpBinding: ActivityOtpactivityBinding
