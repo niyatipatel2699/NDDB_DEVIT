@@ -10,22 +10,23 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.devit.nddb.Adapter.gallery_adapter
 import com.devit.nddb.databinding.FragmentGalleryBinding
+import com.devit.nddb.model.GalleryData
 
 class GalleryFragment : Fragment() {
 
     val list = listOf(
-        "https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ54CE_FOgSo3all2YDRz1bJl6D5zrvpZ9vVw&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuI22npaeSNOveFW2JEp-IFrSKwJZlMmqsJw&usqp=CAU",
-        "https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ54CE_FOgSo3all2YDRz1bJl6D5zrvpZ9vVw&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuI22npaeSNOveFW2JEp-IFrSKwJZlMmqsJw&usqp=CAU",
-        "https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ54CE_FOgSo3all2YDRz1bJl6D5zrvpZ9vVw&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuI22npaeSNOveFW2JEp-IFrSKwJZlMmqsJw&usqp=CAU",
-        "https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ54CE_FOgSo3all2YDRz1bJl6D5zrvpZ9vVw&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuI22npaeSNOveFW2JEp-IFrSKwJZlMmqsJw&usqp=CAU",
+        GalleryData("https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg","Image"),
+        GalleryData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ54CE_FOgSo3all2YDRz1bJl6D5zrvpZ9vVw&usqp=CAU","Image"),
+            GalleryData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuI22npaeSNOveFW2JEp-IFrSKwJZlMmqsJw&usqp=CAU","Image"),
+                GalleryData("https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg","Image"),
+                    GalleryData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ54CE_FOgSo3all2YDRz1bJl6D5zrvpZ9vVw&usqp=CAU","Image"),
+                        GalleryData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuI22npaeSNOveFW2JEp-IFrSKwJZlMmqsJw&usqp=CAU","Image"),
+                            GalleryData("https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg","Image"),
+                                GalleryData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ54CE_FOgSo3all2YDRz1bJl6D5zrvpZ9vVw&usqp=CAU","Image"),
+                                    GalleryData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuI22npaeSNOveFW2JEp-IFrSKwJZlMmqsJw&usqp=CAU","Image"),
+                                        GalleryData("https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg","Image"),
+                                            GalleryData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ54CE_FOgSo3all2YDRz1bJl6D5zrvpZ9vVw&usqp=CAU","Image"),
+                                                GalleryData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuI22npaeSNOveFW2JEp-IFrSKwJZlMmqsJw&usqp=CAU","Image"),
     )
 
     private var _binding: FragmentGalleryBinding? = null

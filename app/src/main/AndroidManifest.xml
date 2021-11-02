@@ -40,6 +40,11 @@
             android:name=".Activity.ui.login.LoginActivity"
             android:screenOrientation="portrait"
             android:exported="true" />
+
+        <activity
+            android:name=".Activity.ui.imageviewer.ImageViewerActivity"
+            android:screenOrientation="portrait"
+            android:exported="true" />
         <activity
             android:name=".Activity.ui.LanguageList.ChooseLanguageActivity"
             android:screenOrientation="portrait"
