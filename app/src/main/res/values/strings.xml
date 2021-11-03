@@ -98,7 +98,7 @@
     <string name="no_city_msg">no any city on selected state </string>
     <string name="please_enter_otp">Please Enter OTP</string>
     <string name="country_code">+91</string>
-    <string name="log_out">LogOut</string>
+    <string name="log_out">Logout</string>
     <string name="kadam_for_kurien">Kadam for Kurien</string>
 
     <string-array name="user_type_array">
