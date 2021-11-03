@@ -89,62 +89,7 @@ class RegistrationActivity : BaseActivity() {
                     mobileNumber
                 )
             }
-
-            /*  first_name = regBinding.edtFname.text.toString()
-              last_name = regBinding.edtLname.text.toString()
-              user_type = user_type_id
-              state = state_id
-              city = city_id
-  *//*
-            if(regBinding.edtFname.text.isEmpty())
-            {
-                regBinding.relRegistration.showSnack(getString(R.string.validation_first_name))
-            }
-            else if(regBinding.edtLname.text.isEmpty())
-            {
-                regBinding.relRegistration.showSnack(getString(R.string.validation_last_name))
-            }
-            else if(user_type_id == null){
-                regBinding.relRegistration.showSnack(getString(R.string.select_usertype))
-            }
-            else if(state_id == null)
-            {
-                regBinding.relRegistration.showSnack(getString(R.string.validation_state))
-            }
-            else if(city_id == null)
-            {
-                regBinding.relRegistration.showSnack(getString(R.string.validation_city))
-            }
-            else if (gender == null)
-            {
-                regBinding.relRegistration.showSnack(getString(R.string.select_gender))
-            }
-            else
-            {
-                first_name = regBinding.edtFname.text.toString()
-                last_name = regBinding.edtLname.text.toString()
-                user_type = user_type_id
-                state = state_id
-                city = city_id
-                registrationViewModel.registerUser(first_name!!,
-                    last_name!!, user_type!!, state!!, city!!,gender,mobileNumber)
-            }*/
-            /* registrationViewModel.registerUser(first_name!!,
-                 last_name!!, user_type!!, state!!, city!!,gender,mobileNumber)*/
-
-            /*  val intent = Intent(this, DrawerActivity::class.java)
-              startActivity(intent)*/
         }
-
-//        val userType = resources.getStringArray(R.array.user_type_array)
-//        val userTypearrayAdapter =
-//            ArrayAdapter(this, R.layout.dropdown_menu, R.id.textView, userType)
-//        regBinding.autoUsertype.setAdapter(userTypearrayAdapter)
-//
-//        val indiaStates = resources.getStringArray(R.array.india_states)
-//        val indiaStatesarrayAdapter =
-//            ArrayAdapter(this, R.layout.dropdown_menu, R.id.textView, indiaStates)
-//        regBinding.autoState.setAdapter(indiaStatesarrayAdapter)
 
         regBinding.group.setOnCheckedChangeListener(ChipGroup.OnCheckedChangeListener { chipGroup, i ->
 

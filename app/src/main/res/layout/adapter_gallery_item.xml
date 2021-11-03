@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/_100sdp"
+<RelativeLayout
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="@dimen/_10sdp"
-    android:layout_marginHorizontal="@dimen/_10sdp"
-    app:cardCornerRadius="@dimen/_10sdp">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/iv_pic"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:adjustViewBounds="true"
-        android:contentDescription="@null"
-        android:scaleType="centerCrop"
-        android:src="@drawable/top_profile_bg" />
+        android:layout_height="@dimen/_100sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_10sdp">
 
-</androidx.cardview.widget.CardView>
+        <ImageView
+            android:id="@+id/iv_pic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/top_profile_bg" />
+
+        <ImageView
+            android:id = "@+id/iv_video"
+            android:src="@drawable/ic_youtube_icon"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>

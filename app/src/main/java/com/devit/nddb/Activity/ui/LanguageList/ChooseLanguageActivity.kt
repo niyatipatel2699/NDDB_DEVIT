@@ -75,17 +75,17 @@ class ChooseLanguageActivity : BaseActivity() {
             }
             else
             {
-                var lang_id = languageList?.get(lanAdapter.row_index)
-                Log.e("langid-->",lang_id.toString())
+                var selected_lang_id = languageList?.get(lanAdapter.row_index)
+                Log.e("langid-->",selected_lang_id.toString())
                 MySharedPreferences.getMySharedPreferences()!!.isLanguageSelected = true
-                MySharedPreferences.getMySharedPreferences()!!.lang_id = lang_id!!.id
+                MySharedPreferences.getMySharedPreferences()!!.lang_id = selected_lang_id!!.id
 
                 // Selected Language
                 NDDBApp.getLocaleManager(this)
                     ?.setNewLocale(this, "en");
 
                 val intent = Intent(this, LoginActivity::class.java)
-                intent.putExtra("lang_id",lanAdapter.row_index)
+                intent.putExtra("lang_id",MySharedPreferences.getMySharedPreferences()!!.lang_id)
                 startActivity(intent)
                 finish()
             }

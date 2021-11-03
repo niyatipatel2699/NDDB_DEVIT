@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
@@ -27,11 +28,12 @@ import com.wajahatkarim3.imagine.utils.showSnack
 import com.wajahatkarim3.imagine.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.appcompat.app.AppCompatActivity
+import com.devit.nddb.Activity.BaseFragment
 import com.devit.nddb.NDDBApp
 
 
 @AndroidEntryPoint
-class ChangeLanguageFragment : Fragment() {
+class ChangeLanguageFragment : BaseFragment() {
 
     private lateinit var changelanguageViewModel: ChangeLanguageViewModel
     private var _binding: ChangeLanguageFragmentBinding? = null
@@ -46,7 +48,7 @@ class ChangeLanguageFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    @SuppressLint("SetTextI18n")
+  /*  @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -63,7 +65,33 @@ class ChangeLanguageFragment : Fragment() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.title =  getString(R.string.choose_lan)
 
         return root
+    }*/
+
+    override fun onCreateFragmentView(
+        inflater: LayoutInflater,
+        parent: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        changelanguageViewModel =
+            ViewModelProvider(this).get(ChangeLanguageViewModel::class.java)
+
+        _binding = ChangeLanguageFragmentBinding.inflate(inflater, parent, false)
+        val root: View = binding.root
+        activityContext = activity
+        initView()
+
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title =  getString(R.string.choose_lan)
+
+        return root
+
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
 
     private fun initView() {
 
@@ -151,14 +179,19 @@ class ChangeLanguageFragment : Fragment() {
             var updated_lang_id = languageList?.get(lanAdapter.row_index)
 
             if (lanResponse.status == 1) {
-                _binding!!.changeRel.showSnack(lanResponse.message!!)
+               // _binding!!.changeRel.showSnack(lanResponse.message!!)
+
                 MySharedPreferences.getMySharedPreferences()!!.lang_id = updated_lang_id!!.id
 
+/*
                 // Selected Language
                 NDDBApp.getLocaleManager(requireContext())
                     ?.setNewLocale(requireContext(), "en");
+*/
 
                 val intent = Intent(requireContext(), DrawerActivity::class.java)
+                //showSnackBar(activity,lanResponse.message)
+                 Toast.makeText(activityContext,lanResponse.message, Toast.LENGTH_SHORT).show()
                 requireContext().startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
 
 //                val intent = Intent(activityContext, DrawerActivity::class.java)
@@ -166,17 +199,9 @@ class ChangeLanguageFragment : Fragment() {
 //                startActivity(intent)
 
             } else {
-                lanResponse.message?.let {
-                    _binding!!.changeRel.showSnack(it)
-                }
+                showSnackBar(activityContext,lanResponse.message)
             }
         }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
 
 }

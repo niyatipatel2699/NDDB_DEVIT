@@ -21,18 +21,26 @@ class gallery_adapter(
 
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        if(languageData[p1].attachmentType.equals("Image"))
+        /*if(languageData[p1].attachmentType.equals("Image"))
         {
-         /*   val intent = Intent(context, ImageViewerActivity::class.java)
+         *//*   val intent = Intent(context, ImageViewerActivity::class.java)
             intent.putExtra("imagePath",languageData[p1].attachmentPath)
-            context.startActivity(intent)*/
-            Glide.with(p0.itemData)
-                .load(languageData[p1].attachmentPath)
-                .placeholder(R.drawable.app_icon)
-                .fitCenter()
-                .into(p0.imageViewBackground)
+            context.startActivity(intent)*//*
+
         }else {
-            p0.imageViewBackground.setImageResource(R.drawable.ic_youtube_icon)
+            p0.imageViewBackground.setImageResource(R.drawable.video_img)
+        }*/
+
+        Glide.with(p0.itemData)
+            .load(languageData[p1].thumnail)
+            .placeholder(R.drawable.app_icon)
+            .fitCenter()
+            .into(p0.imageViewBackground)
+
+        if(languageData[p1].attachmentType.equals("Video")){
+            p0.videoIcon.visibility = View.VISIBLE
+        }else{
+            p0.videoIcon.visibility = View.GONE
         }
 
         p0.imageViewBackground.setOnClickListener {
@@ -65,9 +73,11 @@ class gallery_adapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var itemData: View
         var imageViewBackground: ImageView
+        lateinit var videoIcon : ImageView
 
         init {
             imageViewBackground = itemView.findViewById(R.id.iv_pic)
+            videoIcon = itemView.findViewById(R.id.iv_video)
             this.itemData = itemView
         }
 
