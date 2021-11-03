@@ -24,7 +24,7 @@
 
         <ImageView
             android:id = "@+id/iv_video"
-            android:src="@drawable/ic_youtube_icon"
+            android:src="@drawable/ic_video"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
