@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">NDDB</string>
+    <!--<string name="app_name">NDDB</string>-->
+    <string name="app_name">Kadam4Kurien</string>
 
     <string name="welcome">Welcome NDDB App</string>
     <string name="choose_lan">Choose your language</string>
@@ -55,8 +56,8 @@
     <string name="thank_you">Thank you for your contribution. Keep walking.</string>
     <string name="log_in">Log In</string>
     <string name="for_the_best_experience_nwith_nddb_walkathos">For the best experience \nWith NDDB Walkathos</string>
-    <string name="virtual_walked">"\"Kadam for Kurien\"" is a virtual Walkathon to tribute the Milk Man of India - Dr. Verghese Kurien.</string>
-    <!--<string name="virtual_walked">Press the start button to contribute your steps to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr. Verghese Kurien – the Milkman of India. Click on stop once you have walked your miles.</string>-->
+    <!--<string name="virtual_walked">"\"Kadam for Kurien\"" is a virtual Walkathon to tribute the Milk Man of India - Dr. Verghese Kurien.</string>-->
+    <string name="virtual_walked">Press the start button to contribute your steps to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr. Verghese Kurien – the Milkman of India. Click on stop once you have walked your miles.</string>
     <string name="contribute">To contribute your steps to the target of 200 million steps, click on start. To register your steps, click on stop once you have walked your mile.</string>
 
     <string name="error_alert">Alert</string>

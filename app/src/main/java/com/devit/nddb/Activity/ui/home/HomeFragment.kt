@@ -16,6 +16,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -55,6 +56,14 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
+import androidx.viewpager.widget.ViewPager
+import android.widget.LinearLayout
+
+
+
+
+
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -164,6 +173,28 @@ class HomeFragment : Fragment() {
         binding.slider.isAutoCycle = true
         binding.slider.startAutoCycle()
 
+        /*setupPagerIndidcatorDots()
+
+        ivArrayDotsPager.get(0).setImageResource(R.drawable.page_indicator_selected)
+
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                for (i in 0 until ivArrayDotsPager.length) {
+                    ivArrayDotsPager.get(i).setImageResource(R.drawable.page_indicator_unselected)
+                }
+                ivArrayDotsPager.get(position).setImageResource(R.drawable.page_indicator_selected)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {}
+        })
+*/
         if (MySharedPreferences.getMySharedPreferences()!!.is_facilitator == 0) {
             binding.verificationBtn.visibility = View.GONE
         } else {

@@ -30,6 +30,18 @@
             app:sliderIndicatorUnselectedColor="#FFF"
             app:sliderScrollTimeInSec="1" />
 
+        <!--  <LinearLayout
+              android:id="@+id/pager_dots"
+              android:layout_width="match_parent"
+              android:layout_height="100"
+              android:layout_alignParentBottom="true"
+              android:layout_marginBottom="10dp"
+              android:background="@android:color/transparent"
+              android:gravity="center_horizontal"
+              android:orientation="horizontal">
+          </LinearLayout>
+  -->
+
     </RelativeLayout>
 
     <RelativeLayout
