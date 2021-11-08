@@ -102,7 +102,6 @@
             android:text="@string/contribute"
             android:textColor="@color/black"
             android:textSize="@dimen/_10sdp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_55sdp"

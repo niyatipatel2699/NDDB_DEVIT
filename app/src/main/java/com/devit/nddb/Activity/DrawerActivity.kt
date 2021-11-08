@@ -118,7 +118,7 @@ class DrawerActivity : BaseActivity() {
         AlertDialog.Builder(this)
             .setMessage(getString(R.string.are_you_sure_want_logout))
             .setPositiveButton(
-                getString(R.string.yes)
+                getString(R.string.label_yes)
             ) { dialogInterface, i ->
                 dialogInterface.dismiss()
                 MySharedPreferences.getMySharedPreferences()!!.isLogin = false
@@ -138,7 +138,7 @@ class DrawerActivity : BaseActivity() {
 
             }
             .setNegativeButton(
-                getString(R.string.no)
+                getString(R.string.label_no)
             ) { dialogInterface, i -> dialogInterface.dismiss() }.show()
 
     }

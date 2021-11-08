@@ -46,9 +46,9 @@
                 android:layout_centerInParent="true"
                 android:layout_toStartOf="@+id/ivHome"
                 android:layout_toEndOf="@+id/iv_Back"
+                android:fontFamily="@font/nunito_bold"
                 android:gravity="left"
                 android:maxLines="2"
-                android:fontFamily="@font/nunito_bold"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14sdp"
                 tools:text="AppCompat AppCompat " />

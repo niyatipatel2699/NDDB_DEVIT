@@ -37,7 +37,7 @@
             android:layout_marginTop="@dimen/_35sdp"
             android:fontFamily="@font/nunito_bold"
             android:gravity="center_horizontal"
-            android:text="@string/kadam_for_kurien"
+            android:text="@string/menu_dashboard"
             android:textColor="@color/white"
             android:textSize="@dimen/_20sdp" />
     </RelativeLayout>

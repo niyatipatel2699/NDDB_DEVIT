@@ -50,7 +50,7 @@ class EventFragment : Fragment() {
 //            getString(R.string.your_rank) + " " + 100.toString() + " " + getString(R.string.among_participants)
 //        binding.tvYourRank.text = stringResult
 
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title =  getString(R.string.kadam_for_kurien)
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title =  getString(R.string.menu_dashboard)
 
         return root
     }
