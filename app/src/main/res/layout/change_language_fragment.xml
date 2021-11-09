@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/choose_lan"
     android:id="@+id/changeRel"
-    tools:context=".Activity.ChooseLanguageActivity">
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,8 +21,8 @@
 
             <ImageView
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_80sdp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_60sdp"
                 android:layout_gravity="center"
                 android:src="@drawable/language_choose" />
 

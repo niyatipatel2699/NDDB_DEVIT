@@ -15,7 +15,7 @@ import com.devit.nddb.data.remote.responses.Language.LanguageData
 
 class CustomRecyclerAdapter(
     val context: Context,
-    val languageData: ArrayList<LanguageData>,
+    val languageData: List<String>,
     val type: Int
 ) : RecyclerView.Adapter<CustomRecyclerAdapter.ViewHolder>() {
 
@@ -24,7 +24,7 @@ class CustomRecyclerAdapter(
 
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        p0.txtTitle?.text = languageData[p1].name
+        p0.txtTitle?.text = languageData[p1]
         var langId= MySharedPreferences.getMySharedPreferences()!!.lang_id
         /* for (i in languageData.indices) {
              if(langId==languageData[i].id)
@@ -46,7 +46,7 @@ class CustomRecyclerAdapter(
         if(type==2)
         {
             if (row_index == -1) {
-                if (langId == languageData[p1].id) {
+                if (langId.equals(languageData[p1])) {
                     p0.cardView.setCardBackgroundColor(Color.parseColor("#CA751B"))
                     p0.txtTitle.setTextColor(Color.parseColor("#ffffff"))
                 } else {

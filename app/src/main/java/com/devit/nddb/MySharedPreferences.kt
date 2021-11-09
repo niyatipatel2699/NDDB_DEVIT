@@ -38,7 +38,7 @@ class MySharedPreferences internal constructor(context: Context, gson: Gson) {
         get() = sharedPreferences.getString(RestConstant.TOKEN, " ")!!
         set(token) {
             editor.putString(
-                RestConstant.TOKEN, " ").apply()
+                RestConstant.TOKEN, token).apply()
         }
 
     var first_name: String
@@ -73,14 +73,14 @@ class MySharedPreferences internal constructor(context: Context, gson: Gson) {
 
     var is_facilitator: Int
         get() = sharedPreferences.getInt(RestConstant.IS_FACILITATOR, 0)
-        set(is_Registered) {
-            editor.putInt(RestConstant.IS_FACILITATOR, is_Registered).apply()
+        set(is_facilitator) {
+            editor.putInt(RestConstant.IS_FACILITATOR, is_facilitator).apply()
         }
 
     var lang_id: Int
         get() = sharedPreferences.getInt(RestConstant.LANG_ID, 0)
-        set(is_Registered) {
-            editor.putInt(RestConstant.LANG_ID, is_Registered).apply()
+        set(lang_id) {
+            editor.putInt(RestConstant.LANG_ID, lang_id).apply()
         }
 
     /*var lang_name: String

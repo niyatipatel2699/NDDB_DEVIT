@@ -15,6 +15,7 @@
 */
 package com.wajahatkarim3.imagine.data.remote
 
+import com.devit.nddb.MySharedPreferences
 import com.devit.nddb.data.remote.responses.BaseResponse
 import com.devit.nddb.data.remote.responses.Language.LanguageResponse
 import com.devit.nddb.data.remote.responses.OtpValidation.OtpResponse
@@ -71,7 +72,8 @@ interface LoginApiService {
         @Field("district") district : String,
         @Field("gender") gender : String,
         @Field("phone_number") phone_number : String,
-        @Field("is_Registered") is_registered : Int
+        @Field("is_Registered") is_registered : Int,
+        @Field("lang_id") lang_id : Int= MySharedPreferences.getMySharedPreferences()!!.lang_id
     ) : ApiResponse<RegistrationResponse>
 
 

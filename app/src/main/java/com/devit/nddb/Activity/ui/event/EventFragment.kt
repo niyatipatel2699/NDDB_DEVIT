@@ -11,8 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.devit.nddb.Adapter.slider_adapter
 import com.devit.nddb.R
 import com.devit.nddb.databinding.EventFragmentBinding
+import com.devit.nddb.dialog.AlertDialog
 import com.devit.nddb.model.SliderData
 import com.smarteist.autoimageslider.SliderView
+import android.content.Intent
+import com.devit.nddb.Activity.DrawerActivity
+
 
 class EventFragment : Fragment() {
 
@@ -31,6 +35,7 @@ class EventFragment : Fragment() {
     private var _binding: EventFragmentBinding? = null
 
     private val binding get() = _binding!!
+    lateinit var alertDialog : AlertDialog
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -44,6 +49,8 @@ class EventFragment : Fragment() {
         _binding = EventFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        alertDialog = AlertDialog(activity)
+
         binding.tvTotalSteps.setText("0")
 
 //        val stringResult =
@@ -55,8 +62,11 @@ class EventFragment : Fragment() {
         return root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        openDialog()
 
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
 
@@ -70,6 +80,17 @@ class EventFragment : Fragment() {
         binding.slider.scrollTimeInSec = 2
         binding.slider.isAutoCycle = true
         binding.slider.startAutoCycle()
+    }
+
+    private fun openDialog() {
+
+        alertDialog.btnOk.setOnClickListener{
+            alertDialog.dismiss()
+            val intent = Intent(requireContext(), DrawerActivity::class.java)
+            startActivity(Intent(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)))
+
+        }
+        alertDialog.show()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -24,22 +24,38 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ChooseLanguageActivity : BaseActivity() {
 
-    /* val list = listOf(
-         "English",
-         "हिंदी",
-         "ગુજરાતી",
-         "मराठी",
-         "தமிழ்", // Tamil
-         "తెలుగు", // Telugu
-         "కన్నడ",// Kannad
-         "മലയാളം",// Malayalam
-         "বাংলা",// Bengali
-         "ਪੰਜਾਬੀ",// Punjabi
-         "অসমীয়া",// Assamese
-         "ଓଡିଆ",// Odia
-     )*/
+   /*   val list = listOf(
+        "English",
+        "हिंदी",
+        "ગુજરાતી",
+        "मराठी",
+        "தமிழ்", // Tamil
+        "తెలుగు", // Telugu
+        "కన్నడ",// Kannad
+        "മലയാളം",// Malayalam
+        "বাংলা",// Bengali
+        "ਪੰਜਾਬੀ",// Punjabi
+        "অসমীয়া",// Assamese
+        "ଓଡିଆ",// Odia
+    )
+*/
 
-    var languageList: ArrayList<LanguageData>? = null
+    val list = listOf(
+        "English",
+        "हिंदी",
+        "ગુજરાતી",
+        "मराठी",
+        "ಕನ್ನಡ", // Tamil
+        "తెలుగు", // Telugu
+        "മലയാളി",// Kannad
+        "ਪੰਜਾਬੀ",// Malayalam
+        "ಕನ್ನಡ",// Bengali
+        "తెలుగు",// Punjabi
+        "മലയാളി",// Assamese
+        "ਪੰਜਾਬੀ",// Odia
+    )
+
+   // var languageList: ArrayList<LanguageData>? = null
     private val viewModel: LanguageViewModel by viewModels()
     private lateinit var chooseLanguageBinding: ActivityChooseLanguageBinding
     lateinit var lanAdapter : CustomRecyclerAdapter
@@ -53,19 +69,21 @@ class ChooseLanguageActivity : BaseActivity() {
 //        choose_lan_binding.toolbar.conToolMain.setBackgroundResource(R.color.white)
         chooseLanguageBinding.toolbar.ivHome.setVisibility(View.INVISIBLE)
         chooseLanguageBinding.toolbar.ivBack.setVisibility(View.INVISIBLE)
+        chooseLanguageBinding.progressLanguage.gone()
 
-        initObservations()
-        viewModel.getLanguage()
+     /*   initObservations()
+        viewModel.getLanguage()*/
 
-        /*  GridLayoutManager(this, 2, RecyclerView.VERTICAL, false).apply {
+          GridLayoutManager(this, 2, RecyclerView.VERTICAL, false).apply {
               chooseLanguageBinding.rvEffectList.layoutManager = this
           }
 
   //        choose_lan_binding.rvEffectList.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
 
-          var lanAdapter = CustomRecyclerAdapter(this, languageList!!)
+          //var lanAdapter = CustomRecyclerAdapter(this, languageList!!)
+        var lanAdapter = CustomRecyclerAdapter(this, list!!,1)
           chooseLanguageBinding.rvEffectList.adapter = lanAdapter
-  */
+
         chooseLanguageBinding.btnNext.setOnClickListener {
 
 
@@ -75,11 +93,11 @@ class ChooseLanguageActivity : BaseActivity() {
             }
             else
             {
-                var selected_lang_id = languageList?.get(lanAdapter.row_index)
+                var selected_lang_id = list?.get(lanAdapter.row_index + 1)
                 Log.e("langid-->",selected_lang_id.toString())
                 MySharedPreferences.getMySharedPreferences()!!.isLanguageSelected = true
-                MySharedPreferences.getMySharedPreferences()!!.lang_id = selected_lang_id!!.id
-
+                MySharedPreferences.getMySharedPreferences()!!.lang_id = lanAdapter.row_index + 1
+                Log.e("lang_id-->", lanAdapter.row_index.toString())
                 // Selected Language
                 NDDBApp.getLocaleManager(this)
                     ?.setNewLocale(this, "en");
@@ -94,7 +112,7 @@ class ChooseLanguageActivity : BaseActivity() {
         }
     }
 
-    private fun initObservations() {
+  /*  private fun initObservations() {
 
         viewModel.uiStateLiveData.observe(this) { state ->
             when (state) {
@@ -132,5 +150,5 @@ class ChooseLanguageActivity : BaseActivity() {
                 }
             }
         }
-    }
+    }*/
 }

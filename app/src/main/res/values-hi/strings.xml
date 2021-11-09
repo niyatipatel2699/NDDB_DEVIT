@@ -50,6 +50,7 @@
     <string name="message_no_network_connected_str">No network connected!</string>
     <string name="message_something_went_wrong_str">Something went wrong!</string>
     <string name="your_total_step_walked">Steps Walked</string>
+    <string name="total_contributed_steps">Total Steps Contributed </string>
     <string name="your_rank">Congratulations! You currently rank\n</string>
     <string name="among_participants">among all participants.</string>
     <string name="thank_you">Thank you for your contribution. Keep walking.</string>
@@ -86,6 +87,8 @@
     <string name="registered_mobile">Registered Mobile</string>
     <string name="select_language">Please choose any language first</string>
     <string name="are_you_sure_want_logout">Are you sure you want to Logout?</string>
+    <string name="alert_dialog">Thank you for your interest in Event {Event name}. Event will be start on {Date}.</string>
+    <string name="ok">Ok</string>
     <!--<string name="yes">Yes</string>
     <string name="no">No</string>-->
 

@@ -35,6 +35,21 @@ import com.devit.nddb.NDDBApp
 @AndroidEntryPoint
 class ChangeLanguageFragment : BaseFragment() {
 
+    val list = listOf(
+        "English",
+        "हिंदी",
+        "ગુજરાતી",
+        "मराठी",
+        "ಕನ್ನಡ", // Tamil
+        "తెలుగు", // Telugu
+        "മലയാളി",// Kannad
+        "ਪੰਜਾਬੀ",// Malayalam
+        "ಕನ್ನಡ",// Bengali
+        "తెలుగు",// Punjabi
+        "മലയാളി",// Assamese
+        "ਪੰਜਾਬੀ",// Odia
+    )
+
     private lateinit var changelanguageViewModel: ChangeLanguageViewModel
     private var _binding: ChangeLanguageFragmentBinding? = null
     var languageList: ArrayList<LanguageData>? = null
@@ -100,6 +115,9 @@ class ChangeLanguageFragment : BaseFragment() {
             p0.txtTitle.setTextColor(Color.parseColor("#ffffff"))*/
 
         _binding!!.btnNext.setText(getString(R.string.submit))
+        _binding!!.progressLanguage.visibility = View.GONE
+
+        getLanguage()
 
 
         _binding!!.btnNext.setOnClickListener {
@@ -111,27 +129,25 @@ class ChangeLanguageFragment : BaseFragment() {
             }
             else
             {
-                var lang_id = languageList?.get(lanAdapter.row_index)
-                changelanguageViewModel.updateLanguage(lang_id!!.id)
-                /*var lang_id = languageList?.get(lanAdapter.row_index)
-                Log.e("langid-->",lang_id.toString())
-                MySharedPreferences.getMySharedPreferences()!!.isLanguageSelected = true
-                MySharedPreferences.getMySharedPreferences()!!.lang_id = lang_id!!.id
-                MySharedPreferences.getMySharedPreferences()!!.lang_name = lang_id!!.name.toString()
+                //var lang_id = languageList?.get(lanAdapter.row_index + 1)
+                changelanguageViewModel.updateLanguage(lanAdapter.row_index + 1)
+                initObservations()
 
-                *//* if (lanAdapter.row_index == -1){
-                     chooseLanguageBinding.relChooseLan.showSnack(getString(R.string.select_language))
-                 }*//**//*else {*//*
-                val intent = Intent(activityContext, LoginActivity::class.java)
-                intent.putExtra("lang_id",lang_id!!.id)
-                intent.putExtra("lan_name",lang_id.name)
-                startActivity(intent)
-                //finish()*/
             }
         }
 
-        initObservations()
-        viewModel.getLanguage()
+        //initObservations()
+        //viewModel.getLanguage()
+    }
+
+    private fun getLanguage() {
+
+        var  gridLayoutManager:GridLayoutManager = GridLayoutManager(activity, 2, LinearLayoutManager.VERTICAL, false)
+        _binding!!.rvEffectList.layoutManager = gridLayoutManager
+        lanAdapter = CustomRecyclerAdapter(requireActivity(), list!!,2)
+        _binding!!.rvEffectList.adapter = lanAdapter
+
+        //        choose_lan_binding.rvEffectList.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
     }
 
     private fun initObservations() {
@@ -155,7 +171,7 @@ class ChangeLanguageFragment : BaseFragment() {
             }
         }
 
-        viewModel.lanResponseLiveData.observe(requireActivity()) { lanResponse ->
+      /*  viewModel.lanResponseLiveData.observe(requireActivity()) { lanResponse ->
 
             if (lanResponse.status == 1) {
                 Log.e("lan-->", lanResponse.items!!.toString())
@@ -172,16 +188,16 @@ class ChangeLanguageFragment : BaseFragment() {
                     _binding!!.changeRel.showSnack(it)
                 }
             }
-        }
+        }*/
 
         viewModel.changelanResponseLiveData.observe(requireActivity()) { lanResponse ->
 
-            var updated_lang_id = languageList?.get(lanAdapter.row_index)
+            var updated_lang_id = languageList?.get(lanAdapter.row_index + 1)
 
             if (lanResponse.status == 1) {
                // _binding!!.changeRel.showSnack(lanResponse.message!!)
 
-                MySharedPreferences.getMySharedPreferences()!!.lang_id = updated_lang_id!!.id
+                MySharedPreferences.getMySharedPreferences()!!.lang_id = lanAdapter.row_index + 1
 
 /*
                 // Selected Language

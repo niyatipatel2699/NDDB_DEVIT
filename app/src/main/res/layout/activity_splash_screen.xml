@@ -4,11 +4,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <!--<ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/new_splash" />
+        android:scaleType="fitXY"
+        android:src="@drawable/new_splash_v2" />
+    -->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/new_splash_bottom"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:layout_width="@dimen/_175sdp"
+        android:layout_height="@dimen/_175sdp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/_38sdp"
+        android:layout_marginTop="@dimen/_255sdp"
+        android:src="@drawable/new_dr_kurien" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_380sdp"
+        android:background="@drawable/new_dotted_splash_bg">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginTop="@dimen/_70sdp"
+            android:src="@drawable/kadam_for_kurien_splash"
+            android:layout_marginStart = "@dimen/_10sdp"
+            android:layout_marginEnd = "@dimen/_10sdp"
+            android:scaleType="fitXY" />
+
+
+    </LinearLayout>
+
+
 
    <!-- <LinearLayout
         android:layout_width="match_parent"
