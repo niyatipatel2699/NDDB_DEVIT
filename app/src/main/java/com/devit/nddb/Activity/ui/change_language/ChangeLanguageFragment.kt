@@ -199,11 +199,9 @@ class ChangeLanguageFragment : BaseFragment() {
 
                 MySharedPreferences.getMySharedPreferences()!!.lang_id = lanAdapter.row_index + 1
 
-/*
                 // Selected Language
                 NDDBApp.getLocaleManager(requireContext())
-                    ?.setNewLocale(requireContext(), "en");
-*/
+                    ?.setNewLocale(requireContext(), "hi");
 
                 val intent = Intent(requireContext(), DrawerActivity::class.java)
                 //showSnackBar(activity,lanResponse.message)
