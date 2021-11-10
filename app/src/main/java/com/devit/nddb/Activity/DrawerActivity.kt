@@ -122,6 +122,7 @@ class DrawerActivity : BaseActivity() {
             ) { dialogInterface, i ->
                 dialogInterface.dismiss()
                 MySharedPreferences.getMySharedPreferences()!!.isLogin = false
+                MySharedPreferences.getMySharedPreferences()!!.isLanguageSelected = false
                 val i = Intent(this,LoginActivity :: class.java)
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(i)

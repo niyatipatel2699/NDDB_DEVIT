@@ -28,12 +28,15 @@ import com.wajahatkarim3.imagine.data.room.entity.Steps
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.*
 
 class AutoStartService : Service, SensorEventListener, StepListener {
     var counter = 0
     var stepsWalked = 0
+    private var stepsTaken = 0
+    private var reportedSteps = 0
+    private val stepDetector = 0
+
     private var timer: Timer? = null
     private var timerTask: TimerTask? = null
     var myResultReceiver: ResultReceiver? = null
@@ -152,12 +155,20 @@ class AutoStartService : Service, SensorEventListener, StepListener {
 //                broadcastActionBaz(context, counter.toString())
             }
         }
+      /*  senAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        senStepCounter = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
+        senStepDetector = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);*/
+
         running = true
-        sensorManager!!.registerListener(
+       /* sensorManager!!.registerListener(
             this,
             sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
             SensorManager.SENSOR_DELAY_FASTEST
-        )
+        )*/
+
+        sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER), SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR), SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     fun stoptimertask() {
@@ -176,19 +187,83 @@ class AutoStartService : Service, SensorEventListener, StepListener {
     }
 
     override fun onSensorChanged(event: SensorEvent) {
-        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+        /*if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
             simpleStepDetector?.updateAccelerometer(
                 event.timestamp,
                 event.values[0],
                 event.values[1],
                 event.values[2]
             )
+        }*/
+        if(event.sensor.type == Sensor.TYPE_STEP_COUNTER)
+        {
+            if (reportedSteps < 1) {
+                reportedSteps = event.values[0].toInt()
+            }
+            stepsWalked = event.values[0].toInt() - reportedSteps
+            addStep()
         }
+
     }
 
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
+
+
+    fun addStep()
+    {
+        broadcastActionBazSteps(this, stepsWalked.toString())
+        GlobalScope.launch (Dispatchers.Main) {
+            var lat= MySharedPreferences.getMySharedPreferences()!!.latitude
+            var lng= MySharedPreferences.getMySharedPreferences()!!.longitude
+            var address= MySharedPreferences.getMySharedPreferences()!!.longitude
+            val currentDate = FORMATTER.format(Date())
+            var step=dbHelper.getStep(currentDate)
+            if(step!=null)
+            {
+                dbHelper.updateSteps(step.id,stepsWalked,address, lat, lng,step.ispass)
+            }
+            else
+            {
+                dbHelper.insertSteps(Steps(currentDate, stepsWalked, address, lat, lng, false))
+            }
+        }
+
+        /* ADD STEPS IN SHARED PREFERENCE */
+        val preferences: SharedPreferences = this.getSharedPreferences(
+            "AUTHENTICATION_FILE_NAME",
+            Context.MODE_PRIVATE
+        )
+        val editor = preferences.edit()
+        editor.putString("steps", stepsWalked.toString())
+        editor.apply()
+        /* ADD STEPS IN SHARED PREFERENCE */
+
+
+        val notificationIntent = Intent(this, DrawerActivity::class.java)
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0,
+            notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT
+        )
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        val channelId =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) createNotificationChannel(
+                notificationManager
+            ) else ""
+        val notificationBuilder = NotificationCompat.Builder(this, channelId)
+        val notification: Notification = notificationBuilder.setOngoing(true)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setPriority(NotificationCompat.PRIORITY_MIN)
+            .setCategory(NotificationCompat.CATEGORY_SERVICE)
+            .setContentIntent(pendingIntent)
+            .setContentText("YOU TOTAL STEPS WALKED $stepsWalked")
+            .build()
+        startForeground(1001, notification)
+    }
+
+
     override fun step(timeNs: Long) {
-        stepsWalked++
+        val currentDate = FORMATTER.format(Date())
+       // stepsWalked++
 //        Toast.makeText(this, "STEPS  $stepsWalked", Toast.LENGTH_SHORT).show()
         broadcastActionBazSteps(this, stepsWalked.toString())
         GlobalScope.launch (Dispatchers.Main) {

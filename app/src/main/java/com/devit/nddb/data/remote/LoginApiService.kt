@@ -72,8 +72,7 @@ interface LoginApiService {
         @Field("district") district : String,
         @Field("gender") gender : String,
         @Field("phone_number") phone_number : String,
-        @Field("is_Registered") is_registered : Int,
-        @Field("lang_id") lang_id : Int= MySharedPreferences.getMySharedPreferences()!!.lang_id
+        @Field("is_Registered") is_registered : Int
     ) : ApiResponse<RegistrationResponse>
 
 
