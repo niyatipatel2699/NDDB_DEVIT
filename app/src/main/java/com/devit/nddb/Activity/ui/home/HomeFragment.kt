@@ -128,7 +128,6 @@ class HomeFragment : Fragment() {
     ): View? {
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -580,7 +579,12 @@ class HomeFragment : Fragment() {
                     requireContext(),
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED
-            ) {
+            )
+            else if(ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACTIVITY_RECOGNITION
+                ) != PackageManager.PERMISSION_GRANTED)
+            {
                 // here to request the missing permissions, and then overriding
                 //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
                 //                                          int[] grantResults)
@@ -615,6 +619,8 @@ class HomeFragment : Fragment() {
         val permissions: MutableList<String> = ArrayList()
         permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
         permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION)
+        permissions.add(Manifest.permission.ACTIVITY_RECOGNITION)
+
         var permissionGranted = true
         for (permission in permissions) {
             if (ContextCompat.checkSelfPermission(
@@ -633,7 +639,8 @@ class HomeFragment : Fragment() {
         requestPermissions(
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACTIVITY_RECOGNITION
             ),
             REQUEST_PERMISSIONS_REQUEST_CODE
         )
@@ -776,7 +783,8 @@ class HomeFragment : Fragment() {
     private fun checkAllPermissionAndStartLocationUpdate() {
         val permissionAsk = arrayOf(
             Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACTIVITY_RECOGNITION
         )
         val permissionsNotGranted = ArrayList<String>()
         for (permission in permissionAsk) {
