@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.devit.nddb.utils.RestConstant
 import com.google.gson.Gson
 
+
 class MySharedPreferences internal constructor(context: Context, gson: Gson) {
 
     private val SP_NAME = "NDDBPrefs"

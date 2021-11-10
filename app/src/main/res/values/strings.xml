@@ -91,7 +91,9 @@
     <string name="registered_mobile">Registered Mobile</string>
     <string name="select_language">Please choose any language first</string>
     <string name="are_you_sure_want_logout">Are you sure you want to Logout?</string>
-    <string name="alert_dialog">Thank you for your interest in Event {Event name}. Event will be start on {Date}.</string>
+    <string name="gallery_text">Check out the media gallery below to see some glimpses from the life and work of Dr. Kurien</string>
+    <!--<string name="alert_dialog">Thank you for your interest in Event {Event name}. Event will be start on {Date}.</string>-->
+    <string name="alert_dialog">Thank you for your interest in Event Kadam for Kurien. Event will be start on 26-Nov-2021.</string>
     <string name="ok">Ok</string>
    <!-- <string name="yes">Yes</string>
     <string name="no">No</string>-->

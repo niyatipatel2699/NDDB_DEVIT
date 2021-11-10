@@ -31,11 +31,14 @@ class gallery_adapter(
             p0.imageViewBackground.setImageResource(R.drawable.video_img)
         }*/
 
-        Glide.with(p0.itemData)
+      /*  Glide.with(p0.itemData)
             .load(languageData[p1].thumnail)
             .placeholder(R.drawable.app_icon)
             .fitCenter()
-            .into(p0.imageViewBackground)
+            .into(p0.imageViewBackground)*/
+
+        //myImageView.setImageResource(myImageList[i]);
+        p0.imageViewBackground.setImageResource(languageData[p1].thumnail)
 
         if(languageData[p1].attachmentType.equals("Video")){
             p0.videoIcon.visibility = View.VISIBLE

@@ -33,7 +33,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_30sdp"
-                app:layout_constraintTop_toBottomOf="@+id/headerView" />
+                app:layout_constraintTop_toBottomOf="@+id/headerView"
+                />
         </LinearLayout>
 
         <Button

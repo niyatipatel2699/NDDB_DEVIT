@@ -16,6 +16,7 @@
 package com.wajahatkarim3.imagine.di.modules
 
 import com.devit.nddb.BuildConfig
+import com.devit.nddb.MySharedPreferences
 import com.devit.nddb.utils.RestConstant
 import com.wajahatkarim3.imagine.data.remote.ApiResponseCallAdapterFactory
 import com.wajahatkarim3.imagine.data.remote.LoginApiService
@@ -40,6 +41,7 @@ class NetworkApiModule {
 
 
 //    val BASE_API_URL = "http://localhost:3000/api/v1/users/"
+   // var token : String = MySharedPreferences.getMySharedPreferences()!!.token
 
     @Singleton
     @Provides
@@ -53,7 +55,9 @@ class NetworkApiModule {
             .addInterceptor { chain ->
                 var request = chain.request()
                 var newRequest =
-                    request.newBuilder().header("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjIxIiwiaWF0IjoxNjM1MTQwMTkwfQ.18JMsiu3vR1dob20eLz4bWNzIYhgkYl8ExwPDi11pKM")
+                    //request.newBuilder().header("Authorization","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IjIxIiwiaWF0IjoxNjM1MTQwMTkwfQ.18JMsiu3vR1dob20eLz4bWNzIYhgkYl8ExwPDi11pKM")
+                    request.newBuilder().header("Authorization",MySharedPreferences.getMySharedPreferences()!!.token)
+                    //request.newBuilder().header("Authorization",token)
                 chain.proceed(newRequest.build())
             }
             .addInterceptor(logging)

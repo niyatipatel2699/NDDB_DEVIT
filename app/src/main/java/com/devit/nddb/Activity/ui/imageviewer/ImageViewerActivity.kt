@@ -24,7 +24,7 @@ class ImageViewerActivity  : BaseActivity()
 {
     lateinit var regBinding: ActivityImageViewerBinding
 
-    lateinit var imagePath:String
+     var imagePath:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +38,7 @@ class ImageViewerActivity  : BaseActivity()
             finish()
         }
 
-        imagePath = intent.getStringExtra("imagePath").toString()
+        imagePath = intent.getIntExtra("imagePath",0)
         val requestOptions = RequestOptions()
         requestOptions.placeholder(R.drawable.app_icon)
 

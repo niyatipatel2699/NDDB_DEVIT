@@ -47,11 +47,11 @@ class LoginActivity : BaseActivity() {
         loginBinding.toolbar.ivHome.setVisibility(View.INVISIBLE)
         loginBinding.toolbar.ivBack.setVisibility(View.INVISIBLE)
 
-       /* val bundle: Bundle? = intent.extras
-        if (bundle != null) {
-            selected_lang_id = bundle.getInt("lang_id")
+        /* val bundle: Bundle? = intent.extras
+         if (bundle != null) {
+             selected_lang_id = bundle.getInt("lang_id")
 
-        }*/
+         }*/
 
         loginBinding.verificationBtn.setOnClickListener {
 
@@ -105,13 +105,13 @@ class LoginActivity : BaseActivity() {
                 intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
                 startActivity(intent)*/
             if (loginResponse.status == 1) {
-              /*  //val intent = Intent(this, OTPActivity::class.java)
-                val intent = Intent(this, DrawerActivity::class.java)
-                //intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
-               // intent.putExtra("lang_id",selected_lang_id)
-                Log.e("success",loginResponse.message!!)
-                startActivity(intent)
-                finish()*/
+                /*  //val intent = Intent(this, OTPActivity::class.java)
+                  val intent = Intent(this, DrawerActivity::class.java)
+                  //intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
+                 // intent.putExtra("lang_id",selected_lang_id)
+                  Log.e("success",loginResponse.message!!)
+                  startActivity(intent)
+                  finish()*/
                 if(loginResponse.items!!.is_Registered == 1){
                     setUserData(loginResponse)
                     val intent = Intent(this, DrawerActivity::class.java)
@@ -135,20 +135,20 @@ class LoginActivity : BaseActivity() {
 
     }
 
-        private fun setUserData(validateOTP : OtpResponse) {
+    private fun setUserData(validateOTP : OtpResponse) {
 
-            MySharedPreferences.getMySharedPreferences()!!.isLogin = true
-            MySharedPreferences.getMySharedPreferences()!!.lang_id = validateOTP.items!!.user!!.lang_id
-            MySharedPreferences.getMySharedPreferences()!!.token = validateOTP.items!!.token.toString()
-            MySharedPreferences.getMySharedPreferences()!!.is_Registered = validateOTP.items!!.user!!.is_Registered
-            MySharedPreferences.getMySharedPreferences()!!.first_name = validateOTP.items!!.user!!.first_name.toString()
-            MySharedPreferences.getMySharedPreferences()!!.last_name = validateOTP.items!!.user!!.last_name.toString()
-            MySharedPreferences.getMySharedPreferences()!!.phone_number = validateOTP.items!!.user!!.phone_number.toString()
-            MySharedPreferences.getMySharedPreferences()!!.is_facilitator = validateOTP.items!!.user!!.is_facilitator
-            MySharedPreferences.getMySharedPreferences()!!.state = validateOTP.items!!.user!!.state.toString()
-            MySharedPreferences.getMySharedPreferences()!!.gender = validateOTP!!.items!!.user!!.gender.toString()
-            MySharedPreferences.getMySharedPreferences()!!.district = validateOTP.items!!.user!!.district.toString()
-            MySharedPreferences.getMySharedPreferences()!!.user_type = validateOTP!!.items!!.user!!.user_type.toString()
+        MySharedPreferences.getMySharedPreferences()!!.isLogin = true
+        MySharedPreferences.getMySharedPreferences()!!.lang_id = validateOTP.items!!.user!!.lang_id
+        MySharedPreferences.getMySharedPreferences()!!.token = validateOTP.items!!.token.toString()
+        MySharedPreferences.getMySharedPreferences()!!.is_Registered = validateOTP.items!!.user!!.is_Registered
+        MySharedPreferences.getMySharedPreferences()!!.first_name = validateOTP.items!!.user!!.first_name.toString()
+        MySharedPreferences.getMySharedPreferences()!!.last_name = validateOTP.items!!.user!!.last_name.toString()
+        MySharedPreferences.getMySharedPreferences()!!.phone_number = validateOTP.items!!.user!!.phone_number.toString()
+        MySharedPreferences.getMySharedPreferences()!!.is_facilitator = validateOTP.items!!.user!!.is_facilitator
+        MySharedPreferences.getMySharedPreferences()!!.state = validateOTP.items!!.user!!.state.toString()
+        MySharedPreferences.getMySharedPreferences()!!.gender = validateOTP!!.items!!.user!!.gender.toString()
+        MySharedPreferences.getMySharedPreferences()!!.district = validateOTP.items!!.user!!.district.toString()
+        MySharedPreferences.getMySharedPreferences()!!.user_type = validateOTP!!.items!!.user!!.user_type.toString()
 
-        }
+    }
 }

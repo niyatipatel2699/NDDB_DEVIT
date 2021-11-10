@@ -16,6 +16,8 @@ import com.devit.nddb.model.SliderData
 import com.smarteist.autoimageslider.SliderView
 import android.content.Intent
 import com.devit.nddb.Activity.DrawerActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class EventFragment : Fragment() {

@@ -20,7 +20,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/nunito_semibold"
                 android:padding="@dimen/_15sdp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                android:text="@string/gallery_text"
                 android:textColor="@color/font_head_color"
                 android:textSize="@dimen/_12sdp" />
 
