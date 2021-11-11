@@ -34,7 +34,6 @@ import com.devit.nddb.backgroundservice.MotionService
 import com.devit.nddb.backgroundservice.RestartBroadcastReceiver
 import com.devit.nddb.databinding.FragmentHomeBinding
 import com.devit.nddb.model.SliderData
-import com.devit.nddb.utils.Database
 import com.devit.nddb.utils.NetworkUtils
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -126,6 +125,11 @@ class HomeFragment : Fragment() {
 //            textView.text = it
 //        })
 
+        /*val stepsNotPass = Database.getInstance(requireActivity()).getEntries()
+        if(stepsNotPass.size > 0 )
+        {
+            homeViewModel.stepCount(stepsNotPass)
+        }*/
         GlobalScope.launch(Dispatchers.Main) {
             dbHelper =
                 activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
@@ -137,8 +141,13 @@ class HomeFragment : Fragment() {
 
         }
 
-        val overallSteps = Database.getInstance(requireActivity()).getSumSteps(0)
-        binding.tvContributedSteps.text=overallSteps.toString()
+        GlobalScope.launch(Dispatchers.Main) {
+            dbHelper =
+                activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
+            binding.tvContributedSteps.text=dbHelper.totalSteps().toString()
+        }
+        /*val overallSteps = Database.getInstance(requireActivity()).getSumSteps(0)
+        binding.tvContributedSteps.text=overallSteps.toString()*/
         subscribeService()
 
         return root
@@ -214,7 +223,16 @@ class HomeFragment : Fragment() {
             homeViewModel.stepCountResponseLiveData.observe(it) { stepCountResponse ->
                 if (stepCountResponse.status == 1) {
                     //Log.e("success",loginResponse.message!!)
-
+                   /* val stepsNotPass = Database.getInstance(requireActivity()).getEntries()
+                    if(stepsNotPass.size > 0 )
+                    {
+                        stepsNotPass.forEach {
+                            if (!it.ispass) {
+                                Database.getInstance(requireActivity()).updateEntry(1)
+                                //dbHelper.updateEntry(it.id,it.step!!,it.location!!,it.lat!!,it.longitude!!,true)
+                            }
+                        }
+                    }*/
                     GlobalScope.launch(Dispatchers.Main) {
                         dbHelper = activity?.let { DatabaseBuilder.getInstance(it) }
                             ?.let { DatabaseHelperImpl(it) }!!

@@ -27,10 +27,18 @@ import android.widget.Toast
 import com.bumptech.glide.util.Util
 import com.devit.nddb.Activity.DrawerActivity
 import com.devit.nddb.Activity.ui.home.HomeFragment
+import com.devit.nddb.MySharedPreferences
 import com.devit.nddb.R
-import com.devit.nddb.utils.Database
-import com.devit.nddb.utils.Helper
+import com.devit.nddb.utils.Converters
+
 import com.devit.nddb.utils.StepDetector
+import com.wajahatkarim3.imagine.data.room.DatabaseBuilder
+import com.wajahatkarim3.imagine.data.room.DatabaseHelper
+import com.wajahatkarim3.imagine.data.room.DatabaseHelperImpl
+import com.wajahatkarim3.imagine.data.room.entity.Steps
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -59,13 +67,15 @@ internal class MotionService : Service() {
     private var motionActivityId = 0
     var stopped = false
 
+    private lateinit var dbHelper: DatabaseHelper
+
     override fun onBind(intent: Intent): IBinder? {
         return null
     }
 
     override fun onCreate() {
         Log.d(TAG, "Creating MotionService")
-
+        dbHelper= DatabaseHelperImpl(DatabaseBuilder.getInstance(this))
         startService()
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
@@ -139,10 +149,36 @@ internal class MotionService : Service() {
 
     private fun handleEvent() {
         // Check if new day started
-        if (!DateUtils.isToday(mCurrentDate)) {
 
+        GlobalScope.launch (Dispatchers.Main) {
+            var lat= MySharedPreferences.getMySharedPreferences()!!.latitude
+            var lng= MySharedPreferences.getMySharedPreferences()!!.longitude
+            var address= MySharedPreferences.getMySharedPreferences()!!.longitude
+            val currentDate = Converters.FORMATTER.format(Date())
+            var step=dbHelper.getStep(currentDate)
+            if(step!=null)
+            {
+                sharedPreferences.edit().putInt(KEY_STEPS, mTodaysSteps).apply()
+                dbHelper.updateSteps(step.id,mTodaysSteps,address, lat, lng,step.ispass)
+            }
+            else
+            {
+                mTodaysSteps = 0
+                mCurrentDate = com.devit.nddb.utils.Util.calendar.timeInMillis
+                sharedPreferences.edit().putLong(KEY_DATE, mCurrentDate).apply()
+                dbHelper.insertSteps(Steps(currentDate, mTodaysSteps, address, lat, lng, false))
+            }
+        }
+
+        /*if (!DateUtils.isToday(mCurrentDate)) {
+
+            //(timestamp long primary key, isPass TEXT CHECK( isPass IN ('1','0') )   NOT NULL DEFAULT '0', steps int not null);"
             // Add record for the day to the database
-            Database.getInstance(this).addEntry(mCurrentDate, mTodaysSteps)
+            var lat= MySharedPreferences.getMySharedPreferences()!!.latitude
+            var lng= MySharedPreferences.getMySharedPreferences()!!.longitude
+            var address= MySharedPreferences.getMySharedPreferences()!!.longitude
+
+            Database.getInstance(this).addEntry(mCurrentDate, mTodaysSteps,lat,lng,address)
 
             // Start counting for the new day
             mTodaysSteps = 0
@@ -152,7 +188,7 @@ internal class MotionService : Service() {
         sharedPreferences.edit().putInt(KEY_STEPS, mTodaysSteps).apply()
         for (i in 0 until motionActivities.size()) {
             motionActivities.valueAt(i).update(mCurrentSteps)
-        }
+        }*/
         sendUpdate()
     }
 

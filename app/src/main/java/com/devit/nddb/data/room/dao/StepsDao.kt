@@ -23,6 +23,9 @@ interface StepsDao {
     @Query("select * from Steps")
     fun getSteps(): List<Steps>
 
+    @Query("select sum(step) from Steps")
+    fun getTotalSteps(): Int
+
     @Query("select * from Steps WHERE date=:date")
     fun getStep(date: String): Steps
 

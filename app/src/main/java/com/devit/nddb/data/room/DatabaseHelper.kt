@@ -18,4 +18,6 @@ interface DatabaseHelper {
 
     suspend fun updateSteps(id:Int,steps: Int,address:String, lat:String, lng:String,ispass:Boolean)
 
+    suspend fun totalSteps():Int
+
 }
