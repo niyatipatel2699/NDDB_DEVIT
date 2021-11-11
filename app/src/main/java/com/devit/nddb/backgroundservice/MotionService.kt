@@ -193,7 +193,7 @@ internal class MotionService : Service() {
     }
 
     private fun sendUpdate() {
-        mBuilder.setContentText(String.format(Locale.getDefault(), "%.2f km / %d steps", com.devit.nddb.utils.Util.stepsToMeters(mTodaysSteps), mTodaysSteps))
+        mBuilder.setContentText(String.format(Locale.getDefault(), "YOU TOTAL STEPS WALKED %d"/* com.devit.nddb.utils.Util.stepsToMeters(mTodaysSteps)*/, mTodaysSteps))
         mNotificationManager.notify(FOREGROUND_ID, mBuilder.build())
         receiver?.let {
             val bundle = Bundle()
