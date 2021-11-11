@@ -95,8 +95,8 @@
     <!--<string name="alert_dialog">Thank you for your interest in Event {Event name}. Event will be start on {Date}.</string>-->
     <string name="alert_dialog">Thank you for your interest in Event Kadam for Kurien. Event will be start on 26-Nov-2021.</string>
     <string name="ok">Ok</string>
-   <!-- <string name="yes">Yes</string>
-    <string name="no">No</string>-->
+    <!-- <string name="yes">Yes</string>
+     <string name="no">No</string>-->
 
     <string name="validation_first_name">Please Enter First Name</string>
     <string name="validation_last_name">Please Enter Last Name</string>

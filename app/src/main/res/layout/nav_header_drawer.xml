@@ -15,9 +15,9 @@
         android:layout_gravity="center"
         android:contentDescription="@string/nav_header_desc"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/top_menu_bg" />
+        app:srcCompat="@drawable/menu_screen_top_banner" />
 
-    <RelativeLayout
+  <!--  <RelativeLayout
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
         android:layout_height="wrap_content">
@@ -40,7 +40,7 @@
             android:text="@string/menu_dashboard"
             android:textColor="@color/white"
             android:textSize="@dimen/_20sdp" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 
 </RelativeLayout>

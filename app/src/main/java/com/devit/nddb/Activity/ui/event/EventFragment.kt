@@ -72,9 +72,14 @@ class EventFragment : Fragment() {
 
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
 
-        sliderDataArrayList.add(SliderData(url1))
+       /* sliderDataArrayList.add(SliderData(url1))
         sliderDataArrayList.add(SliderData(url2))
-        sliderDataArrayList.add(SliderData(url3))
+        sliderDataArrayList.add(SliderData(url3))*/
+
+        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_1))
+        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_2))
+        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_3))
+
 
         val adapter = slider_adapter(requireContext(), sliderDataArrayList)
         binding.slider.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR

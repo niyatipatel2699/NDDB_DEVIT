@@ -6,5 +6,5 @@ class SliderData     // Constructor method.
     // Getter method
     // image url is used to
     // store the url of image
-    var imgUrl: String
+    var imgUrl: Int
 )

@@ -1,0 +1,158 @@
+<resources>
+    <!--<string name="app_name">NDDB</string>-->
+    <string name="app_name">Kadam For Kurien</string>
+
+    <string name="welcome">NDDB অ্যাপে স্বাগত</string>
+    <string name="choose_lan">আপনার ভাষা নির্বাচন করুন</string>
+    <string name="next">পরবর্তী</string>
+
+    <string name="enter_mobilenumber">মোবাইল নম্বর প্রবেশ করান</string>
+    <string name="otp_will_be_send_to_mobile_number">উপরের মোবাইল নম্বরে, এক-কালীন যাচাইকরণ OTP পাঠানো হবে</string>
+    <string name="send_sms">যাচাইকরণ কোড পাঠান</string>
+    <string name="enter_mobile_number">দয়া করে মোবাইল নম্বর প্রবেশ করান</string>
+    <string name="enter_valid_mobile_number">দয়া করে বৈধ মোবাইল নম্বর প্রবেশ করান</string>
+    <string name="new_user_register_here">নতুন ব্যবহারকারী? এখানে রেজিস্টার করুন</string>
+    <string name="registration">রেজিস্ট্রেশন</string>
+    <string name="otp_screen">OTP যাচাইকরণ</string>
+    <string name="otp_sent_on_mobile_number">তে পাঠানো OTP প্রবেশ করান</string>
+    <string name="resend_otp">OTP পাননি?</string>
+    <string name="resend"> কোড পুনরায় পাঠান</string>
+
+    <string name="fname">প্রথম নাম</string>
+    <string name="lname">পদবি</string>
+    <string name="dob">জন্ম তারিখ</string>
+    <string name="submit">জমা দিন</string>
+    <string name="user_type">ব্যবহারকারীর প্রকার</string>
+    <string name="select_state">রাজ্য নির্বাচন করুন</string>
+    <string name="select_city">শহর নির্বাচন করুন</string>
+
+    <string name="title_activity_drawer">DrawerActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="verify_continue">যাচাই করুন এবং প্রচলিত রাখুন</string>
+
+    <string name="menu_dashboard">কদম ফর কুরিয়েন</string>
+    <string name="menu_event">ঘটনা</string>
+    <string name="menu_walked_history">ইতিহাস</string>
+    <string name="menu_gallery">গ্যালারি</string>
+    <string name="menu_change_language">ভাষা</string>
+    <string name="menu_profile">প্রোফাইল</string>
+
+    <string name="gender">লিঙ্গ</string>
+    <string name="male">পরুষ</string>
+    <string name="female">মহিলা</string>
+    <string name="transgender">তৃতীয় লিঙ্গ</string>
+    <string name="dontdis">প্রকাশ করবেন না</string>
+
+    <string name="message_no_network_connected_str">কোনও নেটওয়ার্ক সংযুক্ত নাই</string>
+    <string name="message_something_went_wrong_str">কোন কিছু ভুল হয়েছে</string>
+    <!--<string name="your_total_step_walked">... গুলি পা হাঁটা হয়েছে</string>-->
+    <string name="your_total_step_walked">Steps Walked Today </string>
+    <string name="total_contributed_steps">Total Steps Contributed </string>
+    <string name="your_rank">অভিনন্দন! আপনার বর্তমান স্থানাঙ্ক</string>
+    <string name="among_participants">সকল অংশগ্রহণকারীর মধ্যে.</string>
+    <!--<string name="thank_you">আপনার সংযোজনের জন্য ধন্যবাদ৷ হাঁটতে থাকুন</string>-->
+    <string name="thank_you">Thank you for joining the world’s largest walkathon by contributing to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr. Verghese Kurien – the Milkman of India.</string>
+    <string name="log_in">লগ ইন করুন</string>
+    <string name="for_the_best_experience_nwith_nddb_walkathos">NDDB ওয়াকাথোন এর সর্বোৎকৃষ্ট অভিজ্ঞতার জন্য</string>
+    <!--<string name="virtual_walked">কদম ফর কুরিয়েন হল, ভারতের দুগ্ধ ব্যক্তি - ড. ভার্ঘিস কুরিয়েন এর প্রতি শ্রদ্ধা জ্ঞাপনের উদ্দেশ্যে একটি ভার্চুয়াল ওয়াকাথন</string>-->
+    <string name="virtual_walked">Press the start button to contribute your steps to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr. Verghese Kurien – the Milkman of India. Click on stop once you have walked your miles.</string>
+    <string name="contribute">200 মিলিয়ান পদক্ষেপের লক্ষ্যের প্রতি আপনার পদক্ষেপগুলি সংযোজন করার উদ্দেশ্যে, স্টার্ট এ ক্লিক করুন৷ আপনার পদক্ষেপগুলি রেজিস্টার করার জন্য, একবার থামুন আপনি আপনার মাইলটি হেঁটেছেন৷</string>
+
+    <string name="error_alert">সতর্ক হন</string>
+    <string name="location_setting_cannot_be_fixed_here">অবস্থান সেটিংগুলি অপর্যাপ্ত আছে, এবং এখানে ঠিক করা যাবে না৷ সেটি সেটিংস এ ঠিক করুন</string>
+    <string name="please_disable_flight_mode">দয়া করে ফ্লাইট মোড অক্ষম করুন</string>
+    <string name="fetching_location">অবস্থান আনয়ন করা হচ্ছে</string>
+    <string name="settings_location_required">দয়া করে অবস্থান সক্ষম করুন</string>
+    <string name="no_location_detected">কোনও অবস্থান পাওয়া যায়নি৷ ডিভাইসে অবস্থান সক্ষম থাকা নিশ্চিত করুন</string>
+    <string name="high_accuracy_location_not_available">বর্তমানে উচ্চ নির্ভুলতাসহ অবস্থান উপলব্ধ নয়৷ দয়া করে পুনরায় চেষ্টা করুন, বাঞ্ছনীয়ভাবে ইন্টারনেট সংযোগের সাহায্যে৷</string>
+    <string name="permission_rationale">ব্যবহারকারীর অবস্থানের জন্য, অবস্থানের অনুমতি প্রয়োজনীয়</string>
+    <string name="permission_denied_explanation">অনুমতি অস্বীকার করার হয়েছিল, কিন্তু ব্যবহারকারীর অবস্থানের প্রয়োজনীয়</string>
+    <string name="location_failed_permission_not_granted">অবস্থান ব্যর্থ হয়েছে৷ অবস্থান অনুমতি মঞ্জুর করা হয়নি</string>
+    <string name="label_yes">হ্যাঁ</string>
+    <string name="label_no">না</string>
+    <string name="current_steps_nwalked">বর্তমানে হাঁটা পদক্ষেপগুলি</string>
+    <string name="start">শুরু করুন</string>
+    <string name="stop">থামুন</string>
+    <string name="register_walkings">হাঁটা রেজিস্টার করুন</string>
+    <string name="step_walked">হাঁটা পদক্ষেপ</string>
+    <string name="facilitator">সুবিধাকারী</string>
+    <string name="enter_number_of_people">ব্যক্তিদের সংখ্যা প্রবেশ করান</string>
+    <string name="register">রেজিস্টার করুন</string>
+    <string name="state">রাজ্য</string>
+    <string name="district">জেলা</string>
+    <string name="phone_number">ফোন নম্বর</string>
+    <string name="photos">ছবি</string>
+    <string name="videos">ভিডিও</string>
+    <string name="registered_mobile">রেজিস্টার করা মোবাইল</string>
+    <string name="select_language">দয়া করে প্রথমে যেকোনো ভাষা নির্বাচন করুন</string>
+    <string name="are_you_sure_want_logout">লগআউট করার বিষয়ে আপনি কি নিশ্চিত?</string>
+    <string name="gallery_text">Check out the media gallery below to see some glimpses from the life and work of Dr. Kurien</string>
+    <!--<string name="alert_dialog">Thank you for your interest in Event {Event name}. Event will be start on {Date}.</string>-->
+    <string name="alert_dialog">Thank you for your interest in Event Kadam for Kurien. Event will be start on 26-Nov-2021.</string>
+    <string name="ok">Ok</string>
+    <!-- <string name="yes">Yes</string>
+     <string name="no">No</string>-->
+
+    <string name="validation_first_name">দয়া করে প্রথম নাম প্রবেশ করান</string>
+    <string name="validation_last_name">দয়া করে পদবি প্রবেশ করান</string>
+    <string name="validation_state">দয়া করে রাজ্য নির্বাচন করুন</string>
+    <string name="validation_city">দয়া করে জেলা নির্বাচন করুন </string>
+    <string name="select_gender">দয়া করে লিঙ্গ নির্বাচন করুন</string>
+    <string name="select_usertype">দয়া করে ব্যবহারকারীর প্রকার নির্বাচন করুন</string>
+    <string name="no_city_msg">নির্বাচিত রাজ্যে কোন শহর নাই </string>
+    <string name="please_enter_otp">দয়া করে OTP প্রবেশ করান</string>
+    <string name="country_code">+91</string>
+    <string name="log_out">লগআউট করুন</string>
+    <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
+
+    <string-array name="user_type_array">
+        <item>Milk Union</item>
+        <item>Individual</item>
+        <item>Farmer</item>
+    </string-array>
+
+    <string-array name="india_states">
+        <item>Andaman and Nicobar Islands</item>
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chandigarh</item>
+        <item>Chhattisgarh</item>
+        <item>Dadra and Nagar Haveli</item>
+        <item>Daman and Diu</item>
+        <item>Delhi</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Lakshadweep</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Orissa</item>
+        <item>Pondicherry</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Telangana</item>
+        <item>Tripura</item>
+        <item>Uttaranchal</item>
+        <item>Uttar Pradesh</item>
+        <item>West Bengal</item>
+    </string-array>
+
+</resources>

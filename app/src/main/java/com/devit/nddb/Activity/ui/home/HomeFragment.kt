@@ -54,11 +54,9 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-    var url1 = "https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg"
-    var url2 =
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ54CE_FOgSo3all2YDRz1bJl6D5zrvpZ9vVw&usqp=CAU"
-    var url3 =
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuI22npaeSNOveFW2JEp-IFrSKwJZlMmqsJw&usqp=CAU"
+  /*  var url1 = R.drawable.app_dashboard_banner_1
+    var url2 = R.drawable.app_dashboard_banner_2
+    var url3 = R.drawable.app_dashboard_banner_3*/
 
     /**
      * Provides access to the Fused Location Provider API.
@@ -159,9 +157,9 @@ class HomeFragment : Fragment() {
 //        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
 
-        sliderDataArrayList.add(SliderData(url1))
-        sliderDataArrayList.add(SliderData(url2))
-        sliderDataArrayList.add(SliderData(url3))
+        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_1))
+        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_2))
+        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_3))
 
         val adapter = slider_adapter(requireContext(), sliderDataArrayList)
         binding.slider.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR

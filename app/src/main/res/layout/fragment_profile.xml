@@ -19,11 +19,11 @@
             android:layout_gravity="center"
             android:contentDescription="@string/nav_header_desc"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/top_profile_bg" />
+            app:srcCompat="@drawable/profile_screen_banner" />
 
         <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="@dimen/_120sdp"
+            android:layout_width="@dimen/_115sdp"
+            android:layout_height="@dimen/_115sdp"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
@@ -38,7 +38,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true"
                 android:layout_centerInParent="true"
-                android:src="@drawable/dr_kurien"
+                android:src="@drawable/profile_pic"
                 android:padding="@dimen/_8sdp" />
 
         </androidx.cardview.widget.CardView>

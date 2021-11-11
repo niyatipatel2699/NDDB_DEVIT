@@ -200,8 +200,19 @@ class ChangeLanguageFragment : BaseFragment() {
                 MySharedPreferences.getMySharedPreferences()!!.lang_id = lanAdapter.row_index + 1
 
                 // Selected Language
-                NDDBApp.getLocaleManager(requireContext())
-                    ?.setNewLocale(requireContext(), "hi");
+                if(MySharedPreferences.getMySharedPreferences()!!.lang_id == 1) {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "en");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 2) {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "hi");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 3) {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "gu");
+                }else {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "en");
+                }
 
                 val intent = Intent(requireContext(), DrawerActivity::class.java)
                 //showSnackBar(activity,lanResponse.message)

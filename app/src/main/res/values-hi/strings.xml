@@ -1,6 +1,6 @@
 <resources>
     <!--<string name="app_name">एनडीडीबी</string>-->
-    <string name="app_name">कदम4कुरियन</string>
+    <string name="app_name">Kadam For Kurien</string>
 
     <string name="welcome">एनडीडीबी ऐप पर आपका स्वागत है</string>
     <string name="choose_lan">आपकी भाषा चुनें</string>
@@ -53,7 +53,7 @@
     <!--<string name="your_total_step_walked">कितने कदम चले</string>-->
     <string name="your_total_step_walked">Steps Walked Today </string>
     <string name="total_contributed_steps">Total Steps Contributed </string>
-    <string name="your_rank">बधाइयाँ! आप अभी इस स्थान पर हैं \n</string>
+    <string name="your_rank">बधाइयाँ! आप अभी इस स्थान पर हैं</string>
     <string name="among_participants">सभी सहभागियों में से|</string>
     <!--<string name="thank_you">आपके योगदान के लिये धन्यवाद। पैदल चलते रहें|</string>-->
     <string name="thank_you">Thank you for joining the world’s largest walkathon by contributing to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr| Verghese Kurien – the Milkman of India|</string>
