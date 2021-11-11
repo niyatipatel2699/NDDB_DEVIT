@@ -1,9 +1,7 @@
 package com.devit.nddb.backgroundservice
 
 import android.app.*
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -21,6 +19,10 @@ import com.devit.nddb.MySharedPreferences
 import com.devit.nddb.R
 import com.devit.nddb.utils.Converters.Companion.FORMATTER
 import com.devit.nddb.utils.StepDetector
+import com.google.android.gms.location.ActivityRecognitionClient
+import com.google.android.gms.location.ActivityRecognitionResult
+import com.google.android.gms.location.DetectedActivity
+import com.google.android.gms.tasks.Task
 import com.wajahatkarim3.imagine.data.room.DatabaseBuilder
 import com.wajahatkarim3.imagine.data.room.DatabaseHelper
 import com.wajahatkarim3.imagine.data.room.DatabaseHelperImpl
@@ -29,6 +31,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
+
 
 class AutoStartService : Service, SensorEventListener, StepListener {
     var counter = 0
@@ -47,6 +50,16 @@ class AutoStartService : Service, SensorEventListener, StepListener {
     private var simpleStepDetector: StepDetector? = null
 
     private lateinit var dbHelper: DatabaseHelper
+
+    private lateinit var mIntentService: Intent
+    private lateinit var mPendingIntent: PendingIntent
+    private lateinit var mActivityRecognitionClient: ActivityRecognitionClient
+    private lateinit var broadcastReceiver: BroadcastReceiver
+
+    var iswal = false
+
+    var actvityType :Int=0
+    var confidence :Int=0
 
     constructor(context: Context?) {
         Log.i(TAG, "AutoStartService: Here we Go!!!!!")
@@ -79,8 +92,42 @@ class AutoStartService : Service, SensorEventListener, StepListener {
             .build()
         startForeground(1001, notification)
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        simpleStepDetector = StepDetector()
-        simpleStepDetector?.registerListener(this)
+        /*simpleStepDetector = StepDetector()
+        simpleStepDetector?.registerListener(this)*/
+
+        simpleStepDetector = StepDetector(object : StepDetector.StepListener {
+            override fun step(timeNs: Long) {
+                //handleEvent(mCurrentSteps + 1)
+            }
+        })
+
+
+
+        mActivityRecognitionClient = ActivityRecognitionClient(this)
+        mIntentService = Intent(this, RecognizedActivitiesService::class.java)
+        mPendingIntent = PendingIntent.getService(this, 1, mIntentService, PendingIntent.FLAG_UPDATE_CURRENT)
+        requestActivityUpdatesButtonHandler()
+
+        broadcastReceiver  = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                if (intent.action == RecognizedActivitiesService.BROADCAST_ACTIVITY_RECOGNITION) {
+                    //true
+                  /*  addStep()*/
+                   actvityType = intent.getIntExtra("type", -1)
+                    confidence = intent.getIntExtra("confidence", 0)
+                    handleUserActivity(actvityType, confidence)
+                    //handleUserActivity()addStep()
+                  /*  val type = intent.getIntExtra("type", -1)
+                    val confidence = intent.getIntExtra("confidence", 0)
+                    //handleUserActivity(type, confidence)
+                    Log.e("123",type.toString())
+                    Log.e("123111",confidence.toString())*/
+                }
+            }
+        }
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,
+            IntentFilter(RecognizedActivitiesService.BROADCAST_ACTIVITY_RECOGNITION))
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -102,6 +149,7 @@ class AutoStartService : Service, SensorEventListener, StepListener {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
+        //activityIntent=intent!!
         if (intent != null && intent.hasExtra("stopped")) {
             stopped = intent.extras!!.getBoolean("stopped",false)
         }
@@ -124,6 +172,7 @@ class AutoStartService : Service, SensorEventListener, StepListener {
         val broadcastIntent = Intent(this, RestartBroadcastReceiver::class.java)
         sendBroadcast(broadcastIntent)
         stoptimertask()
+        removeActivityUpdatesButtonHandler()
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {
@@ -160,15 +209,15 @@ class AutoStartService : Service, SensorEventListener, StepListener {
         senStepDetector = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);*/
 
         running = true
-       /* sensorManager!!.registerListener(
+        sensorManager!!.registerListener(
             this,
             sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
             SensorManager.SENSOR_DELAY_FASTEST
-        )*/
+        )
 
-        sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+        /*sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
         sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER), SensorManager.SENSOR_DELAY_NORMAL);
-        sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR), SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager!!.registerListener(this, sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR), SensorManager.SENSOR_DELAY_NORMAL);*/
     }
 
     fun stoptimertask() {
@@ -187,22 +236,18 @@ class AutoStartService : Service, SensorEventListener, StepListener {
     }
 
     override fun onSensorChanged(event: SensorEvent) {
-        /*if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
-            simpleStepDetector?.updateAccelerometer(
+        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+
+            simpleStepDetector?.updateAccel(
                 event.timestamp,
                 event.values[0],
                 event.values[1],
                 event.values[2]
             )
-        }*/
-        if(event.sensor.type == Sensor.TYPE_STEP_COUNTER)
-        {
-            if (reportedSteps < 1) {
-                reportedSteps = event.values[0].toInt()
-            }
-            stepsWalked = event.values[0].toInt() - reportedSteps
-            addStep()
+
+
         }
+
 
     }
 
@@ -211,6 +256,7 @@ class AutoStartService : Service, SensorEventListener, StepListener {
 
     fun addStep()
     {
+        stepsWalked++
         broadcastActionBazSteps(this, stepsWalked.toString())
         GlobalScope.launch (Dispatchers.Main) {
             var lat= MySharedPreferences.getMySharedPreferences()!!.latitude
@@ -262,56 +308,23 @@ class AutoStartService : Service, SensorEventListener, StepListener {
 
 
     override fun step(timeNs: Long) {
-        val currentDate = FORMATTER.format(Date())
-       // stepsWalked++
-//        Toast.makeText(this, "STEPS  $stepsWalked", Toast.LENGTH_SHORT).show()
-        broadcastActionBazSteps(this, stepsWalked.toString())
-        GlobalScope.launch (Dispatchers.Main) {
-            var lat= MySharedPreferences.getMySharedPreferences()!!.latitude
-            var lng= MySharedPreferences.getMySharedPreferences()!!.longitude
-            var address= MySharedPreferences.getMySharedPreferences()!!.longitude
-            val currentDate = FORMATTER.format(Date())
-            var step=dbHelper.getStep(currentDate)
-            if(step!=null)
-            {
-                dbHelper.updateSteps(step.id,stepsWalked,address, lat, lng,step.ispass)
+        //addStep()
+       /* if(iswal)
+        {
+            addStep()
+        }*/
+
+
+
+       /* if (ActivityRecognitionResult.hasResult(activityIntent)) {
+            val result = ActivityRecognitionResult.extractResult(activityIntent)
+            //handleDetectedActivities()
+            for (activity in result.probableActivities) {
+                if (activity.type == DetectedActivity.RUNNING || activity.type == DetectedActivity.WALKING) {
+                    addStep()
+                }
             }
-            else
-            {
-                dbHelper.insertSteps(Steps(currentDate, stepsWalked, address, lat, lng, false))
-            }
-        }
-
-        /* ADD STEPS IN SHARED PREFERENCE */
-        val preferences: SharedPreferences = this.getSharedPreferences(
-            "AUTHENTICATION_FILE_NAME",
-            Context.MODE_PRIVATE
-        )
-        val editor = preferences.edit()
-        editor.putString("steps", stepsWalked.toString())
-        editor.apply()
-        /* ADD STEPS IN SHARED PREFERENCE */
-
-
-        val notificationIntent = Intent(this, DrawerActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0,
-            notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-        val channelId =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) createNotificationChannel(
-                notificationManager
-            ) else ""
-        val notificationBuilder = NotificationCompat.Builder(this, channelId)
-        val notification: Notification = notificationBuilder.setOngoing(true)
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setPriority(NotificationCompat.PRIORITY_MIN)
-            .setCategory(NotificationCompat.CATEGORY_SERVICE)
-            .setContentIntent(pendingIntent)
-            .setContentText("YOU TOTAL STEPS WALKED $stepsWalked")
-            .build()
-        startForeground(1001, notification)
+        }*/
     }
 
     private fun broadcastActionBazSteps(context: Context?, param: String?) {
@@ -340,5 +353,87 @@ class AutoStartService : Service, SensorEventListener, StepListener {
 //            val bm = LocalBroadcastManager.getInstance(context!!)
 //            bm.sendBroadcast(intent)
 //        }
+    }
+
+    fun requestActivityUpdatesButtonHandler() {
+        val task = mActivityRecognitionClient?.requestActivityUpdates(
+            RecognizedActivitiesService.DETECTION_INTERVAL_IN_MILLISECONDS,
+            mPendingIntent)
+
+        task?.addOnSuccessListener {
+            /*Toast.makeText(applicationContext,
+                "Successfully requested activity updates",
+                Toast.LENGTH_SHORT)
+                .show()*/
+        }
+
+        task?.addOnFailureListener {
+            /*Toast.makeText(applicationContext,
+                "Requesting activity updates failed to start",
+                Toast.LENGTH_SHORT)
+                .show()*/
+        }
+    }
+
+    fun removeActivityUpdatesButtonHandler() {
+        val task = mActivityRecognitionClient?.removeActivityUpdates(
+            mPendingIntent)
+        task?.addOnSuccessListener {
+          /*  Toast.makeText(applicationContext,
+                "Removed activity updates successfully!",
+                Toast.LENGTH_SHORT)
+                .show()*/
+        }
+
+        task?.addOnFailureListener {
+            /*Toast.makeText(applicationContext, "Failed to remove activity updates!",
+                Toast.LENGTH_SHORT).show()*/
+        }
+    }
+
+    private fun handleUserActivity(type: Int, confidence: Int) {
+        var activityType = "Activity Unknown"
+
+        when (type) {
+            DetectedActivity.STILL -> {
+                activityType = "Still"
+                iswal=false
+            }
+            DetectedActivity.ON_FOOT -> {
+                activityType = "On Foot"
+                iswal=true
+            }
+            DetectedActivity.WALKING -> {
+                activityType = "Walking"
+                iswal=true
+            }
+            DetectedActivity.RUNNING -> {
+                activityType = "Running"
+                iswal=true
+            }
+            DetectedActivity.IN_VEHICLE -> {
+                iswal=false
+            }
+            DetectedActivity.ON_BICYCLE -> {
+                iswal=false
+            }
+            DetectedActivity.TILTING -> {
+                iswal=false
+            }
+            DetectedActivity.UNKNOWN -> {
+                iswal=false
+            }
+        }
+
+        Log.e("Activity Type:", activityType)
+        Log.e("Activity Confidence:", confidence.toString())
+
+
+
+        if (confidence > 70 ) {
+
+           /* txt_type?.text = activityType
+            txt_confidence?.text = "Confidence: " + confidence*/
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.devit.nddb.Activity.ui.home
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.*
 import android.content.pm.PackageManager
 import android.location.Location
@@ -11,32 +12,29 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
+import android.os.ResultReceiver
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.devit.nddb.Activity.DrawerActivity
 import com.devit.nddb.Activity.FacilitatorActivity
-import com.devit.nddb.Activity.ui.event.EventViewModel
-import com.devit.nddb.Activity.ui.login.LoginActivity
-import com.devit.nddb.Activity.ui.registration.RegistrationModel
 import com.devit.nddb.Adapter.slider_adapter
 import com.devit.nddb.BuildConfig
 import com.devit.nddb.MySharedPreferences
 import com.devit.nddb.R
 import com.devit.nddb.backgroundservice.AutoStartService
+import com.devit.nddb.backgroundservice.MotionService
 import com.devit.nddb.backgroundservice.RestartBroadcastReceiver
 import com.devit.nddb.databinding.FragmentHomeBinding
 import com.devit.nddb.model.SliderData
+import com.devit.nddb.utils.Database
 import com.devit.nddb.utils.NetworkUtils
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -48,21 +46,10 @@ import com.smarteist.autoimageslider.SliderView
 import com.wajahatkarim3.imagine.data.room.DatabaseBuilder
 import com.wajahatkarim3.imagine.data.room.DatabaseHelper
 import com.wajahatkarim3.imagine.data.room.DatabaseHelperImpl
-import com.wajahatkarim3.imagine.data.room.entity.Steps
-import com.wajahatkarim3.imagine.utils.showSnack
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.util.*
-import kotlin.collections.ArrayList
-import androidx.viewpager.widget.ViewPager
-import android.widget.LinearLayout
-
-
-
-
-
 
 
 @AndroidEntryPoint
@@ -150,7 +137,9 @@ class HomeFragment : Fragment() {
 
         }
 
-
+        val overallSteps = Database.getInstance(requireActivity()).getSumSteps(0)
+        binding.tvContributedSteps.text=overallSteps.toString()
+        subscribeService()
 
         return root
     }
@@ -1060,7 +1049,24 @@ class HomeFragment : Fragment() {
 
         private const val REQUEST_LOCATION = 0x02
 
-        private const val TAG = "Home Fragment"
+        const val TAG = "Home Fragment"
+    }
+
+    private fun subscribeService() {
+        // start the service and pass a result receiver that is used by the service to update the UI
+        val i = Intent(activity, MotionService::class.java)
+        i.action = MotionService.ACTION_SUBSCRIBE
+        i.putExtra(TAG, object : ResultReceiver(null) {
+            override fun onReceiveResult(resultCode: Int, resultData: Bundle) {
+                Log.e("steps ",resultData.getInt(MotionService.KEY_STEPS).toString())
+                if (resultCode == 0) {
+                    activity?.runOnUiThread {
+                        binding.tvTotalSteps.setText(resultData.getInt(MotionService.KEY_STEPS).toString())
+                    }
+                }
+            }
+        })
+        activity?.startService(i)
     }
 
 }

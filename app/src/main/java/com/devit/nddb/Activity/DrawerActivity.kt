@@ -3,6 +3,7 @@ package com.devit.nddb.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -27,7 +28,9 @@ import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import com.devit.nddb.MainActivity
 import com.devit.nddb.backgroundservice.AutoStartService
+import com.devit.nddb.backgroundservice.MotionService
 import com.devit.nddb.backgroundservice.ServiceAdmin
+import com.devit.nddb.utils.Database
 import com.wajahatkarim3.imagine.data.room.DatabaseBuilder
 import com.wajahatkarim3.imagine.data.room.DatabaseHelper
 import com.wajahatkarim3.imagine.data.room.DatabaseHelperImpl
@@ -127,15 +130,21 @@ class DrawerActivity : BaseActivity() {
                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(i)
                 //AutoStartService.stop
-                val prfs = getSharedPreferences("AUTHENTICATION_FILE_NAME", MODE_PRIVATE)
+               /* val prfs = getSharedPreferences("AUTHENTICATION_FILE_NAME", MODE_PRIVATE)
                 val editor = prfs.edit()
                 editor.putString("steps", "0")
-                editor.apply()
+                editor.apply()*/
+                var sharedPreferences=PreferenceManager.getDefaultSharedPreferences(this)
+                sharedPreferences.edit().putInt(MotionService.KEY_STEPS, 0).apply()
+                Database.getInstance(this).clearTableData()
                 GlobalScope.launch (Dispatchers.Main) {
-                dbHelper.deleteSteps()
+                //dbHelper.deleteSteps()
                 }
-                val serviceAdmin = ServiceAdmin()
-                serviceAdmin.stopService(this)
+               /* val serviceAdmin = ServiceAdmin()
+                serviceAdmin.stopService(this)*/
+                val intent = Intent(activity, MotionService::class.java)
+                intent.putExtra("stopped", true)
+                activity?.startService(intent)
 
             }
             .setNegativeButton(
