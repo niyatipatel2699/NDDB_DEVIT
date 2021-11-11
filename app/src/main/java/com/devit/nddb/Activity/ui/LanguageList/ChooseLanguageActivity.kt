@@ -110,6 +110,33 @@ class ChooseLanguageActivity : BaseActivity() {
                 }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 3) {
                     NDDBApp.getLocaleManager(activity)
                         ?.setNewLocale(activity, "gu");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 4) {
+                    NDDBApp.getLocaleManager(activity)
+                        ?.setNewLocale(activity, "mr");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 5) {
+                    NDDBApp.getLocaleManager(activity)
+                        ?.setNewLocale(activity, "pa");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 6) {
+                    NDDBApp.getLocaleManager(activity)
+                        ?.setNewLocale(activity, "bn");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 7) {
+                    NDDBApp.getLocaleManager(activity)
+                        ?.setNewLocale(activity, "ta");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 8) {
+                    NDDBApp.getLocaleManager(activity)
+                        ?.setNewLocale(activity, "te");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 9) {
+                    NDDBApp.getLocaleManager(activity)
+                        ?.setNewLocale(activity, "kn");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 10) {
+                    NDDBApp.getLocaleManager(activity)
+                        ?.setNewLocale(activity, "ml");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 11) {
+                    NDDBApp.getLocaleManager(activity)
+                        ?.setNewLocale(activity, "as");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 12) {
+                    NDDBApp.getLocaleManager(activity)
+                        ?.setNewLocale(activity, "or");
                 }else {
                     NDDBApp.getLocaleManager(activity)
                         ?.setNewLocale(activity, "en");

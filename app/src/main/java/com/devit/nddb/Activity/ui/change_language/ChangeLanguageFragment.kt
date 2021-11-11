@@ -40,14 +40,14 @@ class ChangeLanguageFragment : BaseFragment() {
         "हिंदी",
         "ગુજરાતી",
         "मराठी",
-        "ಕನ್ನಡ", // Tamil
-        "తెలుగు", // Telugu
-        "മലയാളി",// Kannad
-        "ਪੰਜਾਬੀ",// Malayalam
-        "ಕನ್ನಡ",// Bengali
-        "తెలుగు",// Punjabi
-        "മലയാളി",// Assamese
-        "ਪੰਜਾਬੀ",// Odia
+        "ਪੰਜਾਬੀ", //=> Punjabi
+        "বাংলা ", // bengali
+        "தமிழ் ", // tamil
+        "தெலுங்கு  ",//telugu
+        "ಕನ್ನಡ  ", //kannad
+        "മലയാളം ", // malayalam
+        "অসমীয়া ", //assamee
+        "ରନ୍ " //odiya
     )
 
     private lateinit var changelanguageViewModel: ChangeLanguageViewModel
@@ -209,6 +209,33 @@ class ChangeLanguageFragment : BaseFragment() {
                 }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 3) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "gu");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 4) {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "mr");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 5) {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "pa");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 6) {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "bn");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 7) {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "ta");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 8) {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "te");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 9) {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "kn");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 10) {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "ml");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 11) {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "as");
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 12) {
+                    NDDBApp.getLocaleManager(requireContext())
+                        ?.setNewLocale(requireContext(), "or");
                 }else {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "en");
