@@ -105,15 +105,15 @@ class LoginActivity : BaseActivity() {
                 intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
                 startActivity(intent)*/
             if (loginResponse.status == 1) {
-                /*  //val intent = Intent(this, OTPActivity::class.java)
-                  val intent = Intent(this, DrawerActivity::class.java)
-                  //intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
+                  val intent = Intent(this, OTPActivity::class.java)
+                  //val intent = Intent(this, DrawerActivity::class.java)
+                  intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
                  // intent.putExtra("lang_id",selected_lang_id)
                   Log.e("success",loginResponse.message!!)
                   startActivity(intent)
-                  finish()*/
+                  finish()
 
-                if(loginResponse.items!!.is_Registered == 1){
+              /*  if(loginResponse.items!!.is_Registered == 1){
                     setUserData(loginResponse)
                     val intent = Intent(this, DrawerActivity::class.java)
                     startActivity(intent)
@@ -127,7 +127,7 @@ class LoginActivity : BaseActivity() {
                     intent.putExtra("mobile", loginResponse.items!!.user!!.phone_number)
                     startActivity(intent)
                     finish()
-                }
+                }*/
             } else {
                 loginResponse.message?.let {
                     loginBinding.relMain.showSnack(it)
