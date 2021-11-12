@@ -17,6 +17,7 @@ package com.wajahatkarim3.imagine.data.remote
 
 import com.devit.nddb.MySharedPreferences
 import com.devit.nddb.data.remote.responses.BaseResponse
+import com.devit.nddb.data.remote.responses.History.HistoryResponse
 import com.devit.nddb.data.remote.responses.Language.LanguageResponse
 import com.devit.nddb.data.remote.responses.OtpValidation.OtpResponse
 import com.devit.nddb.data.remote.responses.Registration.*
@@ -89,6 +90,12 @@ interface LoginApiService {
         @Field("data") stepsList : List<Steps>,
 
         ) : ApiResponse<StepCountResponse>
+
+
+    @GET("api/v1/stepscount/getWalkHistory")
+    suspend fun getWalkHistory() : ApiResponse<HistoryResponse>
+
+
 
 
 

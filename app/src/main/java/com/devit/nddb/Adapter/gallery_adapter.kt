@@ -56,7 +56,19 @@ class gallery_adapter(
             }
             else
             {
-                watchYoutubeVideo(context,"EHg--XWNr9I")
+                if(p1==2)
+                {
+                    watchYoutubeVideo(context,"Me85wbcC0Zk")
+                }
+                else if(p1==3)
+                {
+                    watchYoutubeVideo(context,"DBtNPgYWjKU")
+                }
+                else
+                {
+                    watchYoutubeVideo(context,"EHg--XWNr9I")
+                }
+
             }
 
 

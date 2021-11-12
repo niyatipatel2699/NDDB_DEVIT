@@ -139,17 +139,26 @@ class HomeFragment : Fragment() {
 
         }
 
-        GlobalScope.launch(Dispatchers.Main) {
-            dbHelper =
-                activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
-            binding.tvContributedSteps.text=dbHelper.totalSteps().toString()
-        }
+        updateTotalSteps()
         /*val overallSteps = Database.getInstance(requireActivity()).getSumSteps(0)
         binding.tvContributedSteps.text=overallSteps.toString()*/
         subscribeService()
 
         return root
     }
+
+    fun updateTotalSteps()
+    {
+
+        GlobalScope.launch(Dispatchers.Main) {
+            //binding.tvTotalSteps.setText(step.toString())
+            dbHelper =
+                activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
+            binding.tvContributedSteps.text=(dbHelper.totalSteps()).toString()
+        }
+
+    }
+
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -590,11 +599,6 @@ class HomeFragment : Fragment() {
                     Manifest.permission.ACTIVITY_RECOGNITION
                 ) != PackageManager.PERMISSION_GRANTED)
             {
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
                 requestPermissions()
                 return
             }
@@ -1078,6 +1082,7 @@ class HomeFragment : Fragment() {
                 if (resultCode == 0) {
                     activity?.runOnUiThread {
                         binding.tvTotalSteps.setText(resultData.getInt(MotionService.KEY_STEPS).toString())
+                        //updateTotalSteps(resultData.getInt(MotionService.KEY_STEPS))
                     }
                 }
             }

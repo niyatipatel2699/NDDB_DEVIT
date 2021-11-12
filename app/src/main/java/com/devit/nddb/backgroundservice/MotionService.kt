@@ -170,7 +170,7 @@ internal class MotionService : Service() {
             }
         }
 
-        /*if (!DateUtils.isToday(mCurrentDate)) {
+       /* if (!DateUtils.isToday(mCurrentDate)) {
 
             //(timestamp long primary key, isPass TEXT CHECK( isPass IN ('1','0') )   NOT NULL DEFAULT '0', steps int not null);"
             // Add record for the day to the database

@@ -108,6 +108,13 @@
     <string name="please_enter_otp">Please Enter OTP</string>
     <string name="country_code">+91</string>
     <string name="log_out">Logout</string>
+
+    <string name="history_total_step">Total Steps Walked</string>
+
+    <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
+
+    <string name="history_thank_msg">Thank you for your contribution. Keep walking.</string>
+
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
 
     <string-array name="user_type_array">

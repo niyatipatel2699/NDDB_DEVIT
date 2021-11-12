@@ -112,6 +112,7 @@ class LoginActivity : BaseActivity() {
                   Log.e("success",loginResponse.message!!)
                   startActivity(intent)
                   finish()*/
+
                 if(loginResponse.items!!.is_Registered == 1){
                     setUserData(loginResponse)
                     val intent = Intent(this, DrawerActivity::class.java)
@@ -121,6 +122,7 @@ class LoginActivity : BaseActivity() {
                 else
                 {
                     //  Log.e("data-->", validateOTP.items.toString())
+                    MySharedPreferences.getMySharedPreferences()!!.token = loginResponse.items!!.token.toString()
                     val intent = Intent(this, RegistrationActivity::class.java)
                     intent.putExtra("mobile", loginResponse.items!!.user!!.phone_number)
                     startActivity(intent)

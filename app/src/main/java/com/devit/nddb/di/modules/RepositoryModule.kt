@@ -16,6 +16,8 @@
 package com.wajahatkarim3.imagine.di.modules
 
 import android.app.Application
+import com.devit.nddb.data.repository.HistoryRepo.HistoryRepository
+import com.devit.nddb.data.repository.HistoryRepo.HistoryRepositoryImpl
 import com.devit.nddb.data.repository.HomeRepo.HomeRepository
 import com.devit.nddb.data.repository.HomeRepo.HomeRepositoryImpl
 import com.devit.nddb.data.repository.Language.LanguageRepository
@@ -64,6 +66,12 @@ class RepositoryModule {
     @Provides
     fun provideLanguageRepository(stringUtils: StringUtils, apiService: LoginApiService): LanguageRepository {
         return LanguageRepositoryImpl(stringUtils, apiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideHistoryRepository(stringUtils: StringUtils, apiService: LoginApiService): HistoryRepository {
+        return HistoryRepositoryImpl(stringUtils, apiService)
     }
 
     @Singleton
