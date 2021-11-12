@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -64,9 +65,15 @@ class WalkedHistoryFragment : Fragment() {
     @SuppressLint("WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initObservations()
+        stepslist= ArrayList()
+
+        binding.rvWalkedHistory.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayout.VERTICAL, false)
+
         lanAdapter = walked_history_adapter(requireContext(), stepslist)
         binding.rvWalkedHistory.adapter = lanAdapter
-        initObservations()
+
 
         var stringResult =
             getString(R.string.your_rank) + " " + 100.toString() + " " + getString(R.string.among_participants)
@@ -102,10 +109,10 @@ class WalkedHistoryFragment : Fragment() {
         viewModel.historyResponseLiveData.observe(requireActivity()) { historyResponse ->
 
             if (historyResponse.status == 1) {
-                //stepslist = ArrayList()
-//                stepslist.c
-                stepslist = historyResponse.historyData!! as ArrayList<HistoryData>
+
+                stepslist = historyResponse.items// as ArrayList<HistoryData>
                 lanAdapter.notifyDataSetChanged()
+
             } else {
                 historyResponse.message?.let {
                     binding.fragmentWalk.showSnack(it)

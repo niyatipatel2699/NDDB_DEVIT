@@ -84,7 +84,7 @@ class OTPActivity : BaseActivity() {
 
         otpBinding.verifyOtpBtn.setOnClickListener {
             if(otpValidation()) {
-                otpViewModel.otpValidation(mobileNumber.toString())
+                otpViewModel.otpValidation(code!!,mobileNumber.toString())
                /* MySharedPreferences.getMySharedPreferences()!!.isLogin = true
                 val intent = Intent(this, RegistrationActivity::class.java)
                 //val intent = Intent(this, DrawerActivity::class.java)
