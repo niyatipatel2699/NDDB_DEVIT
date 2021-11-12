@@ -26,9 +26,9 @@ class WalkedHistoryViewModel @Inject constructor(
     private var _uiState = MutableLiveData<HistoryUiState>()
     val uiStateLiveData: LiveData<HistoryUiState> = _uiState
 
-    /*init {
+    init {
         getWalkHistory()
-    }*/
+    }
     fun getWalkHistory() {
 
         viewModelScope.launch {

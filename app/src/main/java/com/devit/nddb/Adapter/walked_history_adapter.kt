@@ -15,11 +15,11 @@ import java.util.*
 
 class walked_history_adapter(
     val context: Context,
-    val stepslist: List<Steps>
+    val stepslist: List<HistoryData>
 ) : RecyclerView.Adapter<walked_history_adapter.ViewHolder>() {
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        p0.tv_Count?.text = stepslist[p1].step.toString()
+        p0.tv_Count?.text = stepslist[p1].steps.toString()
         //val fDate: String = stepslist[p1].date
         val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
         val outputFormat: DateFormat = SimpleDateFormat("dd-MMM-yyyy")

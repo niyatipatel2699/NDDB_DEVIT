@@ -42,7 +42,7 @@ class WalkedHistoryFragment : Fragment() {
 
     private lateinit var dbHelper: DatabaseHelper
 
-    private lateinit var stepslist:List<Steps>
+    private lateinit var stepslist:List<HistoryData>
 
     private lateinit var lanAdapter:walked_history_adapter
     @SuppressLint("SetTextI18n")
@@ -64,16 +64,16 @@ class WalkedHistoryFragment : Fragment() {
     @SuppressLint("WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*lanAdapter = walked_history_adapter(requireContext(), stepslist)
+        lanAdapter = walked_history_adapter(requireContext(), stepslist)
         binding.rvWalkedHistory.adapter = lanAdapter
-        initObservations()*/
+        initObservations()
 
         var stringResult =
             getString(R.string.your_rank) + " " + 100.toString() + " " + getString(R.string.among_participants)
 
         binding.tvYourRank.text = stringResult
 
-        GlobalScope.launch (Dispatchers.Main) {
+        /*GlobalScope.launch (Dispatchers.Main) {
             dbHelper= activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
             var stepslist=dbHelper.getSteps()
 
@@ -86,7 +86,7 @@ class WalkedHistoryFragment : Fragment() {
 
             var lanAdapter = walked_history_adapter(requireContext(), stepslist)
             binding.rvWalkedHistory.adapter = lanAdapter
-        }
+        }*/
 
 
 
@@ -98,7 +98,7 @@ class WalkedHistoryFragment : Fragment() {
     }
 
 
-   /* private fun initObservations() {
+    private fun initObservations() {
         viewModel.historyResponseLiveData.observe(requireActivity()) { historyResponse ->
 
             if (historyResponse.status == 1) {
@@ -108,9 +108,9 @@ class WalkedHistoryFragment : Fragment() {
                 lanAdapter.notifyDataSetChanged()
             } else {
                 historyResponse.message?.let {
-                    //regBinding.relRegistration.showSnack(it)
+                    binding.fragmentWalk.showSnack(it)
                 }
             }
         }
-    }*/
+    }
 }
