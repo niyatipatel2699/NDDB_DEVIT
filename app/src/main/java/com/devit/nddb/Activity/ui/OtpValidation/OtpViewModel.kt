@@ -26,6 +26,10 @@ class OtpViewModel @Inject constructor(
   /*  private var _loginResponse = MutableLiveData<BaseResponse>()
     val loginResponseLiveData: LiveData<BaseResponse> = _loginResponse*/
 
+
+    private var _loginWithOtpResponse = MutableLiveData<OtpResponse>()
+    val loginWithOtpResponseLiveData : LiveData<OtpResponse> = _loginWithOtpResponse
+
     private var _otpResponse = MutableLiveData<OtpResponse>()
     val otpResponseLiveData : LiveData<OtpResponse> = _otpResponse
 
@@ -54,6 +58,29 @@ class OtpViewModel @Inject constructor(
         _uiState.postValue(LoadingState)
         viewModelScope.launch {
             loginRepository.loginWithOTP(phone_number,lang_id ).collect { dataState ->
+                when (dataState) {
+                    is DataState.Success -> {
+                        // Any other page
+                        _uiState.postValue(ContentState)
+                        dataState.data.let {
+                            _loginWithOtpResponse.postValue(it)
+                        }
+                    }
+
+                    is DataState.Error -> {
+                        _uiState.postValue(ErrorState(dataState.message))
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    fun resendOTP(phone_number: String) {
+        _uiState.postValue(LoadingState)
+        viewModelScope.launch {
+            loginRepository.resendOTP(phone_number).collect { dataState ->
                 when (dataState) {
                     is DataState.Success -> {
                         // Any other page

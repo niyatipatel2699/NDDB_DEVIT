@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.devit.nddb.Activity.DrawerActivity
 import com.devit.nddb.Adapter.walked_history_adapter
+import com.devit.nddb.MySharedPreferences
 import com.devit.nddb.R
 import com.devit.nddb.data.remote.responses.History.HistoryData
 import com.devit.nddb.databinding.WalkedHistoryFragmentBinding
@@ -43,7 +44,7 @@ class WalkedHistoryFragment : Fragment() {
 
     private lateinit var dbHelper: DatabaseHelper
 
-    private lateinit var stepslist:List<HistoryData>
+    private lateinit var stepslist:ArrayList<HistoryData>
 
     private lateinit var lanAdapter:walked_history_adapter
     @SuppressLint("SetTextI18n")
@@ -65,22 +66,27 @@ class WalkedHistoryFragment : Fragment() {
     @SuppressLint("WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initObservations()
-        stepslist= ArrayList()
+        /*stepslist= ArrayList()
 
-        binding.rvWalkedHistory.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayout.VERTICAL, false)
+        initObservations()*/
 
-        lanAdapter = walked_history_adapter(requireContext(), stepslist)
-        binding.rvWalkedHistory.adapter = lanAdapter
+
+
 
 
         var stringResult =
-            getString(R.string.your_rank) + " " + 100.toString() + " " + getString(R.string.among_participants)
+            getString(R.string.your_rank) + " " + MySharedPreferences.getMySharedPreferences()!!.user_rank.toString() + " " + getString(R.string.among_participants)
 
         binding.tvYourRank.text = stringResult
 
-        /*GlobalScope.launch (Dispatchers.Main) {
+        GlobalScope.launch(Dispatchers.Main) {
+            //binding.tvTotalSteps.setText(step.toString())
+            dbHelper =
+                activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
+            binding.tvTotalStep.text=(dbHelper.totalSteps()).toString()
+        }
+
+        GlobalScope.launch (Dispatchers.Main) {
             dbHelper= activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
             var stepslist=dbHelper.getSteps()
 
@@ -93,7 +99,7 @@ class WalkedHistoryFragment : Fragment() {
 
             var lanAdapter = walked_history_adapter(requireContext(), stepslist)
             binding.rvWalkedHistory.adapter = lanAdapter
-        }*/
+        }
 
 
 
@@ -105,13 +111,19 @@ class WalkedHistoryFragment : Fragment() {
     }
 
 
-    private fun initObservations() {
+   /* private fun initObservations() {
         viewModel.historyResponseLiveData.observe(requireActivity()) { historyResponse ->
 
             if (historyResponse.status == 1) {
 
-                stepslist = historyResponse.items// as ArrayList<HistoryData>
-                lanAdapter.notifyDataSetChanged()
+               // stepslist
+                stepslist = historyResponse.items as ArrayList<HistoryData>
+                binding.rvWalkedHistory.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+                lanAdapter = walked_history_adapter(requireContext(), stepslist)
+                binding.rvWalkedHistory.adapter = lanAdapter
+               // lanAdapter.notifyDataSetChanged()
 
             } else {
                 historyResponse.message?.let {
@@ -119,5 +131,5 @@ class WalkedHistoryFragment : Fragment() {
                 }
             }
         }
-    }
+    }*/
 }

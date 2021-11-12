@@ -6,10 +6,11 @@
 
     <!--Image we will display is our slider view-->
     <ImageView
+        android:src="@drawable/app_dashboard_banner_1"
         android:id="@+id/myimage"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:scaleType="centerCrop"
+        android:layout_height="@dimen/_165sdp"
+android:scaleType="fitXY"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/app_name" />
 

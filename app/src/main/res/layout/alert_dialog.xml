@@ -22,7 +22,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_15sdp"
             android:fontFamily="@font/nunito_regular"
-            android:text="@string/alert_dialog"
+            android:text="@string/event_alert_msg"
             android:textColor="@color/black"
             android:gravity="center"
             android:textSize="@dimen/_13sdp" />

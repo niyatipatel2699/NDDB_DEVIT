@@ -115,6 +115,8 @@
 
     <string name="history_thank_msg">Thank you for your contribution. Keep walking.</string>
 
+    <string name="event_alert_msg">This feature will get activated on 26-Nov-2021 date</string>
+
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
 
     <string-array name="user_type_array">

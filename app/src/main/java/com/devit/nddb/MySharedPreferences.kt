@@ -114,6 +114,17 @@ class MySharedPreferences internal constructor(context: Context, gson: Gson) {
             editor.putString(RestConstant.LONGITUDE, district).apply()
         }
 
+    var firebaseToken: String
+        get() = sharedPreferences.getString(RestConstant.FIRBASETOKEN, "")!!
+        set(district) {
+            editor.putString(RestConstant.FIRBASETOKEN, district).apply()
+        }
+
+    var user_rank: Int
+        get() = sharedPreferences.getInt(RestConstant.USER_RANK, 100)
+        set(user_rank) {
+            editor.putInt(RestConstant.USER_RANK, user_rank).apply()
+        }
     companion object {
         private var mySharedPreferences: MySharedPreferences? = null
 

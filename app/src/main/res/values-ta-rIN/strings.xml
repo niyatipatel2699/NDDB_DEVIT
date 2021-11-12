@@ -109,7 +109,7 @@
     <string name="country_code">+91</string>
     <string name="log_out">லாக்அவுட்</string>
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
-
+    <string name="event_alert_msg">இந்த அம்சம் 26-நவம்பர்-2021 தேதியில் செயல்படுத்தப்படும்</string>
     <string name="history_thank_msg">Thank you for your contribution. Keep walking.</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>

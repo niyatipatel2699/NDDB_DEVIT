@@ -46,7 +46,7 @@ class CustomRecyclerAdapter(
         if(type==2)
         {
             if (row_index == -1) {
-                if (langId.equals(languageData[p1])) {
+                if (langId==p1) {
                     p0.cardView.setCardBackgroundColor(Color.parseColor("#CA751B"))
                     p0.txtTitle.setTextColor(Color.parseColor("#ffffff"))
                 } else {

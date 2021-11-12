@@ -130,7 +130,7 @@ class ChangeLanguageFragment : BaseFragment() {
             else
             {
                 //var lang_id = languageList?.get(lanAdapter.row_index + 1)
-                changelanguageViewModel.updateLanguage(lanAdapter.row_index + 1)
+                changelanguageViewModel.updateLanguage(lanAdapter.row_index)
                 initObservations()
 
             }
@@ -197,43 +197,43 @@ class ChangeLanguageFragment : BaseFragment() {
             if (lanResponse.status == 1) {
                // _binding!!.changeRel.showSnack(lanResponse.message!!)
 
-                MySharedPreferences.getMySharedPreferences()!!.lang_id = lanAdapter.row_index + 1
+                MySharedPreferences.getMySharedPreferences()!!.lang_id = lanAdapter.row_index
 
                 // Selected Language
-                if(MySharedPreferences.getMySharedPreferences()!!.lang_id == 1) {
+                if(MySharedPreferences.getMySharedPreferences()!!.lang_id == 0) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "en");
-                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 2) {
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 1) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "hi");
-                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 3) {
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 2) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "gu");
-                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 4) {
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 3) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "mr");
-                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 5) {
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 4) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "pa");
-                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 6) {
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 5) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "bn");
-                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 7) {
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 6) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "ta");
-                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 8) {
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 7) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "te");
-                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 9) {
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 8) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "kn");
-                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 10) {
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 9) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "ml");
-                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 11) {
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 10) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "as");
-                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 12) {
+                }else if (MySharedPreferences.getMySharedPreferences()!!.lang_id == 11) {
                     NDDBApp.getLocaleManager(requireContext())
                         ?.setNewLocale(requireContext(), "or");
                 }else {

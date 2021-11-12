@@ -20,6 +20,7 @@ import com.devit.nddb.data.remote.responses.BaseResponse
 import com.devit.nddb.data.remote.responses.History.HistoryResponse
 import com.devit.nddb.data.remote.responses.Language.LanguageResponse
 import com.devit.nddb.data.remote.responses.OtpValidation.OtpResponse
+import com.devit.nddb.data.remote.responses.RankResponse.RankResponseModel
 import com.devit.nddb.data.remote.responses.Registration.*
 import com.devit.nddb.data.remote.responses.StepCountResponse
 import com.google.android.gms.common.api.Api
@@ -40,7 +41,8 @@ interface LoginApiService {
     @POST("api/v1/users/login-with-mobile-no")
     suspend fun loginWithOTP(
         @Field("phone_number") mobileNumber: String,
-        @Field("lang_id") lang_id: Int?
+        @Field("lang_id") lang_id: Int?,
+        @Field("device_id") device_id: String=MySharedPreferences.getMySharedPreferences()!!.firebaseToken
     ): ApiResponse<OtpResponse>
 
 
@@ -48,6 +50,12 @@ interface LoginApiService {
     @POST("api/v1/users/otp-validate")
     suspend fun otpValidation(
         @Field("otp") otp: String,
+        @Field("phone_number") mobile_number: String
+    ): ApiResponse<OtpResponse>
+
+    @FormUrlEncoded
+    @POST("api/v1/users//resend-otp")
+    suspend fun resendOtp(
         @Field("phone_number") mobile_number: String
     ): ApiResponse<OtpResponse>
 
@@ -97,7 +105,8 @@ interface LoginApiService {
 
 
 
-
+    @GET("api/v1/stepscount/getRank")
+    suspend fun getRank() : ApiResponse<RankResponseModel>
 
 //    @GET("photos")
 //    suspend fun loadPhotos(

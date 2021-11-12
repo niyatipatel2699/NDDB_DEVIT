@@ -36,7 +36,7 @@ class WalkedHistoryViewModel @Inject constructor(
                 when (dataState) {
                     is DataState.Success -> {
                         // Any other page
-                        //_uiState.postValue(ContentState)
+                        _uiState.postValue(ContentState)
                         dataState.data.let {
                             _historyResponse.postValue(it)
                         }

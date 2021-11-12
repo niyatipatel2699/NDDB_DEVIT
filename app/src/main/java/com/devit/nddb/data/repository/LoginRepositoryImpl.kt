@@ -62,4 +62,30 @@ class LoginRepositoryImpl @Inject constructor(
     }
 
 
+    @WorkerThread
+    override suspend fun resendOTP(phoneNumber: String): Flow<DataState<OtpResponse>> {
+        return flow {
+            apiService.resendOtp(phoneNumber).apply {
+                this.onSuccessSuspend {
+                    data?.let {
+                        emit(DataState.success(it))
+                    }
+                }
+                // handle the case when the API request gets an error response.
+                // e.g. internal server error.
+            }.onErrorSuspend {
+                emit(DataState.error<OtpResponse>(message()))
+
+                // handle the case when the API request gets an exception response.
+                // e.g. network connection error.
+            }.onExceptionSuspend {
+                if (this.exception is IOException) {
+                    emit(DataState.error<OtpResponse>(stringUtils.noNetworkErrorMessage()))
+                } else {
+                    emit(DataState.error<OtpResponse>(stringUtils.somethingWentWrong()))
+                }
+            }
+        }
+    }
+
 }

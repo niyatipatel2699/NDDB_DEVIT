@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "244221378344",
+    "project_id": "nddb-8041e",
+    "storage_bucket": "nddb-8041e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244221378344:android:685b01ddccf463b621da1d",
+        "android_client_info": {
+          "package_name": "com.devit.nddb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244221378344-pu5ojsqsh6jikvfbjrc4g6m9j1l65ro6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4-cqqw7l56RA2tmXDnFjb7fxyS43GwO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244221378344-pu5ojsqsh6jikvfbjrc4g6m9j1l65ro6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

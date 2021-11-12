@@ -30,10 +30,10 @@ class GalleryFragment : Fragment() {
         GalleryData(R.drawable.s_80_1,R.drawable.s_80_1,"Image"),
         GalleryData(R.drawable.ct756,R.drawable.ct756,"Image"),
         GalleryData(R.drawable.ct759,R.drawable.ct759,"Image"),
-        GalleryData(R.drawable.ct768,R.drawable.ct768,"Image"),
+        //GalleryData(R.drawable.ct768,R.drawable.ct768,"Image"),
         GalleryData(R.drawable.ct599,R.drawable.ct599,"Image"),
-        GalleryData(R.drawable.ct616,R.drawable.ct616,"Image"),
-        GalleryData(R.drawable.ct703,R.drawable.ct703,"Image"),
+        //GalleryData(R.drawable.ct616,R.drawable.ct616,"Image"),
+        //GalleryData(R.drawable.ct703,R.drawable.ct703,"Image"),
         GalleryData(R.drawable.ct692,R.drawable.ct692,"Image"),
         GalleryData(R.drawable.ct725,R.drawable.ct725,"Image")
         /*  GalleryData("PtkqwslbLY8","https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg","Video"),

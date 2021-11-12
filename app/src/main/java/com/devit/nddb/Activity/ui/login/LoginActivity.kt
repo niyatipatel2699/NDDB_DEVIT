@@ -111,7 +111,7 @@ class LoginActivity : BaseActivity() {
                  // intent.putExtra("lang_id",selected_lang_id)
                   Log.e("success",loginResponse.message!!)
                   startActivity(intent)
-                  finish()
+                  //finish()
 
               /*  if(loginResponse.items!!.is_Registered == 1){
                     setUserData(loginResponse)

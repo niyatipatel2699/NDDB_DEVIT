@@ -14,5 +14,7 @@ import kotlinx.coroutines.flow.Flow
 interface LoginRepository {
     //suspend fun loginWithOTP(phoneNumber: String,lang_id : Int): Flow<DataState<BaseResponse>>
     suspend fun loginWithOTP(phoneNumber: String,lang_id : Int): Flow<DataState<OtpResponse>>
+    suspend fun resendOTP(phoneNumber: String): Flow<DataState<OtpResponse>>
+
 //    suspend fun searchPhotos(query: String, pageNumber: Int, pageSize: Int): Flow<DataState<List<PhotoModel>>>
 }

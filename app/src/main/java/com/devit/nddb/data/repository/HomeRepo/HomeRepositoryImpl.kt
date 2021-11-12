@@ -1,5 +1,6 @@
 package com.devit.nddb.data.repository.HomeRepo
 
+import com.devit.nddb.data.remote.responses.RankResponse.RankResponseModel
 import com.devit.nddb.data.remote.responses.StepCountResponse
 import com.wajahatkarim3.imagine.data.DataState
 import com.wajahatkarim3.imagine.data.remote.*
@@ -42,6 +43,34 @@ class HomeRepositoryImpl @Inject constructor(
                 }
             }
         } as Flow<DataState<StepCountResponse>>
+
+    }
+
+
+
+    override suspend fun getRank(): Flow<DataState<RankResponseModel>> {
+        return flow {
+            apiService.getRank().apply {
+                this.onSuccessSuspend {
+                    data?.let {
+                        emit(DataState.success(it))
+                    }
+                }
+                // handle the case when the API request gets an error response.
+                // e.g. internal server error.
+            }.onErrorSuspend {
+                emit(DataState.error<com.devit.nddb.data.remote.responses.RankResponse.RankResponseModel>(message()))
+
+                // handle the case when the API request gets an exception response.
+                // e.g. network connection error.
+            }.onExceptionSuspend {
+                if (this.exception is IOException) {
+                    emit(DataState.error<RankResponseModel>(stringUtils.noNetworkErrorMessage()))
+                } else {
+                    emit(DataState.error<RankResponseModel>(stringUtils.somethingWentWrong()))
+                }
+            }
+        } as Flow<DataState<RankResponseModel>>
 
     }
 }

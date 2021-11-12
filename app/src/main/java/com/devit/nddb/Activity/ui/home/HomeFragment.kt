@@ -116,7 +116,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         var stringResult =
-            getString(R.string.your_rank) + " " + 100.toString() + " " + getString(R.string.among_participants)
+            getString(R.string.your_rank) + " " + MySharedPreferences.getMySharedPreferences()!!.user_rank.toString() + " " + getString(R.string.among_participants)
         binding.tvYourRank.text = stringResult
 
 //        homeViewModel.text.observe(viewLifecycleOwner, Observer {
@@ -138,7 +138,7 @@ class HomeFragment : Fragment() {
             }
 
         }
-
+        getRank()
         updateTotalSteps()
         /*val overallSteps = Database.getInstance(requireActivity()).getSumSteps(0)
         binding.tvContributedSteps.text=overallSteps.toString()*/
@@ -159,7 +159,10 @@ class HomeFragment : Fragment() {
 
     }
 
-
+    fun getRank(){
+        homeViewModel.getRank()
+        initObservation()
+    }
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -258,6 +261,24 @@ class HomeFragment : Fragment() {
             }
         }
 
+    }
+
+    fun initObservation(){
+
+        homeViewModel.rankLiveData.observe(requireActivity()){ rankResponse ->
+
+            if(rankResponse.status == 1){
+                //Log.e("rankl",rankResponse.)
+                if(rankResponse.items.size>0)
+                {
+                    MySharedPreferences.getMySharedPreferences()?.user_rank = rankResponse.items.get(0).rnk
+                }
+
+            }else {
+                rankResponse.message?.let { Log.e("error-->", it) }
+            }
+
+        }
     }
 
     override fun onDestroyView() {
@@ -1080,6 +1101,10 @@ class HomeFragment : Fragment() {
             override fun onReceiveResult(resultCode: Int, resultData: Bundle) {
                 Log.e("steps ",resultData.getInt(MotionService.KEY_STEPS).toString())
                 if (resultCode == 0) {
+                    /*if(isVisible())
+                    {
+
+                    }*/
                     activity?.runOnUiThread {
                         binding.tvTotalSteps.setText(resultData.getInt(MotionService.KEY_STEPS).toString())
                         //updateTotalSteps(resultData.getInt(MotionService.KEY_STEPS))

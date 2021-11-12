@@ -287,6 +287,6 @@ internal class MotionService : Service() {
         internal const val KEY_ACTIVITIES = "ACTIVITIES"
         internal const val KEY_DATE = "DATE"
         private const val FOREGROUND_ID = 3843
-        private const val CHANNEL_ID = "com.tiefensuche.motionmate.CHANNEL_ID"
+        const val CHANNEL_ID = "com.tiefensuche.motionmate.CHANNEL_ID"
     }
 }

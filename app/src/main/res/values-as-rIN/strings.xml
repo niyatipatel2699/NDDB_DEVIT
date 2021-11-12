@@ -110,6 +110,7 @@
     <string name="log_out">লগআউট কৰক</string>
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
     <string name="history_thank_msg">Thank you for your contribution. Keep walking.</string>
+    <string name="event_alert_msg">এই সুবিধাটো 26-নৱেম্বৰ-2021 তাৰিখে সক্ৰিয় কৰা হ\'ব</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

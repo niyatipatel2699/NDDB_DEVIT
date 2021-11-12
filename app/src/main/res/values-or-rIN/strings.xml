@@ -109,6 +109,7 @@
     <string name="country_code">+91</string>
     <string name="log_out">ଲଗ ଆଉଟ୍ </string>
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
+    <string name="event_alert_msg">ଏହି ବ feature ଶିଷ୍ଟ୍ୟ 26-ନଭେମ୍ବର -2021 ତାରିଖରେ ସକ୍ରିୟ ହେବ |</string>
 
     <string name="history_thank_msg">Thank you for your contribution. Keep walking.</string>
     <string-array name="user_type_array">

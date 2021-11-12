@@ -35,7 +35,7 @@ class OTPActivity : BaseActivity() {
 
     private var code: String? = null
     var mobileNumber: String? = null
-   // var selected_langid : Int? = null
+    // var selected_langid : Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -48,7 +48,7 @@ class OTPActivity : BaseActivity() {
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
             mobileNumber = bundle.getString("mobile")
-           // selected_langid = bundle.getInt("lang_id")
+            // selected_langid = bundle.getInt("lang_id")
 
         }
         initObservations()
@@ -84,12 +84,20 @@ class OTPActivity : BaseActivity() {
 
         otpBinding.verifyOtpBtn.setOnClickListener {
             if(otpValidation()) {
+                if(code==null)
+                {
+                    var otp1=otpBinding.otpEditBox1.getText().toString()
+                    var otp2=otpBinding.otpEditBox2.getText().toString()
+                    var otp3=otpBinding.otpEditBox3.getText().toString()
+                    var otp4=otpBinding.otpEditBox4.getText().toString()
+                    code="$otp1$otp2$otp3$otp4"
+                }
                 otpViewModel.otpValidation(code!!,mobileNumber.toString())
-               /* MySharedPreferences.getMySharedPreferences()!!.isLogin = true
-                val intent = Intent(this, RegistrationActivity::class.java)
-                //val intent = Intent(this, DrawerActivity::class.java)
-                intent.putExtra("mobile",mobileNumber)
-                startActivity(intent)*/
+                /* MySharedPreferences.getMySharedPreferences()!!.isLogin = true
+                 val intent = Intent(this, RegistrationActivity::class.java)
+                 //val intent = Intent(this, DrawerActivity::class.java)
+                 intent.putExtra("mobile",mobileNumber)
+                 startActivity(intent)*/
             }
             /*val intent = Intent(this, RegistrationActivity::class.java)
             intent.putExtra("mobile",mobileNumber)
@@ -150,17 +158,26 @@ class OTPActivity : BaseActivity() {
             }
         }
 
-       /* otpViewModel.loginResponseLiveData.observe(this) { otpResponse ->
+        /* otpViewModel.loginResponseLiveData.observe(this) { otpResponse ->
 
-            if (otpResponse.status == 1) {
-                //Log.e("success",loginResponse.message!!)
-                otpBinding.relOTP.showSnack(otpResponse.message!!)
-            } else {
-                otpResponse.message?.let {
-                    otpBinding.relOTP.showSnack(it)
-                }
+             if (otpResponse.status == 1) {
+                 //Log.e("success",loginResponse.message!!)
+                 otpBinding.relOTP.showSnack(otpResponse.message!!)
+             } else {
+                 otpResponse.message?.let {
+                     otpBinding.relOTP.showSnack(it)
+                 }
+             }
+         }*/
+        otpViewModel.loginWithOtpResponseLiveData.observe(this) { loginResponse ->
+            /*    val intent = Intent(this, OTPActivity::class.java)
+                intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
+                startActivity(intent)*/
+            loginResponse.message?.let {
+                otpBinding.relOTP.showSnack(it)
             }
-        }*/
+
+        }
 
         otpViewModel.otpResponseLiveData.observe(this) { validateOTP ->
 
@@ -280,6 +297,9 @@ class OTPActivity : BaseActivity() {
 
 
     private fun startCountDown() {
+        otpBinding.textResend.isEnabled = false
+        otpBinding.textOtpSec.visibility=View.VISIBLE
+        otpBinding.textResend.setTextColor(resources.getColor(R.color.grey))
         object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 otpBinding.textOtpSec.setText(
@@ -288,8 +308,9 @@ class OTPActivity : BaseActivity() {
             }
 
             override fun onFinish() {
-                otpBinding.textOtpResendOtp.setTextColor(resources.getColor(R.color.black))
-                otpBinding.textOtpResendOtp.isEnabled = true
+                otpBinding.textOtpSec.visibility=View.GONE
+                otpBinding.textResend.setTextColor(resources.getColor(R.color.orange))
+                otpBinding.textResend.isEnabled = true
             }
         }.start()
     }

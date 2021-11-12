@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.devit.nddb.Activity.ui.registration.ErrorState
 import com.devit.nddb.Activity.ui.registration.LoadingState
 import com.devit.nddb.Activity.ui.registration.RegistrationUiState
+import com.devit.nddb.data.remote.responses.RankResponse.RankResponseModel
 import com.devit.nddb.data.remote.responses.StepCountResponse
 import com.devit.nddb.data.repository.HomeRepo.HomeRepository
 import com.devit.nddb.data.repository.Registration.RegistrationRepository
@@ -33,6 +34,12 @@ class HomeViewModel @Inject constructor(
 
     private var _uiState = MutableLiveData<RegistrationUiState>()
     val uiStateLiveData: LiveData<RegistrationUiState> = _uiState
+
+    private var _rankResponse = MutableLiveData<RankResponseModel>()
+    val rankLiveData : LiveData<RankResponseModel> = _rankResponse
+
+    private var _rankState = MutableLiveData<HomeUiState>()
+    val rankResponseLiveData: LiveData<HomeUiState> = _rankState
 
    /* fun stepCount(
         stepsList : List<Steps>
@@ -73,6 +80,27 @@ class HomeViewModel @Inject constructor(
 
                     is DataState.Error -> {
                         _uiState.postValue(ErrorState(dataState.message))
+                    }
+                }
+            }
+
+        }
+    }
+
+    fun getRank() {
+        _rankState.postValue(com.devit.nddb.Activity.ui.home.LoadingState)
+        viewModelScope.launch {
+            homeRepository.getRank().collect { dataState ->
+                when (dataState) {
+                    is DataState.Success -> {
+                        // Any other page
+                        dataState.data.let {
+                            _rankResponse.postValue(it)
+                        }
+                    }
+
+                    is DataState.Error -> {
+                        _rankState.postValue(com.devit.nddb.Activity.ui.home.ErrorState(dataState.message))
                     }
                 }
             }

@@ -21,4 +21,9 @@ object RestConstant {
     const val GENDER = "gender"
     const val LATITUDE = "latitude"
     const val LONGITUDE = "longitude"
+
+    const val FIRBASETOKEN = "firebasetoken"
+    const val USER_RANK = "user_rank"
+
+
 }
