@@ -1,14 +1,17 @@
 package com.devit.nddb.Activity.ui.registration
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.RequiresApi
 import com.devit.nddb.Activity.BaseActivity
 import com.devit.nddb.Activity.DrawerActivity
 import com.devit.nddb.MySharedPreferences
@@ -19,6 +22,7 @@ import com.devit.nddb.data.remote.responses.Registration.StateData
 import com.devit.nddb.data.remote.responses.Registration.UserTypeData
 import com.devit.nddb.databinding.ActivityRegistrationBinding
 import com.devit.nddb.model.StateCity
+
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.wajahatkarim3.imagine.utils.capitalized
@@ -157,13 +161,25 @@ class RegistrationActivity : BaseActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun setEventListener() {
+
+        regBinding.autoUsertype.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+             /*   val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)*/
+                view.context.getSystemService(InputMethodManager::class.java).hideSoftInputFromWindow(view.windowToken, 0)
+            }
+        }
         regBinding.autoUsertype.setOnItemClickListener { adapterView, view, position, id ->
             val list: UserTypeData = userTypeList.get(position)
             user_type_id = java.lang.String.valueOf(list.id)
             user_type_name = java.lang.String.valueOf(list.name)
             Log.e("utype-->", user_type_id.toString())
             Log.d("Register Activity", "Register Activity User Type ${userTypeList[position]}")
+
+
+            hideKeyboard(view)
         }
 
         regBinding.autoState.setOnItemClickListener { adapterView, view, position, id ->
@@ -172,6 +188,8 @@ class RegistrationActivity : BaseActivity() {
             Log.e("utype-->", state_id.toString())
             Log.d("Register Activity", "Register Activity State ${stateList[position]}")
             registrationViewModel.fetchCityList(stateList[position].id)
+
+            hideKeyboard(view)
         }
 
         regBinding.autoCity.setOnItemClickListener { adapterView, view, position, id ->
@@ -179,6 +197,12 @@ class RegistrationActivity : BaseActivity() {
             city_id = java.lang.String.valueOf(list.id)
             Log.e("utype-->", city_id.toString())
             Log.d("Register Activity", "Register Activity City ${cityList[position]}")
+
+            if (view != null) {
+                val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+            }
+
         }
     }
 
@@ -255,7 +279,12 @@ class RegistrationActivity : BaseActivity() {
                 //Log.e("success",loginResponse.message!!)
                 regBinding.relRegistration.showSnack(registerResponse.message!!)
                 setUserData(registerResponse)
+                /*val i = Intent(this, DrawerActivity::class.java)
+                startActivity(i)
+                finish()*/
+
                 val i = Intent(this, DrawerActivity::class.java)
+                i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(i)
                 finish()
             } else {
@@ -289,6 +318,11 @@ class RegistrationActivity : BaseActivity() {
 
 
     }
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
 
 //    fun getJsonDataFromAsset(context: Context, fileName: String): String? {
 //        val jsonString: String

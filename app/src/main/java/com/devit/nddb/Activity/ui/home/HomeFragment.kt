@@ -3,16 +3,13 @@ package com.devit.nddb.Activity.ui.home
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ActivityManager
 import android.content.*
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
-import android.os.Build
-import android.os.Bundle
-import android.os.Looper
-import android.os.ResultReceiver
+import android.os.*
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,7 +17,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -103,6 +99,9 @@ class HomeFragment : Fragment() {
 
     private lateinit var dbHelper: DatabaseHelper
 
+    var totalSteps:Int=0
+    var isFirstTimeLoad:Boolean=false
+
     // private val registrationViewModel by viewModels<HomeViewModel>()
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -118,6 +117,8 @@ class HomeFragment : Fragment() {
         var stringResult =
             getString(R.string.your_rank) + " " + MySharedPreferences.getMySharedPreferences()!!.user_rank.toString() + " " + getString(R.string.among_participants)
         binding.tvYourRank.text = stringResult
+
+
 
 //        homeViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
@@ -149,12 +150,13 @@ class HomeFragment : Fragment() {
 
     fun updateTotalSteps()
     {
-
+        isFirstTimeLoad=true
         GlobalScope.launch(Dispatchers.Main) {
             //binding.tvTotalSteps.setText(step.toString())
             dbHelper =
                 activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
-            binding.tvContributedSteps.text=(dbHelper.totalSteps()).toString()
+            totalSteps=dbHelper.totalSteps()
+            binding.tvContributedSteps.text=totalSteps.toString()
         }
 
     }
@@ -176,7 +178,7 @@ class HomeFragment : Fragment() {
         val adapter = slider_adapter(requireContext(), sliderDataArrayList)
         binding.slider.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
         binding.slider.setSliderAdapter(adapter)
-        binding.slider.scrollTimeInSec = 2
+        binding.slider.scrollTimeInSec = 10
         binding.slider.isAutoCycle = true
         binding.slider.startAutoCycle()
 
@@ -228,6 +230,18 @@ class HomeFragment : Fragment() {
 
         if (!checkPlayServices()) return
         getDeviceLocation()
+
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val packageName = activity?.packageName
+            val pm = activity?.getSystemService(Context.POWER_SERVICE) as PowerManager
+            if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+                val intent = Intent()
+                intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+                intent.flags = FLAG_ACTIVITY_NEW_TASK
+                intent.data = Uri.parse("package:$packageName")
+                startActivity(intent)
+            }
+        }*/
 
         activity?.let {
             homeViewModel.stepCountResponseLiveData.observe(it) { stepCountResponse ->
@@ -647,9 +661,10 @@ class HomeFragment : Fragment() {
      */
     private fun checkPermissions(): Boolean {
         val permissions: MutableList<String> = ArrayList()
+        permissions.add(Manifest.permission.ACTIVITY_RECOGNITION)
         permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
         permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION)
-        permissions.add(Manifest.permission.ACTIVITY_RECOGNITION)
+
 
         var permissionGranted = true
         for (permission in permissions) {
@@ -668,9 +683,10 @@ class HomeFragment : Fragment() {
     private fun startLocationPermissionRequest() {
         requestPermissions(
             arrayOf(
+                Manifest.permission.ACTIVITY_RECOGNITION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACTIVITY_RECOGNITION
+                Manifest.permission.ACCESS_COARSE_LOCATION
+
             ),
             REQUEST_PERMISSIONS_REQUEST_CODE
         )
@@ -812,9 +828,10 @@ class HomeFragment : Fragment() {
 
     private fun checkAllPermissionAndStartLocationUpdate() {
         val permissionAsk = arrayOf(
+            Manifest.permission.ACTIVITY_RECOGNITION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACTIVITY_RECOGNITION
+
         )
         val permissionsNotGranted = ArrayList<String>()
         for (permission in permissionAsk) {
@@ -1099,20 +1116,44 @@ class HomeFragment : Fragment() {
         i.action = MotionService.ACTION_SUBSCRIBE
         i.putExtra(TAG, object : ResultReceiver(null) {
             override fun onReceiveResult(resultCode: Int, resultData: Bundle) {
-                Log.e("steps ",resultData.getInt(MotionService.KEY_STEPS).toString())
+                //Log.e("steps ",resultData.getInt(MotionService.KEY_STEPS).toString())
                 if (resultCode == 0) {
                     /*if(isVisible())
                     {
 
                     }*/
+                    Log.e("runOnUiThread",resultData.getInt(MotionService.KEY_STEPS).toString())
                     activity?.runOnUiThread {
                         binding.tvTotalSteps.setText(resultData.getInt(MotionService.KEY_STEPS).toString())
-                        //updateTotalSteps(resultData.getInt(MotionService.KEY_STEPS))
+                        //isFirstTimeLoad=false
+                        //totalStep(resultData.getInt(MotionService.KEY_STEPS))
+                        updateTotalSteps()
                     }
                 }
             }
         })
         activity?.startService(i)
+    }
+
+    fun totalStep(step:Int)
+    {
+        if(!isFirstTimeLoad)
+        {
+            if(step>=totalSteps)
+            {
+                var tempTotal=step-totalSteps
+                totalSteps=totalSteps+tempTotal
+            }
+            else
+            {
+                var temp=totalSteps-step
+                totalSteps=totalSteps+temp
+            }
+
+        }
+        isFirstTimeLoad=false
+        binding.tvContributedSteps.text=totalSteps.toString()
+
     }
 
 }

@@ -48,19 +48,24 @@ import kotlin.collections.ArrayList
  *
  * Created by sinku on 10.11.2021.
  */
-internal class MotionService : Service() {
+internal class MotionService : Service(), SensorEventListener {
     private lateinit var sharedPreferences: SharedPreferences
+
     // steps at the current day
     private var mTodaysSteps: Int = 0
+
     // steps reported from sensor
     private var mCurrentSteps: Int = 0
+
     // steps reported from sensor STEP_COUNTER in previous event
     private var mLastSteps = -1
+
     // current date of counting
     private var mCurrentDate: Long = 0
     private var receiver: ResultReceiver? = null
+    private lateinit var stepDetector: Sensor
+    private lateinit var mSensorManager: SensorManager
     private lateinit var simpleStepDetector: StepDetector
-    private lateinit var mListener: SensorEventListener
     private lateinit var mNotificationManager: NotificationManager
     private lateinit var mBuilder: NotificationCompat.Builder
     private var motionActivities: SparseArray<MotionActivity> = SparseArray()
@@ -75,28 +80,42 @@ internal class MotionService : Service() {
 
     override fun onCreate() {
         Log.d(TAG, "Creating MotionService")
-        dbHelper= DatabaseHelperImpl(DatabaseBuilder.getInstance(this))
+        dbHelper = DatabaseHelperImpl(DatabaseBuilder.getInstance(this))
         startService()
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
         // get last saved date
-        mCurrentDate = sharedPreferences.getLong(KEY_DATE, com.devit.nddb.utils.Util.calendar.timeInMillis)
+        mCurrentDate =
+            sharedPreferences.getLong(KEY_DATE, com.devit.nddb.utils.Util.calendar.timeInMillis)
         // get last steps
         mTodaysSteps = sharedPreferences.getInt(KEY_STEPS, 0)
 
         val manager = packageManager
 
         // connect sensor
-        val mSensorManager = getSystemService(Context.SENSOR_SERVICE) as? SensorManager ?: throw IllegalStateException("could not get sensor service")
-        var mStepSensor: Sensor? = null
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && manager.hasSystemFeature(PackageManager.FEATURE_SENSOR_STEP_COUNTER)) {
+        mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
+            stepDetector = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+        } else {
+            stepDetector = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+            simpleStepDetector = StepDetector(object : StepDetector.StepListener {
+                override fun step(timeNs: Long) {
+                    Log.d(TAG, "using fallback sensor accelerometer" + mCurrentSteps + 1)
+                    handleEvent(mCurrentSteps + 1)
+                }
+            })
+        }
+
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && manager.hasSystemFeature(PackageManager.FEATURE_SENSOR_STEP_COUNTER)) {
             // androids built in step counter
-            Log.d(TAG, "using sensor step counter")
+            Log.e(TAG, "using sensor step counter")
             mStepSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
             mListener = object : SensorEventListener {
 
                 override fun onSensorChanged(event: SensorEvent) {
+                    Log.e(TAG, "using sensor step counter"+event.values[0].toInt())
                     handleEvent(event.values[0].toInt())
                 }
 
@@ -104,13 +123,14 @@ internal class MotionService : Service() {
                     // no-op
                 }
             }
-        } else if (manager.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)) {
+        }  else if (manager.hasSystemFeature(PackageManager.FEATURE_SENSOR_ACCELEROMETER)) {
             // fallback sensor
-            Log.d(TAG, "using fallback sensor accelerometer")
+            Log.e(TAG, "using fallback sensor accelerometer")
             mStepSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
             //simpleStepDetector = StepDetector(object : StepDetector.listener {
             simpleStepDetector = StepDetector(object : StepDetector.StepListener {
                 override fun step(timeNs: Long) {
+                    Log.d(TAG, "using fallback sensor accelerometer"+mCurrentSteps + 1)
                     handleEvent(mCurrentSteps + 1)
                 }
             })
@@ -127,42 +147,37 @@ internal class MotionService : Service() {
                     // no-op
                 }
             }
-        }
+        }*/
 
-        if (mStepSensor != null) {
-            mSensorManager.registerListener(mListener, mStepSensor,
-                SensorManager.SENSOR_DELAY_FASTEST)
-        } else {
-            Toast.makeText(this, "no sensor", Toast.LENGTH_LONG).show()
-        }
+        mSensorManager.registerListener(this, stepDetector, SensorManager.SENSOR_DELAY_FASTEST)
+
     }
 
     private fun handleEvent(value: Int) {
+        Log.e("each step before cal", value.toString())
         mCurrentSteps = value
         if (mLastSteps == -1) {
             mLastSteps = value
         }
         mTodaysSteps += value - mLastSteps
         mLastSteps = value
+        Log.e("each step after cal", mTodaysSteps.toString())
         handleEvent()
     }
 
     private fun handleEvent() {
         // Check if new day started
 
-        GlobalScope.launch (Dispatchers.Main) {
-            var lat= MySharedPreferences.getMySharedPreferences()!!.latitude
-            var lng= MySharedPreferences.getMySharedPreferences()!!.longitude
-            var address= MySharedPreferences.getMySharedPreferences()!!.longitude
+        GlobalScope.launch(Dispatchers.Main) {
+            var lat = MySharedPreferences.getMySharedPreferences()!!.latitude
+            var lng = MySharedPreferences.getMySharedPreferences()!!.longitude
+            var address = MySharedPreferences.getMySharedPreferences()!!.longitude
             val currentDate = Converters.FORMATTER.format(Date())
-            var step=dbHelper.getStep(currentDate)
-            if(step!=null)
-            {
+            var step = dbHelper.getStep(currentDate)
+            if (step != null) {
                 sharedPreferences.edit().putInt(KEY_STEPS, mTodaysSteps).apply()
-                dbHelper.updateSteps(step.id,mTodaysSteps,address, lat, lng,step.ispass)
-            }
-            else
-            {
+                dbHelper.updateSteps(step.id, mTodaysSteps, address, lat, lng, step.ispass)
+            } else {
                 mTodaysSteps = 0
                 mCurrentDate = com.devit.nddb.utils.Util.calendar.timeInMillis
                 sharedPreferences.edit().putLong(KEY_DATE, mCurrentDate).apply()
@@ -170,53 +185,63 @@ internal class MotionService : Service() {
             }
         }
 
-       /* if (!DateUtils.isToday(mCurrentDate)) {
+        /* if (!DateUtils.isToday(mCurrentDate)) {
 
-            //(timestamp long primary key, isPass TEXT CHECK( isPass IN ('1','0') )   NOT NULL DEFAULT '0', steps int not null);"
-            // Add record for the day to the database
-            var lat= MySharedPreferences.getMySharedPreferences()!!.latitude
-            var lng= MySharedPreferences.getMySharedPreferences()!!.longitude
-            var address= MySharedPreferences.getMySharedPreferences()!!.longitude
+             //(timestamp long primary key, isPass TEXT CHECK( isPass IN ('1','0') )   NOT NULL DEFAULT '0', steps int not null);"
+             // Add record for the day to the database
+             var lat= MySharedPreferences.getMySharedPreferences()!!.latitude
+             var lng= MySharedPreferences.getMySharedPreferences()!!.longitude
+             var address= MySharedPreferences.getMySharedPreferences()!!.longitude
 
-            Database.getInstance(this).addEntry(mCurrentDate, mTodaysSteps,lat,lng,address)
+             Database.getInstance(this).addEntry(mCurrentDate, mTodaysSteps,lat,lng,address)
 
-            // Start counting for the new day
-            mTodaysSteps = 0
-            mCurrentDate = com.devit.nddb.utils.Util.calendar.timeInMillis
-            sharedPreferences.edit().putLong(KEY_DATE, mCurrentDate).apply()
-        }
-        sharedPreferences.edit().putInt(KEY_STEPS, mTodaysSteps).apply()
-        for (i in 0 until motionActivities.size()) {
-            motionActivities.valueAt(i).update(mCurrentSteps)
-        }*/
+             // Start counting for the new day
+             mTodaysSteps = 0
+             mCurrentDate = com.devit.nddb.utils.Util.calendar.timeInMillis
+             sharedPreferences.edit().putLong(KEY_DATE, mCurrentDate).apply()
+         }
+         sharedPreferences.edit().putInt(KEY_STEPS, mTodaysSteps).apply()
+         for (i in 0 until motionActivities.size()) {
+             motionActivities.valueAt(i).update(mCurrentSteps)
+         }*/
+        Log.e("before sending to home", "" + mTodaysSteps)
         sendUpdate()
     }
 
     private fun sendUpdate() {
-        mBuilder.setContentText(String.format(Locale.getDefault(), "YOU TOTAL STEPS WALKED %d"/* com.devit.nddb.utils.Util.stepsToMeters(mTodaysSteps)*/, mTodaysSteps))
+        mBuilder.setContentText(
+            String.format(
+                Locale.getDefault(),
+                "YOU TOTAL STEPS WALKED %d"/* com.devit.nddb.utils.Util.stepsToMeters(mTodaysSteps)*/,
+                mTodaysSteps
+            )
+        )
         mNotificationManager.notify(FOREGROUND_ID, mBuilder.build())
+        Log.e("sensor", "sendUpdate")
         receiver?.let {
             val bundle = Bundle()
             bundle.putInt(KEY_STEPS, mTodaysSteps)
-            val activities = ArrayList<Bundle>()
-            for (i in 0 until motionActivities.size()) {
-                val motionActivity = motionActivities.valueAt(i)
-                val activityBundle = Bundle()
-                activityBundle.putInt(KEY_ID, motionActivity.id)
-                activityBundle.putInt(KEY_STEPS, motionActivity.steps)
-                activityBundle.putBoolean(KEY_ACTIVE, motionActivity.active)
-                activities.add(activityBundle)
-            }
-            bundle.putParcelableArrayList(KEY_ACTIVITIES, activities)
+            /* val activities = ArrayList<Bundle>()
+             for (i in 0 until motionActivities.size()) {
+                 val motionActivity = motionActivities.valueAt(i)
+                 val activityBundle = Bundle()
+                 activityBundle.putInt(KEY_ID, motionActivity.id)
+                 activityBundle.putInt(KEY_STEPS, motionActivity.steps)
+                 activityBundle.putBoolean(KEY_ACTIVE, motionActivity.active)
+                 activities.add(activityBundle)
+             }
+             bundle.putParcelableArrayList(KEY_ACTIVITIES, activities)*/
+            Log.e("sensor", "sendUpdate1")
             it.send(0, bundle)
         }
+
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.d(TAG, "Received start id $startId: $intent")
 
         if (intent != null && intent.hasExtra("stopped")) {
-            stopped = intent.extras!!.getBoolean("stopped",false)
+            stopped = intent.extras!!.getBoolean("stopped", false)
         }
         if (stopped) {
             stopForeground(true)
@@ -226,13 +251,24 @@ internal class MotionService : Service() {
 
         if (intent != null) {
             when {
-                ACTION_SUBSCRIBE == intent.action -> receiver = intent.getParcelableExtra(HomeFragment.TAG)
+                ACTION_SUBSCRIBE == intent.action -> receiver =
+                    intent.getParcelableExtra(HomeFragment.TAG)
                 ACTION_START_ACTIVITY == intent.action -> {
                     val id = motionActivityId++
                     motionActivities.put(id, MotionActivity(id, mCurrentSteps))
                 }
-                ACTION_STOP_ACTIVITY == intent.action -> motionActivities.remove(intent.getIntExtra(KEY_ID, 0))
-                ACTION_TOGGLE_ACTIVITY == intent.action -> motionActivities.get(intent.getIntExtra(KEY_ID, 0)).toggle()
+                ACTION_STOP_ACTIVITY == intent.action -> motionActivities.remove(
+                    intent.getIntExtra(
+                        KEY_ID,
+                        0
+                    )
+                )
+                ACTION_TOGGLE_ACTIVITY == intent.action -> motionActivities.get(
+                    intent.getIntExtra(
+                        KEY_ID,
+                        0
+                    )
+                ).toggle()
             }
             sendUpdate()
         }
@@ -243,7 +279,9 @@ internal class MotionService : Service() {
     }
 
     private fun startService() {
-        mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager ?: throw IllegalStateException("could not get notification service")
+        mNotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
+                ?: throw IllegalStateException("could not get notification service")
         val notificationIntent = Intent(this, DrawerActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
         // Notification channels are only supported on Android O+.
@@ -252,7 +290,7 @@ internal class MotionService : Service() {
         }
 
         mBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.app_icon)
             .setContentTitle(getString(R.string.app_name))
             .setContentIntent(pendingIntent)
         startForeground(FOREGROUND_ID, mBuilder.build())
@@ -264,9 +302,11 @@ internal class MotionService : Service() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel() {
         if (mNotificationManager.getNotificationChannel(CHANNEL_ID) == null) {
-            val notificationChannel = NotificationChannel(CHANNEL_ID,
+            val notificationChannel = NotificationChannel(
+                CHANNEL_ID,
                 getString(R.string.app_name),
-                NotificationManager.IMPORTANCE_NONE)
+                NotificationManager.IMPORTANCE_NONE
+            )
 
             notificationChannel.description = "steps"
 
@@ -288,5 +328,24 @@ internal class MotionService : Service() {
         internal const val KEY_DATE = "DATE"
         private const val FOREGROUND_ID = 3843
         const val CHANNEL_ID = "com.tiefensuche.motionmate.CHANNEL_ID"
+    }
+
+    override fun onSensorChanged(p0: SensorEvent?) {
+        if (p0?.sensor!!.type == Sensor.TYPE_ACCELEROMETER) {
+            simpleStepDetector.updateAccel(
+                p0.timestamp, p0.values[0], p0.values[1], p0.values[2])
+        } else if (p0?.sensor == stepDetector) {
+            mTodaysSteps = (p0.values[0].toInt())
+            handleEvent()
+        }
+    }
+
+    override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mSensorManager.unregisterListener(this, stepDetector)
     }
 }

@@ -1,5 +1,9 @@
 package com.devit.nddb.utils
 
+import android.app.Activity
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.devit.nddb.R
 import com.devit.nddb.model.AndroidVersionModel
 
@@ -24,5 +28,7 @@ class Helper{
 
             return androidVersionList as ArrayList
         }
+
     }
+
 }

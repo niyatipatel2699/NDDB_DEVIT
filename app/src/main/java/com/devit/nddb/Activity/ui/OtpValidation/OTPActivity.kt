@@ -9,7 +9,6 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import com.devit.nddb.Activity.BaseActivity
 import com.devit.nddb.Activity.DrawerActivity
 import com.devit.nddb.Activity.ui.registration.RegistrationActivity
@@ -20,10 +19,12 @@ import com.devit.nddb.data.remote.responses.OtpValidation.OtpResponse
 import com.devit.nddb.databinding.ActivityOtpactivityBinding
 import com.devit.nddb.utils.onTextChanged
 import com.google.android.gms.auth.api.phone.SmsRetriever
+
 import com.wajahatkarim3.imagine.utils.gone
 import com.wajahatkarim3.imagine.utils.showSnack
 import com.wajahatkarim3.imagine.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class OTPActivity : BaseActivity() {
@@ -186,10 +187,15 @@ class OTPActivity : BaseActivity() {
                     otpBinding.relOTP.showSnack(it)
                 }
                 if(validateOTP.items!!.is_Registered == 1){
-                    setUserData(validateOTP)
-                    val intent = Intent(this, DrawerActivity::class.java)
-                    startActivity(intent)
-                    //finish()
+                   setUserData(validateOTP)
+                   /*val intent = Intent(this, DrawerActivity::class.java)
+                   startActivity(intent)
+                   finish()*/
+
+                    val i = Intent(this, DrawerActivity::class.java)
+                    i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(i)
+                    finish()
                 }
                 else
                 {
@@ -198,7 +204,7 @@ class OTPActivity : BaseActivity() {
                     val intent = Intent(this, RegistrationActivity::class.java)
                     intent.putExtra("mobile", validateOTP.items!!.user!!.phone_number)
                     startActivity(intent)
-                    //finish()
+                    finish()
                 }
             } else {
                 validateOTP.message?.let { otpBinding.relOTP.showSnack(it) }
@@ -209,7 +215,7 @@ class OTPActivity : BaseActivity() {
     private fun setUserData(validateOTP : OtpResponse) {
 
         MySharedPreferences.getMySharedPreferences()!!.isLogin = true
-        MySharedPreferences.getMySharedPreferences()!!.lang_id = validateOTP.items!!.user!!.lang_id
+        MySharedPreferences.getMySharedPreferences()!!.lang_id = MySharedPreferences.getMySharedPreferences()!!.lang_id//validateOTP.items!!.user!!.lang_id
         MySharedPreferences.getMySharedPreferences()!!.token = validateOTP.items!!.token.toString()
         MySharedPreferences.getMySharedPreferences()!!.is_Registered = validateOTP.items!!.user!!.is_Registered
         MySharedPreferences.getMySharedPreferences()!!.first_name = validateOTP.items!!.user!!.first_name.toString()
@@ -219,6 +225,8 @@ class OTPActivity : BaseActivity() {
         MySharedPreferences.getMySharedPreferences()!!.state = validateOTP.items!!.user!!.state.toString()
         MySharedPreferences.getMySharedPreferences()!!.district = validateOTP.items!!.user!!.district.toString()
 
+        MySharedPreferences.getMySharedPreferences()!!.gender = validateOTP!!.items!!.user!!.gender.toString()
+        MySharedPreferences.getMySharedPreferences()!!.user_type=validateOTP!!.items!!.user!!.user_type.toString()
     }
 
 
@@ -300,10 +308,10 @@ class OTPActivity : BaseActivity() {
         otpBinding.textResend.isEnabled = false
         otpBinding.textOtpSec.visibility=View.VISIBLE
         otpBinding.textResend.setTextColor(resources.getColor(R.color.grey))
-        object : CountDownTimer(60000, 1000) {
+        object : CountDownTimer(180000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 otpBinding.textOtpSec.setText(
-                    "0:" + (millisUntilFinished / 1000).toString() + " " + "Remaining"
+                    (millisUntilFinished / 1000).toString() + " " + "Sec Remaining"
                 )
             }
 

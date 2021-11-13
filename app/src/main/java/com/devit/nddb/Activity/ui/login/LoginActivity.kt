@@ -140,7 +140,7 @@ class LoginActivity : BaseActivity() {
     private fun setUserData(validateOTP : OtpResponse) {
 
         MySharedPreferences.getMySharedPreferences()!!.isLogin = true
-        MySharedPreferences.getMySharedPreferences()!!.lang_id = validateOTP.items!!.user!!.lang_id
+        MySharedPreferences.getMySharedPreferences()!!.lang_id = MySharedPreferences.getMySharedPreferences()!!.lang_id//validateOTP.items!!.user!!.lang_id
         MySharedPreferences.getMySharedPreferences()!!.token = validateOTP.items!!.token.toString()
         MySharedPreferences.getMySharedPreferences()!!.is_Registered = validateOTP.items!!.user!!.is_Registered
         MySharedPreferences.getMySharedPreferences()!!.first_name = validateOTP.items!!.user!!.first_name.toString()

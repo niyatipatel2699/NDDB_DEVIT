@@ -30,6 +30,7 @@
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/_15sdp"
             app:cardPreventCornerOverlap="false"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:layout_marginStart="@dimen/_10sdp">
 
             <ImageView
