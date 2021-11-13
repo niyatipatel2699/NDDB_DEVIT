@@ -7,37 +7,37 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.devit.nddb.Activity.ui.home.HomeFragment"
+        android:name="com.nddb.kudamforkurien.Activity.ui.home.HomeFragment"
         android:label="@string/menu_dashboard"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_event"
-        android:name="com.devit.nddb.Activity.ui.event.EventFragment"
+        android:name="com.nddb.kudamforkurien.Activity.ui.event.EventFragment"
         android:label="@string/menu_event"
         tools:layout="@layout/event_fragment" />
 
     <fragment
         android:id="@+id/nav_walked_history"
-        android:name="com.devit.nddb.Activity.ui.walked_history.WalkedHistoryFragment"
+        android:name="com.nddb.kudamforkurien.Activity.ui.walked_history.WalkedHistoryFragment"
         android:label="@string/menu_walked_history"
         tools:layout="@layout/walked_history_fragment" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.devit.nddb.Activity.ui.gallery.GalleryFragment"
+        android:name="com.nddb.kudamforkurien.Activity.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_change_language"
-        android:name="com.devit.nddb.Activity.ui.change_language.ChangeLanguageFragment"
+        android:name="com.nddb.kudamforkurien.Activity.ui.change_language.ChangeLanguageFragment"
         android:label="@string/menu_change_language"
         tools:layout="@layout/change_language_fragment" />
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.devit.nddb.Activity.ui.slideshow.ProfileFragment"
+        android:name="com.nddb.kudamforkurien.Activity.ui.slideshow.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
 

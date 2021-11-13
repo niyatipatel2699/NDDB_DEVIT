@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.devit.nddb">
+    package="com.nddb.kudamforkurien">
 
     <application
         android:largeHeap="true"
-        android:name=".NDDBApp"
+        android:name="com.nddb.kudamforkurien.NDDBApp"
         android:allowBackup="true"
         android:icon="@drawable/new_app_icon"
         android:label="@string/app_name"
@@ -13,38 +13,38 @@
         android:theme="@style/Theme.NDDB"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Activity.FacilitatorActivity"
+            android:name="com.nddb.kudamforkurien.Activity.FacilitatorActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.DrawerActivity"
+            android:name="com.nddb.kudamforkurien.Activity.DrawerActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:label="@string/title_activity_drawer"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.ui.OtpValidation.OTPActivity"
+            android:name="com.nddb.kudamforkurien.Activity.ui.OtpValidation.OTPActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.ui.registration.RegistrationActivity"
+            android:name="com.nddb.kudamforkurien.Activity.ui.registration.RegistrationActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.ui.login.LoginActivity"
+            android:name="com.nddb.kudamforkurien.Activity.ui.login.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".Activity.ui.imageviewer.ImageViewerActivity"
+            android:name="com.nddb.kudamforkurien.Activity.ui.imageviewer.ImageViewerActivity"
             android:screenOrientation="portrait"
             android:exported="true" />
         <activity
-            android:name=".Activity.ui.LanguageList.ChooseLanguageActivity"
+            android:name="com.nddb.kudamforkurien.Activity.ui.LanguageList.ChooseLanguageActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.SplashActivity"
+            android:name="com.nddb.kudamforkurien.Activity.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -54,7 +54,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.nddb.kudamforkurien.MainActivity"
             android:exported="true" >
           <!--  <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,13 +64,13 @@
         </activity>
 
         <receiver
-            android:name=".backgroundservice.RestartBroadcastReceiver"
+            android:name="com.nddb.kudamforkurien.backgroundservice.RestartBroadcastReceiver"
             android:enabled="true"
             android:exported="true"
             android:label="RestartServiceWhenStopped"
             android:permission="TODO" />
         <receiver
-            android:name=".brodcastreceiver.AlarmReceiver"
+            android:name="com.nddb.kudamforkurien.brodcastreceiver.AlarmReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -79,22 +79,22 @@
         </receiver>
 
         <service
-            android:name=".backgroundservice.JobService"
+            android:name="com.nddb.kudamforkurien.backgroundservice.JobService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
         <!--<service
             android:name=".backgroundservice.AutoStartService"
             android:enabled="true" />-->
 
         <service
-            android:name=".backgroundservice.RecognizedActivitiesService"
+            android:name="com.nddb.kudamforkurien.backgroundservice.RecognizedActivitiesService"
             android:enabled="true" />
 
         <service
-            android:name=".backgroundservice.MotionService"
+            android:name="com.nddb.kudamforkurien.backgroundservice.MotionService"
             android:enabled="true"/>
 
         <service
-            android:name=".backgroundservice.FirebaseMessagingService"
+            android:name="com.nddb.kudamforkurien.backgroundservice.FirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
