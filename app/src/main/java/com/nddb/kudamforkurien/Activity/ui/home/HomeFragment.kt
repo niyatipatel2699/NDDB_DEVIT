@@ -145,7 +145,8 @@ class HomeFragment : Fragment() {
             getString(R.string.your_rank) + " " + MySharedPreferences.getMySharedPreferences()!!.user_rank.toString() + " " + getString(R.string.among_participants)
         binding.tvYourRank.text = stringResult
 
-
+        var welcome_text = getString(R.string.dear) + " " + MySharedPreferences.getMySharedPreferences()!!.first_name + ", " + getString(R.string.you_have)
+        binding.welcomeText.text = welcome_text
 
 //        homeViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
