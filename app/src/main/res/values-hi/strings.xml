@@ -15,8 +15,10 @@
     <string name="registration">रेजिस्ट्रेशन</string>
     <string name="otp_screen">ओटीपी वेरिफिकेशन</string>
     <string name="otp_sent_on_mobile_number">पर भेजा गया ओटीपी डालें  </string>
-    <string name="resend_otp">क्या आपको ओटीपी नहीं मिली है?</string>
-    <string name="resend">कोड दुबारा भेजें</string>
+    <!--<string name="resend_otp">क्या आपको ओटीपी नहीं मिली है?</string>
+    <string name="resend">कोड दुबारा भेजें</string>-->
+    <string name="resend_otp">Did not receive OTP?</string>
+    <string name="resend"> Resend</string>
 
     <string name="fname">प्रथम नाम</string>
     <string name="lname">अंतिम नाम</string>
@@ -109,8 +111,15 @@
     <string name="country_code">+91</string>
     <string name="log_out">लॉगआउट करें </string>
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
+
+    <string name="dear">Dear</string>
+    <string name="you_have">You Have</string>
+    <string name="history_total_step">Total Steps Walked</string>
+
+    <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
+
     <string name="event_alert_msg">यह सुविधा 26-नवंबर-2021 की तारीख को सक्रिय हो जाएगी</string>
-    <string name="history_thank_msg">Thank you for your contribution. Keep walking.</string>
+    <string name="history_thank_msg">आपके योगदान के लिये धन्यवाद। पैदल चलते रहें|</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

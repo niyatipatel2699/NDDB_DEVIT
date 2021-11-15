@@ -8,14 +8,6 @@
     android:background="@color/white"
     tools:context=".Activity.ui.home.HomeFragment">
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <RelativeLayout
             android:id="@+id/slider_rl"
             android:layout_width="wrap_content"
@@ -25,7 +17,7 @@
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/slider"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_130sdp"
+                android:layout_height="@dimen/_150sdp"
                 android:layout_centerInParent="true"
                 app:sliderAnimationDuration="600"
                 app:sliderAutoCycleDirection="back_and_forth"
@@ -42,68 +34,78 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_yourRank"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/slider_rl"
-            android:layout_marginHorizontal="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:fontFamily="@font/nunito_semibold"
-            android:gravity="center"
-            android:text="@string/virtual_walked"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp" />
-
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/slider_rl"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/tv_yourRank">
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_yourRank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:fontFamily="@font/nunito_semibold"
+                android:gravity="center"
+                android:text="@string/virtual_walked"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp"
+                />
 
 
             <RelativeLayout
-                android:id="@+id/rl_ring"
-                android:layout_width="@dimen/_150sdp"
-                android:layout_height="@dimen/_150sdp"
-                android:layout_centerInParent="true"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/dashboard_ring">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tv_yourRank"
+                android:layout_marginTop="@dimen/_20sdp">
 
-                <ImageView
-                    android:id="@+id/img_walk"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_45sdp"
-                    android:layout_above="@+id/tv_totalSteps"
-                    android:layout_centerHorizontal="true"
-                    android:src="@drawable/shoes" />
 
-                <TextView
-                    android:id="@+id/tv_totalSteps"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <RelativeLayout
+                    android:id="@+id/rl_ring"
+                    android:layout_width="@dimen/_150sdp"
+                    android:layout_height="@dimen/_150sdp"
                     android:layout_centerInParent="true"
-                    android:fontFamily="@font/nunito_bold"
-                    android:gravity="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_20sdp"
-                    tools:text="1000" />
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/dashboard_ring">
 
-                <TextView
-                    android:id="@+id/tv_your_total_steps"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_totalSteps"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:gravity="center"
-                    android:text="@string/current_steps_nwalked"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp" />
+                    <ImageView
+                        android:id="@+id/img_walk"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:layout_above="@+id/tv_totalSteps"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/shoes" />
+
+                    <TextView
+                        android:id="@+id/tv_totalSteps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/nunito_bold"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_20sdp"
+                        tools:text="1000" />
+
+                    <TextView
+                        android:id="@+id/tv_your_total_steps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_totalSteps"
+                        android:fontFamily="@font/nunito_semibold"
+                        android:gravity="center"
+                        android:text="@string/current_steps_nwalked"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp" />
+
+                </RelativeLayout>
 
             </RelativeLayout>
-
-        </RelativeLayout>
 
 
     </RelativeLayout>

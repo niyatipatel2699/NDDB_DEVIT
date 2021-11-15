@@ -15,8 +15,10 @@
     <string name="registration">ରେଜିଷ୍ଟ୍ରେସନ </string>
     <string name="otp_screen">ଓଟିପି ଭେରିଫିକେସନ </string>
     <string name="otp_sent_on_mobile_number">ପଠାଯାଇଥିବା ଓଟିପି ଏଣ୍ଟର କରନ୍ତୁ </string>
-    <string name="resend_otp">ଓଟିପି ପାଇ ନାହାନ୍ତି କି? </string>
-    <string name="resend">କୋଡକୁ ପୁଣି ଥରେ ପଠାନ୍ତୁ </string>
+   <!-- <string name="resend_otp">ଓଟିପି ପାଇ ନାହାନ୍ତି କି? </string>
+    <string name="resend">କୋଡକୁ ପୁଣି ଥରେ ପଠାନ୍ତୁ </string>-->
+    <string name="resend_otp">Did not receive OTP?</string>
+    <string name="resend"> Resend</string>
 
     <string name="fname">ପ୍ରଥମ ନାମ </string>
     <string name="lname">ଶେଷ ନାମ </string>
@@ -109,9 +111,15 @@
     <string name="country_code">+91</string>
     <string name="log_out">ଲଗ ଆଉଟ୍ </string>
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
-    <string name="event_alert_msg">ଏହି ବ feature ଶିଷ୍ଟ୍ୟ 26-ନଭେମ୍ବର -2021 ତାରିଖରେ ସକ୍ରିୟ ହେବ |</string>
 
-    <string name="history_thank_msg">Thank you for your contribution. Keep walking.</string>
+    <string name="dear">Dear</string>
+    <string name="you_have">You Have</string>
+    <string name="history_total_step">Total Steps Walked</string>
+
+    <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
+
+    <string name="event_alert_msg">ଏହି ବ feature ଶିଷ୍ଟ୍ୟ 26-ନଭେମ୍ବର -2021 ତାରିଖରେ ସକ୍ରିୟ ହେବ |</string>
+    <string name="history_thank_msg">ଆପଣଙ୍କର ଅବଦାନ ପାଇଁ ଧନ୍ୟବାଦ। ଚାଳିବା ଜାରି ରଖନ୍ତୁ</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

@@ -15,8 +15,10 @@
     <string name="registration">രജിസ്ട്രേഷൻ</string>
     <string name="otp_screen">ഒടിപി പരിശോധന</string>
     <string name="otp_sent_on_mobile_number">അയച്ച ഒടിപി നൽകുക </string>
-    <string name="resend_otp">ഒടിപി ലഭിച്ചില്ലേ?</string>
-    <string name="resend">കോഡ് വീണ്ടും അയക്കുക</string>
+    <!--<string name="resend_otp">ഒടിപി ലഭിച്ചില്ലേ?</string>
+    <string name="resend">കോഡ് വീണ്ടും അയക്കുക</string>-->
+    <string name="resend_otp">Did not receive OTP?</string>
+    <string name="resend"> Resend</string>
 
     <string name="fname">പേരിന്റെ ആദ്യഭാഗം</string>
     <string name="lname">പേരിന്റെ അവസാന ഭാഗം</string>
@@ -110,7 +112,14 @@
     <string name="log_out">ലോഗൌട്ട് ചെയ്യുക</string>
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
     <string name="event_alert_msg">ഈ ഫീച്ചർ 26-നവംബർ-2021 തീയതിയിൽ സജീവമാകും</string>
-    <string name="history_thank_msg">Thank you for your contribution. Keep walking.</string>
+
+    <string name="dear">Dear</string>
+    <string name="you_have">You Have</string>
+    <string name="history_total_step">Total Steps Walked</string>
+
+    <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
+
+    <string name="history_thank_msg">നിങ്ങളുടെ സംഭാവനയ്ക്ക് നന്ദി. നടത്തം തുടരുക.</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

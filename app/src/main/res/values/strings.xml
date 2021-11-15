@@ -1,4 +1,4 @@
-<resources>
+ <resources>
     <!--<string name="app_name">NDDB</string>-->
     <string name="app_name">Kadam For Kurien</string>
 
@@ -15,8 +15,8 @@
     <string name="registration">Registration</string>
     <string name="otp_screen">OTP Verification</string>
     <string name="otp_sent_on_mobile_number">Enter the OTP sent to </string>
-    <string name="resend_otp">Didn’t receive OTP?</string>
-    <string name="resend"> Resend code</string>
+    <string name="resend_otp">Did not receive OTP?</string>
+    <string name="resend"> Resend</string>
 
     <string name="fname">First Name</string>
     <string name="lname">Last Name</string>
@@ -108,6 +108,9 @@
     <string name="please_enter_otp">Please Enter OTP</string>
     <string name="country_code">+91</string>
     <string name="log_out">Logout</string>
+
+     <string name="dear">Dear</string>
+     <string name="you_have">You Have</string>
 
     <string name="history_total_step">Total Steps Walked</string>
 
