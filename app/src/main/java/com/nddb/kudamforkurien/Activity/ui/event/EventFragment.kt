@@ -69,7 +69,7 @@ class EventFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        openDialog()
+        ///openDialog()
 
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
 
