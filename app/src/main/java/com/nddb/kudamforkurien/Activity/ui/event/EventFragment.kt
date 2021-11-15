@@ -76,7 +76,7 @@ class EventFragment : Fragment() {
 
 
         if (finalDate.compareTo(currentDate) > 0)
-        {    openDialog()}
+        {      alertDialog.show()}
         else if (finalDate.compareTo(currentDate) < 0)
         {   alertDialog.dismiss()}
         else if (finalDate.compareTo(currentDate) == 0)
@@ -101,27 +101,7 @@ class EventFragment : Fragment() {
         binding.slider.startAutoCycle()
     }
 
-    private fun openDialog() {
 
-        val sdf = SimpleDateFormat("dd-MM-yyyy")
-        val currentDate = sdf.format(Date())
-        val finalDate = "26-11-2021"
-
-
-        if (finalDate.compareTo(currentDate) > 0)
-        {    openDialog()}
-        else if (finalDate.compareTo(currentDate) < 0)
-        {   alertDialog.dismiss()}
-        else if (finalDate.compareTo(currentDate) == 0)
-        {    alertDialog.dismiss()}
-       /* alertDialog.btnOk.setOnClickListener{
-            alertDialog.dismiss()
-            val intent = Intent(requireContext(), DrawerActivity::class.java)
-            startActivity(Intent(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)))
-
-        }
-        alertDialog.show()*/
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
