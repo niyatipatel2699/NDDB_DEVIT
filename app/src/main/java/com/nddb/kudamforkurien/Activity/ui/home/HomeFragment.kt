@@ -3,12 +3,16 @@ package com.nddb.kudamforkurien.Activity.ui.home
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.*
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
-import android.os.*
+import android.os.Build
+import android.os.Bundle
+import android.os.Looper
+import android.os.ResultReceiver
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +23,19 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.fitness.Fitness
+import com.google.android.gms.fitness.FitnessOptions
+import com.google.android.gms.fitness.data.*
+import com.google.android.gms.fitness.request.DataReadRequest
+import com.google.android.gms.fitness.result.DataReadResponse
+import com.google.android.gms.location.*
+import com.google.android.gms.tasks.Task
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.nddb.kudamforkurien.Activity.FacilitatorActivity
 import com.nddb.kudamforkurien.Adapter.slider_adapter
 import com.nddb.kudamforkurien.BuildConfig
@@ -27,27 +44,38 @@ import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.backgroundservice.AutoStartService
 import com.nddb.kudamforkurien.backgroundservice.MotionService
 import com.nddb.kudamforkurien.backgroundservice.RestartBroadcastReceiver
-import com.nddb.kudamforkurien.databinding.FragmentHomeBinding
-import com.nddb.kudamforkurien.model.SliderData
-import com.nddb.kudamforkurien.utils.NetworkUtils
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.GoogleApiAvailability
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.*
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.smarteist.autoimageslider.SliderView
 import com.nddb.kudamforkurien.data.room.DatabaseBuilder
 import com.nddb.kudamforkurien.data.room.DatabaseHelper
 import com.nddb.kudamforkurien.data.room.DatabaseHelperImpl
+import com.nddb.kudamforkurien.data.room.entity.Steps
+import com.nddb.kudamforkurien.databinding.FragmentHomeBinding
+import com.nddb.kudamforkurien.model.SliderData
+import com.nddb.kudamforkurien.utils.Converters
+import com.nddb.kudamforkurien.utils.NetworkUtils
+import com.smarteist.autoimageslider.SliderView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.text.DateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
+
+enum class FitActionRequestCode {
+    INSERT_AND_READ_DATA,
+}
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
+
+    private val dateFormat = DateFormat.getDateTimeInstance()
+    private val fitnessOptions: FitnessOptions by lazy {
+        FitnessOptions.builder()
+            .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
+            .build()
+    }
 
   /*  var url1 = R.drawable.app_dashboard_banner_1
     var url2 = R.drawable.app_dashboard_banner_2
@@ -142,7 +170,7 @@ class HomeFragment : Fragment() {
         updateTotalSteps()
         /*val overallSteps = Database.getInstance(requireActivity()).getSumSteps(0)
         binding.tvContributedSteps.text=overallSteps.toString()*/
-        subscribeService()
+//        subscribeService()
 
         return root
     }
@@ -225,7 +253,7 @@ class HomeFragment : Fragment() {
 
         val prfs: SharedPreferences =
             requireContext().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE)
-        binding.tvTotalSteps.setText(prfs.getString("steps", "0"))
+//        binding.tvTotalSteps.setText(prfs.getString("steps", "0"))
 
         if (!checkPlayServices()) return
         getDeviceLocation()
@@ -307,7 +335,7 @@ class HomeFragment : Fragment() {
                 val param_B = intent.getStringExtra(AutoStartService.EXTRA_PARAM_B)
                 if (param_B != null) {
 //                    tvTotalSteps.setText("YOUR TOTAL STEPS WALKED -- $param_B")
-                    binding.tvTotalSteps.setText(param_B.toString())
+//                    binding.tvTotalSteps.setText(param_B.toString())
 //                    Log.e("YOUR TOTAL STEPS WALKED", "$param_B")
                     val preferences: SharedPreferences = context.getSharedPreferences(
                         "AUTHENTICATION_FILE_NAME",
@@ -431,6 +459,7 @@ class HomeFragment : Fragment() {
                         if (currentLocation != null) {
                             //remove previous current location marker and add new one at current position
                             getLocationFunction(currentLocation)
+                            requestFitPermission()
                         } else {
                             requestContinuousLocationUpdates()
                         }
@@ -598,6 +627,9 @@ class HomeFragment : Fragment() {
 //                        getString(R.string.fetching_location)
 //                    )
                     requestContinuousLocationUpdates()
+
+                    requestFitPermission()
+
                 } else {
                     askLocationPermission()
                 }
@@ -614,6 +646,32 @@ class HomeFragment : Fragment() {
                 askLocationPermission()
 
             }
+        }else if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
+                Manifest.permission.ACTIVITY_RECOGNITION).not() &&
+            grantResults.size == 1 &&
+            grantResults[0] == PackageManager.PERMISSION_DENIED) {
+//            showSettingsDialog(this)
+        } else if (requestCode == PERMISSION_REQUEST_ACTIVITY_RECOGNITION &&
+            permissions.contains(Manifest.permission.ACTIVITY_RECOGNITION) &&
+            grantResults.size == 1 &&
+            grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.d("permission_result", "permission granted")
+//            isTrackingStarted = true
+            // Google login.
+            fitSignIn(FitActionRequestCode.INSERT_AND_READ_DATA)
+        }
+
+    }
+
+    private fun requestFitPermission() {
+        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), PERMISSION_REQUEST_ACTIVITY_RECOGNITION)
+            }else{
+                fitSignIn(FitActionRequestCode.INSERT_AND_READ_DATA)
+            }
+        } else {
+            fitSignIn(FitActionRequestCode.INSERT_AND_READ_DATA)
         }
     }
 
@@ -633,10 +691,10 @@ class HomeFragment : Fragment() {
                     Manifest.permission.ACTIVITY_RECOGNITION
                 ) != PackageManager.PERMISSION_GRANTED)
             {
-                requestPermissions()
+                requestFitPermission()
                 return
             }
-
+//
 //            createLocationCallback();
             mRequestingLocationUpdates = true
             if (mFusedLocationClient != null) {
@@ -1066,6 +1124,14 @@ class HomeFragment : Fragment() {
 
             }
         }
+        when (resultCode) {
+            RESULT_OK -> {
+                if(requestCode == FitActionRequestCode.INSERT_AND_READ_DATA.ordinal){
+                    performActionForRequestCode(FitActionRequestCode.INSERT_AND_READ_DATA)
+                }
+            }
+            else -> oAuthErrorMsg(requestCode, resultCode)
+        }
     }
 
 
@@ -1079,6 +1145,7 @@ class HomeFragment : Fragment() {
     companion object {
 
 
+        private const val PERMISSION_REQUEST_ACTIVITY_RECOGNITION = 10001
         /**
          * Constant used in the location settings dialog.
          */
@@ -1123,7 +1190,7 @@ class HomeFragment : Fragment() {
                     }*/
                     Log.e("runOnUiThread",resultData.getInt(MotionService.KEY_STEPS).toString())
                     activity?.runOnUiThread {
-                        binding.tvTotalSteps.setText(resultData.getInt(MotionService.KEY_STEPS).toString())
+//                        binding.tvTotalSteps.setText(resultData.getInt(MotionService.KEY_STEPS).toString())
                         //isFirstTimeLoad=false
                         //totalStep(resultData.getInt(MotionService.KEY_STEPS))
                         updateTotalSteps()
@@ -1155,4 +1222,147 @@ class HomeFragment : Fragment() {
 
     }
 
+
+    private fun fitSignIn(requestCode: FitActionRequestCode) {
+        if (oAuthPermissionsApproved()) {
+            performActionForRequestCode(requestCode)
+        } else {
+            requestCode.let {
+                GoogleSignIn.requestPermissions(
+                    this,
+                    requestCode.ordinal,
+                    getGoogleAccount(), fitnessOptions)
+            }
+        }
+    }
+
+
+    private fun oAuthPermissionsApproved() = GoogleSignIn.hasPermissions(getGoogleAccount(), fitnessOptions)
+    private fun getGoogleAccount() = GoogleSignIn.getAccountForExtension(requireActivity(), fitnessOptions)
+
+    private fun performActionForRequestCode(requestCode: FitActionRequestCode) = when (requestCode) {
+        FitActionRequestCode.INSERT_AND_READ_DATA -> readHistoryData()
+    }
+
+    private fun readHistoryData(): Task<DataReadResponse> {
+        // Begin by creating the query.
+        val readRequest = queryFitnessData()
+
+        // Invoke the History API to fetch the data with the query
+        return Fitness.getHistoryClient(requireActivity(), getGoogleAccount())
+            .readData(readRequest)
+            .addOnCompleteListener {
+                if(it.isSuccessful){
+                    val dataReadResponse = it.result
+                    printData(dataReadResponse)
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e(TAG, "There was a problem reading the data.", e)
+            }
+    }
+
+    private fun queryFitnessData(): DataReadRequest {
+        // [START build_read_data_request]
+        // Setting a start and end date using a range of 1 week before this moment.
+        val calendar = Calendar.getInstance(TimeZone.getDefault())
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        val startTime = calendar.timeInMillis
+        val endTime = Calendar.getInstance(TimeZone.getDefault()).timeInMillis
+
+        Log.i(TAG, "Range Start: ${dateFormat.format(startTime)}")
+        Log.i(TAG, "Range End: ${dateFormat.format(endTime)}")
+
+        val ESTIMATED_STEP_DELTAS: DataSource = DataSource.Builder()
+            .setDataType(DataType.TYPE_STEP_COUNT_DELTA)
+            .setType(DataSource.TYPE_DERIVED)
+            .setStreamName("estimated_steps")
+            .setAppPackageName("com.google.android.gms")
+            .build()
+
+        return DataReadRequest.Builder()
+            .aggregate(ESTIMATED_STEP_DELTAS, DataType.AGGREGATE_STEP_COUNT_DELTA)
+            .bucketByTime(1, TimeUnit.DAYS)
+            .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+            .build()
+
+        /*return DataReadRequest.Builder()
+            .aggregate(DataType.TYPE_STEP_COUNT_DELTA)
+            .bucketByTime(1, TimeUnit.DAYS)
+            .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+            .build()*/
+    }
+
+    private fun printData(dataReadResult: DataReadResponse) {
+        // [START parse_read_data_result]
+        // If the DataReadRequest object specified aggregated data, dataReadResult will be returned
+        // as buckets containing DataSets, instead of just DataSets.
+        if (dataReadResult.buckets.isNotEmpty()) {
+            Log.i(TAG, "Number of returned buckets of DataSets is: " + dataReadResult.buckets.size)
+            for (bucket in dataReadResult.buckets) {
+                bucket.dataSets.forEach { dumpDataSet(it) }
+            }
+        } else if (dataReadResult.dataSets.isNotEmpty()) {
+            Log.i(TAG, "Number of returned DataSets is: " + dataReadResult.dataSets.size)
+            dataReadResult.dataSets.forEach { dumpDataSet(it) }
+        }
+        // [END parse_read_data_result]
+    }
+
+    private fun dumpDataSet(dataSet: DataSet) {
+        Log.i(TAG, "Data returned for Data type: ${dataSet.dataType.name}")
+
+        var totalSteps = 0
+        for (dp in dataSet.dataPoints) {
+            Log.i(TAG, "Data point:")
+            Log.i(TAG, "\tType: ${dp.dataType.name}")
+            Log.i(TAG, "\tStart: ${dp.getStartTimeString()}")
+            Log.i(TAG, "\tEnd: ${dp.getEndTimeString()}")
+            dp.dataType.fields.forEach {
+                if(it.name == Field.FIELD_STEPS.name){
+                    Log.i(TAG, "\tField: ${it.name} Value: ${dp.getValue(it)}")
+                    totalSteps +=dp.getValue(it).asInt()
+                }
+            }
+        }
+
+        binding.tvTotalSteps.setText(totalSteps.toString())
+
+        GlobalScope.launch(Dispatchers.Main) {
+            var lat = MySharedPreferences.getMySharedPreferences()!!.latitude
+            var lng = MySharedPreferences.getMySharedPreferences()!!.longitude
+            var address = MySharedPreferences.getMySharedPreferences()!!.longitude
+            val currentDate = Converters.FORMATTER.format(Date())
+            var step = dbHelper.getStep(currentDate)
+            if (step != null) {
+//                sharedPreferences.edit().putInt(MotionService.KEY_STEPS, mTodaysSteps).apply()
+                dbHelper.updateSteps(step.id, totalSteps, address, lat, lng, step.ispass)
+            } else {
+//                mTodaysSteps = 0
+//                mCurrentDate = com.nddb.kudamforkurien.utils.Util.calendar.timeInMillis
+//                sharedPreferences.edit().putLong(MotionService.KEY_DATE, mCurrentDate).apply()
+                dbHelper.insertSteps(Steps(currentDate, totalSteps, address, lat, lng, false))
+            }
+        }
+        updateTotalSteps()
+    }
+
+    private fun oAuthErrorMsg(requestCode: Int, resultCode: Int) {
+        val message = """
+            There was an error signing into Fit. Check the troubleshooting section of the README
+            for potential issues.
+            Request code was: $requestCode
+            Result code was: $resultCode
+        """.trimIndent()
+        Log.e(TAG, message)
+    }
+
+    fun DataPoint.getStartTimeString(): String = DateFormat.getTimeInstance()
+        .format(this.getStartTime(TimeUnit.MILLISECONDS))
+
+    fun DataPoint.getEndTimeString(): String = DateFormat.getTimeInstance()
+        .format(this.getEndTime(TimeUnit.MILLISECONDS))
 }
