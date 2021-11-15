@@ -6,7 +6,9 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.nddb.kudamforkurien.Activity.BaseActivity
+import com.nddb.kudamforkurien.Activity.DrawerActivity
 import com.nddb.kudamforkurien.Activity.ui.OtpValidation.OTPActivity
+import com.nddb.kudamforkurien.Activity.ui.registration.RegistrationActivity
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.data.remote.responses.OtpValidation.OtpResponse
@@ -102,15 +104,15 @@ class LoginActivity : BaseActivity() {
                 intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
                 startActivity(intent)*/
             if (loginResponse.status == 1) {
-                  val intent = Intent(this, OTPActivity::class.java)
+                 /* val intent = Intent(this, OTPActivity::class.java)
                   //val intent = Intent(this, DrawerActivity::class.java)
                   intent.putExtra("mobile",loginBinding.edtMobilenum.text.toString())
                  // intent.putExtra("lang_id",selected_lang_id)
                   Log.e("success",loginResponse.message!!)
-                  startActivity(intent)
+                  startActivity(intent)*/
                   //finish()
 
-              /*  if(loginResponse.items!!.is_Registered == 1){
+                if(loginResponse.items!!.is_Registered == 1){
                     setUserData(loginResponse)
                     val intent = Intent(this, DrawerActivity::class.java)
                     startActivity(intent)
@@ -124,7 +126,7 @@ class LoginActivity : BaseActivity() {
                     intent.putExtra("mobile", loginResponse.items!!.user!!.phone_number)
                     startActivity(intent)
                     finish()
-                }*/
+                }
             } else {
                 loginResponse.message?.let {
                     loginBinding.relMain.showSnack(it)
