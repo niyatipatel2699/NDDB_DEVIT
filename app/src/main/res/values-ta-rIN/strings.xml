@@ -15,10 +15,10 @@
     <string name="registration"> பதிவு செய்துகொள்ளுதல் </string>
     <string name="otp_screen">OTP சரிபார்த்தல்</string>
     <string name="otp_sent_on_mobile_number">-க்கு அனுப்பிய OTP எண்ணை எழுதுங்கள்</string>
-    <!--<string name="resend_otp">OTP கிடைக்கவில்லையா?</string>
-    <string name="resend">மறுபடியும் குறிஎண்ணை அனுப்பவும்</string>-->
-    <string name="resend_otp">Did not receive OTP?</string>
-    <string name="resend"> Resend</string>
+    <string name="resend_otp">OTP கிடைக்கவில்லையா?</string>
+    <string name="resend">மறுபடியும் குறிஎண்ணை அனுப்பவும்</string>
+   <!-- <string name="resend_otp">Did not receive OTP?</string>
+    <string name="resend"> Resend</string>-->
 
     <string name="fname">మొదటి పేరు</string>
     <string name="lname">ఆఖరి పేరు</string>
@@ -53,16 +53,16 @@
     <string name="message_no_network_connected_str">நெட்வொர்க் தொடர்பு இல்லை</string>
     <string name="message_something_went_wrong_str">ஏதோ பிழை நிகழ்ந்துள்ளது</string>
     <!--<string name="your_total_step_walked">நடந்திருக்கும் காலடிகள்</string>-->
-    <string name="your_total_step_walked">Steps Walked Today </string>
-    <string name="total_contributed_steps">Total Steps Contributed </string>
+    <string name="your_total_step_walked">இன்று நடந்திருக்கும் காலடிகள் </string>
+    <string name="total_contributed_steps">பங்களித்திருக்கும் மொத்த காலடிகள் </string>
     <string name="your_rank">வாழ்த்துகள்! உங்கள் தற்போதைய ரேங்க்</string>
     <string name="among_participants">அனைத்து பங்கேற்பாளர்களுடன் ஒப்பிடும் போது.</string>
     <!--<string name="thank_you">உங்கள் பங்களிப்புக்கு நன்றி நடந்து கொண்டிருங்கள்</string>-->
-    <string name="thank_you">Thank you for joining the world’s largest walkathon by contributing to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr. Verghese Kurien – the Milkman of India.</string>
+    <string name="thank_you">200 மில்லியன் டன்கள் பால் வழங்கிய இந்தியாவின் பால் மகன் - டா. வர்கீஸ் குரியன்  வாழ்க்கை மற்றும் பணியை நினைவுகூறும் விதமாக நிகழ்த்தப்படும் உலகளவில் மிகப் பெரிய 200 மில்லியன் காலடிகள் வாக்கதான் நிகழ்ச்சியில் பங்கேற்றதற்கு மிகவும் நன்றி.</string>
     <string name="log_in">லாக்-இன்</string>
     <string name="for_the_best_experience_nwith_nddb_walkathos">என்டிடிபி வாக்கதோஸ்வுடன் அற்புதமான அனுபவத்திற்கு</string>
     <!--<string name="virtual_walked">குரியனுக்கு ஒரு காலடி என்பது ஒரு மெய்நிகழ் வாக்கத்தோன் இந்தியாவின் பால் மகன் - டாக்டர் வர்கீஸ் குரியனுக்கு வழங்கப்படும் ஓர் அஞ்சலியாக.</string>-->
-    <string name="virtual_walked">Press the start button to contribute your steps to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr. Verghese Kurien – the Milkman of India. Click on stop once you have walked your miles.</string>
+    <string name="virtual_walked">200  மில்லியன் டன்கள் பால் வழங்கிய இந்தியாவின் பால் மகன் - டா. வர்கீஸ் குரியன்  வாழ்க்கை மற்றும் பணியை நினைவுகூறும் விதமாக 200 மில்லியன் காலடிகளுக்குப் பங்களிக்க ஸ்டார்ட் பட்டனை அழுத்துங்கள். உங்கள் இலக்கு தூரத்தை நடந்து முடித்தவுடன் ஸ்டாப் பட்டனை அழுத்துங்கள்.</string>
     <string name="contribute">200 மில்லியன் காலடிகள் இலக்கை எட்டுவதற்கு உங்கள் காலடிகளையும் அர்ப்பணம் செய்ய, ஸ்டார்ட் மீது கிளிக் செய்யுங்கள். நீங்கள் நடந்து முடிந்த பிறகு உங்கள் காலடிகளைப் பதிவு செய்ய, ஸ்டாப் மீது கிளிக் செய்யுங்கள்.</string>
 
     <string name="error_alert">எச்சரிக்கை </string>
@@ -93,7 +93,7 @@
     <string name="registered_mobile">பதிவு செய்யப்பட்டிருக்கும் மொபைல்</string>
     <string name="select_language">முதலில் ஒரு மொழியைத் தேர்ந்தெடுக்கவும்</string>
     <string name="are_you_sure_want_logout">லாக் அவுட் செய்ய விரும்புகிறீர்களா? </string>
-    <string name="gallery_text">Check out the media gallery below to see some glimpses from the life and work of Dr. Kurien</string>
+    <string name="gallery_text">டா. குரியனின் வாழ்க்கை மற்றும் பணிகளில் ஒரு சில காட்சிகளை நீங்கள் கீழே மீடியா கேலரியில் பார்க்கலாம்.</string>
     <!--<string name="alert_dialog">Thank you for your interest in Event {Event name}. Event will be start on {Date}.</string>-->
     <string name="alert_dialog">Thank you for your interest in Event Kadam for Kurien. Event will be start on 26-Nov-2021.</string>
     <string name="ok">Ok</string>
@@ -112,8 +112,8 @@
     <string name="log_out">லாக்அவுட்</string>
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
 
-    <string name="dear">Dear</string>
-    <string name="you_have">You Have</string>
+    <string name="dear">வணக்கம்</string>
+    <string name="you_have">உங்களிடம் உள்ளது</string>
     <string name="history_total_step">Total Steps Walked</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>

@@ -15,10 +15,10 @@
     <string name="registration">नोंदणी</string>
     <string name="otp_screen">ओटीपी पडताळणी</string>
     <string name="otp_sent_on_mobile_number">वर पाठवलेला ओटीपी प्रविष्ट करा </string>
-   <!-- <string name="resend_otp">ओटीपी मिळाला नाही?</string>
-    <string name="resend">कोड पुन्हा पाठवा</string>-->
-    <string name="resend_otp">Did not receive OTP?</string>
-    <string name="resend"> Resend</string>
+    <string name="resend_otp">ओटीपी मिळाला नाही?</string>
+    <string name="resend">कोड पुन्हा पाठवा</string>
+    <!--<string name="resend_otp">Did not receive OTP?</string>
+    <string name="resend"> Resend</string>-->
 
     <string name="fname">नाव</string>
     <string name="lname">आडनाव</string>
@@ -53,16 +53,16 @@
     <string name="message_no_network_connected_str">नेटवर्क जोडलेले नाही!</string>
     <string name="message_something_went_wrong_str">काहीतरी चुकले!</string>
     <!--<string name="your_total_step_walked">चाललेली पावले</string>-->
-    <string name="your_total_step_walked">Steps Walked Today </string>
-    <string name="total_contributed_steps">Total Steps Contributed </string>
+    <string name="your_total_step_walked">आज चाललेली पावले</string>
+    <string name="total_contributed_steps">एकूण समर्पित पावले </string>
     <string name="your_rank">अभिनंदन! तुमचा सध्याचा क्रमांक आहे</string>
     <string name="among_participants">सर्व सहभागीदारांमध्ये.</string>
     <!--<string name="thank_you">तुमच्या योगदानासाठी धन्यवाद. चालत राहा.</string>-->
-    <string name="thank_you">Thank you for joining the world’s largest walkathon by contributing to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr. Verghese Kurien – the Milkman of India.</string>
+    <string name="thank_you">मिल्कमॅन ऑफ इंडिया, डॉ. व्हर्गीस कुरिअन ह्यांचे जीवन व कार्य ह्यांचे स्मरण करण्यासाठी, जगातील सर्वांत मोठ्या वॉकेथॉनमध्ये सहभागी होऊन २० कोटी टन दुधाकरिता २० कोटी पावले टाकण्यात तुमच्या पावलांचे योगदान देण्यासाठी ‘सुरु करा’ बटण दाबा.</string>
     <string name="log_in">लॉग इन करा</string>
     <string name="for_the_best_experience_nwith_nddb_walkathos">एनडीडीबी वॉकेथॉनच्या सर्वोत्तम अनुभवासाठी</string>
     <!--<string name="virtual_walked">कदम फॉर कुरिअन एक व्हर्च्युअल वॉकेथॉन आहे, भारताच्या मिल्क मॅनला आदरांजली वाहण्यासाठी - डॉ. व्हर्गीस कुरिअन. </string>-->
-    <string name="virtual_walked">Press the start button to contribute your steps to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr. Verghese Kurien – the Milkman of India. Click on stop once you have walked your miles.</string>
+    <string name="virtual_walked">मिल्कमॅन ऑफ इंडिया, डॉ. व्हर्गीस कुरिअन ह्यांचे जीवन व कार्य ह्यांचे स्मरण करण्यासाठी, जगातील सर्वांत मोठ्या वॉकेथॉनमध्ये सहभागी होऊन २० कोटी टन दुधाकरिता २० कोटी पावले टाकण्यात आपले योगदान दिल्याबद्दल धन्यवाद. </string>
     <string name="contribute">२०० कोटी पावलांचे लक्ष्य गाठण्यात आपले योगदान देण्यासाठी, ‘सुरु’वर क्लिक करा. तुमची पावले नोंदवण्यासाठी, तुम्ही तुमचे मैलभर अंतर चालून गेल्यावर ‘थांबा’वर क्लिक करा.</string>
 
     <string name="error_alert">इशारा</string>
@@ -93,10 +93,10 @@
     <string name="registered_mobile">नोंदणीकृत मोबाईल</string>
     <string name="select_language">कृपया आधी कोणतीही भाषा निवडा</string>
     <string name="are_you_sure_want_logout">तुम्हाला नक्की लॉग आऊट करायचे आहे?</string>
-    <string name="gallery_text">Check out the media gallery below to see some glimpses from the life and work of Dr. Kurien</string>
+    <string name="gallery_text">डॉ. कुरिअन ह्यांच्या जीवनातील आणि कार्यातील काही क्षण पाहण्यासाठी खालील मीडिया गॅलरी पाहा</string>
     <!--<string name="alert_dialog">Thank you for your interest in Event {Event name}. Event will be start on {Date}.</string>-->
     <string name="alert_dialog">Thank you for your interest in Event Kadam for Kurien. Event will be start on 26-Nov-2021.</string>
-    <string name="ok">Ok</string>
+    <string name="ok">ठीक आहे</string>
     <!-- <string name="yes">Yes</string>
      <string name="no">No</string>-->
 
@@ -112,13 +112,13 @@
     <string name="log_out">लॉग आऊट करा</string>
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
 
-    <string name="dear">Dear</string>
-    <string name="you_have">You Have</string>
+    <string name="dear">प्रिय</string>
+    <string name="you_have">तुम्ही </string>
     <string name="history_total_step">Total Steps Walked</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
 
-    <string name="event_alert_msg">हे वैशिष्ट्य 26-नोव्हेंबर-2021 तारखेला सक्रिय होईल</string>
+    <string name="event_alert_msg">हे फीचर २६ नोव्हेंबर २०२१ ह्या दिनांकारोजी सक्रिय होईल.</string>
     <string name="history_thank_msg">ुमच्या योगदानासाठी धन्यवाद. चालत राहा.</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>

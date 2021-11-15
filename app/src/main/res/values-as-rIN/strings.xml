@@ -15,11 +15,11 @@
     <string name="registration">পঞ্জীকৰণ</string>
     <string name="otp_screen">অ\'টিপি সত্যাপন</string>
     <string name="otp_sent_on_mobile_number">প্রেৰিত অ\'টিপি লিখক</string>
-   <!-- <string name="resend_otp">অ\'টিপি প্ৰাপ্ত কৰা নাই</string>
-    <string name="resend">কোডটো পুনৰায় পঠিয়াওঁক</string>-->
-    <string name="resend_otp">Did not receive OTP?</string>
+    <string name="resend_otp">অ\'টিপি প্ৰাপ্ত কৰা নাই</string>
+    <string name="resend">কোডটো পুনৰায় পঠিয়াওঁক</string>
+  <!--  <string name="resend_otp">Did not receive OTP?</string>
     <string name="resend"> Resend</string>
-
+-->
     <string name="fname">নামৰ প্রথম অংশ</string>
     <string name="lname">নামৰ শেষাংশ</string>
     <string name="dob">জন্ম তাৰিখ</string>
@@ -53,16 +53,16 @@
     <string name="message_no_network_connected_str">কোনো নেটৱর্ক সংযুক্ত নাই</string>
     <string name="message_something_went_wrong_str">কিবা ভুল হৈছে</string>
     <!--<string name="your_total_step_walked">পদক্ষেপ আগবাঢ়িল</string>-->
-    <string name="your_total_step_walked">Steps Walked Today </string>
-    <string name="total_contributed_steps">Total Steps Contributed </string>
+    <string name="your_total_step_walked">আজি খোজকাঢ়ি আগবাঢ়ক </string>
+    <string name="total_contributed_steps">মুঠ পদক্ষেপৰ অৱদান</string>
     <string name="your_rank">অভিনন্দন! আপুনি বর্তমান ৰেঙ্ক পাইছে</string>
     <string name="among_participants">সকলো অংশগ্রহণকাৰী সকলৰ ভিতৰত</string>
     <!--<string name="thank_you">আপোনাৰ অৱদানৰ বাবে ধন্যবাদ ৷ আগবাঢ়ি থাকক</string>-->
-    <string name="thank_you">Thank you for joining the world’s largest walkathon by contributing to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr. Verghese Kurien – the Milkman of India.</string>
+    <string name="thank_you">ভাৰতৰ মিল্ক মেন ড০ ভার্গিছ কুৰিয়েনৰ  কৰ্ম আৰু জীৱনৰ স্মৰণ কৰাৰ বাবে 200 মিলিয়ন টন গাখীৰৰ বাবে 200 মিলিয়ন পদক্ষেপেৰে অৱদান আগবঢ়াই বিশ্বৰ বৃহত্তম ৱাকাথনত যোগ দিয়াৰ বাবে আপোনাক ধন্যবাদ।</string>
     <string name="log_in">লগইন কৰক</string>
     <string name="for_the_best_experience_nwith_nddb_walkathos">এনডিডিবি ৱাকএথ\'জৰ সৈতে উত্তমা অভিজ্ঞতাৰ বাবে</string>
     <!--<string name="virtual_walked">কুৰিয়েনৰ বাবে কদম হ\'ল ভাৰতৰ মিল্ক মেনক শ্রদ্ধা জনোৱা এক ভার্চুয়াল ৱাকথন - ডাঃ ভার্গিছ কুৰিয়েন.</string>-->
-    <string name="virtual_walked">Press the start button to contribute your steps to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr. Verghese Kurien – the Milkman of India. Click on stop once you have walked your miles.</string>
+    <string name="virtual_walked">200 মিলিয়ন টন গাখীৰৰ বাবে 200 মিলিয়ন পদক্ষেপেৰে আপোনাৰ পদক্ষেপৰ অৱদান ৰাখিবলৈ ষ্টার্ট বুটাম টিপক - ভাৰতৰ মিল্ক মেন ড০ ভার্গিছ কুৰিয়েনৰ  কৰ্ম আৰু জীৱনৰ স্মৰণ কৰাৰ বাবে। এবাৰ আপুনি আপোনাৰ মাইল খোজকঢ়াৰ পিছত ষ্টপত ক্লিক কৰক।</string>
     <string name="contribute">200 মিলিয়ন পদক্ষেপৰ লক্ষ্যৰে আপোনাৰ পদক্ষেপবোৰৰ অৱদান আগবঢ়াবলৈ, আৰম্ভণিতে ক্লিক কৰক। আপোনাৰ পদক্ষেপবোৰ পঞ্জীকৃত কৰিবলৈ, এবাৰ আপুনি আপোনাৰ এক মাইল আগবঢ়াৰ সময়ত ক্লিক কৰক।</string>
 
     <string name="error_alert">সতর্কতা</string>
@@ -93,10 +93,10 @@
     <string name="registered_mobile">পঞ্জীকৃত ম\'বাইল</string>
     <string name="select_language">অনুগ্রহ কৰি প্রথমে যিকোনো ভাষা বাছি লওঁক</string>
     <string name="are_you_sure_want_logout">আপুনি লগ আউট কৰিব বিচাৰে নেকি?</string>
-    <string name="gallery_text">Check out the media gallery below to see some glimpses from the life and work of Dr. Kurien</string>
+    <string name="gallery_text">ড০ কুৰিয়েনৰ জীৱন আৰু কৰ্মৰ কিছু অৱলোকন চাবলৈ তলৰ মিডিয়া গেলাৰিটোলৈ চাওঁক</string>
     <!--<string name="alert_dialog">Thank you for your interest in Event {Event name}. Event will be start on {Date}.</string>-->
     <string name="alert_dialog">Thank you for your interest in Event Kadam for Kurien. Event will be start on 26-Nov-2021.</string>
-    <string name="ok">Ok</string>
+    <string name="ok">ঠিক আছে</string>
     <!-- <string name="yes">Yes</string>
      <string name="no">No</string>-->
 
@@ -111,8 +111,8 @@
     <string name="country_code">+91</string>
     <string name="log_out">লগআউট কৰক</string>
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
-    <string name="dear">Dear</string>
-    <string name="you_have">You Have</string>
+    <string name="dear">প্রিয়</string>
+    <string name="you_have">আপোনাৰ আছে</string>
     <string name="history_total_step">Total Steps Walked</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>

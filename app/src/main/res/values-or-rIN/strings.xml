@@ -53,16 +53,16 @@
     <string name="message_no_network_connected_str">ନେଟୱର୍କ ସଂଯୁକ୍ତ ହୋଇ ନାହିଁ </string>
     <string name="message_something_went_wrong_str">କିଛି ତ୍ରୁଟି ହୋଇଛି  </string>
     <!--<string name="your_total_step_walked">ଚାଲିଥିବା ଷ୍ଟେପ୍‌ସ </string>-->
-    <string name="your_total_step_walked">Steps Walked Today </string>
-    <string name="total_contributed_steps">Total Steps Contributed </string>
+    <string name="your_total_step_walked">ଆଜି ଚାଲିଥିବା ଷ୍ଟେପ୍ସ  </string>
+    <string name="total_contributed_steps">ସମୁଦାୟ ଚାଲିଥିବା ଷ୍ଟେପ୍ସ </string>
     <string name="your_rank">ଅଭିନନ୍ଦନ! ଆପଣଙ୍କର ବର୍ତ୍ତମାନର ରାଙ୍କ ହେଉଛି </string>
     <string name="among_participants">ସମସ୍ତ ଅଂଶଗ୍ରହଣକାରୀମାନଙ୍କ ମଧ୍ୟରେ </string>
     <!--<string name="thank_you">ଆପଣଙ୍କର ଅବଦାନ ପାଇଁ ଧନ୍ୟବାଦ। ଚାଳିବା ଜାରି ରଖନ୍ତୁ</string>-->
-    <string name="thank_you">Thank you for joining the world’s largest walkathon by contributing to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr. Verghese Kurien – the Milkman of India.</string>
+    <string name="thank_you">ଡା. ଭର୍ଗିଜ୍ କ୍ୟୁରିଆନ୍ – ଭାରତର ମିଲ୍କମ୍ୟାନଙ୍କ କାର୍ଯ୍ୟ ଓ ଜୀବନକୁ ସ୍ମରଣ କରିବା ପାଇଁ 200 ନିୟୁତ ଟନର କ୍ଷୀର ପାଇଁ 200 ନିୟୁତ ପାଦ ଚାଲିବା ଦ୍ବାରା ବିଶ୍ବର ବୃହତ୍ତମ ୱାକାଥନରେ ଯୋଗଦାନ ହେତୁ ଆପଣଙ୍କୁ ଧନ୍ୟବାଦ।</string>
     <string name="log_in">ଲଗ୍‌ ଇନ୍ </string>
     <string name="for_the_best_experience_nwith_nddb_walkathos">ଏନଡିଡିବି ୱାକାଥୋସ୍ ସହିତ ଭଲ ଅନୁଭବ ପାଇଁ </string>
     <!--<string name="virtual_walked">କ୍ୟୁରିଆନ୍ ପାଇଁ କଦମ୍ ହେଉଛି ଏକ ଭର୍ଚୁଆଲ୍ ୱାକାଥନ୍ ଓ ଏହା ଭାରତର ମିଲ୍‌କ ମ୍ୟାନ୍ -–ଡ. ଭର୍ଗିଜ୍ କ୍ୟୁରିଆନଙ୍କ ପାଇଁ ଏକ ଶ୍ରଦ୍ଧାଞ୍ଜଳି </string>-->
-    <string name="virtual_walked">Press the start button to contribute your steps to the 200 million footsteps for 200 million tonnes of milk to remember the work and life of Dr. Verghese Kurien – the Milkman of India. Click on stop once you have walked your miles.</string>
+    <string name="virtual_walked">ଡା. ଭର୍ଗିଜ୍ କ୍ୟୁରିଆନ୍ – ଭାରତର ମିଲ୍କମ୍ୟାନଙ୍କ କାର୍ଯ୍ୟ ଓ ଜୀବନକୁ ସ୍ମରଣ କରିବା ପାଇଁ 200 ନିୟୁତ ଟନର କ୍ଷୀର ପାଇଁ 200 ନିୟୁତ ପାଦ ଚାଲିବା ପାଇଁ ଆପଣ ଷ୍ଟାର୍ଟ ବଟନରେ ପ୍ରେସ୍ କରନ୍ତୁ। ଆପଣଙ୍କ ଚାଲିବା ସମାପ୍ତ ହେବା ପରେ ଷ୍ଟପ୍ ଉପରେ କ୍ଲିକ କରନ୍ତୁ। </string>
     <string name="contribute">200 ମିଲିୟନ ଷ୍ଟେପ୍‌ସର ଆପଣଙ୍କର ଲକ୍ଷ୍ୟ ପାଇଁ ଆପଣଙ୍କର ଷ୍ଟେପ୍‌ସ ପ୍ରଦାନ କରିବା ପାଇଁ, ଷ୍ଟାର୍ଟ ଉପରେ କ୍ଲିକ କରନ୍ତୁ। ଆପଣଙ୍କର ଷ୍ଟେପ୍‌ସକୁ ରେଜିଷ୍ଟର କରିବା ପାଇଁ, ଆପଣଙ୍କର ମାଇଲ୍ ଚାଲି ସାରିବା ପରେ ଷ୍ଟପ୍ ଉପରେ କ୍ଲିକ କରନ୍ତୁ। </string>
 
     <string name="error_alert">ଆଲର୍ଟ </string>
@@ -93,7 +93,7 @@
     <string name="registered_mobile">ପଞ୍ଜୀକୃତ ମୋବାଇଲ୍‌ </string>
     <string name="select_language">ଦୟାକରି ପ୍ରଥମେ କୌଣସି ଏକ ଭାଷାକୁ ବାଛନ୍ତୁ </string>
     <string name="are_you_sure_want_logout">ଆପଣ ଲଗଆଉଟ୍ କରିବାକୁ ନିଶ୍ଚିତ ଅଟନ୍ତି କି ?</string>
-    <string name="gallery_text">Check out the media gallery below to see some glimpses from the life and work of Dr. Kurien</string>
+    <string name="gallery_text">ଡା. କ୍ୟୁରିଆନଙ୍କର ଜୀବନର କିଛି ବିଶେଷ ମୁହୂର୍ତ୍ତ ଓ କାର୍ଯ୍ୟକୁ ନିମ୍ନରେ ପ୍ରଦାନ କରାଯାଇଥିବା ମିଡିଆ ଗ୍ୟାଲେରିରେ ଦେଖନ୍ତୁ </string>
     <!--<string name="alert_dialog">Thank you for your interest in Event {Event name}. Event will be start on {Date}.</string>-->
     <string name="alert_dialog">Thank you for your interest in Event Kadam for Kurien. Event will be start on 26-Nov-2021.</string>
     <string name="ok">Ok</string>
@@ -112,13 +112,13 @@
     <string name="log_out">ଲଗ ଆଉଟ୍ </string>
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
 
-    <string name="dear">Dear</string>
-    <string name="you_have">You Have</string>
+    <string name="dear">ପ୍ରିୟ</string>
+    <string name="you_have">ଆପଣଙ୍କର ରହିଛି </string>
     <string name="history_total_step">Total Steps Walked</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
 
-    <string name="event_alert_msg">ଏହି ବ feature ଶିଷ୍ଟ୍ୟ 26-ନଭେମ୍ବର -2021 ତାରିଖରେ ସକ୍ରିୟ ହେବ |</string>
+    <string name="event_alert_msg">ଏହି ବୈଶିଷ୍ଟ୍ୟ 26 ନଭେମ୍ବର 2021 ରେ ଆକ୍ଟିଭେଟ୍ ହେବ। </string>
     <string name="history_thank_msg">ଆପଣଙ୍କର ଅବଦାନ ପାଇଁ ଧନ୍ୟବାଦ। ଚାଳିବା ଜାରି ରଖନ୍ତୁ</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
