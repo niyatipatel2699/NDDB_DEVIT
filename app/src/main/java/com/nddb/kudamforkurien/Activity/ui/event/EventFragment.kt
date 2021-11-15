@@ -70,6 +70,17 @@ class EventFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         ///openDialog()
+        val sdf = SimpleDateFormat("dd-MM-yyyy")
+        val currentDate = sdf.format(Date())
+        val finalDate = "26-11-2021"
+
+
+        if (finalDate.compareTo(currentDate) > 0)
+        {    openDialog()}
+        else if (finalDate.compareTo(currentDate) < 0)
+        {   alertDialog.dismiss()}
+        else if (finalDate.compareTo(currentDate) == 0)
+        {    alertDialog.dismiss()}
 
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
 
