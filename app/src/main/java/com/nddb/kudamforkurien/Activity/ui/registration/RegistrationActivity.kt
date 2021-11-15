@@ -12,6 +12,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.nddb.kudamforkurien.Activity.BaseActivity
 import com.nddb.kudamforkurien.Activity.DrawerActivity
 import com.nddb.kudamforkurien.MySharedPreferences
@@ -164,14 +166,12 @@ class RegistrationActivity : BaseActivity() {
 
     private fun setEventListener() {
 
-
         regBinding.autoUsertype.setOnItemClickListener { adapterView, view, position, id ->
             val list: UserTypeData = userTypeList.get(position)
             user_type_id = java.lang.String.valueOf(list.id)
             user_type_name = java.lang.String.valueOf(list.name)
             Log.e("utype-->", user_type_id.toString())
             Log.d("Register Activity", "Register Activity User Type ${userTypeList[position]}")
-
 
             hideKeyboard(view)
         }
@@ -197,6 +197,7 @@ class RegistrationActivity : BaseActivity() {
                 inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
             }
 
+            hideKeyboard(view)
         }
     }
 
@@ -313,9 +314,12 @@ class RegistrationActivity : BaseActivity() {
 
     }
     fun Context.hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+        val imm = activity.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = activity.currentFocus
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
 
 }

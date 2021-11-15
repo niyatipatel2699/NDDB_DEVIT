@@ -82,6 +82,12 @@ class EventFragment : Fragment() {
         else if (finalDate.compareTo(currentDate) == 0)
         {    alertDialog.dismiss()}
 
+        alertDialog.btnOk.setOnClickListener{
+            alertDialog.dismiss()
+            val intent = Intent(requireContext(), DrawerActivity::class.java)
+            startActivity(Intent(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)))
+        }
+
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
 
        /* sliderDataArrayList.add(SliderData(url1))

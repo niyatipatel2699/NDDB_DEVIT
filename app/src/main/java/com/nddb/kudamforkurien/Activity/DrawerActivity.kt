@@ -134,9 +134,9 @@ class DrawerActivity : BaseActivity() {
                 }
                /* val serviceAdmin = ServiceAdmin()
                 serviceAdmin.stopService(this)*/
-                val intent = Intent(activity, MotionService::class.java)
-                intent.putExtra("stopped", true)
-                activity?.startService(intent)
+//                val intent = Intent(activity, MotionService::class.java)
+//                intent.putExtra("stopped", true)
+//                activity?.startService(intent)
 
             }
             .setNegativeButton(

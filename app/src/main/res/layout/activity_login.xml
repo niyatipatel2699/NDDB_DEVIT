@@ -104,7 +104,8 @@
                 android:gravity="center"
                 android:text="@string/otp_will_be_send_to_mobile_number"
                 android:textColor="@color/otp_sent_text"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_12sdp"
+                android:visibility="invisible"/>
 
             <!--   <View
                 android:layout_width="match_parent"

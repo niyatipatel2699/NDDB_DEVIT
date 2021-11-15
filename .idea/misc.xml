@@ -29,7 +29,9 @@
         <entry key="..\:/Users/niyati.patel/AndroidStudioProjects/NEW-29-10-NDDB/NDDB/app/src/main/res/layout/nav_header_drawer.xml" value="0.33" />
         <entry key="..\:/Users/niyati.patel/AndroidStudioProjects/NEW-29-10-NDDB/NDDB/app/src/main/res/layout/progress_dialog.xml" value="0.25925925925925924" />
         <entry key="..\:/Users/niyati.patel/AndroidStudioProjects/NEW-29-10-NDDB/NDDB/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/adapter_walked_history_item.xml" value="0.33229166666666665" />
+        <entry key="app/src/main/res/layout/event_fragment.xml" value="0.17760416666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4735866543095459" />
       </map>
     </option>
