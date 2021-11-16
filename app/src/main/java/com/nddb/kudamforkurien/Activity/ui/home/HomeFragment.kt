@@ -49,6 +49,7 @@ import com.nddb.kudamforkurien.data.room.DatabaseHelper
 import com.nddb.kudamforkurien.data.room.DatabaseHelperImpl
 import com.nddb.kudamforkurien.data.room.entity.Steps
 import com.nddb.kudamforkurien.databinding.FragmentHomeBinding
+import com.nddb.kudamforkurien.model.DataSteps
 import com.nddb.kudamforkurien.model.SliderData
 import com.nddb.kudamforkurien.utils.Converters
 import com.nddb.kudamforkurien.utils.NetworkUtils
@@ -56,8 +57,10 @@ import com.smarteist.autoimageslider.SliderView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.text.DateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
@@ -163,7 +166,17 @@ class HomeFragment : Fragment() {
             var list = dbHelper.getStepsOnlyNotPass()
             if(list.size > 0 )
             {
-                homeViewModel.stepCount(list)
+                var tempList:ArrayList<DataSteps> = ArrayList()
+                list.forEach {
+                    var inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+                    var outputFormat: DateFormat = SimpleDateFormat("dd MMM yyyy")
+                    var inputDateStr = it.date
+                    var date:Date=inputFormat.parse(inputDateStr)
+                    var parseDate=outputFormat.format(date)
+                    var dataSteps= DataSteps(parseDate,it.step.toString(),it.location.toString())
+                    tempList.add(dataSteps)
+                    }
+                homeViewModel.stepCount(tempList)
             }
 
         }
@@ -1250,6 +1263,8 @@ class HomeFragment : Fragment() {
         Fitness.getRecordingClient(requireActivity(),getGoogleAccount()).subscribe(DataType.TYPE_STEP_COUNT_DELTA)
 
         // Begin by creating the query.
+
+
         val readRequest = queryFitnessData()
 
         // Invoke the History API to fetch the data with the query
@@ -1267,9 +1282,23 @@ class HomeFragment : Fragment() {
     }
 
     private fun queryFitnessData(): DataReadRequest {
-
         val calendar = Calendar.getInstance(TimeZone.getDefault())
-        calendar.set(Calendar.HOUR_OF_DAY, 0)
+
+        var  operation=GlobalScope.launch(Dispatchers.Main) {
+            var step = dbHelper.getLastRow()
+            if (step != null)
+            {
+
+                calendar.set(Calendar.HOUR_OF_DAY, step.date.split("-")[2].toInt())
+
+            } else
+            {
+                calendar.set(Calendar.HOUR_OF_DAY, 0)
+            }
+        }
+        operation.onJoin
+       // val calendar = Calendar.getInstance(TimeZone.getDefault())
+      //  calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
         calendar.set(Calendar.MILLISECOND, 0)
@@ -1351,8 +1380,9 @@ class HomeFragment : Fragment() {
             } else {
                 dbHelper.insertSteps(Steps(currentDate, totalSteps, address, lat, lng, false))
             }
+            updateTotalSteps()
         }
-        updateTotalSteps()
+
     }
 
     private fun oAuthErrorMsg(requestCode: Int, resultCode: Int) {

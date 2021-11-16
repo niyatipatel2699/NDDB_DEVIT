@@ -29,6 +29,9 @@ interface StepsDao {
     @Query("select * from Steps WHERE date=:date")
     fun getStep(date: String): Steps
 
+    @Query("select * from Steps ORDER BY id DESC LIMIT 1")
+    fun getLastStep(): Steps
+
     @Query("select * from Steps where ispass=0")
     fun getStepsOnlyNotPass(): List<Steps>
 

@@ -5,6 +5,7 @@ import com.nddb.kudamforkurien.data.remote.responses.StepCountResponse
 import com.nddb.kudamforkurien.data.DataState
 import com.nddb.kudamforkurien.data.remote.*
 import com.nddb.kudamforkurien.data.room.entity.Steps
+import com.nddb.kudamforkurien.model.DataSteps
 import com.nddb.kudamforkurien.utils.StringUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -17,7 +18,7 @@ class HomeRepositoryImpl @Inject constructor(
 ) : HomeRepository {
 
     override suspend fun stepCount(
-        stepsList : List<Steps>
+        stepsList : List<DataSteps>
     ): Flow<DataState<StepCountResponse>> {
 
         return flow {

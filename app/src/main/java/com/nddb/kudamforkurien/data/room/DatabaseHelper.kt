@@ -20,4 +20,7 @@ interface DatabaseHelper {
 
     suspend fun totalSteps():Int
 
+    suspend fun getLastRow():Steps
+
+
 }

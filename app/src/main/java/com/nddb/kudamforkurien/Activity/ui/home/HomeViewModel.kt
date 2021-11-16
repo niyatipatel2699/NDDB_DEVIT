@@ -12,6 +12,7 @@ import com.nddb.kudamforkurien.data.remote.responses.StepCountResponse
 import com.nddb.kudamforkurien.data.repository.HomeRepo.HomeRepository
 import com.nddb.kudamforkurien.data.DataState
 import com.nddb.kudamforkurien.data.room.entity.Steps
+import com.nddb.kudamforkurien.model.DataSteps
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -64,7 +65,7 @@ class HomeViewModel @Inject constructor(
     }*/
 
     fun stepCount(
-        stepsList : List<Steps>
+        stepsList : List<DataSteps>
     ) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {

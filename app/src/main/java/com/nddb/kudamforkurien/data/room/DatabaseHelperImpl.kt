@@ -19,5 +19,7 @@ class DatabaseHelperImpl(private val appDatabase: AppDatabase) : DatabaseHelper 
     override suspend fun updateSteps(id: Int,steps: Int,address:String, lat:String, lng:String,ispass:Boolean)= appDatabase.stepsDao().updateStep(id,steps,address,lat,lng,ispass)
     override suspend fun totalSteps() = appDatabase.stepsDao().getTotalSteps()
 
+    override suspend fun getLastRow(): Steps = appDatabase.stepsDao().getLastStep()
+
 
 }

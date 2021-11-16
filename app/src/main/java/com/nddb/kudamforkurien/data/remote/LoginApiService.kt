@@ -9,6 +9,7 @@ import com.nddb.kudamforkurien.data.remote.responses.RankResponse.RankResponseMo
 import com.nddb.kudamforkurien.data.remote.responses.Registration.*
 import com.nddb.kudamforkurien.data.remote.responses.StepCountResponse
 import com.nddb.kudamforkurien.data.room.entity.Steps
+import com.nddb.kudamforkurien.model.DataSteps
 import retrofit2.http.*
 
 interface LoginApiService {
@@ -79,7 +80,7 @@ interface LoginApiService {
     @FormUrlEncoded
     @POST("api/v1/stepscount/create")
     suspend fun stepCount(
-        @Field("data") stepsList : List<Steps>,
+        @Field("data") stepsList : List<DataSteps>,
 
         ) : ApiResponse<StepCountResponse>
 
