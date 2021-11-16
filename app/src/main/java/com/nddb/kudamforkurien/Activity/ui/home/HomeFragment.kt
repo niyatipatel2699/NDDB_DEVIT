@@ -1246,6 +1246,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun readHistoryData(): Task<DataReadResponse> {
+
+        Fitness.getRecordingClient(requireActivity(),getGoogleAccount()).subscribe(DataType.TYPE_STEP_COUNT_DELTA)
+
         // Begin by creating the query.
         val readRequest = queryFitnessData()
 
@@ -1286,6 +1289,7 @@ class HomeFragment : Fragment() {
 
         return DataReadRequest.Builder()
             .aggregate(ESTIMATED_STEP_DELTAS, DataType.AGGREGATE_STEP_COUNT_DELTA)
+            .enableServerQueries()
             .bucketByTime(1, TimeUnit.DAYS)
             .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
             .build()
