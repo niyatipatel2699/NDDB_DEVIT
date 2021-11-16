@@ -1267,8 +1267,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun queryFitnessData(): DataReadRequest {
-        // [START build_read_data_request]
-        // Setting a start and end date using a range of 1 week before this moment.
+
         val calendar = Calendar.getInstance(TimeZone.getDefault())
         calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
@@ -1276,6 +1275,21 @@ class HomeFragment : Fragment() {
         calendar.set(Calendar.MILLISECOND, 0)
         val startTime = calendar.timeInMillis
         val endTime = Calendar.getInstance(TimeZone.getDefault()).timeInMillis
+
+//        val calendar = Calendar.getInstance(TimeZone.getDefault())
+//        calendar.set(Calendar.DATE, 15)
+//        calendar.set(Calendar.HOUR_OF_DAY, 0)
+//        calendar.set(Calendar.MINUTE, 0)
+//        calendar.set(Calendar.SECOND, 0)
+//        calendar.set(Calendar.MILLISECOND, 0)
+//        val startTime = calendar.timeInMillis
+//        val endCalender = Calendar.getInstance(TimeZone.getDefault())
+//        endCalender.set(Calendar.DATE, 15)
+//        endCalender.set(Calendar.HOUR_OF_DAY, 23)
+//        endCalender.set(Calendar.MINUTE, 59)
+//        endCalender.set(Calendar.SECOND, 0)
+//        endCalender.set(Calendar.MILLISECOND, 0)
+//        val endTime = endCalender.timeInMillis
 
         Log.i(TAG, "Range Start: ${dateFormat.format(startTime)}")
         Log.i(TAG, "Range End: ${dateFormat.format(endTime)}")
@@ -1293,18 +1307,9 @@ class HomeFragment : Fragment() {
             .bucketByTime(1, TimeUnit.DAYS)
             .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
             .build()
-
-        /*return DataReadRequest.Builder()
-            .aggregate(DataType.TYPE_STEP_COUNT_DELTA)
-            .bucketByTime(1, TimeUnit.DAYS)
-            .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
-            .build()*/
     }
 
     private fun printData(dataReadResult: DataReadResponse) {
-        // [START parse_read_data_result]
-        // If the DataReadRequest object specified aggregated data, dataReadResult will be returned
-        // as buckets containing DataSets, instead of just DataSets.
         if (dataReadResult.buckets.isNotEmpty()) {
             Log.i(TAG, "Number of returned buckets of DataSets is: " + dataReadResult.buckets.size)
             for (bucket in dataReadResult.buckets) {
@@ -1314,7 +1319,6 @@ class HomeFragment : Fragment() {
             Log.i(TAG, "Number of returned DataSets is: " + dataReadResult.dataSets.size)
             dataReadResult.dataSets.forEach { dumpDataSet(it) }
         }
-        // [END parse_read_data_result]
     }
 
     private fun dumpDataSet(dataSet: DataSet) {
@@ -1343,12 +1347,8 @@ class HomeFragment : Fragment() {
             val currentDate = Converters.FORMATTER.format(Date())
             var step = dbHelper.getStep(currentDate)
             if (step != null) {
-//                sharedPreferences.edit().putInt(MotionService.KEY_STEPS, mTodaysSteps).apply()
                 dbHelper.updateSteps(step.id, totalSteps, address, lat, lng, step.ispass)
             } else {
-//                mTodaysSteps = 0
-//                mCurrentDate = com.nddb.kudamforkurien.utils.Util.calendar.timeInMillis
-//                sharedPreferences.edit().putLong(MotionService.KEY_DATE, mCurrentDate).apply()
                 dbHelper.insertSteps(Steps(currentDate, totalSteps, address, lat, lng, false))
             }
         }
