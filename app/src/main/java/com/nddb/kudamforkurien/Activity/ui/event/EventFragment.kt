@@ -15,7 +15,11 @@ import com.nddb.kudamforkurien.dialog.AlertDialog
 import com.nddb.kudamforkurien.model.SliderData
 import com.smarteist.autoimageslider.SliderView
 import android.content.Intent
+import android.os.ResultReceiver
+import android.util.Log
 import com.nddb.kudamforkurien.Activity.DrawerActivity
+import com.nddb.kudamforkurien.Activity.ui.home.HomeFragment
+import com.nddb.kudamforkurien.backgroundservice.MotionService
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -61,6 +65,12 @@ class EventFragment : Fragment() {
 //        binding.tvYourRank.text = stringResult
 
         (activity as AppCompatActivity?)!!.supportActionBar!!.title =  getString(R.string.menu_dashboard)
+
+        binding.relStartService.setOnClickListener {
+            subscribeService()
+        }
+
+
 
         return root
     }
@@ -133,6 +143,28 @@ class EventFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun subscribeService() {
+        // start the service and pass a result receiver that is used by the service to update the UI
+        val i = Intent(activity, MotionService::class.java)
+        i.action = MotionService.ACTION_SUBSCRIBE
+        i.putExtra(HomeFragment.TAG, object : ResultReceiver(null) {
+            override fun onReceiveResult(resultCode: Int, resultData: Bundle) {
+                //Log.e("steps ",resultData.getInt(MotionService.KEY_STEPS).toString())
+                if (resultCode == 0) {
+                    Log.e("runOnUiThread",resultData.getInt(MotionService.KEY_STEPS).toString())
+                    activity?.runOnUiThread {
+                        //resultData.getInt(MotionService.KEY_STEPS)
+//                        binding.tvTotalSteps.setText(resultData.getInt(MotionService.KEY_STEPS).toString())
+                        //isFirstTimeLoad=false
+                        //totalStep(resultData.getInt(MotionService.KEY_STEPS))
+                        //updateTotalSteps()
+                    }
+                }
+            }
+        })
+        activity?.startService(i)
     }
 
 }

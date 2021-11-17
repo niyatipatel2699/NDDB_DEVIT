@@ -143,6 +143,9 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        dbHelper =
+            activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
+
         var stringResult =
             getString(R.string.your_rank) + " " + MySharedPreferences.getMySharedPreferences()!!.user_rank.toString() + " " + getString(R.string.among_participants)
         binding.tvYourRank.text = stringResult
@@ -159,9 +162,21 @@ class HomeFragment : Fragment() {
         {
             homeViewModel.stepCount(stepsNotPass)
         }*/
+
+        getRank()
+       // updateTotalSteps()
+        /*val overallSteps = Database.getInstance(requireActivity()).getSumSteps(0)
+        binding.tvContributedSteps.text=overallSteps.toString()*/
+//        subscribeService()
+
+        return root
+    }
+
+
+    fun sendFitDataToServer()
+    {
         GlobalScope.launch(Dispatchers.Main) {
-            dbHelper =
-                activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
+
             var list = dbHelper.getStepsOnlyNotPass()
             if(list.size > 0 )
             {
@@ -174,18 +189,11 @@ class HomeFragment : Fragment() {
                     var parseDate=outputFormat.format(date)
                     var dataSteps= DataSteps(parseDate,it.step.toString(),it.location.toString())
                     tempList.add(dataSteps)
-                    }
+                }
                 homeViewModel.stepCount(tempList)
             }
 
         }
-        getRank()
-        updateTotalSteps()
-        /*val overallSteps = Database.getInstance(requireActivity()).getSumSteps(0)
-        binding.tvContributedSteps.text=overallSteps.toString()*/
-//        subscribeService()
-
-        return root
     }
 
     fun updateTotalSteps()
@@ -193,12 +201,11 @@ class HomeFragment : Fragment() {
         isFirstTimeLoad=true
         GlobalScope.launch(Dispatchers.Main) {
             //binding.tvTotalSteps.setText(step.toString())
-            dbHelper =
-                activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
+
             totalSteps=dbHelper.totalSteps()
             binding.tvContributedSteps.text=totalSteps.toString()
         }
-
+        sendFitDataToServer()
     }
 
     fun getRank(){
@@ -298,8 +305,7 @@ class HomeFragment : Fragment() {
                         }
                     }*/
                     GlobalScope.launch(Dispatchers.Main) {
-                        dbHelper = activity?.let { DatabaseBuilder.getInstance(it) }
-                            ?.let { DatabaseHelperImpl(it) }!!
+
                         var list = dbHelper.getStepsOnlyNotPass()
                         list.forEach {
                             if (!it.ispass) {
@@ -1284,40 +1290,43 @@ class HomeFragment : Fragment() {
         val calendar = Calendar.getInstance(TimeZone.getDefault())
         var step:Steps
         var  operation=GlobalScope.launch(Dispatchers.Main) {
+
              step = dbHelper.getLastRow()
             if (step != null)
             {
 
-                calendar.set(Calendar.HOUR_OF_DAY, step.date.split("-")[2].toInt())
+                calendar.set(Calendar.DATE, step.date.split("-")[2].toInt())
 
             } else
             {
-                calendar.set(Calendar.HOUR_OF_DAY, 0)
+                calendar.set(Calendar.DATE, 0)
             }
         }
         operation.onJoin
        // val calendar = Calendar.getInstance(TimeZone.getDefault())
-      //  calendar.set(Calendar.HOUR_OF_DAY, 0)
+       // calendar.set(Calendar.DATE, 10)
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
         calendar.set(Calendar.MILLISECOND, 0)
         val startTime = calendar.timeInMillis
         val endTime = Calendar.getInstance(TimeZone.getDefault()).timeInMillis
 
-//        val calendar = Calendar.getInstance(TimeZone.getDefault())
-//        calendar.set(Calendar.DATE, 15)
-//        calendar.set(Calendar.HOUR_OF_DAY, 0)
-//        calendar.set(Calendar.MINUTE, 0)
-//        calendar.set(Calendar.SECOND, 0)
-//        calendar.set(Calendar.MILLISECOND, 0)
-//        val startTime = calendar.timeInMillis
-//        val endCalender = Calendar.getInstance(TimeZone.getDefault())
-//        endCalender.set(Calendar.DATE, 15)
-//        endCalender.set(Calendar.HOUR_OF_DAY, 23)
-//        endCalender.set(Calendar.MINUTE, 59)
-//        endCalender.set(Calendar.SECOND, 0)
-//        endCalender.set(Calendar.MILLISECOND, 0)
-//        val endTime = endCalender.timeInMillis
+       /* val calendar = Calendar.getInstance(TimeZone.getDefault())
+        calendar.set(Calendar.DATE, 15)
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        val startTime = calendar.timeInMillis
+
+        val endCalender = Calendar.getInstance(TimeZone.getDefault())
+        endCalender.set(Calendar.DATE, 15)
+        endCalender.set(Calendar.HOUR_OF_DAY, 23)
+        endCalender.set(Calendar.MINUTE, 59)
+        endCalender.set(Calendar.SECOND, 0)
+        endCalender.set(Calendar.MILLISECOND, 0)
+        val endTime = endCalender.timeInMillis*/
 
         Log.i(TAG, "Range Start: ${dateFormat.format(startTime)}")
         Log.i(TAG, "Range End: ${dateFormat.format(endTime)}")
@@ -1353,7 +1362,10 @@ class HomeFragment : Fragment() {
     private fun dumpDataSet(dataSet: DataSet) {
         Log.i(TAG, "Data returned for Data type: ${dataSet.dataType.name}")
 
+        /*SimpleDateFormat curFormater = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateObj = curFormater.parse(dateStr);
 
+        String newDateStr = curFormater.format(dateObj*/
        // 10  20
 
         var totalSteps = 0
@@ -1362,6 +1374,8 @@ class HomeFragment : Fragment() {
             Log.i(TAG, "\tType: ${dp.dataType.name}")
             Log.i(TAG, "\tStart: ${dp.getStartTimeString()}")
             Log.i(TAG, "\tEnd: ${dp.getEndTimeString()}")
+           var dateTime=dp.getEndTime(TimeUnit.MILLISECONDS)
+            val currentDate = Converters.FORMATTER.format(dateTime)
             dp.dataType.fields.forEach {
                 if(it.name == Field.FIELD_STEPS.name){
                     Log.i(TAG, "\tField: ${it.name} Value: ${dp.getValue(it)}")
@@ -1369,24 +1383,39 @@ class HomeFragment : Fragment() {
                 }
             }
 
+            GlobalScope.launch(Dispatchers.Main) {
+                var lat = MySharedPreferences.getMySharedPreferences()!!.latitude
+                var lng = MySharedPreferences.getMySharedPreferences()!!.longitude
+                var address = MySharedPreferences.getMySharedPreferences()!!.longitude
+                val currentDate = Converters.FORMATTER.format(dateTime)
+
+                var step = dbHelper.getStep(currentDate)
+                if (step != null) {
+                    dbHelper.updateSteps(step.id, totalSteps, address, lat, lng, step.ispass)
+                } else {
+                    dbHelper.insertSteps(Steps(currentDate, totalSteps, address, lat, lng, false))
+                }
+               // updateTotalSteps()
+            }
         }
 
         binding.tvTotalSteps.setText(totalSteps.toString())
 
-        GlobalScope.launch(Dispatchers.Main) {
+       /* GlobalScope.launch(Dispatchers.Main) {
             var lat = MySharedPreferences.getMySharedPreferences()!!.latitude
             var lng = MySharedPreferences.getMySharedPreferences()!!.longitude
             var address = MySharedPreferences.getMySharedPreferences()!!.longitude
             val currentDate = Converters.FORMATTER.format(Date())
+
             var step = dbHelper.getStep(currentDate)
             if (step != null) {
                 dbHelper.updateSteps(step.id, totalSteps, address, lat, lng, step.ispass)
             } else {
                 dbHelper.insertSteps(Steps(currentDate, totalSteps, address, lat, lng, false))
             }
-            updateTotalSteps()
-        }
 
+        }*/
+        updateTotalSteps()
     }
 
     private fun oAuthErrorMsg(requestCode: Int, resultCode: Int) {
