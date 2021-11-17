@@ -6,6 +6,8 @@ import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.*
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
@@ -58,6 +60,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.io.IOException
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -78,10 +81,6 @@ class HomeFragment : Fragment() {
             .addDataType(DataType.TYPE_STEP_COUNT_DELTA, FitnessOptions.ACCESS_READ)
             .build()
     }
-
-  /*  var url1 = R.drawable.app_dashboard_banner_1
-    var url2 = R.drawable.app_dashboard_banner_2
-    var url3 = R.drawable.app_dashboard_banner_3*/
 
     /**
      * Provides access to the Fused Location Provider API.
@@ -128,8 +127,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var dbHelper: DatabaseHelper
 
-    var totalSteps:Int=0
-    var isFirstTimeLoad:Boolean=false
 
     // private val registrationViewModel by viewModels<HomeViewModel>()
     @SuppressLint("SetTextI18n")
@@ -143,8 +140,22 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
         dbHelper =
             activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
+
+        var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
+
+        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_1))
+        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_2))
+        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_3))
+
+        val adapter = slider_adapter(requireContext(), sliderDataArrayList)
+        binding.slider.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
+        binding.slider.setSliderAdapter(adapter)
+        binding.slider.scrollTimeInSec = 10
+        binding.slider.isAutoCycle = true
+        binding.slider.startAutoCycle()
 
         var stringResult =
             getString(R.string.your_rank) + " " + MySharedPreferences.getMySharedPreferences()!!.user_rank.toString() + " " + getString(R.string.among_participants)
@@ -153,21 +164,20 @@ class HomeFragment : Fragment() {
         var welcome_text = getString(R.string.dear) + " " + MySharedPreferences.getMySharedPreferences()!!.first_name + ", " + getString(R.string.you_have)
         binding.welcomeText.text = welcome_text
 
-//        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
+        if (MySharedPreferences.getMySharedPreferences()!!.is_facilitator == 0) {
+            binding.llGotoFacilitator.visibility = View.GONE
+        } else {
+            binding.llGotoFacilitator.visibility = View.VISIBLE
+        }
 
-        /*val stepsNotPass = Database.getInstance(requireActivity()).getEntries()
-        if(stepsNotPass.size > 0 )
-        {
-            homeViewModel.stepCount(stepsNotPass)
-        }*/
+        binding.verificationBtn.setOnClickListener {
+            val intent = Intent(getActivity(), FacilitatorActivity::class.java)
+            getActivity()?.startActivity(intent)
+        }
 
         getRank()
-       // updateTotalSteps()
-        /*val overallSteps = Database.getInstance(requireActivity()).getSumSteps(0)
-        binding.tvContributedSteps.text=overallSteps.toString()*/
-//        subscribeService()
+
+
 
         return root
     }
@@ -198,11 +208,11 @@ class HomeFragment : Fragment() {
 
     fun updateTotalSteps()
     {
-        isFirstTimeLoad=true
+
         GlobalScope.launch(Dispatchers.Main) {
             //binding.tvTotalSteps.setText(step.toString())
 
-            totalSteps=dbHelper.totalSteps()
+            var totalSteps=dbHelper.totalSteps()
             binding.tvContributedSteps.text=totalSteps.toString()
         }
         sendFitDataToServer()
@@ -215,118 +225,12 @@ class HomeFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
-
-        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_1))
-        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_2))
-        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_3))
-
-        val adapter = slider_adapter(requireContext(), sliderDataArrayList)
-        binding.slider.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
-        binding.slider.setSliderAdapter(adapter)
-        binding.slider.scrollTimeInSec = 10
-        binding.slider.isAutoCycle = true
-        binding.slider.startAutoCycle()
-
-        /*setupPagerIndidcatorDots()
-
-        ivArrayDotsPager.get(0).setImageResource(R.drawable.page_indicator_selected)
-
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-            }
-
-            override fun onPageSelected(position: Int) {
-                for (i in 0 until ivArrayDotsPager.length) {
-                    ivArrayDotsPager.get(i).setImageResource(R.drawable.page_indicator_unselected)
-                }
-                ivArrayDotsPager.get(position).setImageResource(R.drawable.page_indicator_selected)
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {}
-        })
-*/
-        if (MySharedPreferences.getMySharedPreferences()!!.is_facilitator == 0) {
-            binding.llGotoFacilitator.visibility = View.GONE
-        } else {
-            binding.llGotoFacilitator.visibility = View.VISIBLE
-        }
-
-        binding.verificationBtn.setOnClickListener {
-            val intent = Intent(getActivity(), FacilitatorActivity::class.java)
-            getActivity()?.startActivity(intent)
-        }
-
-        if (AutoStartService.getInstance() == null) {
-            val filter = IntentFilter()
-            filter.addAction(AutoStartService.ACTION_FOO)
-            val bm = LocalBroadcastManager.getInstance(requireContext())
-            bm.registerReceiver(mBroadcastReceiver, filter)
-
-            RestartBroadcastReceiver.scheduleJob(requireContext())
-        }
-
-        val prfs: SharedPreferences =
-            requireContext().getSharedPreferences("AUTHENTICATION_FILE_NAME", Context.MODE_PRIVATE)
-//        binding.tvTotalSteps.setText(prfs.getString("steps", "0"))
-
         if (!checkPlayServices()) return
         getDeviceLocation()
-
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val packageName = activity?.packageName
-            val pm = activity?.getSystemService(Context.POWER_SERVICE) as PowerManager
-            if (!pm.isIgnoringBatteryOptimizations(packageName)) {
-                val intent = Intent()
-                intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
-                intent.flags = FLAG_ACTIVITY_NEW_TASK
-                intent.data = Uri.parse("package:$packageName")
-                startActivity(intent)
-            }
-        }*/
-
-        activity?.let {
-            homeViewModel.stepCountResponseLiveData.observe(it) { stepCountResponse ->
-                if (stepCountResponse.status == 1) {
-                    //Log.e("success",loginResponse.message!!)
-                   /* val stepsNotPass = Database.getInstance(requireActivity()).getEntries()
-                    if(stepsNotPass.size > 0 )
-                    {
-                        stepsNotPass.forEach {
-                            if (!it.ispass) {
-                                Database.getInstance(requireActivity()).updateEntry(1)
-                                //dbHelper.updateEntry(it.id,it.step!!,it.location!!,it.lat!!,it.longitude!!,true)
-                            }
-                        }
-                    }*/
-                    GlobalScope.launch(Dispatchers.Main) {
-
-                        var list = dbHelper.getStepsOnlyNotPass()
-                        list.forEach {
-                            if (!it.ispass) {
-                                dbHelper.updateSteps(it.id,it.step!!,it.location!!,it.lat!!,it.longitude!!,true)
-                            }
-                        }
-                    }
-                } else {
-                    stepCountResponse.message?.let {
-                        //  binding.relRegistration.showSnack(it)
-                    }
-                }
-            }
-        }
-
     }
 
     fun initObservation(){
-
         homeViewModel.rankLiveData.observe(requireActivity()){ rankResponse ->
-
             if(rankResponse.status == 1){
                 //Log.e("rankl",rankResponse.)
                 if(rankResponse.items.size>0)
@@ -339,34 +243,32 @@ class HomeFragment : Fragment() {
             }
 
         }
+
+        homeViewModel.stepCountResponseLiveData.observe(requireActivity()) { stepCountResponse ->
+            if (stepCountResponse.status == 1) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    var list = dbHelper.getStepsOnlyNotPass()
+                    list.forEach {
+                        if (!it.ispass) {
+                            dbHelper.updateSteps(it.id,it.step!!,it.location!!,it.lat!!,it.longitude!!,true)
+                        }
+                    }
+                }
+            } else {
+                stepCountResponse.message?.let {
+                    //  binding.relRegistration.showSnack(it)
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        val bm = LocalBroadcastManager.getInstance(requireContext())
-        bm.unregisterReceiver(mBroadcastReceiver)
+
     }
 
-    private val mBroadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            if (intent.action == AutoStartService.ACTION_FOO) {
-                val param_B = intent.getStringExtra(AutoStartService.EXTRA_PARAM_B)
-                if (param_B != null) {
-//                    tvTotalSteps.setText("YOUR TOTAL STEPS WALKED -- $param_B")
-//                    binding.tvTotalSteps.setText(param_B.toString())
-//                    Log.e("YOUR TOTAL STEPS WALKED", "$param_B")
-                    val preferences: SharedPreferences = context.getSharedPreferences(
-                        "AUTHENTICATION_FILE_NAME",
-                        Context.MODE_PRIVATE
-                    )
-                    val editor = preferences.edit()
-                    editor.putString("steps", param_B)
-                    editor.apply()
-                }
-            }
-        }
-    }
+
 
     /* Location */
 
@@ -732,9 +634,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    /**
-     * Return the current state of the permissions needed.
-     */
+
     private fun checkPermissions(): Boolean {
         val permissions: MutableList<String> = ArrayList()
         permissions.add(Manifest.permission.ACTIVITY_RECOGNITION)
@@ -769,9 +669,6 @@ class HomeFragment : Fragment() {
     }
 
 
-    /**
-     * Creates a callback for receiving location events.
-     */
     private fun createLocationCallback() {
         mLocationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
@@ -834,21 +731,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    /**
-     * Sets up the location request. Android has two location request settings:
-     * `ACCESS_COARSE_LOCATION` and `ACCESS_FINE_LOCATION`. These settings control
-     * the accuracy of the current location. This sample uses ACCESS_FINE_LOCATION, as defined in
-     * the AndroidManifest.xml.
-     *
-     *
-     * When the ACCESS_FINE_LOCATION setting is specified, combined with a fast update
-     * interval (5 seconds), the Fused Location Provider API returns location updates that are
-     * accurate to within a few feet.
-     *
-     *
-     * These settings are appropriate for mapping applications that show real-time location
-     * updates.
-     */
+
     private fun createLocationRequest() {
         if (mLocationRequest == null) {
             mLocationRequest = LocationRequest()
@@ -869,11 +752,6 @@ class HomeFragment : Fragment() {
     }
 
 
-    /**
-     * Uses a [com.google.android.gms.location.LocationSettingsRequest.Builder] to build
-     * a [com.google.android.gms.location.LocationSettingsRequest] that is used for checking
-     * if a device has the needed location settings.
-     */
     private fun buildLocationSettingsRequest() {
         if (mLocationSettingsRequest == null) {
             val builder = LocationSettingsRequest.Builder()
@@ -885,9 +763,6 @@ class HomeFragment : Fragment() {
     }
 
 
-    /**
-     * Removes location updates from the FusedLocationApi.
-     */
     private fun stopLocationUpdates() {
         if (!mRequestingLocationUpdates) {
             Log.d(TAG, "stopLocationUpdates: updates never requested, no-op.")
@@ -928,9 +803,6 @@ class HomeFragment : Fragment() {
     }
 
 
-    /**
-     *  check Device is in Flight Mode
-     */
     private fun isInFlightMode(context: Context): Boolean {
         return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
             Settings.System.getInt(
@@ -966,11 +838,7 @@ class HomeFragment : Fragment() {
     }
 
 
-    /**
-     * check Play Service
-     *
-     * @return
-     */
+
     private fun checkPlayServices(): Boolean {
         val googleApiAvailability = GoogleApiAvailability.getInstance()
         val resultCode = googleApiAvailability.isGooglePlayServicesAvailable(requireContext())
@@ -999,12 +867,6 @@ class HomeFragment : Fragment() {
     }
 
 
-    /**
-     * In Phone Redirect on FLight Mode screen show user
-     * can disable Flight Mode
-     *
-     * @param context
-     */
     fun setFlightMode(context: Context) {
         try {
             // No root permission, just show Airplane / Flight mode setting screen.
@@ -1028,24 +890,14 @@ class HomeFragment : Fragment() {
         startActivityForResult(intent, REQUEST_NETWORK_SETTINGS)
     }
 
-    /**
-     * @param context    current Context
-     * @param permission String permission to ask
-     * @return boolean true/false
-     */
+
     private fun isPermissionGranted(context: Context, permission: String?): Boolean {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.M || ContextCompat.checkSelfPermission(
             context, permission!!
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    /**
-     * Check if the provider is enabled of not
-     *
-     * @param context  any context
-     * @param provider the provider to check
-     * @return true if the provider is enabled, false otherwise
-     */
+
     private fun isProviderEnabled(context: Context, provider: String): Boolean {
         val manager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return manager.isProviderEnabled(provider) ?: false
@@ -1158,6 +1010,7 @@ class HomeFragment : Fragment() {
         Log.d(TAG, "LOCATION Latitude ${location.latitude} Longitude${location.longitude}")
         MySharedPreferences.getMySharedPreferences()!!.latitude = location.latitude.toString()
         MySharedPreferences.getMySharedPreferences()!!.longitude = location.longitude.toString()
+        MySharedPreferences.getMySharedPreferences()!!.location = "Ahemdabad"
     }
 
 
@@ -1193,52 +1046,6 @@ class HomeFragment : Fragment() {
         private const val REQUEST_LOCATION = 0x02
 
         const val TAG = "Home Fragment"
-    }
-
-    private fun subscribeService() {
-        // start the service and pass a result receiver that is used by the service to update the UI
-        val i = Intent(activity, MotionService::class.java)
-        i.action = MotionService.ACTION_SUBSCRIBE
-        i.putExtra(TAG, object : ResultReceiver(null) {
-            override fun onReceiveResult(resultCode: Int, resultData: Bundle) {
-                //Log.e("steps ",resultData.getInt(MotionService.KEY_STEPS).toString())
-                if (resultCode == 0) {
-                    /*if(isVisible())
-                    {
-
-                    }*/
-                    Log.e("runOnUiThread",resultData.getInt(MotionService.KEY_STEPS).toString())
-                    activity?.runOnUiThread {
-//                        binding.tvTotalSteps.setText(resultData.getInt(MotionService.KEY_STEPS).toString())
-                        //isFirstTimeLoad=false
-                        //totalStep(resultData.getInt(MotionService.KEY_STEPS))
-                        updateTotalSteps()
-                    }
-                }
-            }
-        })
-        activity?.startService(i)
-    }
-
-    fun totalStep(step:Int)
-    {
-        if(!isFirstTimeLoad)
-        {
-            if(step>=totalSteps)
-            {
-                var tempTotal=step-totalSteps
-                totalSteps=totalSteps+tempTotal
-            }
-            else
-            {
-                var temp=totalSteps-step
-                totalSteps=totalSteps+temp
-            }
-
-        }
-        isFirstTimeLoad=false
-        binding.tvContributedSteps.text=totalSteps.toString()
-
     }
 
 
@@ -1374,7 +1181,7 @@ class HomeFragment : Fragment() {
             Log.i(TAG, "\tType: ${dp.dataType.name}")
             Log.i(TAG, "\tStart: ${dp.getStartTimeString()}")
             Log.i(TAG, "\tEnd: ${dp.getEndTimeString()}")
-           var dateTime=dp.getEndTime(TimeUnit.MILLISECONDS)
+           var dateTime=dp.getStartTime(TimeUnit.MILLISECONDS)
             val currentDate = Converters.FORMATTER.format(dateTime)
             dp.dataType.fields.forEach {
                 if(it.name == Field.FIELD_STEPS.name){
@@ -1400,21 +1207,6 @@ class HomeFragment : Fragment() {
         }
 
         binding.tvTotalSteps.setText(totalSteps.toString())
-
-       /* GlobalScope.launch(Dispatchers.Main) {
-            var lat = MySharedPreferences.getMySharedPreferences()!!.latitude
-            var lng = MySharedPreferences.getMySharedPreferences()!!.longitude
-            var address = MySharedPreferences.getMySharedPreferences()!!.longitude
-            val currentDate = Converters.FORMATTER.format(Date())
-
-            var step = dbHelper.getStep(currentDate)
-            if (step != null) {
-                dbHelper.updateSteps(step.id, totalSteps, address, lat, lng, step.ispass)
-            } else {
-                dbHelper.insertSteps(Steps(currentDate, totalSteps, address, lat, lng, false))
-            }
-
-        }*/
         updateTotalSteps()
     }
 
@@ -1433,4 +1225,23 @@ class HomeFragment : Fragment() {
 
     fun DataPoint.getEndTimeString(): String = DateFormat.getTimeInstance()
         .format(this.getEndTime(TimeUnit.MILLISECONDS))
+
+   /* fun getCityname()
+    {
+        val geoCoder = Geocoder(this, Locale.getDefault()) //it is Geocoder
+
+        val builder = StringBuilder()
+        try {
+            val address: List<Address> = geoCoder.getFromLocation(latitude, longitude, 1)
+            val maxLines: Int = address[0].getMaxAddressLineIndex()
+            for (i in 0 until maxLines) {
+                val addressStr: String = address[0].getAddressLine(i)
+                builder.append(addressStr)
+                builder.append(" ")
+            }
+            val fnialAddress = builder.toString() //This is the complete address.
+        } catch (e: IOException) {
+        } catch (e: NullPointerException) {
+        }
+    }*/
 }

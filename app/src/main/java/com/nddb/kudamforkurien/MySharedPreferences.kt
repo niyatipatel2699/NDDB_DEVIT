@@ -114,6 +114,12 @@ class MySharedPreferences internal constructor(context: Context, gson: Gson) {
             editor.putString(RestConstant.LONGITUDE, district).apply()
         }
 
+    var location: String
+        get() = sharedPreferences.getString(RestConstant.LOCATION, "")!!
+        set(district) {
+            editor.putString(RestConstant.LOCATION, district).apply()
+        }
+
     var firebaseToken: String
         get() = sharedPreferences.getString(RestConstant.FIRBASETOKEN, "")!!
         set(district) {
