@@ -214,6 +214,7 @@ class HomeFragment : Fragment() {
 
             var totalSteps=dbHelper.totalSteps()
             binding.tvContributedSteps.text=totalSteps.toString()
+            binding.circularProgressBar.setProgressWithAnimation(totalSteps.toFloat(), 1000); // =1s
         }
         sendFitDataToServer()
     }
