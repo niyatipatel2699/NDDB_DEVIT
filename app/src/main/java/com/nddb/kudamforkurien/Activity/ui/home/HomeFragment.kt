@@ -14,7 +14,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Looper
-import android.os.ResultReceiver
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,7 +23,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -38,14 +36,13 @@ import com.google.android.gms.fitness.result.DataReadResponse
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.nddb.kudamforkurien.Activity.ui.Facilitator.FacilitatorActivity
 import com.nddb.kudamforkurien.Adapter.slider_adapter
 import com.nddb.kudamforkurien.BuildConfig
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
-import com.nddb.kudamforkurien.backgroundservice.AutoStartService
-import com.nddb.kudamforkurien.backgroundservice.MotionService
-import com.nddb.kudamforkurien.backgroundservice.RestartBroadcastReceiver
 import com.nddb.kudamforkurien.data.room.DatabaseBuilder
 import com.nddb.kudamforkurien.data.room.DatabaseHelper
 import com.nddb.kudamforkurien.data.room.DatabaseHelperImpl
@@ -60,7 +57,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.io.IOException
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -197,10 +193,19 @@ class HomeFragment : Fragment() {
                     var inputDateStr = it.date
                     var date:Date=inputFormat.parse(inputDateStr)
                     var parseDate=outputFormat.format(date)
-                    var dataSteps= DataSteps(parseDate,it.step.toString(),it.location.toString())
+                    var dataSteps= DataSteps(parseDate,it.step!!,it.location.toString())
+
+                    /*{
+                        "date": "10 Oct 2021",
+                        "steps": 1250,
+                        "location": "Ahmedabad"
+                    }*/
                     tempList.add(dataSteps)
                 }
-                homeViewModel.stepCount(tempList)
+                val jsonObject = JsonObject()
+                val toJson = Gson().toJsonTree(tempList) //Only one line to covert array JsonElement
+                jsonObject.add("data", toJson)
+                homeViewModel.stepCount(jsonObject)
             }
 
         }
@@ -1013,7 +1018,7 @@ class HomeFragment : Fragment() {
         Log.d(TAG, "LOCATION Latitude ${location.latitude} Longitude${location.longitude}")
         MySharedPreferences.getMySharedPreferences()!!.latitude = location.latitude.toString()
         MySharedPreferences.getMySharedPreferences()!!.longitude = location.longitude.toString()
-        MySharedPreferences.getMySharedPreferences()!!.location = "Ahemdabad"
+        MySharedPreferences.getMySharedPreferences()!!.location = getCityname(location)
     }
 
 
@@ -1196,7 +1201,7 @@ class HomeFragment : Fragment() {
             GlobalScope.launch(Dispatchers.Main) {
                 var lat = MySharedPreferences.getMySharedPreferences()!!.latitude
                 var lng = MySharedPreferences.getMySharedPreferences()!!.longitude
-                var address = MySharedPreferences.getMySharedPreferences()!!.longitude
+                var address = MySharedPreferences.getMySharedPreferences()!!.location
                 val currentDate = Converters.FORMATTER.format(dateTime)
 
                 var step = dbHelper.getStep(currentDate)
@@ -1229,22 +1234,13 @@ class HomeFragment : Fragment() {
     fun DataPoint.getEndTimeString(): String = DateFormat.getTimeInstance()
         .format(this.getEndTime(TimeUnit.MILLISECONDS))
 
-   /* fun getCityname()
+    fun getCityname(location: Location):String
     {
-        val geoCoder = Geocoder(this, Locale.getDefault()) //it is Geocoder
-
-        val builder = StringBuilder()
-        try {
-            val address: List<Address> = geoCoder.getFromLocation(latitude, longitude, 1)
-            val maxLines: Int = address[0].getMaxAddressLineIndex()
-            for (i in 0 until maxLines) {
-                val addressStr: String = address[0].getAddressLine(i)
-                builder.append(addressStr)
-                builder.append(" ")
-            }
-            val fnialAddress = builder.toString() //This is the complete address.
-        } catch (e: IOException) {
-        } catch (e: NullPointerException) {
-        }
-    }*/
+        val geocoder = Geocoder(activity, Locale.getDefault())
+        val addresses: List<Address> = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+        val cityName: String = addresses[0].getLocality()
+        return cityName
+      /*  val stateName: String = addresses[0].getAddressLine(1)
+        val countryName: String = addresses[0].getAddressLine(2)*/
+    }
 }

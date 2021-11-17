@@ -4,5 +4,7 @@ data class HistoryData(
     val created_at: String,
     val date: String,
     val location: String,
-    val steps: Int
+    val steps: Int,
+    val rnk: Int
+
 )

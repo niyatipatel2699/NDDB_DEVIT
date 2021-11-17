@@ -1,5 +1,6 @@
 package com.nddb.kudamforkurien.data.repository.HomeRepo
 
+import com.google.gson.JsonObject
 import com.nddb.kudamforkurien.data.remote.responses.RankResponse.RankResponseModel
 import com.nddb.kudamforkurien.data.remote.responses.StepCountResponse
 import com.nddb.kudamforkurien.data.DataState
@@ -18,7 +19,7 @@ class HomeRepositoryImpl @Inject constructor(
 ) : HomeRepository {
 
     override suspend fun stepCount(
-        stepsList : List<DataSteps>
+        stepsList : JsonObject
     ): Flow<DataState<StepCountResponse>> {
 
         return flow {

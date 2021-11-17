@@ -1,6 +1,7 @@
 
 package com.nddb.kudamforkurien.data.remote
 
+import com.google.gson.JsonObject
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.data.remote.responses.BaseResponse
 import com.nddb.kudamforkurien.data.remote.responses.History.HistoryResponse
@@ -78,13 +79,11 @@ interface LoginApiService {
         @Field("lang_id") lang_id:Int) : ApiResponse<LanguageResponse>
 
 
-    @FormUrlEncoded
+
     @POST("api/v1/stepscount/create")
     suspend fun stepCount(
-        @Field("data") stepsList : List<DataSteps>,
-
+        @Body jsonObject: JsonObject
         ) : ApiResponse<StepCountResponse>
-
 
     @GET("api/v1/stepscount/getWalkHistory")
     suspend fun getWalkHistory() : ApiResponse<HistoryResponse>

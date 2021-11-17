@@ -64,7 +64,7 @@
                 android:textSize="@dimen/_12sdp" />
 
             <RelativeLayout
-                android:visibility="gone"
+
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_below="@+id/tv_date"
@@ -79,6 +79,7 @@
                     card_view:tint="@color/orange" />
 
                 <TextView
+                    android:id="@+id/tv_rank"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -21,12 +21,13 @@ class walked_history_adapter(
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0.tv_Count?.text = stepslist[p1].steps.toString()
         //val fDate: String = stepslist[p1].date
-        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+        /*val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
         val outputFormat: DateFormat = SimpleDateFormat("dd-MMM-yyyy")
         val inputDateStr = stepslist[p1].date
         val date: Date = inputFormat.parse(inputDateStr)
-        val outputDateStr: String = outputFormat.format(date)
-        p0.tvDate?.text = outputDateStr
+        val outputDateStr: String = outputFormat.format(date)*/
+        p0.tvDate?.text = stepslist[p1].date
+        p0.tvRank?.text = stepslist[p1].rnk.toString()
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -42,6 +43,7 @@ class walked_history_adapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tv_Count = itemView.findViewById<TextView>(R.id.tv_Count)
         val tvDate = itemView.findViewById<TextView>(R.id.tv_date)
+        var tvRank = itemView.findViewById<TextView>(R.id.tv_rank)
     }
 
 }

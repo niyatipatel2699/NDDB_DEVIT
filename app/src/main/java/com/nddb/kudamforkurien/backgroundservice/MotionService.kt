@@ -166,7 +166,7 @@ internal class MotionService : Service(), SensorEventListener {
         GlobalScope.launch(Dispatchers.Main) {
             var lat = MySharedPreferences.getMySharedPreferences()!!.latitude
             var lng = MySharedPreferences.getMySharedPreferences()!!.longitude
-            var address = MySharedPreferences.getMySharedPreferences()!!.longitude
+            var address = MySharedPreferences.getMySharedPreferences()!!.location
             val currentDate = Converters.FORMATTER.format(Date())
             var step = dbHelper.getStep(currentDate)
             if (step != null) {

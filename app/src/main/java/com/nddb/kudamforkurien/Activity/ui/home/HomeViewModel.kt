@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.JsonObject
 import com.nddb.kudamforkurien.Activity.ui.registration.ErrorState
 import com.nddb.kudamforkurien.Activity.ui.registration.LoadingState
 import com.nddb.kudamforkurien.Activity.ui.registration.RegistrationUiState
@@ -65,7 +66,7 @@ class HomeViewModel @Inject constructor(
     }*/
 
     fun stepCount(
-        stepsList : List<DataSteps>
+        stepsList : JsonObject
     ) {
         _uiState.postValue(LoadingState)
         viewModelScope.launch {

@@ -3,6 +3,8 @@ package com.nddb.kudamforkurien.model
 
 data class DataSteps(
     var date : String = "",
-    var steps : String = "",
+    var steps : Int,
     var location: String = ""
+
+
 )
