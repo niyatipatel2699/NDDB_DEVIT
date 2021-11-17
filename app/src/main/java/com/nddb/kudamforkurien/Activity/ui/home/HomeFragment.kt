@@ -281,8 +281,10 @@ class HomeFragment : Fragment() {
             .setPositiveButton(getString(R.string.label_yes)) { dialogInterface, which ->
                 dialogInterface.dismiss()
                 openLocationSettingsScreen()
+                requestFitPermission()
             }
-            .setNegativeButton(getString(R.string.label_no)) { dialogInterface, which -> dialogInterface.dismiss() }
+            .setNegativeButton(getString(R.string.label_no)) { dialogInterface, which -> dialogInterface.dismiss()
+                requestFitPermission()}
             .show()
     }
 
