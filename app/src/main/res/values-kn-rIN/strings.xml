@@ -114,12 +114,16 @@
 
     <string name="dear">ಮಾನ್ಯರೇ </string>
     <string name="you_have">ನಿಮ್ಮ ಬಳಿ </string>
-    <string name="history_total_step">Total Steps Walked</string>
+    <string name="history_total_step">ನಡೆದ ಒಟ್ಟು ಹಂತಗಳು</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
 
     <string name="event_alert_msg">ಈ ವೈಶಿಷ್ಟ್ಯವು 26-ನವೆಂಬರ್-2021 ದಿನಾಂಕದಂದು ಸಕ್ರಿಯಗೊಳ್ಳುತ್ತದೆ </string>
     <string name="history_thank_msg">ನಿಮ್ಮ ಕೊಡುಗೆಗಾಗಿ ಧನ್ಯವಾದಗಳು. ಮುನ್ನಡೆಯತ್ತಲೇ ಇರಿ </string>
+
+    <string name="please_enter_num_of_people">ದಯವಿಟ್ಟು ಜನರ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ</string>
+    <string name="event_tv">200 ಮಿಲಿಯನ್ ಹಂತಗಳ ಗುರಿಗೆ ನಿಮ್ಮ ಹೆಜ್ಜೆಗಳನ್ನು ಕೊಡುಗೆ ನೀಡಲು</string>
+    <string name="event_start_date">ಈವೆಂಟ್ 26-11-2021 ರಂದು ಪ್ರಾರಂಭವಾಗುತ್ತದೆ</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

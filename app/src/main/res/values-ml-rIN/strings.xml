@@ -115,11 +115,15 @@
 
     <string name="dear">പ്രിയപ്പെട്ട</string>
     <string name="you_have">നിങ്ങൾക്ക് ഉണ്ട്</string>
-    <string name="history_total_step">Total Steps Walked</string>
+    <string name="history_total_step">മൊത്തം സ്റ്റെപ്പുകൾ നടന്നു</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
 
     <string name="history_thank_msg">നിങ്ങളുടെ സംഭാവനയ്ക്ക് നന്ദി. നടത്തം തുടരുക.</string>
+
+    <string name="please_enter_num_of_people">ആളുകളുടെ എണ്ണം നൽകുക</string>
+    <string name="event_tv">200 ദശലക്ഷം ഘട്ടങ്ങൾ എന്ന ലക്ഷ്യത്തിലേക്ക് നിങ്ങളുടെ ചുവടുകൾ സംഭാവന ചെയ്യുന്നതിന്</string>
+    <string name="event_start_date">ഇവന്റ് 26-11-2021 ന് ആരംഭിക്കും</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

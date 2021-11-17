@@ -123,6 +123,10 @@
     <string name="event_alert_msg">ఈ ఫీచర్ 26-నవంబర్-2021 తేదీన యాక్టివేట్ చేయబడుతుంది</string>
     <string name="history_thank_msg">మీ తోడ్పాటుకు ధన్యవాదాలు. నడుస్తూ ఉండండి</string>
 
+    <string name="please_enter_num_of_people">Please Enter Number of People</string>
+    <string name="event_tv">To contribute your steps to the target of 200 million steps</string>
+    <string name="event_start_date">Event will be starts on 26-11-2021</string>
+
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>
