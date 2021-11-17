@@ -161,6 +161,7 @@
                 tools:text="Your rank is 100 among all participants" />
 
             <TextView
+                android:id="@+id/tv_thankyou"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_yourRank"
@@ -174,21 +175,22 @@
 
             <LinearLayout
                 android:id="@+id/ll_gotoFacilitator"
+                android:layout_below="@+id/tv_thankyou"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:visibility="gone"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:visibility="visible"
                 android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_marginBottom="@dimen/_20sdp">
+                android:layout_marginBottom="@dimen/_20sdp"
+                >
 
                 <Button
                     android:id="@+id/verification_btn"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:background="@drawable/round_orange"
                     android:fontFamily="@font/nunito_extrabold"
                     android:gravity="center"

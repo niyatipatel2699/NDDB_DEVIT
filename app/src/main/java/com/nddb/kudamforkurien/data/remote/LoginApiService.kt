@@ -2,6 +2,7 @@
 package com.nddb.kudamforkurien.data.remote
 
 import com.nddb.kudamforkurien.MySharedPreferences
+import com.nddb.kudamforkurien.data.remote.responses.BaseResponse
 import com.nddb.kudamforkurien.data.remote.responses.History.HistoryResponse
 import com.nddb.kudamforkurien.data.remote.responses.Language.LanguageResponse
 import com.nddb.kudamforkurien.data.remote.responses.OtpValidation.OtpResponse
@@ -93,6 +94,12 @@ interface LoginApiService {
     @GET("api/v1/stepscount/getRank")
     suspend fun getRank() : ApiResponse<RankResponseModel>
 
+    @FormUrlEncoded
+    @POST("api/v1/facilatordata/create")
+    suspend fun addFacilitator(
+        @Field("no_of_people") no_of_people : String,
+        @Field("location") location : String
+    ) : ApiResponse<BaseResponse>
 //    @GET("photos")
 //    suspend fun loadPhotos(
 //        @Query("page") page: Int = 1,

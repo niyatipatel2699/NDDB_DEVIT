@@ -17,6 +17,7 @@ import com.nddb.kudamforkurien.databinding.WalkedHistoryFragmentBinding
 import com.nddb.kudamforkurien.data.room.DatabaseBuilder
 import com.nddb.kudamforkurien.data.room.DatabaseHelper
 import com.nddb.kudamforkurien.data.room.DatabaseHelperImpl
+import com.nddb.kudamforkurien.utils.showSnack
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -24,8 +25,6 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class WalkedHistoryFragment : Fragment() {
-
-
 
     companion object {
         fun newInstance() = WalkedHistoryFragment()
@@ -51,7 +50,6 @@ class WalkedHistoryFragment : Fragment() {
         viewModel =
             ViewModelProvider(this).get(WalkedHistoryViewModel::class.java)
 
-
         _binding = WalkedHistoryFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -61,20 +59,16 @@ class WalkedHistoryFragment : Fragment() {
     @SuppressLint("WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*stepslist= ArrayList()
+        stepslist= ArrayList()
 
-        initObservations()*/
-
-
-
-
+        initObservations()
 
         var stringResult =
             getString(R.string.your_rank) + " " + MySharedPreferences.getMySharedPreferences()!!.user_rank.toString() + " " + getString(R.string.among_participants)
 
         binding.tvYourRank.text = stringResult
 
-        GlobalScope.launch(Dispatchers.Main) {
+        /*GlobalScope.launch(Dispatchers.Main) {
             //binding.tvTotalSteps.setText(step.toString())
             dbHelper =
                 activity?.let { DatabaseBuilder.getInstance(it) }?.let { DatabaseHelperImpl(it) }!!
@@ -95,9 +89,7 @@ class WalkedHistoryFragment : Fragment() {
             var lanAdapter = walked_history_adapter(requireContext(), stepslist)
             binding.rvWalkedHistory.adapter = lanAdapter
         }
-
-
-
+*/
     }
 
     override fun onDestroyView() {
@@ -106,7 +98,7 @@ class WalkedHistoryFragment : Fragment() {
     }
 
 
-   /* private fun initObservations() {
+    private fun initObservations() {
         viewModel.historyResponseLiveData.observe(requireActivity()) { historyResponse ->
 
             if (historyResponse.status == 1) {
@@ -126,5 +118,5 @@ class WalkedHistoryFragment : Fragment() {
                 }
             }
         }
-    }*/
+    }
 }

@@ -52,7 +52,7 @@ class EventFragment : Fragment() {
         _binding = EventFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        alertDialog = AlertDialog(activity)
+       // alertDialog = AlertDialog(activity)
 
         binding.tvTotalSteps.setText("0")
 
@@ -75,7 +75,7 @@ class EventFragment : Fragment() {
         val finalDate = "26-11-2021"
 
 
-        if (finalDate.compareTo(currentDate) > 0)
+        /*if (finalDate.compareTo(currentDate) > 0)
         {      alertDialog.show()}
         else if (finalDate.compareTo(currentDate) < 0)
         {   alertDialog.dismiss()}
@@ -86,6 +86,21 @@ class EventFragment : Fragment() {
             alertDialog.dismiss()
             val intent = Intent(requireContext(), DrawerActivity::class.java)
             startActivity(Intent(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)))
+        }*/
+
+        if (finalDate.compareTo(currentDate) > 0) {     // alertDialog.show()}
+            binding.imageRl.visibility = View.VISIBLE
+            binding.mainRl.visibility = View.GONE
+        }
+        else if (finalDate.compareTo(currentDate) < 0)
+        {   /*alertDialog.dismiss()*/
+            binding.imageRl.visibility = View.GONE
+            binding.mainRl.visibility = View.VISIBLE
+        }
+        else if (finalDate.compareTo(currentDate) == 0)
+        /*{    alertDialog.dismiss()*/ {
+            binding.imageRl.visibility = View.GONE
+            binding.mainRl.visibility = View.VISIBLE
         }
 
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()

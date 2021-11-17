@@ -246,9 +246,9 @@ class HomeFragment : Fragment() {
         })
 */
         if (MySharedPreferences.getMySharedPreferences()!!.is_facilitator == 0) {
-            binding.verificationBtn.visibility = View.GONE
+            binding.llGotoFacilitator.visibility = View.GONE
         } else {
-            binding.verificationBtn.visibility = View.VISIBLE
+            binding.llGotoFacilitator.visibility = View.VISIBLE
         }
 
         binding.verificationBtn.setOnClickListener {
@@ -1283,9 +1283,9 @@ class HomeFragment : Fragment() {
 
     private fun queryFitnessData(): DataReadRequest {
         val calendar = Calendar.getInstance(TimeZone.getDefault())
-
+        var step:Steps
         var  operation=GlobalScope.launch(Dispatchers.Main) {
-            var step = dbHelper.getLastRow()
+             step = dbHelper.getLastRow()
             if (step != null)
             {
 
@@ -1336,6 +1336,7 @@ class HomeFragment : Fragment() {
             .bucketByTime(1, TimeUnit.DAYS)
             .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
             .build()
+
     }
 
     private fun printData(dataReadResult: DataReadResponse) {

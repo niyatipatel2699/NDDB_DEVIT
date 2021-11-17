@@ -13,6 +13,8 @@ import com.nddb.kudamforkurien.data.repository.OtpValidation.OtpRepositoryImpl
 import com.nddb.kudamforkurien.data.repository.Registration.RegistrationRepository
 import com.nddb.kudamforkurien.data.repository.Registration.RegistrationRepositoryImpl
 import com.nddb.kudamforkurien.data.remote.LoginApiService
+import com.nddb.kudamforkurien.data.repository.AddFacilitatorRepo.AddFacilitatorImpl
+import com.nddb.kudamforkurien.data.repository.AddFacilitatorRepo.AddFacilitatorRepository
 import com.nddb.kudamforkurien.data.repository.LoginRepository
 import com.nddb.kudamforkurien.data.repository.LoginRepositoryImpl
 import com.nddb.kudamforkurien.utils.StringUtils
@@ -70,5 +72,11 @@ class RepositoryModule {
     @Provides
     fun provideHomeRepository(stringUtils: StringUtils, apiService: LoginApiService): HomeRepository {
         return HomeRepositoryImpl(stringUtils, apiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAddFacilitator(stringUtils: StringUtils,apiService: LoginApiService) : AddFacilitatorRepository{
+        return AddFacilitatorImpl(stringUtils,apiService)
     }
 }

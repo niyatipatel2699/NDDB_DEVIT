@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nddb.kudamforkurien.R
+import com.nddb.kudamforkurien.data.remote.responses.History.HistoryData
 import com.nddb.kudamforkurien.data.room.entity.Steps
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -14,11 +15,11 @@ import java.util.*
 
 class walked_history_adapter(
     val context: Context,
-    val stepslist: List<Steps>
+    val stepslist: List<HistoryData>
 ) : RecyclerView.Adapter<walked_history_adapter.ViewHolder>() {
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        p0.tv_Count?.text = stepslist[p1].step.toString()
+        p0.tv_Count?.text = stepslist[p1].steps.toString()
         //val fDate: String = stepslist[p1].date
         val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
         val outputFormat: DateFormat = SimpleDateFormat("dd-MMM-yyyy")
