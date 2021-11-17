@@ -114,12 +114,16 @@
 
     <string name="dear">प्रिय</string>
     <string name="you_have">तुम्ही </string>
-    <string name="history_total_step">Total Steps Walked</string>
+    <string name="history_total_step">एकूण पायऱ्या चालल्या</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
 
     <string name="event_alert_msg">हे फीचर २६ नोव्हेंबर २०२१ ह्या दिनांकारोजी सक्रिय होईल.</string>
     <string name="history_thank_msg">ुमच्या योगदानासाठी धन्यवाद. चालत राहा.</string>
+
+    <string name="please_enter_num_of_people">कृपया लोकांची संख्या प्रविष्ट करा</string>
+    <string name="event_tv">200 दशलक्ष पावलांच्या लक्ष्यात आपल्या पावलांचे योगदान देणे</string>
+    <string name="event_start_date">कार्यक्रम 26-11-2021 रोजी सुरू होईल</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

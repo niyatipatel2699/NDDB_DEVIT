@@ -114,12 +114,16 @@
 
     <string name="dear">ପ୍ରିୟ</string>
     <string name="you_have">ଆପଣଙ୍କର ରହିଛି </string>
-    <string name="history_total_step">Total Steps Walked</string>
+    <string name="history_total_step">ମୋଟ ଷ୍ଟେପଗୁଡିକ ଚାଲିଲା</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
 
     <string name="event_alert_msg">ଏହି ବୈଶିଷ୍ଟ୍ୟ 26 ନଭେମ୍ବର 2021 ରେ ଆକ୍ଟିଭେଟ୍ ହେବ। </string>
     <string name="history_thank_msg">ଆପଣଙ୍କର ଅବଦାନ ପାଇଁ ଧନ୍ୟବାଦ। ଚାଳିବା ଜାରି ରଖନ୍ତୁ</string>
+
+    <string name="please_enter_num_of_people">ଦୟାକରି ଲୋକଙ୍କ ସଂଖ୍ୟା ପ୍ରବେଶ କରନ୍ତୁ</string>
+    <string name="event_tv">200 ନିୟୁତ ପଦକ୍ଷେପଲକ୍ଷ୍ୟରେ ଆପଣଙ୍କ ପଦକ୍ଷେପ ଯୋଗଦାନ କରିବାକୁ</string>
+    <string name="event_start_date">ଇଭେଣ୍ଟ 26-11-2021 ରେ ଆରମ୍ଭ ହେବ</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

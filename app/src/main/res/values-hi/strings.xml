@@ -120,6 +120,11 @@
 
     <string name="event_alert_msg">यह फीचर्स 26-नवंबर-2021 को ऐक्टिवेट हो जायेगा</string>
     <string name="history_thank_msg">आपके योगदान के लिये धन्यवाद। पैदल चलते रहें|</string>
+
+    <string name="please_enter_num_of_people">कृपया लोगों की संख्या दर्ज करें </string>
+    <string name="event_tv">200 मिलियन चरणों के लक्ष्य में अपने कदमों का योगदान करने के लिए</string>
+    <string name="event_start_date">घटना 26-11-2021 को शुरू हो जाएगा</string>
+
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

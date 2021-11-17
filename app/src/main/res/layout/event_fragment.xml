@@ -21,22 +21,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginStart="@dimen/_80sdp"
+            android:layout_marginStart="@dimen/_70sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
             android:fontFamily="@font/nunito_extrabold"
             android:gravity="center"
             android:text="@string/event_tv"
             android:textColor="@color/black"
             android:textSize="@dimen/_14sdp" />
-
-        <View
-            android:id="@+id/view"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="@dimen/_60sdp"
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:background = "@color/grey"
-            android:layout_below="@+id/event_tv"/>
 
         <TextView
             android:id="@+id/event_date_tv"
@@ -45,12 +36,22 @@
             android:layout_below="@+id/view"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="@dimen/_70sdp"
-            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             android:fontFamily="@font/nunito_medium"
             android:gravity="center"
             android:text="@string/event_start_date"
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_below="@+id/event_tv"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:background="@color/otp_edt_color" />
 
     </RelativeLayout>
 

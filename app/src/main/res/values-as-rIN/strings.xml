@@ -113,12 +113,17 @@
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
     <string name="dear">প্রিয়</string>
     <string name="you_have">আপোনাৰ আছে</string>
-    <string name="history_total_step">Total Steps Walked</string>
+    <string name="history_total_step">মুঠ পদক্ষেপখোজ কাঢ়িছে</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
 
     <string name="history_thank_msg">আপোনাৰ অৱদানৰ বাবে ধন্যবাদ ৷ আগবাঢ়ি থাকক</string>
     <string name="event_alert_msg">এই সুবিধাটো 26-নৱেম্বৰ-2021 তাৰিখে সক্ৰিয় কৰা হ\'ব</string>
+
+    <string name="please_enter_num_of_people">অনুগ্ৰহ কৰি লোকৰ সংখ্যা প্ৰবিষ্ট কৰক</string>
+    <string name="event_tv">200 নিযুত পদক্ষেপৰ লক্ষ্যত আপোনাৰ পদক্ষেপবোৰ অৱদান দিবলৈ</string>
+    <string name="event_start_date">অনুষ্ঠানটো 26-11-2021 তাৰিখে আৰম্ভ হ\'ব</string>
+
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

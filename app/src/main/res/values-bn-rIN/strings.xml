@@ -114,12 +114,17 @@
 
     <string name="dear">প্রিয়</string>
     <string name="you_have">আপনি </string>
-    <string name="history_total_step">Total Steps Walked</string>
+    <string name="history_total_step">মোট পদক্ষেপ গুলি হেঁটেগেছে</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
 
     <string name="event_alert_msg">এই বৈশিষ্ট্যটি 26-নভেম্বর-2021 তারিখে সক্রিয় হবে</string>
     <string name="history_thank_msg">আপনার সংযোজনের জন্য ধন্যবাদ৷ হাঁটতে থাকুন</string>
+
+    <string name="please_enter_num_of_people">দয়া করে মানুষের সংখ্যা লিখুন</string>
+    <string name="event_tv">200 মিলিয়ন পদক্ষেপের লক্ষ্যে আপনার পদক্ষেপগুলি অবদান রাখতে</string>
+    <string name="event_start_date">ইভেন্ট টি 26-11-2021 এ শুরু হবে</string>
+
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>
