@@ -13,7 +13,7 @@
         android:theme="@style/Theme.NDDB"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.nddb.kudamforkurien.Activity.FacilitatorActivity"
+            android:name=".Activity.ui.Facilitator.FacilitatorActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity

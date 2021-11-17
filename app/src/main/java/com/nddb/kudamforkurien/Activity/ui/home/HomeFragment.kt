@@ -36,7 +36,7 @@ import com.google.android.gms.fitness.result.DataReadResponse
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.nddb.kudamforkurien.Activity.FacilitatorActivity
+import com.nddb.kudamforkurien.Activity.ui.Facilitator.FacilitatorActivity
 import com.nddb.kudamforkurien.Adapter.slider_adapter
 import com.nddb.kudamforkurien.BuildConfig
 import com.nddb.kudamforkurien.MySharedPreferences
@@ -57,7 +57,6 @@ import com.smarteist.autoimageslider.SliderView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -1354,6 +1353,9 @@ class HomeFragment : Fragment() {
     private fun dumpDataSet(dataSet: DataSet) {
         Log.i(TAG, "Data returned for Data type: ${dataSet.dataType.name}")
 
+
+       // 10  20
+
         var totalSteps = 0
         for (dp in dataSet.dataPoints) {
             Log.i(TAG, "Data point:")
@@ -1366,6 +1368,7 @@ class HomeFragment : Fragment() {
                     totalSteps +=dp.getValue(it).asInt()
                 }
             }
+
         }
 
         binding.tvTotalSteps.setText(totalSteps.toString())
