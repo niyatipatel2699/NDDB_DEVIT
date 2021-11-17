@@ -3,6 +3,7 @@ package com.nddb.kudamforkurien.Activity.ui.home
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.content.*
 import android.content.pm.PackageManager
@@ -154,10 +155,15 @@ class HomeFragment : Fragment() {
         binding.slider.startAutoCycle()
 
         var stringResult =
-            getString(R.string.your_rank) + " " + MySharedPreferences.getMySharedPreferences()!!.user_rank.toString() + " " + getString(R.string.among_participants)
+            getString(R.string.your_rank) + " " + MySharedPreferences.getMySharedPreferences()!!.user_rank.toString() + " " + getString(
+                R.string.among_participants
+            )
         binding.tvYourRank.text = stringResult
 
-        var welcome_text = getString(R.string.dear) + " " + MySharedPreferences.getMySharedPreferences()!!.first_name + ", " + getString(R.string.you_have)
+        var welcome_text =
+            getString(R.string.dear) + " " + MySharedPreferences.getMySharedPreferences()!!.first_name + ", " + getString(
+                R.string.you_have
+            )
         binding.welcomeText.text = welcome_text
 
         if (MySharedPreferences.getMySharedPreferences()!!.is_facilitator == 0) {
@@ -179,21 +185,19 @@ class HomeFragment : Fragment() {
     }
 
 
-    fun sendFitDataToServer()
-    {
+    fun sendFitDataToServer() {
         GlobalScope.launch(Dispatchers.Main) {
 
             var list = dbHelper.getStepsOnlyNotPass()
-            if(list.size > 0 )
-            {
-                var tempList:ArrayList<DataSteps> = ArrayList()
+            if (list.size > 0) {
+                var tempList: ArrayList<DataSteps> = ArrayList()
                 list.forEach {
                     var inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
                     var outputFormat: DateFormat = SimpleDateFormat("dd MMM yyyy")
                     var inputDateStr = it.date
-                    var date:Date=inputFormat.parse(inputDateStr)
-                    var parseDate=outputFormat.format(date)
-                    var dataSteps= DataSteps(parseDate,it.step!!,it.location.toString())
+                    var date: Date = inputFormat.parse(inputDateStr)
+                    var parseDate = outputFormat.format(date)
+                    var dataSteps = DataSteps(parseDate, it.step!!, it.location.toString())
 
                     /*{
                         "date": "10 Oct 2021",
@@ -211,23 +215,23 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun updateTotalSteps()
-    {
+    fun updateTotalSteps() {
 
         GlobalScope.launch(Dispatchers.Main) {
             //binding.tvTotalSteps.setText(step.toString())
 
-            var totalSteps=dbHelper.totalSteps()
-            binding.tvContributedSteps.text=totalSteps.toString()
+            var totalSteps = dbHelper.totalSteps()
+            binding.tvContributedSteps.text = totalSteps.toString()
             binding.circularProgressBar.setProgressWithAnimation(totalSteps.toFloat(), 1000); // =1s
         }
         sendFitDataToServer()
     }
 
-    fun getRank(){
+    fun getRank() {
         homeViewModel.getRank()
         initObservation()
     }
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -235,16 +239,16 @@ class HomeFragment : Fragment() {
         getDeviceLocation()
     }
 
-    fun initObservation(){
-        homeViewModel.rankLiveData.observe(requireActivity()){ rankResponse ->
-            if(rankResponse.status == 1){
+    fun initObservation() {
+        homeViewModel.rankLiveData.observe(requireActivity()) { rankResponse ->
+            if (rankResponse.status == 1) {
                 //Log.e("rankl",rankResponse.)
-                if(rankResponse.items.size>0)
-                {
-                    MySharedPreferences.getMySharedPreferences()?.user_rank = rankResponse.items.get(0).rnk
+                if (rankResponse.items.size > 0) {
+                    MySharedPreferences.getMySharedPreferences()?.user_rank =
+                        rankResponse.items.get(0).rnk
                 }
 
-            }else {
+            } else {
                 rankResponse.message?.let { Log.e("error-->", it) }
             }
 
@@ -256,7 +260,14 @@ class HomeFragment : Fragment() {
                     var list = dbHelper.getStepsOnlyNotPass()
                     list.forEach {
                         if (!it.ispass) {
-                            dbHelper.updateSteps(it.id,it.step!!,it.location!!,it.lat!!,it.longitude!!,true)
+                            dbHelper.updateSteps(
+                                it.id,
+                                it.step!!,
+                                it.location!!,
+                                it.lat!!,
+                                it.longitude!!,
+                                true
+                            )
                         }
                     }
                 }
@@ -275,7 +286,6 @@ class HomeFragment : Fragment() {
     }
 
 
-
     /* Location */
 
     private fun reDirectToLocationScreen(message: String) {
@@ -286,10 +296,11 @@ class HomeFragment : Fragment() {
             .setPositiveButton(getString(R.string.label_yes)) { dialogInterface, which ->
                 dialogInterface.dismiss()
                 openLocationSettingsScreen()
+            }
+            .setNegativeButton(getString(R.string.label_no)) { dialogInterface, which ->
+                dialogInterface.dismiss()
                 requestFitPermission()
             }
-            .setNegativeButton(getString(R.string.label_no)) { dialogInterface, which -> dialogInterface.dismiss()
-                requestFitPermission()}
             .show()
     }
 
@@ -306,6 +317,7 @@ class HomeFragment : Fragment() {
             .setNegativeButton(getString(R.string.label_no)) { dialogInterface, which ->
                 mRequestingLocationUpdates = false
                 dialogInterface.dismiss()
+                requestFitPermission()
             }
             .show()
     }
@@ -319,11 +331,11 @@ class HomeFragment : Fragment() {
                 dialog.dismiss()
                 setFlightMode(requireContext())
                 mRequestingLocationUpdates = false
-                openSettings()
             }
             .setNegativeButton(getString(R.string.label_no)) { dialogInterface, which ->
                 mRequestingLocationUpdates = false
                 dialogInterface.dismiss()
+                requestFitPermission()
             }
             .show()
     }
@@ -336,6 +348,7 @@ class HomeFragment : Fragment() {
             .setPositiveButton(getString(R.string.label_yes)) { dialog, which ->
                 dialog.dismiss()
                 stopLocationUpdates()
+                requestFitPermission()
             }
             .show()
     }
@@ -352,6 +365,7 @@ class HomeFragment : Fragment() {
             .setNegativeButton(getString(R.string.label_no)) { dialogInterface, which ->
                 mRequestingLocationUpdates = false
                 dialogInterface.dismiss()
+                requestFitPermission()
             }
             .show()
     }
@@ -368,6 +382,7 @@ class HomeFragment : Fragment() {
             .setNegativeButton(getString(R.string.label_no)) { dialogInterface, which ->
                 mRequestingLocationUpdates = false
                 dialogInterface.dismiss()
+                requestFitPermission()
             }
             .show()
     }
@@ -407,12 +422,8 @@ class HomeFragment : Fragment() {
 
     private fun requestContinuousLocationUpdates() {
         if (mFusedLocationClient == null) {
-            mFusedLocationClient =
-                LocationServices.getFusedLocationProviderClient(
-                    requireContext()
-                )
+            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         }
-
         // Kick off the process of building the LocationCallback, LocationRequest, and
         // LocationSettingsRequest objects.
 
@@ -556,9 +567,6 @@ class HomeFragment : Fragment() {
 //                        getString(R.string.fetching_location)
 //                    )
                     requestContinuousLocationUpdates()
-
-                    requestFitPermission()
-
                 } else {
                     askLocationPermission()
                 }
@@ -575,15 +583,19 @@ class HomeFragment : Fragment() {
                 askLocationPermission()
 
             }
-        }else if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
-                Manifest.permission.ACTIVITY_RECOGNITION).not() &&
+        } else if (ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(),
+                Manifest.permission.ACTIVITY_RECOGNITION
+            ).not() &&
             grantResults.size == 1 &&
-            grantResults[0] == PackageManager.PERMISSION_DENIED) {
+            grantResults[0] == PackageManager.PERMISSION_DENIED
+        ) {
 //            showSettingsDialog(this)
         } else if (requestCode == PERMISSION_REQUEST_ACTIVITY_RECOGNITION &&
             permissions.contains(Manifest.permission.ACTIVITY_RECOGNITION) &&
             grantResults.size == 1 &&
-            grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) {
             Log.d("permission_result", "permission granted")
 //            isTrackingStarted = true
             // Google login.
@@ -593,10 +605,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun requestFitPermission() {
-        if (ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACTIVITY_RECOGNITION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.ACTIVITY_RECOGNITION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACTIVITY_RECOGNITION), PERMISSION_REQUEST_ACTIVITY_RECOGNITION)
-            }else{
+                requestPermissions(
+                    arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),
+                    PERMISSION_REQUEST_ACTIVITY_RECOGNITION
+                )
+            } else {
                 fitSignIn(FitActionRequestCode.INSERT_AND_READ_DATA)
             }
         } else {
@@ -615,11 +634,11 @@ class HomeFragment : Fragment() {
                     Manifest.permission.ACCESS_COARSE_LOCATION
                 ) != PackageManager.PERMISSION_GRANTED
             )
-            else if(ActivityCompat.checkSelfPermission(
+            else if (ActivityCompat.checkSelfPermission(
                     requireContext(),
                     Manifest.permission.ACTIVITY_RECOGNITION
-                ) != PackageManager.PERMISSION_GRANTED)
-            {
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
                 requestFitPermission()
                 return
             }
@@ -706,6 +725,7 @@ class HomeFragment : Fragment() {
 //                        googleMapRedirectToCurrentLocation(lastLocation)
                         getLocationFunction(lastLocation)
                         stopLocationUpdates()
+                        requestFitPermission()
                         return
                     }
 
@@ -719,6 +739,7 @@ class HomeFragment : Fragment() {
 //                                googleMapRedirectToCurrentLocation(newLocation)
                                 getLocationFunction(newLocation)
                                 stopLocationUpdates()
+                                requestFitPermission()
                                 return
                             }
                         }
@@ -791,7 +812,7 @@ class HomeFragment : Fragment() {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
 
-        )
+            )
         val permissionsNotGranted = ArrayList<String>()
         for (permission in permissionAsk) {
             if (!isPermissionGranted(requireContext(), permission)) {
@@ -844,7 +865,6 @@ class HomeFragment : Fragment() {
 
 
     }
-
 
 
     private fun checkPlayServices(): Boolean {
@@ -1002,14 +1022,26 @@ class HomeFragment : Fragment() {
                 }
 
             }
-        }
-        when (resultCode) {
-            RESULT_OK -> {
-                if(requestCode == FitActionRequestCode.INSERT_AND_READ_DATA.ordinal){
-                    performActionForRequestCode(FitActionRequestCode.INSERT_AND_READ_DATA)
+
+//            when (resultCode) {
+//                RESULT_OK -> {
+//                    if(requestCode == FitActionRequestCode.INSERT_AND_READ_DATA.ordinal){
+//                        performActionForRequestCode(FitActionRequestCode.INSERT_AND_READ_DATA)
+//                    }
+//                }
+//                else -> oAuthErrorMsg(requestCode, resultCode)
+//            }
+
+            FitActionRequestCode.INSERT_AND_READ_DATA.ordinal -> {
+                when (resultCode) {
+                    RESULT_OK -> {
+                        performActionForRequestCode(FitActionRequestCode.INSERT_AND_READ_DATA)
+                    }
+                    RESULT_CANCELED -> {
+                        oAuthErrorMsg(requestCode, resultCode)
+                    }
                 }
             }
-            else -> oAuthErrorMsg(requestCode, resultCode)
         }
     }
 
@@ -1026,6 +1058,7 @@ class HomeFragment : Fragment() {
 
 
         private const val PERMISSION_REQUEST_ACTIVITY_RECOGNITION = 10001
+
         /**
          * Constant used in the location settings dialog.
          */
@@ -1065,22 +1098,28 @@ class HomeFragment : Fragment() {
                 GoogleSignIn.requestPermissions(
                     this,
                     requestCode.ordinal,
-                    getGoogleAccount(), fitnessOptions)
+                    getGoogleAccount(), fitnessOptions
+                )
             }
         }
     }
 
 
-    private fun oAuthPermissionsApproved() = GoogleSignIn.hasPermissions(getGoogleAccount(), fitnessOptions)
-    private fun getGoogleAccount() = GoogleSignIn.getAccountForExtension(requireActivity(), fitnessOptions)
+    private fun oAuthPermissionsApproved() =
+        GoogleSignIn.hasPermissions(getGoogleAccount(), fitnessOptions)
 
-    private fun performActionForRequestCode(requestCode: FitActionRequestCode) = when (requestCode) {
-        FitActionRequestCode.INSERT_AND_READ_DATA -> readHistoryData()
-    }
+    private fun getGoogleAccount() =
+        GoogleSignIn.getAccountForExtension(requireActivity(), fitnessOptions)
+
+    private fun performActionForRequestCode(requestCode: FitActionRequestCode) =
+        when (requestCode) {
+            FitActionRequestCode.INSERT_AND_READ_DATA -> readHistoryData()
+        }
 
     private fun readHistoryData(): Task<DataReadResponse> {
 
-        Fitness.getRecordingClient(requireActivity(),getGoogleAccount()).subscribe(DataType.TYPE_STEP_COUNT_DELTA)
+        Fitness.getRecordingClient(requireActivity(), getGoogleAccount())
+            .subscribe(DataType.TYPE_STEP_COUNT_DELTA)
 
         // Begin by creating the query.
 
@@ -1091,7 +1130,7 @@ class HomeFragment : Fragment() {
         return Fitness.getHistoryClient(requireActivity(), getGoogleAccount())
             .readData(readRequest)
             .addOnCompleteListener {
-                if(it.isSuccessful){
+                if (it.isSuccessful) {
                     val dataReadResponse = it.result
                     printData(dataReadResponse)
                 }
@@ -1103,23 +1142,21 @@ class HomeFragment : Fragment() {
 
     private fun queryFitnessData(): DataReadRequest {
         val calendar = Calendar.getInstance(TimeZone.getDefault())
-        var step:Steps
-        var  operation=GlobalScope.launch(Dispatchers.Main) {
+        var step: Steps
+        var operation = GlobalScope.launch(Dispatchers.Main) {
 
-             step = dbHelper.getLastRow()
-            if (step != null)
-            {
+            step = dbHelper.getLastRow()
+            if (step != null) {
 
                 calendar.set(Calendar.DATE, step.date.split("-")[2].toInt())
 
-            } else
-            {
+            } else {
                 calendar.set(Calendar.DATE, 0)
             }
         }
         operation.onJoin
-       // val calendar = Calendar.getInstance(TimeZone.getDefault())
-       // calendar.set(Calendar.DATE, 10)
+        // val calendar = Calendar.getInstance(TimeZone.getDefault())
+        // calendar.set(Calendar.DATE, 10)
         calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
@@ -1127,21 +1164,21 @@ class HomeFragment : Fragment() {
         val startTime = calendar.timeInMillis
         val endTime = Calendar.getInstance(TimeZone.getDefault()).timeInMillis
 
-       /* val calendar = Calendar.getInstance(TimeZone.getDefault())
-        calendar.set(Calendar.DATE, 15)
-        calendar.set(Calendar.HOUR_OF_DAY, 0)
-        calendar.set(Calendar.MINUTE, 0)
-        calendar.set(Calendar.SECOND, 0)
-        calendar.set(Calendar.MILLISECOND, 0)
-        val startTime = calendar.timeInMillis
+        /* val calendar = Calendar.getInstance(TimeZone.getDefault())
+         calendar.set(Calendar.DATE, 15)
+         calendar.set(Calendar.HOUR_OF_DAY, 0)
+         calendar.set(Calendar.MINUTE, 0)
+         calendar.set(Calendar.SECOND, 0)
+         calendar.set(Calendar.MILLISECOND, 0)
+         val startTime = calendar.timeInMillis
 
-        val endCalender = Calendar.getInstance(TimeZone.getDefault())
-        endCalender.set(Calendar.DATE, 15)
-        endCalender.set(Calendar.HOUR_OF_DAY, 23)
-        endCalender.set(Calendar.MINUTE, 59)
-        endCalender.set(Calendar.SECOND, 0)
-        endCalender.set(Calendar.MILLISECOND, 0)
-        val endTime = endCalender.timeInMillis*/
+         val endCalender = Calendar.getInstance(TimeZone.getDefault())
+         endCalender.set(Calendar.DATE, 15)
+         endCalender.set(Calendar.HOUR_OF_DAY, 23)
+         endCalender.set(Calendar.MINUTE, 59)
+         endCalender.set(Calendar.SECOND, 0)
+         endCalender.set(Calendar.MILLISECOND, 0)
+         val endTime = endCalender.timeInMillis*/
 
         Log.i(TAG, "Range Start: ${dateFormat.format(startTime)}")
         Log.i(TAG, "Range End: ${dateFormat.format(endTime)}")
@@ -1181,7 +1218,7 @@ class HomeFragment : Fragment() {
         Date dateObj = curFormater.parse(dateStr);
 
         String newDateStr = curFormater.format(dateObj*/
-       // 10  20
+        // 10  20
 
         var totalSteps = 0
         for (dp in dataSet.dataPoints) {
@@ -1189,12 +1226,12 @@ class HomeFragment : Fragment() {
             Log.i(TAG, "\tType: ${dp.dataType.name}")
             Log.i(TAG, "\tStart: ${dp.getStartTimeString()}")
             Log.i(TAG, "\tEnd: ${dp.getEndTimeString()}")
-           var dateTime=dp.getStartTime(TimeUnit.MILLISECONDS)
+            var dateTime = dp.getStartTime(TimeUnit.MILLISECONDS)
             val currentDate = Converters.FORMATTER.format(dateTime)
             dp.dataType.fields.forEach {
-                if(it.name == Field.FIELD_STEPS.name){
+                if (it.name == Field.FIELD_STEPS.name) {
                     Log.i(TAG, "\tField: ${it.name} Value: ${dp.getValue(it)}")
-                    totalSteps +=dp.getValue(it).asInt()
+                    totalSteps += dp.getValue(it).asInt()
                 }
             }
 
@@ -1210,7 +1247,7 @@ class HomeFragment : Fragment() {
                 } else {
                     dbHelper.insertSteps(Steps(currentDate, totalSteps, address, lat, lng, false))
                 }
-               // updateTotalSteps()
+                // updateTotalSteps()
             }
         }
 
@@ -1234,13 +1271,13 @@ class HomeFragment : Fragment() {
     fun DataPoint.getEndTimeString(): String = DateFormat.getTimeInstance()
         .format(this.getEndTime(TimeUnit.MILLISECONDS))
 
-    fun getCityname(location: Location):String
-    {
+    fun getCityname(location: Location): String {
         val geocoder = Geocoder(activity, Locale.getDefault())
-        val addresses: List<Address> = geocoder.getFromLocation(location.latitude, location.longitude, 1)
+        val addresses: List<Address> =
+            geocoder.getFromLocation(location.latitude, location.longitude, 1)
         val cityName: String = addresses[0].getLocality()
         return cityName
-      /*  val stateName: String = addresses[0].getAddressLine(1)
-        val countryName: String = addresses[0].getAddressLine(2)*/
+        /*  val stateName: String = addresses[0].getAddressLine(1)
+          val countryName: String = addresses[0].getAddressLine(2)*/
     }
 }
