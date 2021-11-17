@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".Activity.ui.home.HomeFragment"
     android:id="@+id/event_rl">
 
@@ -14,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/new_event_bg"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/event_tv"
@@ -59,7 +58,7 @@
         android:id="@+id/main_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility = "gone">
+        android:visibility = "visible">
 
     <RelativeLayout
             android:id="@+id/slider_rl"
@@ -87,98 +86,99 @@
 
         </RelativeLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/slider_rl"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_10sdp">
-
-        <RelativeLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/ns_event"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/slider_rl"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/tv_yourRank"
-                android:layout_marginTop="@dimen/_20sdp">
-
+                android:layout_height="match_parent">
 
                 <RelativeLayout
-                    android:id="@+id/rl_ring"
-                    android:layout_width="@dimen/_205sdp"
-                    android:layout_height="@dimen/_205sdp"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center_horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tv_yourRank"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_90sdp">
 
-                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                        android:id="@+id/circularProgressBar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:cpb_background_progressbar_color="#F1F1F1"
-                        app:cpb_background_progressbar_width="@dimen/_17sdp"
-                        app:cpb_progress_direction="to_right"
-                        app:cpb_progress_max="1500"
-                        app:cpb_progressbar_color="#8D5E13"
-                        app:cpb_progressbar_width="@dimen/_15sdp"
-                        app:cpb_round_border="true" />
 
-                    <ImageView
-                        android:id="@+id/img_walk"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="@dimen/_45sdp"
-                        android:layout_above="@+id/tv_totalSteps"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/shoes" />
-
-                    <TextView
-                        android:id="@+id/tv_totalSteps"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                    <RelativeLayout
+                        android:id="@+id/rl_ring"
+                        android:layout_width="@dimen/_205sdp"
+                        android:layout_height="@dimen/_205sdp"
                         android:layout_centerInParent="true"
-                        android:fontFamily="@font/nunito_bold"
-                        android:gravity="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_20sdp"
-                        tools:text="1000" />
+                        android:layout_gravity="center_horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_your_total_steps"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_totalSteps"
-                        android:fontFamily="@font/nunito_semibold"
-                        android:gravity="center"
-                        android:text="@string/current_steps_nwalked"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp" />
+                        <ImageView
+                            android:id="@+id/img_walk"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_45sdp"
+                            android:layout_above="@+id/tv_totalSteps"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/shoes" />
+
+                        <TextView
+                            android:id="@+id/tv_totalSteps"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:fontFamily="@font/nunito_bold"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_20sdp"
+                            tools:text="1000" />
+
+                        <TextView
+                            android:id="@+id/tv_your_total_steps"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_totalSteps"
+                            android:fontFamily="@font/nunito_semibold"
+                            android:gravity="center"
+                            android:text="@string/current_steps_nwalked"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp" />
+
+                        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                            android:id="@+id/circularProgressBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:cpb_background_progressbar_color="#F1F1F1"
+                            app:cpb_background_progressbar_width="@dimen/_17sdp"
+                            app:cpb_progress_direction="to_right"
+                            app:cpb_progress_max="1500"
+                            app:cpb_progressbar_color="#8D5E13"
+                            app:cpb_progressbar_width="@dimen/_15sdp"
+                            app:cpb_round_border="true" />
+
+                    </RelativeLayout>
 
                 </RelativeLayout>
 
+                <TextView
+                    android:id="@+id/tv_yourRank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:gravity="center"
+                    android:text="@string/virtual_walked"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
+
             </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
 
-
-            <TextView
-                android:id="@+id/tv_yourRank"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:fontFamily="@font/nunito_semibold"
-                android:gravity="center"
-                android:text="@string/virtual_walked"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp" />
-
-
-        </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_55sdp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/event_bottom" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/event_bottom" />
 
     <RelativeLayout
         android:id="@+id/relStartService"
