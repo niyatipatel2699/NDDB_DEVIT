@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/new_event_bg"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/event_tv"
@@ -58,7 +58,7 @@
         android:id="@+id/main_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility = "gone">
+        android:visibility = "visible">
 
     <RelativeLayout
             android:id="@+id/slider_rl"
@@ -106,11 +106,22 @@
 
                 <RelativeLayout
                     android:id="@+id/rl_ring"
-                    android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_150sdp"
+                    android:layout_width="@dimen/_205sdp"
+                    android:layout_height="@dimen/_205sdp"
                     android:layout_centerInParent="true"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/dashboard_ring">
+                    android:layout_gravity="center_horizontal">
+
+                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                        android:id="@+id/circularProgressBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cpb_background_progressbar_color="#F1F1F1"
+                        app:cpb_background_progressbar_width="@dimen/_17sdp"
+                        app:cpb_progress_direction="to_right"
+                        app:cpb_progress_max="1500"
+                        app:cpb_progressbar_color="#8D5E13"
+                        app:cpb_progressbar_width="@dimen/_15sdp"
+                        app:cpb_round_border="true" />
 
                     <ImageView
                         android:id="@+id/img_walk"

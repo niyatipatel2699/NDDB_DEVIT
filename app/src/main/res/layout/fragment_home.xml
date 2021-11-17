@@ -70,8 +70,19 @@
                     android:layout_height="@dimen/_205sdp"
                     android:layout_centerInParent="true"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/_50sdp"
-                    android:background="@drawable/new_ring_dashboard">
+                    android:layout_marginTop="@dimen/_50sdp">
+
+                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                        android:id="@+id/circularProgressBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cpb_background_progressbar_color="#F1F1F1"
+                        app:cpb_background_progressbar_width="@dimen/_17sdp"
+                        app:cpb_progress_direction="to_right"
+                        app:cpb_progress_max="1500"
+                        app:cpb_progressbar_color="#8D5E13"
+                        app:cpb_progressbar_width="@dimen/_15sdp"
+                        app:cpb_round_border="true" />
 
                     <LinearLayout
                         android:id="@+id/img_walk_ll"
@@ -85,7 +96,7 @@
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_45sdp"
                             android:layout_above="@+id/tv_totalSteps"
-                            android:src="@drawable/grey_shoes" />
+                            android:src="@drawable/shoes" />
 
                     </LinearLayout>
 
