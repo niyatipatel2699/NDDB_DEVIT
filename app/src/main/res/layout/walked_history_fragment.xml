@@ -19,11 +19,11 @@
         android:layout_height="@dimen/_320sdp"
         android:layout_marginHorizontal="@dimen/_10sdp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_walkedHistory"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginHorizontal="@dimen/_10sdp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_walkedHistory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             />
 
     </RelativeLayout>
 
