@@ -131,6 +131,12 @@ class MySharedPreferences internal constructor(context: Context, gson: Gson) {
         set(user_rank) {
             editor.putInt(RestConstant.USER_RANK, user_rank).apply()
         }
+
+    var total_steps: Int
+        get() = sharedPreferences.getInt(RestConstant.TOTAL_STEPS, 100)
+        set(total_steps) {
+            editor.putInt(RestConstant.TOTAL_STEPS, total_steps).apply()
+        }
     companion object {
         private var mySharedPreferences: MySharedPreferences? = null
 

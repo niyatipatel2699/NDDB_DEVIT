@@ -221,8 +221,6 @@ class HomeFragment : Fragment() {
             //binding.tvTotalSteps.setText(step.toString())
 
             var totalSteps = dbHelper.totalSteps()
-            binding.tvContributedSteps.text = totalSteps.toString()
-            binding.circularProgressBar.setProgressWithAnimation(totalSteps.toFloat(), 1000); // =1s
         }
         sendFitDataToServer()
     }
@@ -244,8 +242,11 @@ class HomeFragment : Fragment() {
             if (rankResponse.status == 1) {
                 //Log.e("rankl",rankResponse.)
                 if (rankResponse.items.size > 0) {
-                    MySharedPreferences.getMySharedPreferences()?.user_rank =
-                        rankResponse.items.get(0).rnk
+                    MySharedPreferences.getMySharedPreferences()?.user_rank =rankResponse.items.get(0).rnk
+                    MySharedPreferences.getMySharedPreferences()?.total_steps = rankResponse.items.get(0).total_steps
+                    binding.tvContributedSteps.text = rankResponse.items.get(0).total_steps.toString()
+                    var totalSteps = rankResponse.items.get(0).total_steps
+                    binding.circularProgressBar.setProgressWithAnimation(totalSteps.toFloat(), 1000); // =1s
                 }
 
             } else {

@@ -68,6 +68,8 @@ class WalkedHistoryFragment : Fragment() {
 
         binding.tvYourRank.text = stringResult
 
+        binding.tvTotalStep.text = MySharedPreferences.getMySharedPreferences()!!.total_steps.toString()
+
         /*GlobalScope.launch(Dispatchers.Main) {
             //binding.tvTotalSteps.setText(step.toString())
             dbHelper =

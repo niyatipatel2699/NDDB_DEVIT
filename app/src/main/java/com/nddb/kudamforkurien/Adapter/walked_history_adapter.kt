@@ -21,12 +21,12 @@ class walked_history_adapter(
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0.tv_Count?.text = stepslist[p1].steps.toString()
         //val fDate: String = stepslist[p1].date
-        /*val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
         val outputFormat: DateFormat = SimpleDateFormat("dd-MMM-yyyy")
         val inputDateStr = stepslist[p1].date
         val date: Date = inputFormat.parse(inputDateStr)
-        val outputDateStr: String = outputFormat.format(date)*/
-        p0.tvDate?.text = stepslist[p1].date
+        val outputDateStr: String = outputFormat.format(date)
+        p0.tvDate?.text = outputDateStr
         p0.tvRank?.text = stepslist[p1].rnk.toString()
     }
 

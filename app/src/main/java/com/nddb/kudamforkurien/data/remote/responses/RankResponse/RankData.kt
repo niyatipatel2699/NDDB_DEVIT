@@ -4,5 +4,5 @@ data class RankData (
 
     var rnk: Int,
     var userId: Int? = null,
-    var totalSteps: Int? = null
+    var total_steps: Int
 )
