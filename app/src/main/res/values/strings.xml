@@ -53,6 +53,7 @@
     <!--<string name="your_total_step_walked">Steps Walked</string>-->
     <string name="your_total_step_walked">Steps Today </string>
     <string name="target">Target: 1500/day</string>
+    <string name="updated">Updated:</string>
     <string name="total_contributed_steps">Total Contribution </string>
     <string name="your_rank">Congratulations! You currently rank\n</string>
     <string name="among_participants">among all participants.</string>

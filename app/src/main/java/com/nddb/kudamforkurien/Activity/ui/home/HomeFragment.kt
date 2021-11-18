@@ -166,6 +166,11 @@ class HomeFragment : Fragment() {
             )
         binding.welcomeText.text = welcome_text
 
+        val date = getCurrentDateTime()
+        val dateInString = date.toString("dd-MMM-yyyy HH:mm")
+
+        binding.tvUpdated.text = getString(R.string.updated) + " \n" + dateInString
+
         if (MySharedPreferences.getMySharedPreferences()!!.is_facilitator == 0) {
             binding.llGotoFacilitator.visibility = View.GONE
         } else {
@@ -180,6 +185,15 @@ class HomeFragment : Fragment() {
 //        getRank()
 
         return root
+    }
+
+    fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
+        val formatter = SimpleDateFormat(format, locale)
+        return formatter.format(this)
+    }
+
+    fun getCurrentDateTime(): Date {
+        return Calendar.getInstance().time
     }
 
 
