@@ -75,6 +75,7 @@ class EventFragment : Fragment() {
         var mTodaysSteps =   MySharedPreferences.getMySharedPreferences()!!.keySteps
 
         binding.tvTotalSteps.setText(mTodaysSteps.toString())
+        binding.circularProgressBar.setProgressWithAnimation(mTodaysSteps.toFloat(), 1000); // =1s
 
 //        val stringResult =
 //            getString(R.string.your_rank) + " " + 100.toString() + " " + getString(R.string.among_participants)
