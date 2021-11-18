@@ -17,9 +17,9 @@
     <string name="otp_sent_on_mobile_number">প্রেৰিত অ\'টিপি লিখক</string>
     <string name="resend_otp">অ\'টিপি প্ৰাপ্ত কৰা নাই</string>
     <string name="resend">কোডটো পুনৰায় পঠিয়াওঁক</string>
-  <!--  <string name="resend_otp">Did not receive OTP?</string>
-    <string name="resend"> Resend</string>
--->
+    <!--  <string name="resend_otp">Did not receive OTP?</string>
+      <string name="resend"> Resend</string>
+  -->
     <string name="fname">নামৰ প্রথম অংশ</string>
     <string name="lname">নামৰ শেষাংশ</string>
     <string name="dob">জন্ম তাৰিখ</string>
@@ -123,6 +123,8 @@
     <string name="please_enter_num_of_people">অনুগ্ৰহ কৰি লোকৰ সংখ্যা প্ৰবিষ্ট কৰক</string>
     <string name="event_tv">200 নিযুত পদক্ষেপৰ লক্ষ্যত আপোনাৰ পদক্ষেপবোৰ অৱদান দিবলৈ</string>
     <string name="event_start_date">অনুষ্ঠানটো 26-11-2021 তাৰিখে আৰম্ভ হ\'ব</string>
+    <string name="are_you_sure_want_start_event">আপুনি অনুষ্ঠানটো আৰম্ভ কৰিব বিচাৰে বুলি নিশ্চিতনে?</string>
+    <string name="are_you_sure_want_stop_event">আপুনি অনুষ্ঠানটো বন্ধ কৰিব বিচাৰে বুলি নিশ্চিতনে?</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

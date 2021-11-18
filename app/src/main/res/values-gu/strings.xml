@@ -17,9 +17,9 @@
     <string name="otp_sent_on_mobile_number">પર મોકલેલ OTP દાખલ કરો</string>
     <string name="resend_otp">OTP મળ્યો નથી?</string>
     <string name="resend">કોડ ફરીથી મોકલો</string>
-  <!--  <string name="resend_otp">Did not receive OTP?</string>
-    <string name="resend"> Resend</string>
--->
+    <!--  <string name="resend_otp">Did not receive OTP?</string>
+      <string name="resend"> Resend</string>
+  -->
     <string name="fname">પ્રથમ નામ</string>
     <string name="lname">છેલ્લું નામ</string>
     <string name="dob">જન્મ તારીખ</string>
@@ -53,8 +53,8 @@
     <string name="message_no_network_connected_str">કોઈ નેટવર્ક કનેક્ટેડ નથી!</string>
     <string name="message_something_went_wrong_str">કંઈક ખોટું થયું!</string>
     <!--<string name="your_total_step_walked">પગલાંઓ ચાલ્યા</string>-->
-    <string name="your_total_step_walked">Steps Walked Today </string>
-    <string name="total_contributed_steps">Total Steps Contributed </string>
+    <string name="your_total_step_walked">આજે પગલાં ચાલ્યા </string>
+    <string name="total_contributed_steps">કુલ પગલાંઓનું યોગદાન</string>
     <string name="your_rank">અભિનંદન! તમે હાલમાં રેન્ક પર છો</string>
     <string name="among_participants">બધા સહભાગીઓ વચ્ચે.</string>
     <!--<string name="thank_you">તમારા યોગદાન બદલ આભાર. ચાલતા રહો.</string>-->
@@ -124,6 +124,8 @@
     <string name="please_enter_num_of_people">કૃપા કરીને લોકોની સંખ્યા દાખલ કરો</string>
     <string name="event_tv">200 મિલિયન પગલાંના લક્ષ્યમાં તમારા પગલાંનું યોગદાન આપવું</string>
     <string name="event_start_date">ઇવેન્ટ 26-11-2021થી શરૂ થશે</string>
+    <string name="are_you_sure_want_start_event">શું તમને ખાતરી છે કે તમે ઇવેન્ટ શરૂ કરવા માંગો છો?</string>
+    <string name="are_you_sure_want_stop_event">શું તમને ખાતરી છે કે તમે ઇવેન્ટ બંધ કરવા માંગો છો?</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

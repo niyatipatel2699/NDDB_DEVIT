@@ -15,8 +15,8 @@
     <string name="registration">ରେଜିଷ୍ଟ୍ରେସନ </string>
     <string name="otp_screen">ଓଟିପି ଭେରିଫିକେସନ </string>
     <string name="otp_sent_on_mobile_number">ପଠାଯାଇଥିବା ଓଟିପି ଏଣ୍ଟର କରନ୍ତୁ </string>
-   <!-- <string name="resend_otp">ଓଟିପି ପାଇ ନାହାନ୍ତି କି? </string>
-    <string name="resend">କୋଡକୁ ପୁଣି ଥରେ ପଠାନ୍ତୁ </string>-->
+    <!-- <string name="resend_otp">ଓଟିପି ପାଇ ନାହାନ୍ତି କି? </string>
+     <string name="resend">କୋଡକୁ ପୁଣି ଥରେ ପଠାନ୍ତୁ </string>-->
     <string name="resend_otp">Did not receive OTP?</string>
     <string name="resend"> Resend</string>
 
@@ -124,6 +124,8 @@
     <string name="please_enter_num_of_people">ଦୟାକରି ଲୋକଙ୍କ ସଂଖ୍ୟା ପ୍ରବେଶ କରନ୍ତୁ</string>
     <string name="event_tv">200 ନିୟୁତ ପଦକ୍ଷେପଲକ୍ଷ୍ୟରେ ଆପଣଙ୍କ ପଦକ୍ଷେପ ଯୋଗଦାନ କରିବାକୁ</string>
     <string name="event_start_date">ଇଭେଣ୍ଟ 26-11-2021 ରେ ଆରମ୍ଭ ହେବ</string>
+    <string name="are_you_sure_want_start_event">ଆପଣ ନିଶ୍ଚିତ କି ଆପଣ ଇଭେଣ୍ଟ ଆରମ୍ଭ କରିବାକୁ ଚାହାଁନ୍ତି?</string>
+    <string name="are_you_sure_want_stop_event">ଆପଣ ନିଶ୍ଚିତ କି ଆପଣ ଇଭେଣ୍ଟ ବନ୍ଦ କରିବାକୁ ଚାହୁଁଛନ୍ତି?</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

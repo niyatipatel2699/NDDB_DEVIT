@@ -17,8 +17,8 @@
     <string name="otp_sent_on_mobile_number">ಗೆ ಕಳುಹಿಸಲಾದ ಒಟಿಪಿಯನ್ನು ನಮೂದಿಸಿ   </string>
     <string name="resend_otp">ಒಟಿಪಿ ಸ್ವೀಕರಿಸಲಿಲ್ಲವೇ? </string>
     <string name="resend"> ಕೋಡ್‌ ಅನ್ನು ಪುನಃ ಕಳುಹಿಸಿ </string>
-   <!-- <string name="resend_otp">Did not receive OTP?</string>
-    <string name="resend"> Resend</string>-->
+    <!-- <string name="resend_otp">Did not receive OTP?</string>
+     <string name="resend"> Resend</string>-->
 
     <string name="fname">ಮೊದಲ ಹೆಸರು </string>
     <string name="lname">ಕೊನೆಯ ಹೆಸರು </string>
@@ -124,6 +124,8 @@
     <string name="please_enter_num_of_people">ದಯವಿಟ್ಟು ಜನರ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ</string>
     <string name="event_tv">200 ಮಿಲಿಯನ್ ಹಂತಗಳ ಗುರಿಗೆ ನಿಮ್ಮ ಹೆಜ್ಜೆಗಳನ್ನು ಕೊಡುಗೆ ನೀಡಲು</string>
     <string name="event_start_date">ಈವೆಂಟ್ 26-11-2021 ರಂದು ಪ್ರಾರಂಭವಾಗುತ್ತದೆ</string>
+    <string name="are_you_sure_want_start_event">ನೀವು ಈವೆಂಟ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸಲು ಖಚಿತವಾಗಿರುವಿರಾ?</string>
+    <string name="are_you_sure_want_stop_event">ಈವೆಂಟ್ ಅನ್ನು ನಿಲ್ಲಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

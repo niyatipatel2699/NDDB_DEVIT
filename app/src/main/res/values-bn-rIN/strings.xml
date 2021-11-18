@@ -124,6 +124,8 @@
     <string name="please_enter_num_of_people">দয়া করে মানুষের সংখ্যা লিখুন</string>
     <string name="event_tv">200 মিলিয়ন পদক্ষেপের লক্ষ্যে আপনার পদক্ষেপগুলি অবদান রাখতে</string>
     <string name="event_start_date">ইভেন্ট টি 26-11-2021 এ শুরু হবে</string>
+    <string name="are_you_sure_want_start_event">আপনি কি নিশ্চিত যে আপনি ইভেন্টটি শুরু করতে চান?</string>
+    <string name="are_you_sure_want_stop_event">আপনি কি নিশ্চিত যে আপনি অনুষ্ঠানটি বন্ধ করতে চান?</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

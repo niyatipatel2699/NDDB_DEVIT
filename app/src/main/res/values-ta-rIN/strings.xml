@@ -17,8 +17,8 @@
     <string name="otp_sent_on_mobile_number">-க்கு அனுப்பிய OTP எண்ணை எழுதுங்கள்</string>
     <string name="resend_otp">OTP கிடைக்கவில்லையா?</string>
     <string name="resend">மறுபடியும் குறிஎண்ணை அனுப்பவும்</string>
-   <!-- <string name="resend_otp">Did not receive OTP?</string>
-    <string name="resend"> Resend</string>-->
+    <!-- <string name="resend_otp">Did not receive OTP?</string>
+     <string name="resend"> Resend</string>-->
 
     <string name="fname">మొదటి పేరు</string>
     <string name="lname">ఆఖరి పేరు</string>
@@ -124,6 +124,8 @@
     <string name="please_enter_num_of_people">தயவுசெய்து மக்கள் எண்ணிக்கையை உள்ளிடவும்</string>
     <string name="event_tv">200 மில்லியன் படிகள் என்ற இலக்கிற்கு உங்கள் நடவடிக்கைகளை பங்களிக்க</string>
     <string name="event_start_date">நிகழ்வு 26-11-2021 அன்று தொடங்கும்</string>
+    <string name="are_you_sure_want_start_event">நீங்கள் நிச்சயமாக நிகழ்வைத் தொடங்க விரும்புகிறீர்களா?</string>
+    <string name="are_you_sure_want_stop_event">நீங்கள் நிச்சயமாக நிகழ்வை நிறுத்த விரும்புகிறீர்களா?</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

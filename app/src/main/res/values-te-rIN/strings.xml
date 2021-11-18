@@ -17,10 +17,10 @@
     <string name="otp_sent_on_mobile_number">పంపిన ఒటిపిని నమోదు చేయండి </string>
     <string name="resend_otp">ఒటిపి అందలేదా?</string>
     <string name="resend">కోడ్‌ మళ్ళీ పంపండి</string>
-<!--
-    <string name="resend_otp">Did not receive OTP?</string>
-    <string name="resend"> Resend</string>
--->
+    <!--
+        <string name="resend_otp">Did not receive OTP?</string>
+        <string name="resend"> Resend</string>
+    -->
 
     <string name="fname">మొదటి పేరు</string>
     <string name="lname">ఆఖరి పేరు</string>
@@ -116,16 +116,18 @@
 
     <string name="dear">ప్రియమైన</string>
     <string name="you_have">మీరు </string>
-    <string name="history_total_step">Total Steps Walked</string>
+    <string name="history_total_step">మొత్తం దశలు నడిచారు</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
 
     <string name="event_alert_msg">ఈ ఫీచర్ 26-నవంబర్-2021 తేదీన యాక్టివేట్ చేయబడుతుంది</string>
     <string name="history_thank_msg">మీ తోడ్పాటుకు ధన్యవాదాలు. నడుస్తూ ఉండండి</string>
 
-    <string name="please_enter_num_of_people">Please Enter Number of People</string>
-    <string name="event_tv">To contribute your steps to the target of 200 million steps</string>
-    <string name="event_start_date">Event will be starts on 26-11-2021</string>
+    <string name="please_enter_num_of_people">దయచేసి వ్యక్తుల సంఖ్యను నమోదు చేయండి</string>
+    <string name="event_tv">200 మిలియన్ దశల లక్ష్యాన్ని మీ దశలను అందించడానికి</string>
+    <string name="event_start_date">ఈవెంట్ 26-11-2021 నాడు ప్రారంభం అవుతుంది</string>
+    <string name="are_you_sure_want_start_event">ఈవెంట్ ప్రారంభించాలని మీరు ఖచ్చితంగా అనుకుంటున్నారా?</string>
+    <string name="are_you_sure_want_stop_event">ఈవెంట్ ని మీరు ఖచ్చితంగా ఆపాలని అనుకుంటున్నారా?</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

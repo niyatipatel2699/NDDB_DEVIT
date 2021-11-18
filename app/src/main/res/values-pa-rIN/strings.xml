@@ -124,6 +124,8 @@
     <string name="please_enter_num_of_people">ਕਿਰਪਾ ਕਰਕੇ ਲੋਕਾਂ ਦੀ ਸੰਖਿਆ ਦਾਖਲ ਕਰੋ</string>
     <string name="event_tv">200 ਮਿਲੀਅਨ ਕਦਮਾਂ ਦੇ ਟੀਚੇ ਵਿੱਚ ਆਪਣੇ ਕਦਮਾਂ ਦਾ ਯੋਗਦਾਨ ਪਾਉਣਾ</string>
     <string name="event_start_date">ਈਵੈਂਟ 26-11-2021 ਨੂੰ ਸ਼ੁਰੂ ਕੀਤਾ ਜਾਵੇਗਾ</string>
+    <string name="are_you_sure_want_start_event">ਕੀ ਤੁਹਾਨੂੰ ਯਕੀਨ ਹੈ ਕਿ ਤੁਸੀਂ ਸਮਾਗਮ ਸ਼ੁਰੂ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
+    <string name="are_you_sure_want_stop_event">ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਸਮਾਗਮ ਨੂੰ ਰੋਕਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

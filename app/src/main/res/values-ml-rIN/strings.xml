@@ -124,6 +124,8 @@
     <string name="please_enter_num_of_people">ആളുകളുടെ എണ്ണം നൽകുക</string>
     <string name="event_tv">200 ദശലക്ഷം ഘട്ടങ്ങൾ എന്ന ലക്ഷ്യത്തിലേക്ക് നിങ്ങളുടെ ചുവടുകൾ സംഭാവന ചെയ്യുന്നതിന്</string>
     <string name="event_start_date">ഇവന്റ് 26-11-2021 ന് ആരംഭിക്കും</string>
+    <string name="are_you_sure_want_start_event">ഇവന്റ് ആരംഭിക്കാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുവെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?</string>
+    <string name="are_you_sure_want_stop_event">നിങ്ങൾ ഇവന്റ് നിർത്താൻ ആഗ്രഹിക്കുന്നു ഉറപ്പാണോ?</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

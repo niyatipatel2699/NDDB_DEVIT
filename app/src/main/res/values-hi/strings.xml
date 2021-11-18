@@ -124,6 +124,8 @@
     <string name="please_enter_num_of_people">कृपया लोगों की संख्या दर्ज करें </string>
     <string name="event_tv">200 मिलियन चरणों के लक्ष्य में अपने कदमों का योगदान करने के लिए</string>
     <string name="event_start_date">घटना 26-11-2021 को शुरू हो जाएगा</string>
+    <string name="are_you_sure_want_start_event">क्या आप सुनिश्चित हैं कि आप घटना शुरू करना चाहते हैं?</string>
+    <string name="are_you_sure_want_stop_event">क्या आप सुनिश्चित हैं कि आप घटना को रोकना चाहते हैं?</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>
