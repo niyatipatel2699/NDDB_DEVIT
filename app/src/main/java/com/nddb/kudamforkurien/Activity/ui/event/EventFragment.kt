@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.content.Context.ACTIVITY_SERVICE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.ResultReceiver
 import android.preference.PreferenceManager
@@ -56,6 +57,8 @@ class EventFragment : Fragment() {
 
     var isServiceStart: Boolean = false
 
+    private lateinit var sharedPreferences: SharedPreferences
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,9 +71,12 @@ class EventFragment : Fragment() {
         _binding = EventFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // alertDialog = AlertDialog(activity)
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
-        binding.tvTotalSteps.setText("0")
+        // alertDialog = AlertDialog(activity)
+        var mTodaysSteps = sharedPreferences.getInt(MotionService.KEY_STEPS, 0)
+
+        binding.tvTotalSteps.setText(mTodaysSteps.toString())
 
 //        val stringResult =
 //            getString(R.string.your_rank) + " " + 100.toString() + " " + getString(R.string.among_participants)
