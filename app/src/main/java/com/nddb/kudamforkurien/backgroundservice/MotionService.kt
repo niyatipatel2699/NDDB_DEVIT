@@ -274,6 +274,7 @@ internal class MotionService : Service(), SensorEventListener {
     }
 
     private fun startService() {
+        sharedPreferences.edit().putInt(KEY_STEPS, 0).apply()
         mNotificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
                 ?: throw IllegalStateException("could not get notification service")

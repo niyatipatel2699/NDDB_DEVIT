@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +22,7 @@ import com.nddb.kudamforkurien.Adapter.slider_adapter
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.backgroundservice.MotionService
+import com.nddb.kudamforkurien.backgroundservice.ServiceAdmin
 import com.nddb.kudamforkurien.databinding.EventFragmentBinding
 import com.nddb.kudamforkurien.dialog.AlertDialog
 import com.nddb.kudamforkurien.model.SliderData
@@ -77,6 +79,11 @@ class EventFragment : Fragment() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.title =
             getString(R.string.menu_dashboard)
 
+        if(isServiceRunning())
+        {
+            binding.tvStart.text = activity?.getString(R.string.stop)
+        }
+
         binding.relStartService.setOnClickListener {
 
             showAlertDialog()
@@ -98,8 +105,10 @@ class EventFragment : Fragment() {
                 } else {
                     val intent = Intent(activity, MotionService::class.java)
                     intent.putExtra("stopped", true)
-                    activity?.startService(intent)
-                    isServiceStart = false
+                    //activity?.startService(intent)
+                    ContextCompat.startForegroundService(requireContext(), intent)
+
+                   // isServiceStart = false
                     binding.tvStart.text = activity?.getString(R.string.start)
                 }
             }
