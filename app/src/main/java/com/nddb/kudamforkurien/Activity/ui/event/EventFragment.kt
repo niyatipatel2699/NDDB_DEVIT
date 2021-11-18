@@ -6,6 +6,7 @@ import android.content.Context.ACTIVITY_SERVICE
 import android.content.Intent
 import android.os.Bundle
 import android.os.ResultReceiver
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,13 +16,18 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.nddb.kudamforkurien.Activity.ui.home.HomeFragment
+import com.nddb.kudamforkurien.Activity.ui.login.LoginActivity
 import com.nddb.kudamforkurien.Adapter.slider_adapter
+import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.backgroundservice.MotionService
 import com.nddb.kudamforkurien.databinding.EventFragmentBinding
 import com.nddb.kudamforkurien.dialog.AlertDialog
 import com.nddb.kudamforkurien.model.SliderData
 import com.smarteist.autoimageslider.SliderView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -44,9 +50,9 @@ class EventFragment : Fragment() {
     private var _binding: EventFragmentBinding? = null
 
     private val binding get() = _binding!!
-    lateinit var alertDialog : AlertDialog
+    lateinit var alertDialog: AlertDialog
 
-    var isServiceStart:Boolean=false
+    var isServiceStart: Boolean = false
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -60,7 +66,7 @@ class EventFragment : Fragment() {
         _binding = EventFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-       // alertDialog = AlertDialog(activity)
+        // alertDialog = AlertDialog(activity)
 
         binding.tvTotalSteps.setText("0")
 
@@ -68,30 +74,41 @@ class EventFragment : Fragment() {
 //            getString(R.string.your_rank) + " " + 100.toString() + " " + getString(R.string.among_participants)
 //        binding.tvYourRank.text = stringResult
 
-        (activity as AppCompatActivity?)!!.supportActionBar!!.title =  getString(R.string.menu_dashboard)
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title =
+            getString(R.string.menu_dashboard)
 
         binding.relStartService.setOnClickListener {
 
-            if(!isServiceRunning())
-            {
-                subscribeService()
-                binding.tvStart.text=activity?.getString(R.string.stop)
-            }
-            else
-            {
-                val intent = Intent(activity, MotionService::class.java)
-                intent.putExtra("stopped", true)
-                activity?.startService(intent)
-                isServiceStart=false
-                binding.tvStart.text=activity?.getString(R.string.start)
-            }
-
+            showAlertDialog()
         }
-
-
 
         return root
     }
+
+    private fun showAlertDialog() {
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setMessage(getString(R.string.are_you_sure_want_start_event))
+            .setPositiveButton(
+                getString(R.string.label_yes)
+            ) { dialogInterface, i ->
+                dialogInterface.dismiss()
+                if (!isServiceRunning()) {
+                    subscribeService()
+                    binding.tvStart.text = activity?.getString(R.string.stop)
+                } else {
+                    val intent = Intent(activity, MotionService::class.java)
+                    intent.putExtra("stopped", true)
+                    activity?.startService(intent)
+                    isServiceStart = false
+                    binding.tvStart.text = activity?.getString(R.string.start)
+                }
+            }
+            .setNegativeButton(
+                getString(R.string.label_no)
+            ) { dialogInterface, i -> dialogInterface.dismiss() }.show()
+
+    }
+
     private fun isServiceRunning(): Boolean {
         val manager = activity?.getSystemService(ACTIVITY_SERVICE) as ActivityManager?
         for (service in manager!!.getRunningServices(Int.MAX_VALUE)) {
@@ -125,25 +142,22 @@ class EventFragment : Fragment() {
         }*/
 
         if (finalDate.compareTo(currentDate) > 0) {     // alertDialog.show()}
+            binding.imageRl.visibility = View.GONE
+            binding.mainRl.visibility = View.VISIBLE
+        } else if (finalDate.compareTo(currentDate) < 0) {   /*alertDialog.dismiss()*/
             binding.imageRl.visibility = View.VISIBLE
             binding.mainRl.visibility = View.GONE
-        }
-        else if (finalDate.compareTo(currentDate) < 0)
-        {   /*alertDialog.dismiss()*/
-            binding.imageRl.visibility = View.GONE
-            binding.mainRl.visibility = View.VISIBLE
-        }
-        else if (finalDate.compareTo(currentDate) == 0)
+        } else if (finalDate.compareTo(currentDate) == 0)
         /*{    alertDialog.dismiss()*/ {
-            binding.imageRl.visibility = View.GONE
-            binding.mainRl.visibility = View.VISIBLE
+            binding.imageRl.visibility = View.VISIBLE
+            binding.mainRl.visibility = View.GONE
         }
 
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
 
-       /* sliderDataArrayList.add(SliderData(url1))
-        sliderDataArrayList.add(SliderData(url2))
-        sliderDataArrayList.add(SliderData(url3))*/
+        /* sliderDataArrayList.add(SliderData(url1))
+         sliderDataArrayList.add(SliderData(url2))
+         sliderDataArrayList.add(SliderData(url3))*/
 
         sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_1))
         sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_2))
@@ -157,7 +171,6 @@ class EventFragment : Fragment() {
         binding.slider.isAutoCycle = true
         binding.slider.startAutoCycle()
     }
-
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -179,10 +192,12 @@ class EventFragment : Fragment() {
             override fun onReceiveResult(resultCode: Int, resultData: Bundle) {
                 //Log.e("steps ",resultData.getInt(MotionService.KEY_STEPS).toString())
                 if (resultCode == 0) {
-                    Log.e("runOnUiThread",resultData.getInt(MotionService.KEY_STEPS).toString())
+                    Log.e("runOnUiThread", resultData.getInt(MotionService.KEY_STEPS).toString())
                     activity?.runOnUiThread {
                         //resultData.getInt(MotionService.KEY_STEPS)
-                       binding.tvTotalSteps.setText(resultData.getInt(MotionService.KEY_STEPS).toString())
+                        binding.tvTotalSteps.setText(
+                            resultData.getInt(MotionService.KEY_STEPS).toString()
+                        )
                         //isFirstTimeLoad=false
                         //totalStep(resultData.getInt(MotionService.KEY_STEPS))
                         //updateTotalSteps()
@@ -191,7 +206,7 @@ class EventFragment : Fragment() {
             }
         })
         activity?.startService(i)
-        isServiceStart=true
+        isServiceStart = true
     }
 
 }

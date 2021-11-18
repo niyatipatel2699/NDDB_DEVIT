@@ -34,8 +34,9 @@
         <entry key="app/src/main/res/layout/activity_facilitator.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/adapter_walked_history_item.xml" value="0.33229166666666665" />
-        <entry key="app/src/main/res/layout/event_fragment.xml" value="0.17760416666666667" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.4735866543095459" />
+        <entry key="app/src/main/res/layout/event_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/walked_history_fragment.xml" value="0.2630208333333333" />
       </map>
     </option>
   </component>
