@@ -93,8 +93,11 @@ class EventFragment : Fragment() {
     }
 
     private fun showAlertDialog() {
+        var alertMessage = getString(R.string.are_you_sure_want_stop_event)
+        if(!isServiceRunning())
+        { alertMessage = getString(R.string.are_you_sure_want_start_event) }
         androidx.appcompat.app.AlertDialog.Builder(requireContext())
-            .setMessage(getString(R.string.are_you_sure_want_start_event))
+            .setMessage(alertMessage)
             .setPositiveButton(
                 getString(R.string.label_yes)
             ) { dialogInterface, i ->
