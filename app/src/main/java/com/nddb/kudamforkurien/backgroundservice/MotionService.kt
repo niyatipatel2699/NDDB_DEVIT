@@ -280,6 +280,7 @@ internal class MotionService : Service(), SensorEventListener {
             getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
                 ?: throw IllegalStateException("could not get notification service")
         val notificationIntent = Intent(this, DrawerActivity::class.java)
+        notificationIntent.putExtra( "open" , "event" ) ;
         val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
         // Notification channels are only supported on Android O+.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

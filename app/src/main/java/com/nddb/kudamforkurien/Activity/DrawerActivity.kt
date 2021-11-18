@@ -1,31 +1,34 @@
 package com.nddb.kudamforkurien.Activity
 
+import android.app.ActivityManager
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.NavInflater
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
 import com.nddb.kudamforkurien.Activity.ui.login.LoginActivity
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
-import com.nddb.kudamforkurien.databinding.ActivityDrawerBinding
-import com.google.android.material.navigation.NavigationView
-import dagger.hilt.android.AndroidEntryPoint
 import com.nddb.kudamforkurien.backgroundservice.MotionService
-
 import com.nddb.kudamforkurien.data.room.DatabaseBuilder
 import com.nddb.kudamforkurien.data.room.DatabaseHelper
 import com.nddb.kudamforkurien.data.room.DatabaseHelperImpl
+import com.nddb.kudamforkurien.databinding.ActivityDrawerBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -37,6 +40,7 @@ class DrawerActivity : BaseActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityDrawerBinding
     private lateinit var dbHelper: DatabaseHelper
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,9 +88,9 @@ class DrawerActivity : BaseActivity() {
 
         navView.itemBackground = background
 
-        val navHostFragment =
+        var navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_drawer) as NavHostFragment
-        val navController = navHostFragment.navController
+        navController = navHostFragment.navController
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
@@ -132,11 +136,13 @@ class DrawerActivity : BaseActivity() {
                 GlobalScope.launch (Dispatchers.Main) {
                 dbHelper.deleteSteps()
                 }
-               /* val serviceAdmin = ServiceAdmin()
-                serviceAdmin.stopService(this)*/
-//                val intent = Intent(activity, MotionService::class.java)
-//                intent.putExtra("stopped", true)
-//                activity?.startService(intent)
+                if(isServiceRunning())
+                {
+                    val intent = Intent(this, MotionService::class.java)
+                    intent.putExtra("stopped", true)
+                    ContextCompat.startForegroundService(this, intent)
+                }
+
 
             }
             .setNegativeButton(
@@ -180,6 +186,33 @@ class DrawerActivity : BaseActivity() {
             }
         }
 
+    }
+
+    private fun isServiceRunning(): Boolean {
+        val manager = activity?.getSystemService(ACTIVITY_SERVICE) as ActivityManager?
+        for (service in manager!!.getRunningServices(Int.MAX_VALUE)) {
+            if ("com.nddb.kudamforkurien.backgroundservice.MotionService" == service.service.className) {
+                return true
+            }
+        }
+        return false
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        val extras = intent.extras
+        if (extras != null) {
+            if (extras.containsKey("open")) {
+                val open = extras.getString("open")
+                if(open.equals("event"))
+                {
+                    val navInflater: NavInflater = navController.getNavInflater()
+                    val graph = navInflater.inflate(R.navigation.mobile_navigation)
+                    graph.startDestination = R.id.nav_event
+                    navController.setGraph(graph)
+                }
+            }
+        }
     }
 
 

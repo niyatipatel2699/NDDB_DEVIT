@@ -1051,7 +1051,7 @@ class HomeFragment : Fragment() {
         Log.d(TAG, "LOCATION Latitude ${location.latitude} Longitude${location.longitude}")
         MySharedPreferences.getMySharedPreferences()!!.latitude = location.latitude.toString()
         MySharedPreferences.getMySharedPreferences()!!.longitude = location.longitude.toString()
-        MySharedPreferences.getMySharedPreferences()!!.location = getCityname(location)
+        MySharedPreferences.getMySharedPreferences()!!.location = MySharedPreferences.getMySharedPreferences()!!.district//getCityname(location)
     }
 
 
