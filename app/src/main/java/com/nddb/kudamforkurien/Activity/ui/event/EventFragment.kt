@@ -93,8 +93,11 @@ class EventFragment : Fragment() {
     }
 
     private fun showAlertDialog() {
+        var alertMessage = getString(R.string.are_you_sure_want_stop_event)
+        if(!isServiceRunning())
+        { alertMessage = getString(R.string.are_you_sure_want_start_event) }
         androidx.appcompat.app.AlertDialog.Builder(requireContext())
-            .setMessage(getString(R.string.are_you_sure_want_start_event))
+            .setMessage(alertMessage)
             .setPositiveButton(
                 getString(R.string.label_yes)
             ) { dialogInterface, i ->
@@ -151,15 +154,15 @@ class EventFragment : Fragment() {
         }*/
 
         if (finalDate.compareTo(currentDate) > 0) {     // alertDialog.show()}
+            binding.imageRl.visibility = View.GONE
+            binding.mainRl.visibility = View.VISIBLE
+        } else if (finalDate.compareTo(currentDate) < 0) {   /*alertDialog.dismiss()*/
             binding.imageRl.visibility = View.VISIBLE
             binding.mainRl.visibility = View.GONE
-        } else if (finalDate.compareTo(currentDate) < 0) {   /*alertDialog.dismiss()*/
-            binding.imageRl.visibility = View.GONE
-            binding.mainRl.visibility = View.VISIBLE
         } else if (finalDate.compareTo(currentDate) == 0)
         /*{    alertDialog.dismiss()*/ {
-            binding.imageRl.visibility = View.GONE
-            binding.mainRl.visibility = View.VISIBLE
+            binding.imageRl.visibility = View.VISIBLE
+            binding.mainRl.visibility = View.GONE
         }
 
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
@@ -207,6 +210,7 @@ class EventFragment : Fragment() {
                         binding.tvTotalSteps.setText(
                             resultData.getInt(MotionService.KEY_STEPS).toString()
                         )
+                        binding.circularProgressBar.setProgressWithAnimation(resultData.getInt(MotionService.KEY_STEPS).toFloat(), 1000); // =1s
                         //isFirstTimeLoad=false
                         //totalStep(resultData.getInt(MotionService.KEY_STEPS))
                         //updateTotalSteps()
