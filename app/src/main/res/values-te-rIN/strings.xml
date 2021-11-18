@@ -55,8 +55,10 @@
     <string name="message_no_network_connected_str">నెట్‌వర్క్‌ ఏదీ కనెక్ట్‌ చేయబడలేదు</string>
     <string name="message_something_went_wrong_str">ఏదో తప్పు జరిగింది</string>
     <!--<string name="your_total_step_walked">నడిచిన మెట్లు</string>-->
-    <string name="your_total_step_walked">నేడు నడిచిన అడుగులు </string>
-    <string name="total_contributed_steps">దోహదపడిన మొత్తం అడుగులు</string>
+    <string name="your_total_step_walked">నేడు దశలు </string>
+    <string name="target">టార్గెట్: 1500/రోజు</string>
+    <string name="updated">నవీకరించబడింది:</string>
+    <string name="total_contributed_steps">మొత్తం కంట్రిబ్యూషన్ </string>
     <string name="your_rank">అభినందనలు! మీ ప్రస్తుత ర్యాంకు</string>
     <string name="among_participants">పాల్గొన్నవారందరిలో.</string>
     <!--<string name="thank_you">మీ తోడ్పాటుకు ధన్యవాదాలు. నడుస్తూ ఉండండి</string>-->
@@ -115,7 +117,7 @@
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
 
     <string name="dear">ప్రియమైన</string>
-    <string name="you_have">మీరు </string>
+    <string name="you_have">ఈ రోజు మీ అడుగులు</string>
     <string name="history_total_step">మొత్తం దశలు నడిచారు</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>

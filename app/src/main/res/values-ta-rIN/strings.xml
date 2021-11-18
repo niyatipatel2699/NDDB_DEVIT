@@ -53,8 +53,10 @@
     <string name="message_no_network_connected_str">நெட்வொர்க் தொடர்பு இல்லை</string>
     <string name="message_something_went_wrong_str">ஏதோ பிழை நிகழ்ந்துள்ளது</string>
     <!--<string name="your_total_step_walked">நடந்திருக்கும் காலடிகள்</string>-->
-    <string name="your_total_step_walked">இன்று நடந்திருக்கும் காலடிகள் </string>
-    <string name="total_contributed_steps">பங்களித்திருக்கும் மொத்த காலடிகள் </string>
+    <string name="your_total_step_walked">படிகள் இன்று  </string>
+    <string name="target">இலக்கு: 1500/ நாள்</string>
+    <string name="updated">புதுப்பிக்க:</string>
+    <string name="total_contributed_steps">மொத்த பங்களிப்பு</string>
     <string name="your_rank">வாழ்த்துகள்! உங்கள் தற்போதைய ரேங்க்</string>
     <string name="among_participants">அனைத்து பங்கேற்பாளர்களுடன் ஒப்பிடும் போது.</string>
     <!--<string name="thank_you">உங்கள் பங்களிப்புக்கு நன்றி நடந்து கொண்டிருங்கள்</string>-->
@@ -113,7 +115,7 @@
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
 
     <string name="dear">வணக்கம்</string>
-    <string name="you_have">உங்களிடம் உள்ளது</string>
+    <string name="you_have">இன்று உங்கள் படிகள்</string>
     <string name="history_total_step">மொத்த படிகள் நடந்தன</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>

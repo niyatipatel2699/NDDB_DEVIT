@@ -53,8 +53,10 @@
     <string name="message_no_network_connected_str">നെറ്റ്‌വർക്ക് കണക്റ്റുചെയ്‌തിട്ടില്ല</string>
     <string name="message_something_went_wrong_str">എന്തോ കുഴപ്പം സംഭവിച്ചു</string>
     <!--<string name="your_total_step_walked">നടന്ന ചുവടുകൾ </string>-->
-    <string name="your_total_step_walked">ഇന്ന് നടന്ന ചുവടുകൾ</string>
-    <string name="total_contributed_steps">സംഭാവന ചെയ്ത മൊത്തം ചുവടുകൾ</string>
+    <string name="your_total_step_walked">ഇന്നത്തെ പടികൾ </string>
+    <string name="target">ലക്ഷ്യം: 1500/ദിവസം</string>
+    <string name="updated">പുതുക്കിയത്:</string>
+    <string name="total_contributed_steps">മൊത്തം സംഭാവന </string>
     <string name="your_rank">അഭിനന്ദനങ്ങൾ! നിങ്ങളുടെ നിലവിലെ റാങ്ക്</string>
     <string name="among_participants">എല്ലാ പങ്കാളികൾക്കും ഇടയിൽ</string>
     <!--<string name="thank_you">നിങ്ങളുടെ സംഭാവനയ്ക്ക് നന്ദി. നടത്തം തുടരുക.</string>-->
@@ -114,7 +116,7 @@
     <string name="event_alert_msg">ഈ ഫീച്ചർ 26-നവംബർ-2021 തീയതിയിൽ സജീവമാകും</string>
 
     <string name="dear">പ്രിയപ്പെട്ട</string>
-    <string name="you_have">നിങ്ങൾക്ക് ഉണ്ട്</string>
+    <string name="you_have">ഇന്ന് നിങ്ങളുടെ ചുവടുകൾ</string>
     <string name="history_total_step">മൊത്തം സ്റ്റെപ്പുകൾ നടന്നു</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>

@@ -53,8 +53,10 @@
     <string name="message_no_network_connected_str">কোনও নেটওয়ার্ক সংযুক্ত নাই</string>
     <string name="message_something_went_wrong_str">কোন কিছু ভুল হয়েছে</string>
     <!--<string name="your_total_step_walked">... গুলি পা হাঁটা হয়েছে</string>-->
-    <string name="your_total_step_walked">আজকে হাঁটা পদক্ষেপগুলি</string>
-    <string name="total_contributed_steps">সংযোজিত মোট পদক্ষেপ </string>
+    <string name="your_total_step_walked">আজ পদক্ষেপ </string>
+    <string name="target">লক্ষ্য: 1500/দিন</string>
+    <string name="updated">আধুনিকীকৃত:</string>
+    <string name="total_contributed_steps">মোট অবদান </string>
     <string name="your_rank">অভিনন্দন! আপনার বর্তমান স্থানাঙ্ক</string>
     <string name="among_participants">সকল অংশগ্রহণকারীর মধ্যে.</string>
     <!--<string name="thank_you">আপনার সংযোজনের জন্য ধন্যবাদ৷ হাঁটতে থাকুন</string>-->
@@ -113,7 +115,7 @@
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
 
     <string name="dear">প্রিয়</string>
-    <string name="you_have">আপনি </string>
+    <string name="you_have">আজ আপনার পদক্ষেপ </string>
     <string name="history_total_step">মোট পদক্ষেপ গুলি হেঁটেগেছে</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>

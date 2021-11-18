@@ -53,8 +53,10 @@
     <string name="message_no_network_connected_str">ಯಾವುದೇ ನೆಟ್‌ವರ್ಕ್‌ ಸಪರ್ಕಗೊಂಡಿಲ್ಲ</string>
     <string name="message_something_went_wrong_str">ಏನೋ ತಪ್ಪಾಗಿದೆ </string>
     <!--<string name="your_total_step_walked">ನಡೆದ ಹೆಜ್ಜೆಗಳು </string>-->
-    <string name="your_total_step_walked">ಇಂದು ನಡೆದ ಹೆಜ್ಜೆಗಳು </string>
-    <string name="total_contributed_steps">ಕೊಡುಗೆ ನೀಡಿದ ಒಟ್ಟು ಹೆಜ್ಜೆಗಳು  </string>
+    <string name="your_total_step_walked">ಇಂದು ಹಂತಗಳು </string>
+    <string name="target">ಗುರಿ: 1500/ದಿನ</string>
+    <string name="updated">ನವೀಕರಿಸಲಾಗಿದೆ:</string>
+    <string name="total_contributed_steps">ಒಟ್ಟು ಕೊಡುಗೆ </string>
     <string name="your_rank">ಅಭಿನಂದನೆಗಳು! ನೀವು ಪ್ರಸ್ತುತ ಸ್ಥಾನದಲ್ಲಿರುವಿರಿ </string>
     <string name="among_participants">ಎಲ್ಲಾ ಭಾಗವಹಿಸುವವರಲ್ಲಿ .</string>
     <!--<string name="thank_you">ನಿಮ್ಮ ಕೊಡುಗೆಗಾಗಿ ಧನ್ಯವಾದಗಳು. ಮುನ್ನಡೆಯತ್ತಲೇ ಇರಿ </string>-->
@@ -113,7 +115,7 @@
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
 
     <string name="dear">ಮಾನ್ಯರೇ </string>
-    <string name="you_have">ನಿಮ್ಮ ಬಳಿ </string>
+    <string name="you_have">ಇಂದು ನಿಮ್ಮ ಹೆಜ್ಜೆಗಳು</string>
     <string name="history_total_step">ನಡೆದ ಒಟ್ಟು ಹಂತಗಳು</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>

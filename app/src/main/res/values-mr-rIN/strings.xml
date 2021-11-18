@@ -53,8 +53,10 @@
     <string name="message_no_network_connected_str">नेटवर्क जोडलेले नाही!</string>
     <string name="message_something_went_wrong_str">काहीतरी चुकले!</string>
     <!--<string name="your_total_step_walked">चाललेली पावले</string>-->
-    <string name="your_total_step_walked">आज चाललेली पावले</string>
-    <string name="total_contributed_steps">एकूण समर्पित पावले </string>
+    <string name="your_total_step_walked">आज पावले  </string>
+    <string name="target">लक्ष्य: १५००/दिवस</string>
+    <string name="updated">अद्ययावत:</string>
+    <string name="total_contributed_steps">एकूण योगदान </string>
     <string name="your_rank">अभिनंदन! तुमचा सध्याचा क्रमांक आहे</string>
     <string name="among_participants">सर्व सहभागीदारांमध्ये.</string>
     <!--<string name="thank_you">तुमच्या योगदानासाठी धन्यवाद. चालत राहा.</string>-->
@@ -113,7 +115,7 @@
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
 
     <string name="dear">प्रिय</string>
-    <string name="you_have">तुम्ही </string>
+    <string name="you_have">आज तुझी पावले </string>
     <string name="history_total_step">एकूण पायऱ्या चालल्या</string>
 
     <string name="history_cograt_msg">Congratulations! You currently rank 100 among all participants.</string>
