@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    tools:context=".Activity.ui.walked_history.WalkedHistoryFragment"
-    android:layout_height="match_parent"
-    android:background="@color/choose_lan">
-
-<RelativeLayout
     android:layout_width="match_parent"
     android:id="@+id/fragment_walk"
     android:layout_height="match_parent"
@@ -16,13 +10,13 @@
     <RelativeLayout
         android:id="@+id/rl_walkedHistory"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_320sdp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_10sdp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_walkedHistory"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
              />
 
     </RelativeLayout>
@@ -96,9 +90,8 @@
                 android:padding="@dimen/_5sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10sdp"
-                tools:text="@string/history_thank_msg" />
+                android:text="@string/history_thank_msg" />
         </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
-</androidx.core.widget.NestedScrollView>

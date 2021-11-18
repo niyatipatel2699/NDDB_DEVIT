@@ -83,7 +83,7 @@
     <string name="start">शुरू करें </string>
     <string name="stop">रुकें</string>
     <string name="register_walkings">पैदल चलना रेजिस्टर करें </string>
-    <string name="step_walked">चले हुए कदम</string>
+    <string name="step_walked">कदम</string>
     <string name="facilitator">फैसिलिटेटर (समन्वयक)</string>
     <string name="enter_number_of_people">लोगों की संख्या डालें</string>
     <string name="register">रेजिस्टर करें </string>
@@ -98,6 +98,10 @@
     <string name="gallery_text">डॉ. कूरियन के जीवन और कार्यों की झलक देखने के लिये नीचे दी गयी मीडिया गैलरी देखें। </string>
     <string name="alert_dialog">Thank you for your interest in Event Kadam for Kurien. Event will be start on 26-Nov-2021.</string>
     <string name="ok">ओके</string>
+
+    <string name="thank_you_participating">कुरियन स्पर्धा के लिए कदम में भाग लेने के लिए धन्यवाद।</string>
+    <string name="lets_start">चलो शुरू हो जाओ</string>
+    <string name="enter_mobile_number_to_register">रजिस्टर करने के लिए अपना 10 डिजिट का मोबाइल नंबर डालें।</string>
     <!--<string name="alert_dialog">Thank you for your interest in Event {Event name}| Event will be start on {Date}|</string>-->
     <!-- <string name="yes">Yes</string>
      <string name="no">No</string>-->

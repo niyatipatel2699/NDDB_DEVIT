@@ -83,7 +83,7 @@
     <string name="start">ಸ್ಟಾರ್ಟ್‌ </string>
     <string name="stop">ಸ್ಟಾಪ್‌ </string>
     <string name="register_walkings">ವಾಕಿಂಗ್‌ಗಳನ್ನು ನೋಂದಾಯಿಸಿ </string>
-    <string name="step_walked">ನಡೆದ ಹೆಜ್ಜೆಗಳು [ಸ್ಟೆಪ್ಸ್‌ ವಾಕ್ಡ್‌] </string>
+    <string name="step_walked">ಹಂತಗಳು</string>
     <string name="facilitator">ಫೆಸಿಲಿಟೇಟರ್‌ </string>
     <string name="enter_number_of_people">ಜನರ ನಂಬರ್‌ ಅನ್ನು ನಮೂದಿಸಿ </string>
     <string name="register">ನೋಂದಾಯಿಸಿ </string>
@@ -99,6 +99,11 @@
     <!--<string name="alert_dialog">Thank you for your interest in Event {Event name}. Event will be start on {Date}.</string>-->
     <string name="alert_dialog">Thank you for your interest in Event Kadam for Kurien. Event will be start on 26-Nov-2021.</string>
     <string name="ok">ಒಕೆ /ಸರಿ </string>
+
+    <string name="thank_you_participating">ಕುರಿಯನ್ ಕಾರ್ಯಕ್ರಮಕ್ಕೆ ಕದಮ್ ನಲ್ಲಿ ಭಾಗವಹಿಸಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು.</string>
+    <string name="lets_start">ಪ್ರಾರಂಭಿಸೋಣ</string>
+    <string name="enter_mobile_number_to_register">ನೋಂದಾಯಿಸಲು ದಯವಿಟ್ಟು ನಿಮ್ಮ 10 ಅಂಕಿಗಳ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ.</string>
+
     <!-- <string name="yes">Yes</string>
      <string name="no">No</string>-->
 

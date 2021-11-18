@@ -83,7 +83,7 @@
     <string name="start">ஸ்டார்ட்</string>
     <string name="stop">ஸ்டாப்</string>
     <string name="register_walkings">நடந்திருக்கும் காலடிகளைப் பதிவு செய்தல்</string>
-    <string name="step_walked">நடந்திருக்கும் காலடிகள்</string>
+    <string name="step_walked">சோபானம்</string>
     <string name="facilitator">உதவிபுரிபவர்</string>
     <string name="enter_number_of_people">எவ்வளவு பேர் என்பதை எழுதவும்</string>
     <string name="register">பதிவு செய்தல்</string>
@@ -99,6 +99,10 @@
     <!--<string name="alert_dialog">Thank you for your interest in Event {Event name}. Event will be start on {Date}.</string>-->
     <string name="alert_dialog">Thank you for your interest in Event Kadam for Kurien. Event will be start on 26-Nov-2021.</string>
     <string name="ok">Ok</string>
+
+    <string name="thank_you_participating">குரியன் நிகழ்ச்சிக்காக கடம் நிகழ்ச்சியில் பங்கேற்றதற்கு நன்றி.</string>
+    <string name="lets_start">தொடங்குவோம்</string>
+    <string name="enter_mobile_number_to_register">பதிவு செய்ய உங்கள் 10 இலக்க மொபைல் எண்ணை உள்ளிடவும்</string>
     <!-- <string name="yes">Yes</string>
      <string name="no">No</string>-->
 

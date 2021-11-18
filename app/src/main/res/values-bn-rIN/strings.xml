@@ -83,7 +83,7 @@
     <string name="start">শুরু করুন</string>
     <string name="stop">থামুন</string>
     <string name="register_walkings">হাঁটা রেজিস্টার করুন</string>
-    <string name="step_walked">হাঁটা পদক্ষেপ</string>
+    <string name="step_walked">পদক্ষেপ</string>
     <string name="facilitator">সুবিধাকারী</string>
     <string name="enter_number_of_people">ব্যক্তিদের সংখ্যা প্রবেশ করান</string>
     <string name="register">রেজিস্টার করুন</string>
@@ -99,6 +99,10 @@
     <!--<string name="alert_dialog">Thank you for your interest in Event {Event name}. Event will be start on {Date}.</string>-->
     <string name="alert_dialog">Thank you for your interest in Event Kadam for Kurien. Event will be start on 26-Nov-2021.</string>
     <string name="ok">ঠিক আছে</string>
+
+    <string name="thank_you_participating">কুরিয়েন ইভেন্টের জন্য কদমে অংশ নেওয়ার জন্য আপনাকে ধন্যবাদ।</string>
+    <string name="lets_start">শুরু করা যাক</string>
+    <string name="enter_mobile_number_to_register">নিবন্ধন করতে অনুগ্রহ করে আপনার 10 সংখ্যার মোবাইল নম্বর লিখুন।</string>
     <!-- <string name="yes">Yes</string>
      <string name="no">No</string>-->
 
