@@ -76,9 +76,10 @@ internal class MotionService : Service(), SensorEventListener {
     override fun onCreate() {
         Log.d(TAG, "Creating MotionService")
         dbHelper = DatabaseHelperImpl(DatabaseBuilder.getInstance(this))
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         startService()
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
 
         // get last saved date
         mCurrentDate =
@@ -274,6 +275,7 @@ internal class MotionService : Service(), SensorEventListener {
     }
 
     private fun startService() {
+        sharedPreferences.edit().putInt(KEY_STEPS, 0).apply()
         mNotificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
                 ?: throw IllegalStateException("could not get notification service")
