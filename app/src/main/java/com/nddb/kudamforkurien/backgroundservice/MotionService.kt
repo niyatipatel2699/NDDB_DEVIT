@@ -44,7 +44,7 @@ import java.util.*
  * Created by sinku on 10.11.2021.
  */
 internal class MotionService : Service(), SensorEventListener {
-    private lateinit var sharedPreferences: SharedPreferences
+    //private lateinit var sharedPreferences: SharedPreferences
 
     // steps at the current day
     private var mTodaysSteps: Int = 0
@@ -76,16 +76,16 @@ internal class MotionService : Service(), SensorEventListener {
     override fun onCreate() {
         Log.d(TAG, "Creating MotionService")
         dbHelper = DatabaseHelperImpl(DatabaseBuilder.getInstance(this))
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+      //  sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         startService()
 
 
 
         // get last saved date
-        mCurrentDate =
-            sharedPreferences.getLong(KEY_DATE, com.nddb.kudamforkurien.utils.Util.calendar.timeInMillis)
+        mCurrentDate =MySharedPreferences.getMySharedPreferences()!!.keyDate
+
         // get last steps
-        mTodaysSteps = sharedPreferences.getInt(KEY_STEPS, 0)
+        mTodaysSteps = MySharedPreferences.getMySharedPreferences()!!.keySteps
 
         val manager = packageManager
 
@@ -167,16 +167,18 @@ internal class MotionService : Service(), SensorEventListener {
         GlobalScope.launch(Dispatchers.Main) {
             var lat = MySharedPreferences.getMySharedPreferences()!!.latitude
             var lng = MySharedPreferences.getMySharedPreferences()!!.longitude
-            var address = MySharedPreferences.getMySharedPreferences()!!.location
+            var address = MySharedPreferences.getMySharedPreferences()!!.district
             val currentDate = Converters.FORMATTER.format(Date())
             var step = dbHelper.getStep(currentDate)
             if (step != null) {
-                sharedPreferences.edit().putInt(KEY_STEPS, mTodaysSteps).apply()
+               // sharedPreferences.edit().putInt(KEY_STEPS, mTodaysSteps).apply()
+                MySharedPreferences.getMySharedPreferences()!!.keySteps = mTodaysSteps
                 dbHelper.updateSteps(step.id, mTodaysSteps, address, lat, lng, step.ispass)
             } else {
                 mTodaysSteps = 0
                 mCurrentDate = com.nddb.kudamforkurien.utils.Util.calendar.timeInMillis
-                sharedPreferences.edit().putLong(KEY_DATE, mCurrentDate).apply()
+                //sharedPreferences.edit().putLong(KEY_DATE, mCurrentDate).apply()
+                MySharedPreferences.getMySharedPreferences()!!.keyDate = mCurrentDate
                 dbHelper.insertSteps(Steps(currentDate, mTodaysSteps, address, lat, lng, false))
             }
         }
@@ -275,7 +277,8 @@ internal class MotionService : Service(), SensorEventListener {
     }
 
     private fun startService() {
-        sharedPreferences.edit().putInt(KEY_STEPS, 0).apply()
+        //sharedPreferences.edit().putInt(KEY_STEPS, 0).apply()
+        MySharedPreferences.getMySharedPreferences()!!.keySteps = 0
         mNotificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
                 ?: throw IllegalStateException("could not get notification service")

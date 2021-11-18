@@ -84,6 +84,18 @@ class MySharedPreferences internal constructor(context: Context, gson: Gson) {
             editor.putInt(RestConstant.LANG_ID, lang_id).apply()
         }
 
+    var keyDate: Long
+        get() = sharedPreferences.getLong(RestConstant.KEY_DATE, com.nddb.kudamforkurien.utils.Util.calendar.timeInMillis)
+        set(keyDate) {
+            editor.putLong(RestConstant.KEY_DATE, keyDate).apply()
+        }
+
+
+    var keySteps: Int
+        get() = sharedPreferences.getInt(RestConstant.KEY_STEPS, 0)
+        set(keySteps) {
+            editor.putInt(RestConstant.KEY_STEPS, keySteps).apply()
+        }
     /*var lang_name: String
         get() = sharedPreferences.getString(RestConstant.LANG_NAME, " ")!!
         set(lang_name) {

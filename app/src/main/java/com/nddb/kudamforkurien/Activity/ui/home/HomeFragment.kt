@@ -183,7 +183,7 @@ class HomeFragment : Fragment() {
         }
 
 //        getRank()
-
+        initObservation()
         return root
     }
 
@@ -225,7 +225,7 @@ class HomeFragment : Fragment() {
             }
 
         }
-        getRank()
+
     }
 
     fun updateTotalSteps() {
@@ -240,7 +240,7 @@ class HomeFragment : Fragment() {
 
     fun getRank() {
         homeViewModel.getRank()
-        initObservation()
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -271,6 +271,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.stepCountResponseLiveData.observe(requireActivity()) { stepCountResponse ->
             if (stepCountResponse.status == 1) {
+                getRank()
                 GlobalScope.launch(Dispatchers.Main) {
                     var list = dbHelper.getStepsOnlyNotPass()
                     list.forEach {
@@ -286,11 +287,14 @@ class HomeFragment : Fragment() {
                         }
                     }
                 }
+
             } else {
+                getRank()
                 stepCountResponse.message?.let {
                     //  binding.relRegistration.showSnack(it)
                 }
             }
+
         }
     }
 
@@ -1253,7 +1257,7 @@ class HomeFragment : Fragment() {
             GlobalScope.launch(Dispatchers.Main) {
                 var lat = MySharedPreferences.getMySharedPreferences()!!.latitude
                 var lng = MySharedPreferences.getMySharedPreferences()!!.longitude
-                var address = MySharedPreferences.getMySharedPreferences()!!.location
+                var address = MySharedPreferences.getMySharedPreferences()!!.district
                 val currentDate = Converters.FORMATTER.format(dateTime)
 
                 var step = dbHelper.getStep(currentDate)
