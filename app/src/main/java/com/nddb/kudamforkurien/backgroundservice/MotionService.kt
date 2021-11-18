@@ -76,9 +76,10 @@ internal class MotionService : Service(), SensorEventListener {
     override fun onCreate() {
         Log.d(TAG, "Creating MotionService")
         dbHelper = DatabaseHelperImpl(DatabaseBuilder.getInstance(this))
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         startService()
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
 
         // get last saved date
         mCurrentDate =
