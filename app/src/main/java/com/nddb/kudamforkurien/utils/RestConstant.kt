@@ -25,4 +25,9 @@ object RestConstant {
     const val FIRBASETOKEN = "firebasetoken"
     const val USER_RANK = "user_rank"
     const val TOTAL_STEPS = "total_steps"
+
+    const val KEY_DATE = "key_date"
+    const val KEY_STEPS = "key_steps"
+
+
 }

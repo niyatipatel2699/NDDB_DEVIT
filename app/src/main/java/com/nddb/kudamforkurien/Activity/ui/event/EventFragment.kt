@@ -57,7 +57,6 @@ class EventFragment : Fragment() {
 
     var isServiceStart: Boolean = false
 
-    private lateinit var sharedPreferences: SharedPreferences
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -71,10 +70,9 @@ class EventFragment : Fragment() {
         _binding = EventFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
         // alertDialog = AlertDialog(activity)
-        var mTodaysSteps = sharedPreferences.getInt(MotionService.KEY_STEPS, 0)
+        var mTodaysSteps =   MySharedPreferences.getMySharedPreferences()!!.keySteps
 
         binding.tvTotalSteps.setText(mTodaysSteps.toString())
 
