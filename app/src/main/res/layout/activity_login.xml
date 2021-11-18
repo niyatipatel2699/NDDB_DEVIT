@@ -49,12 +49,32 @@
                 android:id="@+id/text_msisdn_request"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_80sdp"
+                android:layout_marginTop="@dimen/_60sdp"
                 android:fontFamily="@font/nunito_semibold"
                 android:gravity="center"
-                android:text="@string/enter_mobilenumber"
+                android:text="@string/thank_you_participating"
                 android:textColor="@color/login_tx"
-                android:textSize="@dimen/_15sdp" />
+                android:textSize="@dimen/_11sdp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/nunito_semibold"
+                android:gravity="center"
+                android:text="@string/lets_start"
+                android:textColor="@color/login_tx"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/nunito_semibold"
+                android:gravity="center"
+                android:text="@string/enter_mobile_number_to_register"
+                android:textColor="@color/login_tx"
+                android:textSize="@dimen/_11sdp" />
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
