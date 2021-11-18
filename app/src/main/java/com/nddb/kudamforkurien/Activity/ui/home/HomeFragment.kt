@@ -177,9 +177,7 @@ class HomeFragment : Fragment() {
             getActivity()?.startActivity(intent)
         }
 
-        getRank()
-
-
+//        getRank()
 
         return root
     }
@@ -213,6 +211,7 @@ class HomeFragment : Fragment() {
             }
 
         }
+        getRank()
     }
 
     fun updateTotalSteps() {
@@ -234,7 +233,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (!checkPlayServices()) return
-        getDeviceLocation()
+//        getDeviceLocation()
+        requestFitPermission()
+
     }
 
     fun initObservation() {
@@ -246,7 +247,6 @@ class HomeFragment : Fragment() {
                     MySharedPreferences.getMySharedPreferences()?.total_steps = rankResponse.items.get(0).total_steps
                     binding.tvContributedSteps.text = rankResponse.items.get(0).total_steps.toString()
                     var totalSteps = rankResponse.items.get(0).total_steps
-                    binding.circularProgressBar.setProgressWithAnimation(totalSteps.toFloat(), 1000); // =1s
                 }
 
             } else {
@@ -1244,7 +1244,7 @@ class HomeFragment : Fragment() {
 
                 var step = dbHelper.getStep(currentDate)
                 if (step != null) {
-                    dbHelper.updateSteps(step.id, totalSteps, address, lat, lng, step.ispass)
+                    dbHelper.updateSteps(step.id, totalSteps, address, lat, lng, false)
                 } else {
                     dbHelper.insertSteps(Steps(currentDate, totalSteps, address, lat, lng, false))
                 }
@@ -1253,6 +1253,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.tvTotalSteps.setText(totalSteps.toString())
+        binding.circularProgressBar.setProgressWithAnimation(totalSteps.toFloat() / 1500, 1000); // =1s
         updateTotalSteps()
     }
 

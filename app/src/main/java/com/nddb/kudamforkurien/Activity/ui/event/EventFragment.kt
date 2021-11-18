@@ -142,15 +142,15 @@ class EventFragment : Fragment() {
         }*/
 
         if (finalDate.compareTo(currentDate) > 0) {     // alertDialog.show()}
+            binding.imageRl.visibility = View.VISIBLE
+            binding.mainRl.visibility = View.GONE
+        } else if (finalDate.compareTo(currentDate) < 0) {   /*alertDialog.dismiss()*/
             binding.imageRl.visibility = View.GONE
             binding.mainRl.visibility = View.VISIBLE
-        } else if (finalDate.compareTo(currentDate) < 0) {   /*alertDialog.dismiss()*/
-            binding.imageRl.visibility = View.VISIBLE
-            binding.mainRl.visibility = View.GONE
         } else if (finalDate.compareTo(currentDate) == 0)
         /*{    alertDialog.dismiss()*/ {
-            binding.imageRl.visibility = View.VISIBLE
-            binding.mainRl.visibility = View.GONE
+            binding.imageRl.visibility = View.GONE
+            binding.mainRl.visibility = View.VISIBLE
         }
 
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()

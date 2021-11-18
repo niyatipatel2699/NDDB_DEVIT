@@ -51,8 +51,9 @@
     <string name="message_no_network_connected_str">No network connected!</string>
     <string name="message_something_went_wrong_str">Something went wrong!</string>
     <!--<string name="your_total_step_walked">Steps Walked</string>-->
-    <string name="your_total_step_walked">Steps Walked Today </string>
-    <string name="total_contributed_steps">Total Steps Contributed </string>
+    <string name="your_total_step_walked">Steps Today </string>
+    <string name="target">Target: 1500/day</string>
+    <string name="total_contributed_steps">Total Contribution </string>
     <string name="your_rank">Congratulations! You currently rank\n</string>
     <string name="among_participants">among all participants.</string>
     <!--<string name="thank_you">Thank you for your contribution. Keep walking.</string>-->
@@ -112,7 +113,7 @@
     <string name="log_out">Logout</string>
 
      <string name="dear">Dear</string>
-     <string name="you_have">You Have</string>
+     <string name="you_have">your steps today</string>
 
     <string name="history_total_step">Total Steps Walked</string>
 
