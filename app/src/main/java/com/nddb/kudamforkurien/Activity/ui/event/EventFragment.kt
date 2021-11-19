@@ -17,21 +17,30 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.nddb.kudamforkurien.Adapter.slider_adapter
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.backgroundservice.MotionService
+import com.nddb.kudamforkurien.data.remote.LoginApiService
 import com.nddb.kudamforkurien.databinding.EventFragmentBinding
 import com.nddb.kudamforkurien.dialog.AlertDialog
+import com.nddb.kudamforkurien.model.DataSteps
 import com.nddb.kudamforkurien.model.SliderData
 import com.nddb.kudamforkurien.utils.AlarmUtils
 import com.nddb.kudamforkurien.utils.Helper.Companion.runOnUiThread
 import com.smarteist.autoimageslider.SliderView
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-
+@AndroidEntryPoint
 class EventFragment : Fragment() {
     var TIMER_INTERVAL = 1000
     var url1 = "https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg"
@@ -61,6 +70,8 @@ class EventFragment : Fragment() {
 
     private var fragmentVisible = false
 
+    @set:Inject
+    lateinit var apiService: LoginApiService
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -115,6 +126,23 @@ class EventFragment : Fragment() {
         )
         return root
     }
+
+    fun sendFitDataToServer() {
+        var steps=MySharedPreferences.getMySharedPreferences()!!.keySteps
+        var sdf = SimpleDateFormat("dd MMM yyyy")
+        var currentDate = sdf.format(Date())
+        var location= MySharedPreferences.getMySharedPreferences()!!.district
+        var tempList: java.util.ArrayList<DataSteps> = java.util.ArrayList()
+        var dataSteps = DataSteps(currentDate, steps, location)
+        tempList.add(dataSteps)
+        val jsonObject = JsonObject()
+        val toJson = Gson().toJsonTree(tempList) //Only one line to covert array JsonElement
+        jsonObject.add("data", toJson)
+        GlobalScope.launch(Dispatchers.Main) {
+            apiService.stepCount(jsonObject)
+        }
+
+    }
    /* override fun onSaveInstanceState(outState: Bundle) {
         outState.putParcelable(TAG, receiver)
         super.onSaveInstanceState(outState)
@@ -140,6 +168,7 @@ class EventFragment : Fragment() {
                 } else {
                    /* stopTimer()
                     resetTimerView()*/
+                    sendFitDataToServer()
                     val intent = Intent(activity, MotionService::class.java)
                     intent.putExtra("stopped", true)
                     //activity?.startService(intent)
