@@ -12,17 +12,14 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.Build
-import android.os.Bundle
-import android.os.IBinder
-import android.os.ResultReceiver
+import android.os.*
 import android.preference.PreferenceManager
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import android.util.Log
 import android.util.SparseArray
 import com.nddb.kudamforkurien.Activity.DrawerActivity
-import com.nddb.kudamforkurien.Activity.ui.home.HomeFragment
+import com.nddb.kudamforkurien.Activity.ui.event.EventFragment
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.utils.Converters
@@ -36,6 +33,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -65,6 +63,13 @@ internal class MotionService : Service(), SensorEventListener {
     private lateinit var mBuilder: NotificationCompat.Builder
     private var motionActivities: SparseArray<MotionActivity> = SparseArray()
     private var motionActivityId = 0
+
+    private var mHandler: Handler? = null
+
+    private var timeInSeconds = 0L
+
+    var TIMER_INTERVAL = 1000
+
     var stopped = false
 
     private lateinit var dbHelper: DatabaseHelper
@@ -244,13 +249,15 @@ internal class MotionService : Service(), SensorEventListener {
         if (stopped) {
             stopForeground(true)
             stopSelf()
+            //timer reset
+            stopTimer()
             return START_NOT_STICKY
         }
 
         if (intent != null) {
             when {
                 ACTION_SUBSCRIBE == intent.action -> receiver =
-                    intent.getParcelableExtra(HomeFragment.TAG)
+                    intent.getParcelableExtra(EventFragment.TAG)
                 ACTION_START_ACTIVITY == intent.action -> {
                     val id = motionActivityId++
                     motionActivities.put(id, MotionActivity(id, mCurrentSteps))
@@ -278,7 +285,9 @@ internal class MotionService : Service(), SensorEventListener {
 
     private fun startService() {
         //sharedPreferences.edit().putInt(KEY_STEPS, 0).apply()
-        MySharedPreferences.getMySharedPreferences()!!.keySteps = 0
+       // MySharedPreferences.getMySharedPreferences()!!.keySteps = 0
+        mTodaysSteps = 0
+        startTimer()
         mNotificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
                 ?: throw IllegalStateException("could not get notification service")
@@ -328,6 +337,7 @@ internal class MotionService : Service(), SensorEventListener {
         internal const val KEY_ACTIVITIES = "ACTIVITIES"
         internal const val KEY_DATE = "DATE"
         private const val FOREGROUND_ID = 3843
+        internal const val KEY_TIMER = "TIMER"
         const val CHANNEL_ID = "com.tiefensuche.motionmate.CHANNEL_ID"
     }
 
@@ -343,6 +353,56 @@ internal class MotionService : Service(), SensorEventListener {
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
 
+    }
+
+    private fun startTimer() {
+        mHandler = Handler(Looper.getMainLooper())
+        mStatusChecker.run()
+    }
+
+    private fun stopTimer() {
+        mHandler?.removeCallbacks(mStatusChecker)
+    }
+
+
+    private var mStatusChecker: Runnable = object : Runnable {
+        override fun run() {
+            try {
+                timeInSeconds += 1
+                Log.e("timeInSeconds", timeInSeconds.toString())
+                updateStopWatchView(timeInSeconds)
+            } finally {
+                // 100% guarantee that this always happens, even if
+                // your update method throws an exception
+                mHandler!!.postDelayed(this, TIMER_INTERVAL.toLong())
+            }
+        }
+    }
+
+
+    private fun updateStopWatchView(timeInSeconds: Long) {
+        val formattedTime = getFormattedStopWatch((timeInSeconds * 1000))
+        Log.e("formattedTime", formattedTime)
+        receiver?.let {
+            val bundle = Bundle()
+            bundle.putString(KEY_TIMER, formattedTime)
+            it.send(1, bundle)
+        }
+       // binding?.textViewStopWatch?.text = formattedTime
+    }
+
+
+    fun getFormattedStopWatch(ms: Long): String {
+        var milliseconds = ms
+        val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
+        milliseconds -= TimeUnit.HOURS.toMillis(hours)
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
+        milliseconds -= TimeUnit.MINUTES.toMillis(minutes)
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds)
+
+        return "${if (hours < 10) "0" else ""}$hours:" +
+                "${if (minutes < 10) "0" else ""}$minutes:" +
+                "${if (seconds < 10) "0" else ""}$seconds"
     }
 
     override fun onDestroy() {

@@ -4,43 +4,35 @@ import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.content.Context.ACTIVITY_SERVICE
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.os.ResultReceiver
-import android.preference.PreferenceManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.nddb.kudamforkurien.Activity.ui.home.HomeFragment
-import com.nddb.kudamforkurien.Activity.ui.login.LoginActivity
 import com.nddb.kudamforkurien.Adapter.slider_adapter
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.backgroundservice.MotionService
-import com.nddb.kudamforkurien.backgroundservice.ServiceAdmin
+import com.nddb.kudamforkurien.brodcastreceiver.MyResultReceiver
 import com.nddb.kudamforkurien.databinding.EventFragmentBinding
 import com.nddb.kudamforkurien.dialog.AlertDialog
 import com.nddb.kudamforkurien.model.SliderData
 import com.nddb.kudamforkurien.utils.AlarmUtils
+import com.nddb.kudamforkurien.utils.Helper
+import com.nddb.kudamforkurien.utils.Helper.Companion.runOnUiThread
 import com.smarteist.autoimageslider.SliderView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
-class EventFragment : Fragment() {
+class EventFragment : Fragment(),MyResultReceiver.Receiver {
     var TIMER_INTERVAL = 1000
     var url1 = "https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg"
     var url2 =
@@ -50,6 +42,7 @@ class EventFragment : Fragment() {
 
     companion object {
         fun newInstance() = EventFragment()
+        const val TAG = "Event Fragment"
     }
 
     private lateinit var viewModel: EventViewModel
@@ -65,6 +58,9 @@ class EventFragment : Fragment() {
     private var timeInSeconds = 0L
     private var startButtonClicked = false
 
+
+    private var fragmentVisible = false
+    lateinit var receiver: MyResultReceiver
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,6 +72,8 @@ class EventFragment : Fragment() {
 
         _binding = EventFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        fragmentVisible=true
 
 
         // alertDialog = AlertDialog(activity)
@@ -94,6 +92,7 @@ class EventFragment : Fragment() {
         if(isServiceRunning())
         {
             binding.tvStart.text = activity?.getString(R.string.stop)
+            binding.relStartService.setBackgroundResource(R.drawable.stop_ring)
         }
 
         binding.relStartService.setOnClickListener {
@@ -101,7 +100,19 @@ class EventFragment : Fragment() {
             showAlertDialog()
         }
 
+
+        if (savedInstanceState != null) {
+            receiver = savedInstanceState.getParcelable(TAG)!!
+        } else {
+            receiver = MyResultReceiver(Handler())
+        }
+        receiver.setReceiver(this)
+
         return root
+    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelable(TAG, receiver)
+        super.onSaveInstanceState(outState)
     }
 
     private fun showAlertDialog() {
@@ -116,16 +127,18 @@ class EventFragment : Fragment() {
                 dialogInterface.dismiss()
                 if (!isServiceRunning()) {
                     subscribeService()
-                    startTimer()
+                    //startTimer()
                     binding.tvStart.text = activity?.getString(R.string.stop)
+                    binding.relStartService.setBackgroundResource(R.drawable.stop_ring)
                     startAlarm()
                 } else {
-                    stopTimer()
+                   /* stopTimer()
+                    resetTimerView()*/
                     val intent = Intent(activity, MotionService::class.java)
                     intent.putExtra("stopped", true)
                     //activity?.startService(intent)
                     ContextCompat.startForegroundService(requireContext(), intent)
-
+                    binding.relStartService.setBackgroundResource(R.drawable.start_ring)
                    // isServiceStart = false
                     binding.tvStart.text = activity?.getString(R.string.start)
                 }
@@ -185,7 +198,7 @@ class EventFragment : Fragment() {
         /* sliderDataArrayList.add(SliderData(url1))
          sliderDataArrayList.add(SliderData(url2))
          sliderDataArrayList.add(SliderData(url3))*/
-
+        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_4))
         sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_1))
         sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_2))
         sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_3))
@@ -209,14 +222,24 @@ class EventFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        fragmentVisible=false
         //resetTimerView()
     }
 
+
+
     private fun subscribeService() {
         // start the service and pass a result receiver that is used by the service to update the UI
-        val i = Intent(activity, MotionService::class.java)
+       // val receiver: ResultReceiver = MyResultReceiver(null)
+
+        val intent = Intent(activity, MotionService::class.java)
+        intent.putExtra(TAG, receiver)
+        intent.action = MotionService.ACTION_SUBSCRIBE
+        activity?.startService(intent)
+
+      /*  val i = Intent(activity, MotionService::class.java)
         i.action = MotionService.ACTION_SUBSCRIBE
-        i.putExtra(HomeFragment.TAG, object : ResultReceiver(null) {
+        i.putExtra(EventFragment.TAG, object : ResultReceiver(null) {
             override fun onReceiveResult(resultCode: Int, resultData: Bundle) {
                 //Log.e("steps ",resultData.getInt(MotionService.KEY_STEPS).toString())
                 if (resultCode == 0) {
@@ -232,9 +255,17 @@ class EventFragment : Fragment() {
                         //updateTotalSteps()
                     }
                 }
+                else if(resultCode==1)
+                {
+                    activity?.runOnUiThread {
+                        //resultData.getInt(MotionService.KEY_STEPS)
+                        binding?.textViewStopWatch?.text= resultData.getString(MotionService.KEY_TIMER)
+                    }
+
+                }
             }
         })
-        activity?.startService(i)
+        activity?.startService(i)*/
         isServiceStart = true
     }
 
@@ -248,53 +279,79 @@ class EventFragment : Fragment() {
         alarmUtils.initRepeatingAlarm(calendar)
     }
 
+    override fun onReceiveResult(command: Int, resultData: Bundle?) {
+       Log.e("Fafasfasf",""+command+""+resultData)
 
-    private fun resetTimerView() {
-        timeInSeconds = 0
-        startButtonClicked = false
-    }
+        if(!isVisible)
+            return
 
-    private fun startTimer() {
-        mHandler = Handler(Looper.getMainLooper())
-        mStatusChecker.run()
-    }
+        if (command == 0) {
+            Log.e("runOnUiThread", resultData?.getInt(MotionService.KEY_STEPS).toString())
+            runOnUiThread {
+                //resultData.getInt(MotionService.KEY_STEPS)
+                binding.tvTotalSteps.setText(
+                    resultData?.getInt(MotionService.KEY_STEPS).toString()
+                )
+                binding.circularProgressBar.setProgressWithAnimation(resultData?.getInt(MotionService.KEY_STEPS)!!.toFloat(), 1000); // =1s
 
-    private fun stopTimer() {
-        mHandler?.removeCallbacks(mStatusChecker)
-    }
-
-    private var mStatusChecker: Runnable = object : Runnable {
-        override fun run() {
-            try {
-                timeInSeconds += 1
-                Log.e("timeInSeconds", timeInSeconds.toString())
-                updateStopWatchView(timeInSeconds)
-            } finally {
-                // 100% guarantee that this always happens, even if
-                // your update method throws an exception
-                mHandler!!.postDelayed(this, TIMER_INTERVAL.toLong())
             }
+        }
+        else if(command==1)
+        {
+            runOnUiThread {
+                    binding?.textViewStopWatch?.text= resultData?.getString(MotionService.KEY_TIMER)
+            }
+
         }
     }
 
-    private fun updateStopWatchView(timeInSeconds: Long) {
-        val formattedTime = getFormattedStopWatch((timeInSeconds * 1000))
-        Log.e("formattedTime", formattedTime)
-        binding?.textViewStopWatch?.text = formattedTime
-    }
+
+    /* private fun resetTimerView() {
+         timeInSeconds = 0
+         startButtonClicked = false
+     }
+
+     private fun startTimer() {
+         mHandler = Handler(Looper.getMainLooper())
+         mStatusChecker.run()
+     }
+
+     private fun stopTimer() {
+         mHandler?.removeCallbacks(mStatusChecker)
+     }
+
+     private var mStatusChecker: Runnable = object : Runnable {
+         override fun run() {
+             try {
+                 timeInSeconds += 1
+                 Log.e("timeInSeconds", timeInSeconds.toString())
+                 updateStopWatchView(timeInSeconds)
+             } finally {
+                 // 100% guarantee that this always happens, even if
+                 // your update method throws an exception
+                 mHandler!!.postDelayed(this, TIMER_INTERVAL.toLong())
+             }
+         }
+     }
+
+     private fun updateStopWatchView(timeInSeconds: Long) {
+         val formattedTime = getFormattedStopWatch((timeInSeconds * 1000))
+         Log.e("formattedTime", formattedTime)
+         binding?.textViewStopWatch?.text = formattedTime
+     }
 
 
-    fun getFormattedStopWatch(ms: Long): String {
-        var milliseconds = ms
-        val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
-        milliseconds -= TimeUnit.HOURS.toMillis(hours)
-        val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
-        milliseconds -= TimeUnit.MINUTES.toMillis(minutes)
-        val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds)
+     fun getFormattedStopWatch(ms: Long): String {
+         var milliseconds = ms
+         val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
+         milliseconds -= TimeUnit.HOURS.toMillis(hours)
+         val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
+         milliseconds -= TimeUnit.MINUTES.toMillis(minutes)
+         val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds)
 
-        return "${if (hours < 10) "0" else ""}$hours:" +
-                "${if (minutes < 10) "0" else ""}$minutes:" +
-                "${if (seconds < 10) "0" else ""}$seconds"
-    }
+         return "${if (hours < 10) "0" else ""}$hours:" +
+                 "${if (minutes < 10) "0" else ""}$minutes:" +
+                 "${if (seconds < 10) "0" else ""}$seconds"
+     }*/
 
 }

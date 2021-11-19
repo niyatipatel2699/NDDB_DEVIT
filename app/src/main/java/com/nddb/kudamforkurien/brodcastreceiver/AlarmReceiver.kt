@@ -45,7 +45,7 @@ class AlarmReceiver: BroadcastReceiver(){
         var steps=MySharedPreferences.getMySharedPreferences()!!.keySteps
         var sdf = SimpleDateFormat("dd MMM yyyy")
         var currentDate = sdf.format(Date())
-        var location= MySharedPreferences.getMySharedPreferences()!!.location
+        var location= MySharedPreferences.getMySharedPreferences()!!.district
         var tempList: ArrayList<DataSteps> = ArrayList()
         var dataSteps = DataSteps(currentDate, steps, location)
         tempList.add(dataSteps)

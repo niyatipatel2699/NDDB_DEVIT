@@ -1,10 +1,14 @@
 package com.nddb.kudamforkurien.utils
 
+import android.os.Handler
+import android.os.Looper
 import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.model.AndroidVersionModel
 
 class Helper{
     companion object {
+        private val handler = Handler(Looper.getMainLooper())
+
         fun <ArrayList> getVersionsList(): ArrayList {
             var androidVersionList = ArrayList<AndroidVersionModel>()
             androidVersionList.add(AndroidVersionModel(R.drawable.ic_menu_camera, "Cupcake", "1.5", apiLevel = "3"))
@@ -24,7 +28,13 @@ class Helper{
 
             return androidVersionList as ArrayList
         }
-
+        fun runOnUiThread(action: () -> Unit) {
+            if (Looper.myLooper() != Looper.getMainLooper()) {
+                handler.post(action)
+            } else {
+                action.invoke()
+            }
+        }
     }
 
 }

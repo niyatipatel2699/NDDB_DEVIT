@@ -18,9 +18,10 @@ class GalleryFragment : Fragment() {
     var myImageList = intArrayOf(R.drawable.k_10, R.drawable.k_1964_1)
 
     val list = listOf(
+        GalleryData(R.drawable.tribute_youtube_video_thumbnail,R.drawable.tribute_youtube_video_thumbnail,"Video"),
         GalleryData(R.drawable.k_10,R.drawable.k_10,"Image"),
         GalleryData(R.drawable.k_34,R.drawable.k_34,"Image"),
-        GalleryData(R.drawable.new_app_icon,R.drawable.new_app_icon,"Video"),
+        GalleryData(R.drawable.lecture_video_thumbnail,R.drawable.lecture_video_thumbnail,"Video"),
         GalleryData(R.drawable.k_35,R.drawable.k_35,"Image"),
         GalleryData(R.drawable.k_37,R.drawable.k_37,"Image"),
         GalleryData(R.drawable.k_1964_1,R.drawable.k_1964_1,"Image"),
@@ -35,7 +36,7 @@ class GalleryFragment : Fragment() {
         //GalleryData(R.drawable.ct703,R.drawable.ct703,"Image"),
         GalleryData(R.drawable.ct692,R.drawable.ct692,"Image"),
         GalleryData(R.drawable.ct725,R.drawable.ct725,"Image"),
-        GalleryData(R.drawable.new_app_icon,R.drawable.new_app_icon,"Video"),
+        GalleryData(R.drawable.promo_video_thumbnail,R.drawable.promo_video_thumbnail,"Video"),
         /*  GalleryData("PtkqwslbLY8","https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg","Video"),
         GalleryData("https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg","https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg","Image"),
         GalleryData("PtkqwslbLY8","https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg","Video")*/

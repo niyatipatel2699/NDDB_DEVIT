@@ -143,6 +143,7 @@ class HomeFragment : Fragment() {
 
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
 
+        sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_4))
         sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_1))
         sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_2))
         sliderDataArrayList.add(SliderData(R.drawable.app_dashboard_banner_3))

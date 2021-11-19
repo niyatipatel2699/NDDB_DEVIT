@@ -9,7 +9,7 @@ import kotlin.math.sqrt
  * it uses the acceleration sensor with this implementation to count steps.
  *
  *
- * Created by tiefensuche on 10.02.18.
+ * Created by sinku on 11.11.21.
  */
 internal class StepDetector(private var listener: StepListener) {
 
