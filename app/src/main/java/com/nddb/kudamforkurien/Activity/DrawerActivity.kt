@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
@@ -15,6 +16,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavInflater
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.get
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -113,6 +115,16 @@ class DrawerActivity : BaseActivity() {
 //        return true
 //    }
 
+    fun showDownloadBtn(enabled:Boolean)
+    {
+        if(enabled){
+            binding.appBarDrawer.ivHome.visibility = View.VISIBLE
+        }
+        else{
+            binding.appBarDrawer.ivHome.visibility = View.GONE
+        }
+    }
+
     private fun showAlertDialog() {
         AlertDialog.Builder(this)
             .setMessage(getString(R.string.are_you_sure_want_logout))
@@ -208,6 +220,7 @@ class DrawerActivity : BaseActivity() {
                 {
                     val navInflater: NavInflater = navController.getNavInflater()
                     val graph = navInflater.inflate(R.navigation.mobile_navigation)
+                    graph.get(R.id.nav_event)
                     graph.startDestination = R.id.nav_event
                     navController.setGraph(graph)
                 }

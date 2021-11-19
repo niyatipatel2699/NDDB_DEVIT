@@ -5,23 +5,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nddb.kudamforkurien.Activity.DrawerActivity
 import com.nddb.kudamforkurien.Adapter.walked_history_adapter
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.data.remote.responses.History.HistoryData
-import com.nddb.kudamforkurien.databinding.WalkedHistoryFragmentBinding
-import com.nddb.kudamforkurien.data.room.DatabaseBuilder
 import com.nddb.kudamforkurien.data.room.DatabaseHelper
-import com.nddb.kudamforkurien.data.room.DatabaseHelperImpl
+import com.nddb.kudamforkurien.databinding.WalkedHistoryFragmentBinding
 import com.nddb.kudamforkurien.utils.showSnack
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class WalkedHistoryFragment : Fragment() {
@@ -53,6 +49,7 @@ class WalkedHistoryFragment : Fragment() {
         _binding = WalkedHistoryFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        (activity as DrawerActivity?)?.showDownloadBtn(true)
         return root
     }
 
@@ -97,6 +94,7 @@ class WalkedHistoryFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        (activity as DrawerActivity?)?.showDownloadBtn(false)//((DrawerLocker)getActivity()).setDrawerLocked(false);
     }
 
 
