@@ -55,7 +55,10 @@ class gallery_adapter(
             }
             else
             {
-                if(p1==2)
+                if(p1 == 0){
+                    watchYoutubeVideo(context,"dbAoX5dyIOI")
+                }
+                else if(p1==3)
                 {
                     watchYoutubeVideo(context,"Me85wbcC0Zk")
                 }
