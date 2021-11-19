@@ -139,13 +139,13 @@ class MySharedPreferences internal constructor(context: Context, gson: Gson) {
         }
 
     var user_rank: Int
-        get() = sharedPreferences.getInt(RestConstant.USER_RANK, 100)
+        get() = sharedPreferences.getInt(RestConstant.USER_RANK, 0)
         set(user_rank) {
             editor.putInt(RestConstant.USER_RANK, user_rank).apply()
         }
 
     var total_steps: Int
-        get() = sharedPreferences.getInt(RestConstant.TOTAL_STEPS, 100)
+        get() = sharedPreferences.getInt(RestConstant.TOTAL_STEPS, 0)
         set(total_steps) {
             editor.putInt(RestConstant.TOTAL_STEPS, total_steps).apply()
         }

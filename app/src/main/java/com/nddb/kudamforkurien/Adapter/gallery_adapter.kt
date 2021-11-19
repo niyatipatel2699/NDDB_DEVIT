@@ -59,7 +59,7 @@ class gallery_adapter(
                 {
                     watchYoutubeVideo(context,"Me85wbcC0Zk")
                 }
-                else if(p1==3)
+                else if(p1 == languageData.size - 1)
                 {
                     watchYoutubeVideo(context,"DBtNPgYWjKU")
                 }

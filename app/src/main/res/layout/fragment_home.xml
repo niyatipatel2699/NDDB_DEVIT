@@ -79,7 +79,7 @@
                         app:cpb_background_progressbar_color="#F1F1F1"
                         app:cpb_background_progressbar_width="@dimen/_17sdp"
                         app:cpb_progress_direction="to_right"
-                        app:cpb_progress_max="1500"
+                        app:cpb_progress_max="2500"
                         app:cpb_progressbar_color="#8D5E13"
                         app:cpb_progressbar_width="@dimen/_15sdp"
                         app:cpb_round_border="true" />
@@ -111,7 +111,7 @@
                         android:fontFamily="@font/nunito_semibold"
                         android:gravity="center"
                         android:text="@string/total_contributed_steps"
-                        android:textColor="@color/dark_chocolate"
+                        android:textColor="@color/otp_sent_text"
                         android:textSize="@dimen/_10sdp" />
 
                     <TextView
@@ -121,7 +121,7 @@
                         android:layout_below="@+id/tv_your_total_steps"
                         android:fontFamily="@font/nunito_semibold"
                         android:gravity="center"
-                        android:textColor="@color/dark_chocolate"
+                        android:textColor="@color/otp_sent_text"
                         android:textSize="@dimen/_8sdp" />
 
                     <TextView
@@ -155,7 +155,7 @@
                         android:fontFamily="@font/nunito_semibold"
                         android:gravity="center"
                         android:text="@string/your_total_step_walked"
-                        android:textColor="@color/dark_chocolate"
+                        android:textColor="@color/otp_sent_text"
                         android:textSize="@dimen/_10sdp" />
 
                     <TextView
@@ -165,7 +165,7 @@
                         android:fontFamily="@font/nunito_semibold"
                         android:gravity="center"
                         android:text="@string/target"
-                        android:textColor="@color/dark_chocolate"
+                        android:textColor="@color/otp_sent_text"
                         android:textSize="@dimen/_10sdp" />
 
                 </RelativeLayout>
