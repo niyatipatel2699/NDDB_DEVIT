@@ -132,6 +132,8 @@
     <string name="event_start_date">कार्यक्रम 26-11-2021 रोजी सुरू होईल</string>
     <string name="are_you_sure_want_start_event">तुम्हाला कार्यक्रम सुरू करायचा आहे याची खात्री आहे का?</string>
     <string name="are_you_sure_want_stop_event">तुम्हाला खात्री आहे का की तुम्हाला कार्यक्रम थांबवायचा आहे?</string>
+    <string name="download_certificate">आपण २६ नोव्हेंबर ते ३० नोव्हेंबर २०२१ दरम्यान प्रमाणपत्र डाउनलोड करू शकता.</string>
+    <string name="thank_you_for_using_app">कदम कुरियन कार्यक्रमासाठी यशस्वीरित्या पूर्ण झाले आहे. आता आपण हे अनुप्रयोग सुरक्षितपणे अनइन्स्टॉल करू शकता.</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

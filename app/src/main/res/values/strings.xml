@@ -134,7 +134,10 @@
      <string name="please_enter_num_of_people">Please Enter Number of People</string>
      <string name="event_tv">To contribute your steps to the target of 200 million steps</string>
      <string name="event_start_date">Event will be starts on 26-11-2021</string>
-    <string-array name="user_type_array">
+     <string name="thank_you_for_using_app">Kadam For Kurien event is completed successfully. Now you can safely uninstall this application.</string>
+
+
+     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>
         <item>Farmer</item>
