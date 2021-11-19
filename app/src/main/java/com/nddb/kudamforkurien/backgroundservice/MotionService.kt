@@ -7,31 +7,24 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.*
-import android.preference.PreferenceManager
-import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
 import android.util.Log
 import android.util.SparseArray
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.nddb.kudamforkurien.Activity.DrawerActivity
 import com.nddb.kudamforkurien.Activity.ui.event.EventFragment
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
-import com.nddb.kudamforkurien.utils.Converters
-
-import com.nddb.kudamforkurien.utils.StepDetector
 import com.nddb.kudamforkurien.data.room.DatabaseBuilder
 import com.nddb.kudamforkurien.data.room.DatabaseHelper
 import com.nddb.kudamforkurien.data.room.DatabaseHelperImpl
-import com.nddb.kudamforkurien.data.room.entity.Steps
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.nddb.kudamforkurien.utils.StepDetector
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -221,10 +214,10 @@ internal class MotionService : Service(), SensorEventListener {
         )
         mNotificationManager.notify(FOREGROUND_ID, mBuilder.build())
         Log.e("sensor", "sendUpdate")
-        receiver?.let {
+        /*receiver?.let {
             val bundle = Bundle()
             bundle.putInt(KEY_STEPS, mTodaysSteps)
-            /* val activities = ArrayList<Bundle>()
+            *//* val activities = ArrayList<Bundle>()
              for (i in 0 until motionActivities.size()) {
                  val motionActivity = motionActivities.valueAt(i)
                  val activityBundle = Bundle()
@@ -233,10 +226,13 @@ internal class MotionService : Service(), SensorEventListener {
                  activityBundle.putBoolean(KEY_ACTIVE, motionActivity.active)
                  activities.add(activityBundle)
              }
-             bundle.putParcelableArrayList(KEY_ACTIVITIES, activities)*/
+             bundle.putParcelableArrayList(KEY_ACTIVITIES, activities)*//*
             Log.e("sensor", "sendUpdate1")
             it.send(0, bundle)
-        }
+        }*/
+        val intent = Intent("Motion-Service")
+        intent.putExtra(KEY_STEPS, mTodaysSteps)
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
 
     }
 
@@ -286,7 +282,7 @@ internal class MotionService : Service(), SensorEventListener {
     private fun startService() {
         //sharedPreferences.edit().putInt(KEY_STEPS, 0).apply()
        // MySharedPreferences.getMySharedPreferences()!!.keySteps = 0
-        mTodaysSteps = 0
+       // mTodaysSteps = 0
         startTimer()
         mNotificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
@@ -383,11 +379,14 @@ internal class MotionService : Service(), SensorEventListener {
     private fun updateStopWatchView(timeInSeconds: Long) {
         val formattedTime = getFormattedStopWatch((timeInSeconds * 1000))
         Log.e("formattedTime", formattedTime)
-        receiver?.let {
+        val intent = Intent("Motion-Service")
+        intent.putExtra(KEY_TIMER, formattedTime)
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+        /*receiver?.let {
             val bundle = Bundle()
             bundle.putString(KEY_TIMER, formattedTime)
             it.send(1, bundle)
-        }
+        }*/
        // binding?.textViewStopWatch?.text = formattedTime
     }
 

@@ -7,6 +7,6 @@ data class RankResponseModel (
     var  status : Int? = null,
     var  statusCode : Int? = null,
     var  message : String? = null,
-       var  event_status : Boolean
+       var  event_status : Boolean = true
 
 )
