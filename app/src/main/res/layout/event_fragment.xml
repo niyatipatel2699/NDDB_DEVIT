@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/event_rl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.ui.home.HomeFragment"
-    android:id="@+id/event_rl">
+    tools:context=".Activity.ui.home.HomeFragment">
 
     <RelativeLayout
         android:id="@+id/image_rl"
@@ -58,31 +57,31 @@
         android:id="@+id/main_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility = "visible">
+        android:visibility="visible">
 
-    <RelativeLayout
+        <RelativeLayout
             android:id="@+id/slider_rl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:ignore="MissingConstraints">
 
-        <com.smarteist.autoimageslider.SliderView
-            android:id="@+id/slider"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
-            android:layout_centerInParent="true"
-            app:sliderAnimationDuration="600"
-            app:sliderAutoCycleDirection="back_and_forth"
-            app:sliderIndicatorAnimationDuration="600"
-            app:sliderIndicatorEnabled="true"
-            app:sliderIndicatorGravity="center_horizontal|bottom"
-            app:sliderIndicatorMargin="15dp"
-            app:sliderIndicatorOrientation="horizontal"
-            app:sliderIndicatorPadding="3dp"
-            app:sliderIndicatorRadius="1dp"
-            app:sliderIndicatorSelectedColor="#5A5A5A"
-            app:sliderIndicatorUnselectedColor="#FFF"
-            app:sliderScrollTimeInSec="1" />
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_centerInParent="true"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorEnabled="true"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="3dp"
+                app:sliderIndicatorRadius="1dp"
+                app:sliderIndicatorSelectedColor="#5A5A5A"
+                app:sliderIndicatorUnselectedColor="#FFF"
+                app:sliderScrollTimeInSec="1" />
 
         </RelativeLayout>
 
@@ -92,8 +91,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/slider_rl"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            >
+            android:layout_marginBottom="@dimen/_10sdp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -145,16 +143,15 @@
                             android:textSize="@dimen/_10sdp" />
 
                         <TextView
-                            android:layout_centerHorizontal="true"
                             android:id="@+id/textViewStopWatch"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_your_total_steps"
+                            android:layout_centerHorizontal="true"
                             android:gravity="center"
                             android:text="00:00:00"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            android:layout_below="@id/tv_your_total_steps"
-                            />
+                            android:textSize="@dimen/_10sdp" />
 
                         <com.mikhaellopez.circularprogressbar.CircularProgressBar
                             android:id="@+id/circularProgressBar"
@@ -169,8 +166,6 @@
                             app:cpb_round_border="true" />
 
                     </RelativeLayout>
-
-
 
 
                 </RelativeLayout>
@@ -197,26 +192,26 @@
             android:layout_alignParentBottom="true"
             android:background="@drawable/event_bottom" />
 
-    <RelativeLayout
-        android:id="@+id/relStartService"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/start_ring">
-
-        <TextView
-            android:id="@+id/tvStart"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <RelativeLayout
+            android:id="@+id/relStartService"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/nunito_extrabold"
-            android:gravity="center_vertical"
-            android:text="@string/start"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_13sdp" />
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/start_ring">
 
+            <TextView
+                android:id="@+id/tvStart"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/nunito_extrabold"
+                android:gravity="center_vertical"
+                android:text="@string/start"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_8sdp" />
+
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
 </RelativeLayout>

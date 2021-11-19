@@ -54,7 +54,7 @@
     <string name="message_something_went_wrong_str">काहीतरी चुकले!</string>
     <!--<string name="your_total_step_walked">चाललेली पावले</string>-->
     <string name="your_total_step_walked">आज पावले  </string>
-    <string name="target">लक्ष्य: १५००/दिवस</string>
+    <string name="target">लक्ष्य: 2५००/दिवस</string>
     <string name="updated">अद्ययावत:</string>
     <string name="total_contributed_steps">एकूण योगदान </string>
     <string name="your_rank">अभिनंदन! तुमचा सध्याचा क्रमांक आहे</string>

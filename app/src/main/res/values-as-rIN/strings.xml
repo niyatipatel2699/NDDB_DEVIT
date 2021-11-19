@@ -54,7 +54,7 @@
     <string name="message_something_went_wrong_str">কিবা ভুল হৈছে</string>
     <!--<string name="your_total_step_walked">পদক্ষেপ আগবাঢ়িল</string>-->
     <string name="your_total_step_walked">আজিৰ পদক্ষেপসমূহ </string>
-    <string name="target">লক্ষ্য: 1500/দিন</string>
+    <string name="target">লক্ষ্য: 2500/দিন</string>
     <string name="updated">আপডেট কৰা হৈছে:</string>
     <string name="total_contributed_steps">মুঠ অৱদান</string>
     <string name="your_rank">অভিনন্দন! আপুনি বর্তমান ৰেঙ্ক পাইছে</string>

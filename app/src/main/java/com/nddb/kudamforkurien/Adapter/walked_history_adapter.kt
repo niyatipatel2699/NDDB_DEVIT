@@ -19,7 +19,7 @@ class walked_history_adapter(
 ) : RecyclerView.Adapter<walked_history_adapter.ViewHolder>() {
 
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        p0.tv_Count?.text = stepslist[p1].steps.toString() + "/1500"
+        p0.tv_Count?.text = stepslist[p1].steps.toString() + "/2500"
         //val fDate: String = stepslist[p1].date
         val inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
         val outputFormat: DateFormat = SimpleDateFormat("dd-MMM-yyyy")

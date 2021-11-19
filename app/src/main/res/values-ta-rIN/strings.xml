@@ -54,7 +54,7 @@
     <string name="message_something_went_wrong_str">ஏதோ பிழை நிகழ்ந்துள்ளது</string>
     <!--<string name="your_total_step_walked">நடந்திருக்கும் காலடிகள்</string>-->
     <string name="your_total_step_walked">படிகள் இன்று  </string>
-    <string name="target">இலக்கு: 1500/ நாள்</string>
+    <string name="target">இலக்கு: 2500/ நாள்</string>
     <string name="updated">புதுப்பிக்க:</string>
     <string name="total_contributed_steps">மொத்த பங்களிப்பு</string>
     <string name="your_rank">வாழ்த்துகள்! உங்கள் தற்போதைய ரேங்க்</string>

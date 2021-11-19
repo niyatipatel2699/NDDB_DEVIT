@@ -104,6 +104,10 @@ class EventFragment : Fragment() {
         {
             binding.tvStart.text = activity?.getString(R.string.stop)
             binding.relStartService.setBackgroundResource(R.drawable.stop_ring)
+            binding.textViewStopWatch.visibility = View.VISIBLE
+        }else {
+            binding?.tvTotalSteps?.text= "0"
+            binding.textViewStopWatch.visibility = View.GONE
         }
 
         binding.relStartService.setOnClickListener {
@@ -163,8 +167,10 @@ class EventFragment : Fragment() {
                     //startTimer()
                     binding.tvStart.text = activity?.getString(R.string.stop)
                     binding.relStartService.setBackgroundResource(R.drawable.stop_ring)
+                    binding?.tvTotalSteps?.text= "0"
                     startAlarm()
                     MySharedPreferences.getMySharedPreferences()!!.keySteps=0
+                    binding.textViewStopWatch.visibility = View.VISIBLE
                 } else {
                    /* stopTimer()
                     resetTimerView()*/
@@ -173,9 +179,11 @@ class EventFragment : Fragment() {
                     intent.putExtra("stopped", true)
                     //activity?.startService(intent)
                     ContextCompat.startForegroundService(requireContext(), intent)
+                    binding?.tvTotalSteps?.text= "0"
                     binding.relStartService.setBackgroundResource(R.drawable.start_ring)
                    // isServiceStart = false
                     binding.tvStart.text = activity?.getString(R.string.start)
+                    binding.textViewStopWatch.visibility = View.GONE
                 }
             }
             .setNegativeButton(

@@ -257,7 +257,7 @@ class HomeFragment : Fragment() {
     fun initObservation() {
         homeViewModel.rankLiveData.observe(requireActivity()) { rankResponse ->
 
-           /* if(rankResponse.event_status)
+           if(rankResponse.event_status == "false")
             {
                 var alertDialog = AlertDialog(activity,"home")
                 alertDialog.show()
@@ -266,8 +266,7 @@ class HomeFragment : Fragment() {
                     activity?.finish();
                     System.exit(0);
                 }
-
-            }*/
+            }
 
             if (rankResponse.status == 1) {
                 //Log.e("rankl",rankResponse.)

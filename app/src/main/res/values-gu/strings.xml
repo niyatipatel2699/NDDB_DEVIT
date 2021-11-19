@@ -38,7 +38,7 @@
     <string name="verify_continue">ચકાસો અને ચાલુ રાખો</string>
 
     <string name="menu_dashboard">કુરિયન માટે કદમ</string>
-    <string name="menu_event">ઘટના</string>
+    <string name="menu_event">ઈવેન્ટ</string>
     <string name="menu_walked_history">ઇતિહાસ</string>
     <string name="menu_gallery">ગેલેરી</string>
     <string name="menu_change_language">ભાષા</string>
@@ -54,7 +54,7 @@
     <string name="message_something_went_wrong_str">કંઈક ખોટું થયું!</string>
     <!--<string name="your_total_step_walked">પગલાંઓ ચાલ્યા</string>-->
     <string name="your_total_step_walked">આજે પગલાં </string>
-    <string name="target">લક્ષ્ય: 1500/દિવસ</string>
+    <string name="target">લક્ષ્ય: 2500/દિવસ</string>
     <string name="updated">અપડેટ થયેલ છે:</string>
     <string name="total_contributed_steps">કુલ ફાળો </string>
     <string name="your_rank">અભિનંદન! તમે હાલમાં રેન્ક પર છો</string>

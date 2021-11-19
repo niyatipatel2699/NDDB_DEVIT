@@ -52,7 +52,7 @@
     <string name="message_something_went_wrong_str">Something went wrong!</string>
     <!--<string name="your_total_step_walked">Steps Walked</string>-->
     <string name="your_total_step_walked">Steps Today </string>
-    <string name="target">Target: 1500/day</string>
+    <string name="target">Target: 2500/day</string>
     <string name="updated">Updated:</string>
     <string name="total_contributed_steps">Total Contribution </string>
     <string name="your_rank">Congratulations! You currently rank\n</string>

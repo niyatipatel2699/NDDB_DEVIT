@@ -80,7 +80,7 @@ interface LoginApiService {
 
 
 
-    @POST("api/v1/stepscount/create/sqs")
+    @POST("api/v1/stepscount/create")
     suspend fun stepCount(
         @Body jsonObject: JsonObject
         ) : ApiResponse<StepCountResponse>
