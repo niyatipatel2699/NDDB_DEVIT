@@ -6,6 +6,8 @@ import android.content.Context.ACTIVITY_SERVICE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.ResultReceiver
 import android.preference.PreferenceManager
 import android.util.Log
@@ -34,11 +36,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 
 class EventFragment : Fragment() {
-
+    var TIMER_INTERVAL = 1000
     var url1 = "https://media.nationalgeographic.org/assets/photos/000/249/24969.jpg"
     var url2 =
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ54CE_FOgSo3all2YDRz1bJl6D5zrvpZ9vVw&usqp=CAU"
@@ -57,7 +60,10 @@ class EventFragment : Fragment() {
     lateinit var alertDialog: AlertDialog
 
     var isServiceStart: Boolean = false
+    private var mHandler: Handler? = null
 
+    private var timeInSeconds = 0L
+    private var startButtonClicked = false
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -110,9 +116,11 @@ class EventFragment : Fragment() {
                 dialogInterface.dismiss()
                 if (!isServiceRunning()) {
                     subscribeService()
+                    startTimer()
                     binding.tvStart.text = activity?.getString(R.string.stop)
                     startAlarm()
                 } else {
+                    stopTimer()
                     val intent = Intent(activity, MotionService::class.java)
                     intent.putExtra("stopped", true)
                     //activity?.startService(intent)
@@ -201,6 +209,7 @@ class EventFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        //resetTimerView()
     }
 
     private fun subscribeService() {
@@ -238,4 +247,54 @@ class EventFragment : Fragment() {
         val alarmUtils = AlarmUtils(requireContext())
         alarmUtils.initRepeatingAlarm(calendar)
     }
+
+
+    private fun resetTimerView() {
+        timeInSeconds = 0
+        startButtonClicked = false
+    }
+
+    private fun startTimer() {
+        mHandler = Handler(Looper.getMainLooper())
+        mStatusChecker.run()
+    }
+
+    private fun stopTimer() {
+        mHandler?.removeCallbacks(mStatusChecker)
+    }
+
+    private var mStatusChecker: Runnable = object : Runnable {
+        override fun run() {
+            try {
+                timeInSeconds += 1
+                Log.e("timeInSeconds", timeInSeconds.toString())
+                updateStopWatchView(timeInSeconds)
+            } finally {
+                // 100% guarantee that this always happens, even if
+                // your update method throws an exception
+                mHandler!!.postDelayed(this, TIMER_INTERVAL.toLong())
+            }
+        }
+    }
+
+    private fun updateStopWatchView(timeInSeconds: Long) {
+        val formattedTime = getFormattedStopWatch((timeInSeconds * 1000))
+        Log.e("formattedTime", formattedTime)
+        binding?.textViewStopWatch?.text = formattedTime
+    }
+
+
+    fun getFormattedStopWatch(ms: Long): String {
+        var milliseconds = ms
+        val hours = TimeUnit.MILLISECONDS.toHours(milliseconds)
+        milliseconds -= TimeUnit.HOURS.toMillis(hours)
+        val minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds)
+        milliseconds -= TimeUnit.MINUTES.toMillis(minutes)
+        val seconds = TimeUnit.MILLISECONDS.toSeconds(milliseconds)
+
+        return "${if (hours < 10) "0" else ""}$hours:" +
+                "${if (minutes < 10) "0" else ""}$minutes:" +
+                "${if (seconds < 10) "0" else ""}$seconds"
+    }
+
 }

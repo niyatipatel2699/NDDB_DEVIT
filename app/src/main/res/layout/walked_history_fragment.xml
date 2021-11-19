@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,90 +8,93 @@
     >
 
     <RelativeLayout
-        android:id="@+id/rl_walkedHistory"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_10sdp">
+        android:layout_height="wrap_content">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_walkedHistory"
+        <RelativeLayout
+            android:id="@+id/rl_walkedHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-             />
+            android:layout_marginHorizontal="@dimen/_10sdp">
 
-    </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_walkedHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rl_walkedHistory"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/history_rounded_total"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="vertical"
-            android:padding="@dimen/_17sdp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito_bold"
-                android:text="@string/total_contributed_steps" />
-
-            <TextView
-                android:id="@+id/tv_total_step"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito_bold"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/black"
-                tools:text="" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:gravity="center_vertical|center_horizontal"
+            android:layout_below="@+id/rl_walkedHistory"
+            android:layout_alignParentBottom="true"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iv_trophy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_ring_dashboard"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:src="@drawable/trophy" />
-
-            <TextView
-                android:id="@+id/tv_yourRank"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_trophy"
+                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/nunito_semibold"
-                android:gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp" />
+                android:background="@drawable/history_rounded_total"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical"
+                android:padding="@dimen/_17sdp">
 
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/total_contributed_steps" />
+
+                <TextView
+                    android:id="@+id/tv_total_step"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/black"
+                    tools:text="" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_yourRank"
-                android:fontFamily="@font/nunito_semibold"
-                android:gravity="center"
-                android:padding="@dimen/_5sdp"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
-                android:text="@string/history_thank_msg" />
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_marginTop="@dimen/_20sdp"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="vertical">
 
-</RelativeLayout>
+                <ImageView
+                    android:id="@+id/iv_trophy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_ring_dashboard"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:src="@drawable/trophy" />
+
+                <TextView
+                    android:id="@+id/tv_yourRank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_trophy"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_yourRank"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:gravity="center"
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="@string/history_thank_msg" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
