@@ -81,6 +81,8 @@ class ChooseLanguageActivity : BaseActivity() {
         var lanAdapter = CustomRecyclerAdapter(this, list!!,1)
           chooseLanguageBinding.rvEffectList.adapter = lanAdapter
 
+        lanAdapter.row_index = 0
+
         chooseLanguageBinding.btnNext.setOnClickListener {
 
 

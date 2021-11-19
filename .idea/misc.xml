@@ -29,9 +29,11 @@
         <entry key="..\:/Users/niyati.patel/AndroidStudioProjects/NEW-29-10-NDDB/NDDB/app/src/main/res/layout/nav_header_drawer.xml" value="0.33" />
         <entry key="..\:/Users/niyati.patel/AndroidStudioProjects/NEW-29-10-NDDB/NDDB/app/src/main/res/layout/progress_dialog.xml" value="0.25925925925925924" />
         <entry key="..\:/Users/niyati.patel/AndroidStudioProjects/NEW-29-10-NDDB/NDDB/app/src/main/res/menu/activity_main_drawer.xml" value="0.36666666666666664" />
+        <entry key="app/src/main/res/drawable/ic_youtube_icon.xml" value="0.3484375" />
         <entry key="app/src/main/res/layout/activity_choose_language.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/activity_drawer.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/activity_facilitator.xml" value="0.33229166666666665" />
+        <entry key="app/src/main/res/layout/activity_image_viewer.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/adapter_walked_history_item.xml" value="0.33229166666666665" />
         <entry key="app/src/main/res/layout/event_fragment.xml" value="0.33" />

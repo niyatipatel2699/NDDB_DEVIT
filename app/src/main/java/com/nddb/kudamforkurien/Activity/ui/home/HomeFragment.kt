@@ -1271,7 +1271,8 @@ class HomeFragment : Fragment() {
         }
 
         binding.tvTotalSteps.setText(totalSteps.toString())
-        binding.circularProgressBar.setProgressWithAnimation(totalSteps.toFloat() / 1500, 1000); // =1s
+
+        binding.circularProgressBar.setProgressWithAnimation(totalSteps.toFloat(), 1000); // =1s
         updateTotalSteps()
     }
 
