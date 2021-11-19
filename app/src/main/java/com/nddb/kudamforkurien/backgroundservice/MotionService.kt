@@ -90,17 +90,19 @@ internal class MotionService : Service(), SensorEventListener {
         // connect sensor
         mSensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
-        if (mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
+        /*if (mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) != null) {
             stepDetector = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         } else {
-            stepDetector = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-            simpleStepDetector = StepDetector(object : StepDetector.StepListener {
-                override fun step(timeNs: Long) {
-                    Log.d(TAG, "using fallback sensor accelerometer" + mCurrentSteps + 1)
-                    handleEvent(mCurrentSteps + 1)
-                }
-            })
-        }
+
+        }*/
+
+        stepDetector = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        simpleStepDetector = StepDetector(object : StepDetector.StepListener {
+            override fun step(timeNs: Long) {
+                Log.d(TAG, "using fallback sensor accelerometer" + mCurrentSteps + 1)
+                handleEvent(mCurrentSteps + 1)
+            }
+        })
 
         /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && manager.hasSystemFeature(PackageManager.FEATURE_SENSOR_STEP_COUNTER)) {
             // androids built in step counter
