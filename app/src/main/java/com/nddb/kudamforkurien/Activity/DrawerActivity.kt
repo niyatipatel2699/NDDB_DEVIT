@@ -118,7 +118,7 @@ class DrawerActivity : BaseActivity() {
     fun showDownloadBtn(enabled:Boolean)
     {
         if(enabled){
-            binding.appBarDrawer.ivHome.visibility = View.VISIBLE
+            binding.appBarDrawer.ivHome.visibility = View.GONE
         }
         else{
             binding.appBarDrawer.ivHome.visibility = View.GONE

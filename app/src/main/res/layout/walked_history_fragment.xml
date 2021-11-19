@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/fragment_walk"
-    android:layout_height="match_parent"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/iv_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:src="@drawable/download_certificate"
+            app:tint="@color/orange" />
+
         <RelativeLayout
             android:id="@+id/rl_walkedHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_download"
             android:layout_marginHorizontal="@dimen/_10sdp">
 
             <androidx.recyclerview.widget.RecyclerView
@@ -91,9 +103,9 @@
                     android:fontFamily="@font/nunito_semibold"
                     android:gravity="center"
                     android:padding="@dimen/_5sdp"
+                    android:text="@string/history_thank_msg"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:text="@string/history_thank_msg" />
+                    android:textSize="@dimen/_10sdp" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

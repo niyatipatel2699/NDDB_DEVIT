@@ -128,6 +128,8 @@
 
     <string name="event_alert_msg">This feature will get activated on 26-Nov-2021 date</string>
 
+     <string name="download_certificate">You can download certificate between 26th Nov to 30th Nov 2021.</string>
+
     <!--<string name="kadam_for_kurien">Kadam for Kurien</string>-->
      <string name="please_enter_num_of_people">Please Enter Number of People</string>
      <string name="event_tv">To contribute your steps to the target of 200 million steps</string>

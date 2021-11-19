@@ -1,6 +1,8 @@
 package com.nddb.kudamforkurien.Activity.ui.walked_history
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +18,13 @@ import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.data.remote.responses.History.HistoryData
 import com.nddb.kudamforkurien.data.room.DatabaseHelper
 import com.nddb.kudamforkurien.databinding.WalkedHistoryFragmentBinding
+import com.nddb.kudamforkurien.dialog.AlertDialog
+import com.nddb.kudamforkurien.utils.RestConstant
 import com.nddb.kudamforkurien.utils.showSnack
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class WalkedHistoryFragment : Fragment() {
@@ -36,6 +43,8 @@ class WalkedHistoryFragment : Fragment() {
 
     private lateinit var stepslist:ArrayList<HistoryData>
 
+    lateinit var alertDialog: AlertDialog
+
     private lateinit var lanAdapter:walked_history_adapter
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -45,6 +54,8 @@ class WalkedHistoryFragment : Fragment() {
     ): View? {
         viewModel =
             ViewModelProvider(this).get(WalkedHistoryViewModel::class.java)
+
+         alertDialog = AlertDialog(activity)
 
         _binding = WalkedHistoryFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -66,6 +77,46 @@ class WalkedHistoryFragment : Fragment() {
         binding.tvYourRank.text = stringResult
 
         binding.tvTotalStep.text = MySharedPreferences.getMySharedPreferences()!!.total_steps.toString()
+
+        binding.ivDownload.setOnClickListener {
+            val sdf = SimpleDateFormat("dd-MM-yyyy")
+            val currentDate = sdf.format(Date())
+            val finalDate = "26-11-2021"
+
+            if (currentDate == "26-11-2021") {
+                openCertificate()
+            } else if (currentDate == "27-11-2021") {
+                openCertificate()
+            } else if (currentDate == "28-11-2021") {
+                openCertificate()
+            } else if (currentDate == "29-11-2021") {
+                openCertificate()
+            } else if (currentDate == "30-11-2021") {
+                openCertificate()
+            } else {
+                alertDialog.show()
+            }
+
+            alertDialog.btnOk.setOnClickListener{
+                alertDialog.dismiss()
+            }
+
+//            if (finalDate.compareTo(currentDate) > 0)
+//            {      alertDialog.show()}
+//            else if (finalDate.compareTo(currentDate) < 0)
+//            {   alertDialog.dismiss()}
+//            else if (finalDate.compareTo(currentDate) == 0)
+//            {    alertDialog.dismiss()
+//                val str1 = MySharedPreferences.getMySharedPreferences()!!.token
+//                val n = 7
+//                val result = str1.drop(n)
+//                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(RestConstant.CERTIFICATE_URL + result))
+//                browserIntent.setPackage("com.android.chrome") // Whatever browser you are using
+//                startActivity(browserIntent)
+//            }
+
+
+        }
 
         /*GlobalScope.launch(Dispatchers.Main) {
             //binding.tvTotalSteps.setText(step.toString())
@@ -89,6 +140,15 @@ class WalkedHistoryFragment : Fragment() {
             binding.rvWalkedHistory.adapter = lanAdapter
         }
 */
+    }
+
+    private fun openCertificate() {
+            val str1 = MySharedPreferences.getMySharedPreferences()!!.token
+                val n = 7
+                val result = str1.drop(n)
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(RestConstant.CERTIFICATE_URL + result))
+                browserIntent.setPackage("com.android.chrome") // Whatever browser you are using
+                startActivity(browserIntent)
     }
 
     override fun onDestroyView() {
