@@ -163,8 +163,8 @@ internal class MotionService : Service(), SensorEventListener {
 
     private fun handleEvent() {
         // Check if new day started
-
-        GlobalScope.launch(Dispatchers.Main) {
+        MySharedPreferences.getMySharedPreferences()!!.keySteps = mTodaysSteps
+       /* GlobalScope.launch(Dispatchers.Main) {
             var lat = MySharedPreferences.getMySharedPreferences()!!.latitude
             var lng = MySharedPreferences.getMySharedPreferences()!!.longitude
             var address = MySharedPreferences.getMySharedPreferences()!!.district
@@ -173,7 +173,7 @@ internal class MotionService : Service(), SensorEventListener {
             if (step != null) {
                // sharedPreferences.edit().putInt(KEY_STEPS, mTodaysSteps).apply()
                 MySharedPreferences.getMySharedPreferences()!!.keySteps = mTodaysSteps
-                dbHelper.updateSteps(step.id, mTodaysSteps, address, lat, lng, step.ispass)
+                dbHelper.updateSteps(step.id, mTodaysSteps, address, lat, lng, false)
             } else {
                 mTodaysSteps = 0
                 mCurrentDate = com.nddb.kudamforkurien.utils.Util.calendar.timeInMillis
@@ -181,7 +181,7 @@ internal class MotionService : Service(), SensorEventListener {
                 MySharedPreferences.getMySharedPreferences()!!.keyDate = mCurrentDate
                 dbHelper.insertSteps(Steps(currentDate, mTodaysSteps, address, lat, lng, false))
             }
-        }
+        }*/
 
         /* if (!DateUtils.isToday(mCurrentDate)) {
 

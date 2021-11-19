@@ -27,6 +27,7 @@ import com.nddb.kudamforkurien.backgroundservice.ServiceAdmin
 import com.nddb.kudamforkurien.databinding.EventFragmentBinding
 import com.nddb.kudamforkurien.dialog.AlertDialog
 import com.nddb.kudamforkurien.model.SliderData
+import com.nddb.kudamforkurien.utils.AlarmUtils
 import com.smarteist.autoimageslider.SliderView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -109,6 +110,7 @@ class EventFragment : Fragment() {
                 if (!isServiceRunning()) {
                     subscribeService()
                     binding.tvStart.text = activity?.getString(R.string.stop)
+                    startAlarm()
                 } else {
                     val intent = Intent(activity, MotionService::class.java)
                     intent.putExtra("stopped", true)
@@ -226,4 +228,13 @@ class EventFragment : Fragment() {
         isServiceStart = true
     }
 
+
+    fun startAlarm()
+    {
+        val calendar = Calendar.getInstance()
+
+        calendar.add(Calendar.MINUTE, 10);
+        val alarmUtils = AlarmUtils(requireContext())
+        alarmUtils.initRepeatingAlarm(calendar)
+    }
 }
