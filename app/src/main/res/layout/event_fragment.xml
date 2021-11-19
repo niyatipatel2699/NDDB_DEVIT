@@ -213,7 +213,7 @@
             android:fontFamily="@font/nunito_extrabold"
             android:gravity="center_vertical"
             android:text="@string/start"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/_13sdp" />
 
     </RelativeLayout>
