@@ -11,7 +11,7 @@ import com.nddb.kudamforkurien.R
 import java.util.*
 
 
-class AlertDialog(context: Context?) : Dialog(context!!) {
+class AlertDialog(context: Context?,type: String) : Dialog(context!!) {
     var txtTitle: AppCompatTextView
     var btnOk: AppCompatButton
 
@@ -25,5 +25,12 @@ class AlertDialog(context: Context?) : Dialog(context!!) {
         setCancelable(false)
         btnOk = findViewById(R.id.btnOk)
         txtTitle = findViewById(R.id.txt_title)
+
+        if(type.equals("home"))
+        {
+            txtTitle.text=context?.getString(R.string.thank_you_for_using_app)
+        }
+
+
     }
 }

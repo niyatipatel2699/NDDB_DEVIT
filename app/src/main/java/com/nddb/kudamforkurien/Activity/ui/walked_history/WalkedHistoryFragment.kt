@@ -55,7 +55,7 @@ class WalkedHistoryFragment : Fragment() {
         viewModel =
             ViewModelProvider(this).get(WalkedHistoryViewModel::class.java)
 
-         alertDialog = AlertDialog(activity)
+         alertDialog = AlertDialog(activity,"history")
 
         _binding = WalkedHistoryFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root

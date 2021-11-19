@@ -49,6 +49,7 @@ import com.nddb.kudamforkurien.data.room.DatabaseHelper
 import com.nddb.kudamforkurien.data.room.DatabaseHelperImpl
 import com.nddb.kudamforkurien.data.room.entity.Steps
 import com.nddb.kudamforkurien.databinding.FragmentHomeBinding
+import com.nddb.kudamforkurien.dialog.AlertDialog
 import com.nddb.kudamforkurien.model.DataSteps
 import com.nddb.kudamforkurien.model.SliderData
 import com.nddb.kudamforkurien.utils.Converters
@@ -255,6 +256,18 @@ class HomeFragment : Fragment() {
 
     fun initObservation() {
         homeViewModel.rankLiveData.observe(requireActivity()) { rankResponse ->
+
+            if(!rankResponse.event_status)
+            {
+                var alertDialog = AlertDialog(activity,"home")
+                alertDialog.show()
+                alertDialog.btnOk.setOnClickListener{
+                    alertDialog.dismiss()
+                    activity?.finish();
+                    System.exit(0);
+                }
+            }
+
             if (rankResponse.status == 1) {
                 //Log.e("rankl",rankResponse.)
                 if (rankResponse.items.size > 0) {
