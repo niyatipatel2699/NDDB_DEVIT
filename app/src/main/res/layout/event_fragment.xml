@@ -203,7 +203,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/event_ring">
+        android:background="@drawable/start_ring">
 
         <TextView
             android:id="@+id/tvStart"
@@ -213,7 +213,7 @@
             android:fontFamily="@font/nunito_extrabold"
             android:gravity="center_vertical"
             android:text="@string/start"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/_13sdp" />
 
     </RelativeLayout>
