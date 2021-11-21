@@ -42,14 +42,14 @@ class ChooseLanguageActivity : BaseActivity() {
         "हिंदी",
         "ગુજરાતી",
         "मराठी",
-        "ಕನ್ನಡ", // Tamil
-        "తెలుగు", // Telugu
-        "മലയാളി",// Kannad
-        "ਪੰਜਾਬੀ",// Malayalam
-        "ಕನ್ನಡ",// Bengali
-        "తెలుగు",// Punjabi
-        "മലയാളി",// Assamese
-        "ਪੰਜਾਬੀ",// Odia
+        "ਪੰਜਾਬੀ", //=> Punjabi
+        "বাংলা ", // bengali
+        "தமிழ் ", // tamil
+        "தெலுங்கு  ",//telugu
+        "ಕನ್ನಡ  ", //kannad
+        "മലയാളം ", // malayalam
+        "অসমীয়া ", //assamee
+        "ରନ୍ " //odiya
     )
 
    // var languageList: ArrayList<LanguageData>? = null
