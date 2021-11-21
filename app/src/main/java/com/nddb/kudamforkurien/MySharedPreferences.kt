@@ -96,6 +96,13 @@ class MySharedPreferences internal constructor(context: Context, gson: Gson) {
         set(keySteps) {
             editor.putInt(RestConstant.KEY_STEPS, keySteps).apply()
         }
+
+    var keyStepsHome: Int
+        get() = sharedPreferences.getInt(RestConstant.KEY_STEPS_HOME, 0)
+        set(keySteps) {
+            editor.putInt(RestConstant.KEY_STEPS_HOME, keySteps).apply()
+        }
+
     /*var lang_name: String
         get() = sharedPreferences.getString(RestConstant.LANG_NAME, " ")!!
         set(lang_name) {

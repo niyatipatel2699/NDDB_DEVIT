@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
+import android.app.ActivityManager
 import android.content.*
 import android.content.pm.PackageManager
 import android.location.Address
@@ -24,6 +25,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
@@ -44,6 +46,8 @@ import com.nddb.kudamforkurien.Adapter.slider_adapter
 import com.nddb.kudamforkurien.BuildConfig
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
+import com.nddb.kudamforkurien.backgroundservice.MotionService
+import com.nddb.kudamforkurien.backgroundservice.MotionServiceNew
 import com.nddb.kudamforkurien.data.room.DatabaseBuilder
 import com.nddb.kudamforkurien.data.room.DatabaseHelper
 import com.nddb.kudamforkurien.data.room.DatabaseHelperImpl
@@ -53,6 +57,7 @@ import com.nddb.kudamforkurien.dialog.AlertDialog
 import com.nddb.kudamforkurien.model.DataSteps
 import com.nddb.kudamforkurien.model.SliderData
 import com.nddb.kudamforkurien.utils.Converters
+import com.nddb.kudamforkurien.utils.Helper
 import com.nddb.kudamforkurien.utils.NetworkUtils
 import com.smarteist.autoimageslider.SliderView
 import dagger.hilt.android.AndroidEntryPoint
@@ -184,6 +189,17 @@ class HomeFragment : Fragment() {
             getActivity()?.startActivity(intent)
         }
 
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(mMessageReceiver,
+            IntentFilter("Motion-Service-Home")
+        )
+
+        if(!isServiceRunning())
+        {
+            val intent = Intent(activity, MotionServiceNew::class.java)
+            activity?.startService(intent)
+        }
+        sendFitDataToServer()
+
 //        getRank()
         initObservation()
         return root
@@ -248,9 +264,8 @@ class HomeFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (!checkPlayServices()) return
-//        getDeviceLocation()
-        requestFitPermission()
+        /*if (!checkPlayServices()) return
+        requestFitPermission()*/
 
     }
 
@@ -1314,5 +1329,36 @@ class HomeFragment : Fragment() {
         return cityName
         /*  val stateName: String = addresses[0].getAddressLine(1)
           val countryName: String = addresses[0].getAddressLine(2)*/
+    }
+
+    private fun isServiceRunning(): Boolean {
+        val manager = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
+        for (service in manager!!.getRunningServices(Int.MAX_VALUE)) {
+            if ("com.nddb.kudamforkurien.backgroundservice.MotionService" == service.service.className) {
+                return true
+            }
+        }
+        return false
+    }
+
+    private var mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if(!isVisible)
+                return
+          /*  if (intent.hasExtra(MotionService.KEY_TIMER)) {
+                val time = intent.getStringExtra(MotionService.KEY_TIMER)
+                Helper.runOnUiThread {
+                    binding?.textViewStopWatch?.text = time
+                }
+            }
+            else*/ if (intent.hasExtra(MotionService.KEY_STEPS)) {
+                val steps = intent.getIntExtra(MotionService.KEY_STEPS,0)
+                Helper.runOnUiThread {
+                    binding?.tvTotalSteps?.text = steps.toString()
+//                    binding.circularProgressBar.setProgressWithAnimation(steps!!.toFloat(), 1000); // =1s
+                }
+                binding.circularProgressBar.setProgressWithAnimation(steps!!.toFloat(), 1000)
+            }
+        }
     }
 }

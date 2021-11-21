@@ -94,6 +94,10 @@
             android:enabled="true"/>
 
         <service
+            android:name="com.nddb.kudamforkurien.backgroundservice.MotionServiceNew"
+            android:enabled="true"/>
+
+        <service
             android:name="com.nddb.kudamforkurien.backgroundservice.FirebaseMessagingService"
             android:exported="false">
             <intent-filter>

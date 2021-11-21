@@ -19,6 +19,7 @@ import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.nddb.kudamforkurien.Activity.DrawerActivity
 import com.nddb.kudamforkurien.Activity.ui.event.EventFragment
+import com.nddb.kudamforkurien.Activity.ui.home.HomeFragment
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.data.room.DatabaseBuilder
@@ -39,7 +40,7 @@ import java.util.concurrent.TimeUnit
  *
  * Created by sinku on 10.11.2021.
  */
-internal class MotionService : Service(), SensorEventListener {
+internal class MotionServiceNew : Service(), SensorEventListener {
     //private lateinit var sharedPreferences: SharedPreferences
 
     // steps at the current day
@@ -88,7 +89,7 @@ internal class MotionService : Service(), SensorEventListener {
         mCurrentDate =MySharedPreferences.getMySharedPreferences()!!.keyDate
 
         // get last steps
-        mTodaysSteps = MySharedPreferences.getMySharedPreferences()!!.keySteps
+        mTodaysSteps = MySharedPreferences.getMySharedPreferences()!!.keyStepsHome
 
         val manager = packageManager
 
@@ -168,10 +169,10 @@ internal class MotionService : Service(), SensorEventListener {
 
     private fun handleEvent() {
         // Check if new day started
-        MySharedPreferences.getMySharedPreferences()!!.keySteps = mTodaysSteps
+        //MySharedPreferences.getMySharedPreferences()!!.keyStepsHome = mTodaysSteps
 
 
-        /*GlobalScope.launch(Dispatchers.Main) {
+        GlobalScope.launch(Dispatchers.Main) {
             var lat = MySharedPreferences.getMySharedPreferences()!!.latitude
             var lng = MySharedPreferences.getMySharedPreferences()!!.longitude
             var address = MySharedPreferences.getMySharedPreferences()!!.district
@@ -179,16 +180,16 @@ internal class MotionService : Service(), SensorEventListener {
             var step = dbHelper.getStep(currentDate)
             if (step != null) {
                // sharedPreferences.edit().putInt(KEY_STEPS, mTodaysSteps).apply()
-                MySharedPreferences.getMySharedPreferences()!!.keySteps = mTodaysSteps
+                MySharedPreferences.getMySharedPreferences()!!.keyStepsHome = mTodaysSteps
                 dbHelper.updateSteps(step.id, mTodaysSteps, address, lat, lng, false)
             } else {
-                mTodaysSteps = 0
+              //  mTodaysSteps = 0
                 mCurrentDate = com.nddb.kudamforkurien.utils.Util.calendar.timeInMillis
                 //sharedPreferences.edit().putLong(KEY_DATE, mCurrentDate).apply()
                 MySharedPreferences.getMySharedPreferences()!!.keyDate = mCurrentDate
                 dbHelper.insertSteps(Steps(currentDate, mTodaysSteps, address, lat, lng, false))
             }
-        }*/
+        }
 
         /* if (!DateUtils.isToday(mCurrentDate)) {
 
@@ -239,7 +240,7 @@ internal class MotionService : Service(), SensorEventListener {
             Log.e("sensor", "sendUpdate1")
             it.send(0, bundle)
         }*/
-        val intent = Intent("Motion-Service")
+        val intent = Intent("Motion-Service-Home")
         intent.putExtra(KEY_STEPS, mTodaysSteps)
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
 
@@ -262,7 +263,7 @@ internal class MotionService : Service(), SensorEventListener {
         if (intent != null) {
             when {
                 ACTION_SUBSCRIBE == intent.action -> receiver =
-                    intent.getParcelableExtra(EventFragment.TAG)
+                    intent.getParcelableExtra(HomeFragment.TAG)
                 ACTION_START_ACTIVITY == intent.action -> {
                     val id = motionActivityId++
                     motionActivities.put(id, MotionActivity(id, mCurrentSteps))
@@ -290,14 +291,14 @@ internal class MotionService : Service(), SensorEventListener {
 
     private fun startService() {
         //sharedPreferences.edit().putInt(KEY_STEPS, 0).apply()
-       // MySharedPreferences.getMySharedPreferences()!!.keySteps = 0
+       // MySharedPreferences.getMySharedPreferences()!!.keyStepsHome = 0
        // mTodaysSteps = 0
-        startTimer()
+        //startTimer()
         mNotificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
                 ?: throw IllegalStateException("could not get notification service")
         val notificationIntent = Intent(this, DrawerActivity::class.java)
-        notificationIntent.putExtra( "open" , "event" ) ;
+        //notificationIntent.putExtra( "open" , "event" ) ;
         val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0)
         // Notification channels are only supported on Android O+.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -331,13 +332,13 @@ internal class MotionService : Service(), SensorEventListener {
 
     companion object {
 
-        private val TAG = MotionService::class.java.simpleName
+        private val TAG = MotionServiceNew::class.java.simpleName
         internal const val ACTION_SUBSCRIBE = "ACTION_SUBSCRIBE"
         internal const val ACTION_START_ACTIVITY = "ACTION_START_ACTIVITY"
         internal const val ACTION_STOP_ACTIVITY = "ACTION_STOP_ACTIVITY"
         internal const val ACTION_TOGGLE_ACTIVITY = "ACTION_TOGGLE_ACTIVITY"
         internal const val KEY_ID = "ID"
-        internal const val KEY_STEPS = "STEPS"
+        internal const val KEY_STEPS = "STEPS_HOME"
         internal const val KEY_ACTIVE = "ACTIVE"
         internal const val KEY_ACTIVITIES = "ACTIVITIES"
         internal const val KEY_DATE = "DATE"

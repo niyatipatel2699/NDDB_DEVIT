@@ -34,5 +34,8 @@ object RestConstant {
     const val KEY_DATE = "key_date"
     const val KEY_STEPS = "key_steps"
 
+    const val KEY_STEPS_HOME = "key_steps_home"
+
+
 
 }
