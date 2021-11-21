@@ -1334,7 +1334,7 @@ class HomeFragment : Fragment() {
     private fun isServiceRunning(): Boolean {
         val manager = activity?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
         for (service in manager!!.getRunningServices(Int.MAX_VALUE)) {
-            if ("com.nddb.kudamforkurien.backgroundservice.MotionService" == service.service.className) {
+            if ("com.nddb.kudamforkurien.backgroundservice.MotionServiceNew" == service.service.className) {
                 return true
             }
         }
