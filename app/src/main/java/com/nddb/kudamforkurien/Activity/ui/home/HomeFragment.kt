@@ -195,13 +195,14 @@ class HomeFragment : Fragment() {
 
         var mTodaysSteps =   MySharedPreferences.getMySharedPreferences()!!.keyStepsHome
         binding.tvTotalSteps.setText(mTodaysSteps.toString())
+        binding.circularProgressBar.setProgressWithAnimation(mTodaysSteps!!.toFloat(), 1000)
 
-        if(!isServiceRunning())
-        {
-            val intent = Intent(activity, MotionServiceNew::class.java)
-            activity?.startService(intent)
-        }
-        sendFitDataToServer()
+//        if(!isServiceRunning())
+//        {
+//            val intent = Intent(activity, MotionServiceNew::class.java)
+//            activity?.startService(intent)
+//        }
+//        sendFitDataToServer()
 
 //        getRank()
         initObservation()
@@ -244,6 +245,9 @@ class HomeFragment : Fragment() {
                 jsonObject.add("data", toJson)
                 homeViewModel.stepCount(jsonObject)
             }
+            else {
+                getRank()
+            }
 
         }
 
@@ -269,7 +273,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         /*if (!checkPlayServices()) return
         requestFitPermission()*/
-
+        if(!isServiceRunning())
+        {
+            val intent = Intent(activity, MotionServiceNew::class.java)
+            activity?.startService(intent)
+        }
+        sendFitDataToServer()
     }
 
     fun initObservation() {

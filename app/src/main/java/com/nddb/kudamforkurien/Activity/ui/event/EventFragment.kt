@@ -107,6 +107,7 @@ class EventFragment : Fragment() {
             binding.textViewStopWatch.visibility = View.VISIBLE
         }else {
             binding?.tvTotalSteps?.text= "0"
+            binding.circularProgressBar.setProgressWithAnimation(0f, 1000); // =1s
             binding.textViewStopWatch.visibility = View.GONE
         }
 
