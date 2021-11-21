@@ -46,7 +46,7 @@ import com.nddb.kudamforkurien.Adapter.slider_adapter
 import com.nddb.kudamforkurien.BuildConfig
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
-import com.nddb.kudamforkurien.backgroundservice.MotionService
+
 import com.nddb.kudamforkurien.backgroundservice.MotionServiceNew
 import com.nddb.kudamforkurien.data.room.DatabaseBuilder
 import com.nddb.kudamforkurien.data.room.DatabaseHelper
@@ -192,6 +192,9 @@ class HomeFragment : Fragment() {
         LocalBroadcastManager.getInstance(requireContext()).registerReceiver(mMessageReceiver,
             IntentFilter("Motion-Service-Home")
         )
+
+        var mTodaysSteps =   MySharedPreferences.getMySharedPreferences()!!.keyStepsHome
+        binding.tvTotalSteps.setText(mTodaysSteps.toString())
 
         if(!isServiceRunning())
         {

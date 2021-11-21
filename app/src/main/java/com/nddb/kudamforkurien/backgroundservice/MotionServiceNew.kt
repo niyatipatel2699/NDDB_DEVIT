@@ -169,7 +169,7 @@ internal class MotionServiceNew : Service(), SensorEventListener {
 
     private fun handleEvent() {
         // Check if new day started
-        //MySharedPreferences.getMySharedPreferences()!!.keyStepsHome = mTodaysSteps
+        MySharedPreferences.getMySharedPreferences()!!.keyStepsHome = mTodaysSteps
 
 
         GlobalScope.launch(Dispatchers.Main) {
