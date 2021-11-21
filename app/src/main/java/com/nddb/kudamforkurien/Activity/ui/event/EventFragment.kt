@@ -134,7 +134,7 @@ class EventFragment : Fragment() {
 
     fun sendFitDataToServer() {
         var steps=MySharedPreferences.getMySharedPreferences()!!.keySteps
-        var sdf = SimpleDateFormat("dd MMM yyyy")
+        var sdf = SimpleDateFormat("dd MMM yyyy",Locale.US)
         var currentDate = sdf.format(Date())
         var location= MySharedPreferences.getMySharedPreferences()!!.district
         var tempList: java.util.ArrayList<DataSteps> = java.util.ArrayList()

@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -43,7 +44,8 @@ class AlarmReceiver: BroadcastReceiver(){
 
     fun sendFitDataToServer() {
         var steps=MySharedPreferences.getMySharedPreferences()!!.keySteps
-        var sdf = SimpleDateFormat("dd MMM yyyy")
+        //var sdf = SimpleDateFormat("dd MMM yyyy")
+        var sdf = SimpleDateFormat("dd MMM yyyy" , Locale.US)
         var currentDate = sdf.format(Date())
         var location= MySharedPreferences.getMySharedPreferences()!!.district
         var tempList: ArrayList<DataSteps> = ArrayList()

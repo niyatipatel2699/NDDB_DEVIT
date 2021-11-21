@@ -2,6 +2,7 @@ package com.nddb.kudamforkurien.utils
 
 import androidx.room.TypeConverter
 import java.text.SimpleDateFormat
+import java.util.*
 
 class Converters {
    /* @TypeConverter
@@ -25,6 +26,6 @@ class Converters {
 
     companion object{
 
-        val FORMATTER = SimpleDateFormat("yyyy-MM-dd")
+        val FORMATTER = SimpleDateFormat("yyyy-MM-dd", Locale.US )
     }
 }

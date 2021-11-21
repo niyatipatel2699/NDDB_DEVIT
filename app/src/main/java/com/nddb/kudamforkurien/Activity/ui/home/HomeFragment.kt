@@ -227,7 +227,7 @@ class HomeFragment : Fragment() {
                 var tempList: ArrayList<DataSteps> = ArrayList()
                 list.forEach {
                     var inputFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-                    var outputFormat: DateFormat = SimpleDateFormat("dd MMM yyyy")
+                    var outputFormat: DateFormat = SimpleDateFormat("dd MMM yyyy" , Locale.US)
                     var inputDateStr = it.date
                     var date: Date = inputFormat.parse(inputDateStr)
                     var parseDate = outputFormat.format(date)
