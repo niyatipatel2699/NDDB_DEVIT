@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Activity.ui.home.HomeFragment">
 
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:id="@+id/image_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,7 +51,7 @@
             android:layout_marginTop="@dimen/_4sdp"
             android:background="@color/otp_edt_color" />
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <RelativeLayout
         android:id="@+id/main_rl"

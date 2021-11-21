@@ -225,17 +225,17 @@ class EventFragment : Fragment() {
             startActivity(Intent(intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)))
         }*/
 
-        if (finalDate.compareTo(currentDate) > 0) {     // alertDialog.show()}
+        /*if (finalDate.compareTo(currentDate) > 0) {     // alertDialog.show()}
             binding.imageRl.visibility = View.GONE
             binding.mainRl.visibility = View.VISIBLE
-        } else if (finalDate.compareTo(currentDate) < 0) {   /*alertDialog.dismiss()*/
+        } else if (finalDate.compareTo(currentDate) < 0) {   *//*alertDialog.dismiss()*//*
             binding.imageRl.visibility = View.VISIBLE
             binding.mainRl.visibility = View.GONE
         } else if (finalDate.compareTo(currentDate) == 0)
-        /*{    alertDialog.dismiss()*/ {
+        *//*{    alertDialog.dismiss()*//* {
             binding.imageRl.visibility = View.VISIBLE
             binding.mainRl.visibility = View.GONE
-        }
+        }*/
 
         var sliderDataArrayList: ArrayList<SliderData> = ArrayList()
 
