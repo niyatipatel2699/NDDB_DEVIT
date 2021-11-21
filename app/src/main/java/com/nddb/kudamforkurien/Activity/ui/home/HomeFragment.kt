@@ -1351,8 +1351,8 @@ class HomeFragment : Fragment() {
                     binding?.textViewStopWatch?.text = time
                 }
             }
-            else*/ if (intent.hasExtra(MotionService.KEY_STEPS)) {
-                val steps = intent.getIntExtra(MotionService.KEY_STEPS,0)
+            else*/ if (intent.hasExtra(MotionServiceNew.KEY_STEPS)) {
+                val steps = intent.getIntExtra(MotionServiceNew.KEY_STEPS,0)
                 Helper.runOnUiThread {
                     binding?.tvTotalSteps?.text = steps.toString()
 //                    binding.circularProgressBar.setProgressWithAnimation(steps!!.toFloat(), 1000); // =1s
