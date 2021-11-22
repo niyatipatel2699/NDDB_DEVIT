@@ -28,7 +28,7 @@ interface LoginApiService {
     @POST("api/v1/users/login-with-mobile-no")
     suspend fun loginWithOTP(
         @Field("phone_number") mobileNumber: String,
-        @Field("lang_id") lang_id: Int?,
+        @Field("lang_id") lang_id : Int=MySharedPreferences.getMySharedPreferences()!!.lang_id + 1,
         @Field("device_id") device_id: String=MySharedPreferences.getMySharedPreferences()!!.firebaseToken
     ): ApiResponse<OtpResponse>
 
@@ -69,7 +69,7 @@ interface LoginApiService {
         @Field("gender") gender : String,
         @Field("phone_number") phone_number : String,
         @Field("is_Registered") is_registered : Int,
-        @Field("lang_id") lang_id : Int=MySharedPreferences.getMySharedPreferences()!!.lang_id
+        @Field("lang_id") lang_id : Int=MySharedPreferences.getMySharedPreferences()!!.lang_id + 1
     ) : ApiResponse<RegistrationResponse>
 
 

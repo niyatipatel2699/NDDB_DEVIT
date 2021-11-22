@@ -125,7 +125,7 @@ class ChangeLanguageFragment : BaseFragment() {
             else
             {
                 //var lang_id = languageList?.get(lanAdapter.row_index + 1)
-                changelanguageViewModel.updateLanguage(lanAdapter.row_index)
+                changelanguageViewModel.updateLanguage(lanAdapter.row_index + 1)
                 initObservations()
 
             }
