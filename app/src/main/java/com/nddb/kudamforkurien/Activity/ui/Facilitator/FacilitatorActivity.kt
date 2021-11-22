@@ -19,6 +19,7 @@ import android.R.attr.maxLength
 
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
+import android.widget.Toast
 
 
 @AndroidEntryPoint
@@ -98,7 +99,8 @@ class FacilitatorActivity : BaseActivity() {
 
             val status = facilitatorResponse.status
             if(status == 1){
-                facilitatorBinding.facilitatorRl.showSnack(facilitatorResponse.message!!)
+//                facilitatorBinding.facilitatorRl.showSnack(facilitatorResponse.message!!)
+                  Toast.makeText(this, facilitatorResponse.message , Toast.LENGTH_SHORT).show()
                 val i = Intent(this, DrawerActivity::class.java)
                 i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(i)

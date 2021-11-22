@@ -92,8 +92,6 @@ class ChooseLanguageActivity : BaseActivity() {
             }
             else
             {
-                var selected_lang_id = list?.get(lanAdapter.row_index + 1)
-                Log.e("langid-->",selected_lang_id.toString())
                 MySharedPreferences.getMySharedPreferences()!!.isLanguageSelected = true
                 MySharedPreferences.getMySharedPreferences()!!.lang_id = lanAdapter.row_index
                 Log.e("lang_id-->", lanAdapter.row_index.toString())

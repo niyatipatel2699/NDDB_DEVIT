@@ -85,6 +85,17 @@ class RegistrationActivity : BaseActivity() {
         regBinding.btnSubmit.setOnClickListener {
 
             if (registrationValidation()) {
+//                var rg1=regBinding.group.checkedChipId
+//                var rg2=regBinding.group1.checkedChipId
+//                if(rg1 == R.id.option_1){
+//                    gender = "Male"
+//                }else if(rg1 == R.id.option_3){
+//                    gender = "Transgender"
+//                }else if(rg2 == R.id.option_2){
+//                    gender = "Female"
+//                }else if(rg2 == R.id.option_4){
+//                    gender = "Don't Disclose"
+//                }
                 registrationViewModel.registerUser(
                     first_name?.capitalized() ?: "",
                     last_name?.capitalized() ?: "",
@@ -102,7 +113,12 @@ class RegistrationActivity : BaseActivity() {
             if (chipGroup.findViewById<Chip>(i) != null) {
                 val chip: Chip = chipGroup.findViewById(i)
                 regBinding.group1.clearCheck()
-                gender = chip.text as String?
+                if(chip.id == R.id.option_1){
+                    gender = "Male"
+                }else if(chip.id == R.id.option_3){
+                    gender = "Transgender"
+                }
+//                gender = chip.text as String?
                 /*  Toast.makeText(
                       applicationContext,
                       "Chip is " + chip.text,
@@ -116,7 +132,12 @@ class RegistrationActivity : BaseActivity() {
             if (chipGroup.findViewById<Chip>(i) != null) {
                 val chip: Chip = chipGroup.findViewById(i)
                 regBinding.group.clearCheck()
-                gender = chip.text as String?
+//                gender = chip.text as String?
+                if(chip.id == R.id.option_2){
+                    gender = "Female"
+                }else if(chip.id == R.id.option_4){
+                    gender = "Don't Disclose"
+                }
                 /* Toast.makeText(
                      applicationContext,
                      "Chip is " + chip.text,
