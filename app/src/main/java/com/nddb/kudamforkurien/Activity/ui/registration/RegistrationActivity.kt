@@ -304,8 +304,8 @@ class RegistrationActivity : BaseActivity() {
             registrationResponse.items!!.user!!.last_name.toString()
         MySharedPreferences.getMySharedPreferences()!!.phone_number =
             registrationResponse.items!!.user!!.phone_number.toString()
-        MySharedPreferences.getMySharedPreferences()!!.user_type = user_type_name.toString()
-        MySharedPreferences.getMySharedPreferences()!!.gender = gender.toString()
+        MySharedPreferences.getMySharedPreferences()!!.user_type =  registrationResponse.items!!.user!!.user_type.toString()
+        MySharedPreferences.getMySharedPreferences()!!.gender = registrationResponse.items!!.user!!.gender.toString()
         MySharedPreferences.getMySharedPreferences()!!.state =
             registrationResponse.items!!.user!!.state.toString()
         MySharedPreferences.getMySharedPreferences()!!.district =
