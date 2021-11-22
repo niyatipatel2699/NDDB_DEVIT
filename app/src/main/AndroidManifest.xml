@@ -93,9 +93,11 @@
             android:name="com.nddb.kudamforkurien.backgroundservice.MotionService"
             android:enabled="true"/>
 
+        <!-- Start For Accelerometer -->
         <service
             android:name="com.nddb.kudamforkurien.backgroundservice.MotionServiceNew"
             android:enabled="true"/>
+        <!-- End For Accelerometer -->
 
         <service
             android:name="com.nddb.kudamforkurien.backgroundservice.FirebaseMessagingService"

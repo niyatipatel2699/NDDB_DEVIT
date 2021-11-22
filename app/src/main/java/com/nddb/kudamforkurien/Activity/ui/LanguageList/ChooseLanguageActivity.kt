@@ -49,7 +49,7 @@ class ChooseLanguageActivity : BaseActivity() {
         "ಕನ್ನಡ  ", //kannad
         "മലയാളം ", // malayalam
         "অসমীয়া ", //assamee
-        "ରନ୍ " //odiya
+        "ଓଡିଆ" //odiya
     )
 
    // var languageList: ArrayList<LanguageData>? = null

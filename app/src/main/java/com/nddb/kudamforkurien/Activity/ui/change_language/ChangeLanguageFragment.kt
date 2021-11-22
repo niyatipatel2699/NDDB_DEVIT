@@ -42,7 +42,7 @@ class ChangeLanguageFragment : BaseFragment() {
         "ಕನ್ನಡ  ", //kannad
         "മലയാളം ", // malayalam
         "অসমীয়া ", //assamee
-        "ରନ୍ " //odiya
+        "ଓଡିଆ" //odiya
     )
 
     private lateinit var changelanguageViewModel: ChangeLanguageViewModel

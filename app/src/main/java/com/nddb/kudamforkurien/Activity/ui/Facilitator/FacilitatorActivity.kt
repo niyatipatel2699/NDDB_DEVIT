@@ -1,5 +1,6 @@
 package com.nddb.kudamforkurien.Activity.ui.Facilitator
 
+import android.R.attr
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -14,6 +15,11 @@ import com.nddb.kudamforkurien.utils.gone
 import com.nddb.kudamforkurien.utils.showSnack
 import com.nddb.kudamforkurien.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+import android.R.attr.maxLength
+
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
+
 
 @AndroidEntryPoint
 class FacilitatorActivity : BaseActivity() {
@@ -39,10 +45,17 @@ class FacilitatorActivity : BaseActivity() {
         facilitatorBinding.regBtn.setOnClickListener {
 
             if(facilitatorValidation()){
-                viewModel.addFacilitator(no_of_people.toString(),MySharedPreferences.getMySharedPreferences()!!.district)
+                if(no_of_people?.toInt()!! > 0){
+                    viewModel.addFacilitator(no_of_people.toString(),MySharedPreferences.getMySharedPreferences()!!.district)
+                }else {
+                    facilitatorBinding.facilitatorRl.showSnack(getString(R.string.please_enter_valid_count))
+                }
             }
         }
 
+
+        val maxLengthofEditText = 3
+        facilitatorBinding.edtEnterPeople.setFilters(arrayOf<InputFilter>(LengthFilter(maxLengthofEditText)))
     }
 
     private fun facilitatorValidation(): Boolean {

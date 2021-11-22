@@ -188,7 +188,7 @@ class HomeFragment : Fragment() {
             val intent = Intent(getActivity(), FacilitatorActivity::class.java)
             getActivity()?.startActivity(intent)
         }
-
+          /* Start For Accelerometer  */
         LocalBroadcastManager.getInstance(requireContext()).registerReceiver(mMessageReceiver,
             IntentFilter("Motion-Service-Home")
         )
@@ -197,15 +197,19 @@ class HomeFragment : Fragment() {
         binding.tvTotalSteps.setText(mTodaysSteps.toString())
         binding.circularProgressBar.setProgressWithAnimation(mTodaysSteps!!.toFloat(), 1000)
 
-//        if(!isServiceRunning())
-//        {
-//            val intent = Intent(activity, MotionServiceNew::class.java)
-//            activity?.startService(intent)
-//        }
-//        sendFitDataToServer()
+        if(!isServiceRunning())
+        {
+            val intent = Intent(activity, MotionServiceNew::class.java)
+            activity?.startService(intent)
+        }
+        sendFitDataToServer()
+        /* End For Accelerometer */
 
-//        getRank()
         initObservation()
+
+        val intent = Intent(getActivity(), FacilitatorActivity::class.java)
+        getActivity()?.startActivity(intent)
+
         return root
     }
 
@@ -271,14 +275,10 @@ class HomeFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*if (!checkPlayServices()) return
-        requestFitPermission()*/
-        if(!isServiceRunning())
-        {
-            val intent = Intent(activity, MotionServiceNew::class.java)
-            activity?.startService(intent)
-        }
-        sendFitDataToServer()
+        /* Stary for google fit */
+//        if (!checkPlayServices()) return
+//        requestFitPermission()
+        /* End for google fit */
     }
 
     fun initObservation() {
@@ -1353,24 +1353,19 @@ class HomeFragment : Fragment() {
         return false
     }
 
+    /* Start For Accelerometer  */
     private var mMessageReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if(!isVisible)
                 return
-          /*  if (intent.hasExtra(MotionService.KEY_TIMER)) {
-                val time = intent.getStringExtra(MotionService.KEY_TIMER)
-                Helper.runOnUiThread {
-                    binding?.textViewStopWatch?.text = time
-                }
-            }
-            else*/ if (intent.hasExtra(MotionServiceNew.KEY_STEPS)) {
+            if (intent.hasExtra(MotionServiceNew.KEY_STEPS)) {
                 val steps = intent.getIntExtra(MotionServiceNew.KEY_STEPS,0)
                 Helper.runOnUiThread {
                     binding?.tvTotalSteps?.text = steps.toString()
-//                    binding.circularProgressBar.setProgressWithAnimation(steps!!.toFloat(), 1000); // =1s
                 }
                 binding.circularProgressBar.setProgressWithAnimation(steps!!.toFloat(), 1000)
             }
         }
     }
+    /* Start For Accelerometer  */
 }
