@@ -26,6 +26,7 @@ import com.nddb.kudamforkurien.Activity.ui.login.LoginActivity
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.backgroundservice.MotionService
+import com.nddb.kudamforkurien.backgroundservice.MotionServiceNew
 import com.nddb.kudamforkurien.data.room.DatabaseBuilder
 import com.nddb.kudamforkurien.data.room.DatabaseHelper
 import com.nddb.kudamforkurien.data.room.DatabaseHelperImpl
@@ -150,9 +151,15 @@ class DrawerActivity : BaseActivity() {
                 }
                 if(isServiceRunning())
                 {
+                    val new_intent = Intent(this, MotionServiceNew::class.java)
+                    new_intent.putExtra("stopped", true)
+
                     val intent = Intent(this, MotionService::class.java)
                     intent.putExtra("stopped", true)
                     ContextCompat.startForegroundService(this, intent)
+                    ContextCompat.startForegroundService(this, new_intent)
+
+
                 }
 
 
@@ -204,6 +211,8 @@ class DrawerActivity : BaseActivity() {
         val manager = activity?.getSystemService(ACTIVITY_SERVICE) as ActivityManager?
         for (service in manager!!.getRunningServices(Int.MAX_VALUE)) {
             if ("com.nddb.kudamforkurien.backgroundservice.MotionService" == service.service.className) {
+                return true
+            }else if("com.nddb.kudamforkurien.backgroundservice.MotionServiceNew" == service.service.className){
                 return true
             }
         }
