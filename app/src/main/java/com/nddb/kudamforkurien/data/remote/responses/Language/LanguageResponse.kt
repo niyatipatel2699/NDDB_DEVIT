@@ -9,5 +9,4 @@ data class LanguageResponse (
     var statusCode: Int? = null,
     var message: String? = null,
     var eventStatus: String? = null
-
 )

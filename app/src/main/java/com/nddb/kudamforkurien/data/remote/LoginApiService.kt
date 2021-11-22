@@ -77,7 +77,6 @@ interface LoginApiService {
     @POST("api/v1/userLanguage")
     suspend fun updateLanguage(
         @Field("lang_id") lang_id:Int) : ApiResponse<LanguageResponse>*/
-
     @FormUrlEncoded
     @POST("api/v1/users/userLanguage")
     suspend fun updateLanguage(
