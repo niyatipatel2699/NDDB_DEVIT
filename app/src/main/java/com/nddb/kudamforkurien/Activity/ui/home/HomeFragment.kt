@@ -207,9 +207,6 @@ class HomeFragment : Fragment() {
 
         initObservation()
 
-        val intent = Intent(getActivity(), FacilitatorActivity::class.java)
-        getActivity()?.startActivity(intent)
-
         return root
     }
 
