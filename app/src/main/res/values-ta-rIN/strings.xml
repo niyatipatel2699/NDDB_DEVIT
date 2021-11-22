@@ -134,6 +134,7 @@
     <string name="are_you_sure_want_stop_event">நீங்கள் நிச்சயமாக நிகழ்வை நிறுத்த விரும்புகிறீர்களா?</string>
     <string name="download_certificate">2021 நவம்பர் 26 முதல் 30 வரை சான்றிதழை பதிவிறக்கம் செய்யலாம்.</string>
     <string name="thank_you_for_using_app">கதம் ஃபார் குரியன் நிகழ்ச்சி வெற்றிகரமாக முடிக்கப்பட்டுள்ளது. இப்போது நீங்கள் பாதுகாப்பாக இந்த பயன்பாட்டை நீக்க முடியும்.</string>
+    <string name="please_enter_valid_count">செல்லத்தக்க எண்ணிக்கையை உள்ளிடவும்</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

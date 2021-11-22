@@ -135,6 +135,7 @@
     <string name="are_you_sure_want_stop_event">ಈವೆಂಟ್ ಅನ್ನು ನಿಲ್ಲಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?</string>
     <string name="download_certificate">ನೀವು 26 ನೇ ನವೆಂಬರ್ ನಿಂದ 30 ನವೆಂಬರ್ 2021 ರ ನಡುವೆ ಪ್ರಮಾಣಪತ್ರವನ್ನು ಡೌನ್ ಲೋಡ್ ಮಾಡಬಹುದು.</string>
     <string name="thank_you_for_using_app">ಕದಮ್ ಫಾರ್ ಕುರಿಯನ್ ಈವೆಂಟ್ ಯಶಸ್ವಿಯಾಗಿ ಪೂರ್ಣಗೊಂಡಿದೆ. ಈಗ ನೀವು ಸುರಕ್ಷಿತವಾಗಿ ಈ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಅಸ್ಥಾಪಿಸಬಹುದು.</string>
+    <string name="please_enter_valid_count">ದಯವಿಟ್ಟು ಮಾನ್ಯ ಎಣಿಕೆಯನ್ನು ನಮೂದಿಸಿ</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

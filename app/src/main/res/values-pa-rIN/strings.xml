@@ -134,6 +134,7 @@
     <string name="are_you_sure_want_stop_event">ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਸਮਾਗਮ ਨੂੰ ਰੋਕਣਾ ਚਾਹੁੰਦੇ ਹੋ?</string>
     <string name="download_certificate">ਤੁਸੀਂ 26 ਨਵੰਬਰ ਤੋਂ 30 ਨਵੰਬਰ 2021 ਦੇ ਵਿਚਕਾਰ ਸਰਟੀਫਿਕੇਟ ਡਾਊਨਲੋਡ ਕਰ ਸਕਦੇ ਹੋ।</string>
     <string name="thank_you_for_using_app">ਕੁਰੀਅਨ ਈਵੈਂਟ ਲਈ ਕਦਮ ਸਫਲਤਾਪੂਰਵਕ ਪੂਰਾ ਹੋ ਜਾਂਦਾ ਹੈ। ਹੁਣ ਤੁਸੀਂ ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ ਅਨਇੰਸਟਾਲ ਕਰ ਸਕਦੇ ਹੋ।</string>
+    <string name="please_enter_valid_count">ਕਿਰਪਾ ਕਰਕੇ ਵੈਧ ਗਿਣਤੀ ਦਾਖਲ ਕਰੋ</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

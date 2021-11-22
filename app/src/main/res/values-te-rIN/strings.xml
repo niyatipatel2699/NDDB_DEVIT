@@ -136,6 +136,7 @@
     <string name="are_you_sure_want_stop_event">ఈవెంట్ ని మీరు ఖచ్చితంగా ఆపాలని అనుకుంటున్నారా?</string>
     <string name="download_certificate">మీరు 26 నవంబర్ నుంచి 30 నవంబర్ 2021 మధ్య సర్టిఫికేట్ ని డౌన్ లోడ్ చేసుకోవచ్చు.</string>
     <string name="thank_you_for_using_app">కురియన్ ఈవెంట్ కొరకు కదమ్ విజయవంతంగా పూర్తయింది. ఇప్పుడు మీరు ఈ అప్లికేషన్ ని సురక్షితంగా అన్ ఇన్ స్టాల్ చేయవచ్చు.</string>
+    <string name="please_enter_valid_count">దయచేసి చెల్లుబాటు అయ్యే కౌంట్ నమోదు చేయండి</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

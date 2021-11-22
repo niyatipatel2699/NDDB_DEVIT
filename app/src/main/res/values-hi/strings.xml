@@ -134,6 +134,7 @@
     <string name="are_you_sure_want_stop_event">क्या आप सुनिश्चित हैं कि आप घटना को रोकना चाहते हैं?</string>
     <string name="download_certificate">आप 26 नवंबर से 30 नवंबर 2021 के बीच प्रमाण पत्र डाउनलोड कर सकते हैं।</string>
     <string name="thank_you_for_using_app">कुरियन स्पर्धा के लिए कदम सफलतापूर्वक पूरा हो गया है । अब आप इस एप्लिकेशन को सुरक्षित रूप से अनइंस्टॉल कर सकते हैं।</string>
+    <string name="please_enter_valid_count">कृपया वैध गणना दर्ज करें</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

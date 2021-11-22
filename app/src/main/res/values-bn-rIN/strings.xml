@@ -134,6 +134,7 @@
     <string name="are_you_sure_want_stop_event">আপনি কি নিশ্চিত যে আপনি অনুষ্ঠানটি বন্ধ করতে চান?</string>
     <string name="download_certificate">আপনি ২৬ নভেম্বর থেকে ৩০ নভেম্বর ২০২১ এর মধ্যে শংসাপত্র ডাউনলোড করতে পারেন।</string>
     <string name="thank_you_for_using_app">কদম ফর কুরিয়েন ইভেন্ট সফলভাবে সম্পন্ন হয়েছে। এখন আপনি নিরাপদে এই অ্যাপ্লিকেশনটি আনইনস্টল করতে পারেন।</string>
+    <string name="please_enter_valid_count">অনুগ্রহ করে বৈধ গণনা লিখুন</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

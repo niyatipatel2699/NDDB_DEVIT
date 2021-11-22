@@ -134,6 +134,7 @@
     <string name="are_you_sure_want_stop_event">શું તમને ખાતરી છે કે તમે ઇવેન્ટ બંધ કરવા માંગો છો?</string>
     <string name="download_certificate">તમે ૨૬ નવેમ્બરથી ૩૦ નવેમ્બર ૨૦૨૧ ની વચ્ચે પ્રમાણપત્ર ડાઉનલોડ કરી શકો છો.</string>
     <string name="thank_you_for_using_app">કદમ કુરિયન ઇવેન્ટ માટે સફળતાપૂર્વક પૂર્ણ થાય છે. હવે તમે આ એપ્લિકેશનને સુરક્ષિત રીતે અનઇન્સ્ટોલ કરી શકો છો.</string>
+    <string name="please_enter_valid_count">કૃપા કરીને માન્ય ગણતરી દાખલ કરો</string>
 
     <string-array name="user_type_array">
         <item>Milk Union</item>

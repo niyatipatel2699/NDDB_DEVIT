@@ -134,6 +134,7 @@
     <string name="are_you_sure_want_stop_event">നിങ്ങൾ ഇവന്റ് നിർത്താൻ ആഗ്രഹിക്കുന്നു ഉറപ്പാണോ?</string>
     <string name="download_certificate">2021 നവംബർ 26 മുതൽ 30 വരെ നിങ്ങൾക്ക് സർട്ടിഫിക്കറ്റ് ഡൗൺലോഡ് ചെയ്യാം.</string>
     <string name="thank_you_for_using_app">കദം ഫോർ കുര്യൻ ഇവന്റ് വിജയകരമായി പൂർത്തിയായി. ഇപ്പോൾ നിങ്ങൾക്ക് സുരക്ഷിതമായി ഈ ആപ്ലിക്കേഷൻ അൺഇൻസ്റ്റാൾ ചെയ്യാം.</string>
+    <string name="please_enter_valid_count">സാധുതയുള്ള കൗണ്ട് നൽകുക</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

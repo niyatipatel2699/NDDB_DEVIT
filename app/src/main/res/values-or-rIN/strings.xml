@@ -134,6 +134,7 @@
     <string name="are_you_sure_want_stop_event">ଆପଣ ନିଶ୍ଚିତ କି ଆପଣ ଇଭେଣ୍ଟ ବନ୍ଦ କରିବାକୁ ଚାହୁଁଛନ୍ତି?</string>
     <string name="download_certificate">ଆପଣ 26 ନଭେମ୍ବରରୁ 30 ନଭେମ୍ବର 2021 ମଧ୍ୟରେ ସାର୍ଟିଫିକେଟ୍ ଡାଉନଲୋଡ୍ କରିପାରିବେ ।</string>
     <string name="thank_you_for_using_app">କୁରିଏନ୍ ଇଭେଣ୍ଟ ପାଇଁ କଦମ୍ ସଫଳତାର ସହ ସମାପ୍ତ ହୋଇଛି | ବର୍ତ୍ତମାନ ଆପଣ ସୁରକ୍ଷିତ ଭାବରେ ଏହି ଆପ୍ଲିକେସନ୍ ଅଣସଂସ୍ଥାପନ କରିପାରିବେ।</string>
+    <string name="please_enter_valid_count">ଦୟାକରି ବୈଧ ଗଣନା ପ୍ରବେଶ କରନ୍ତୁ</string>
     <string-array name="user_type_array">
         <item>Milk Union</item>
         <item>Individual</item>

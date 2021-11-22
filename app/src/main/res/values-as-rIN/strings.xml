@@ -133,6 +133,7 @@
     <string name="are_you_sure_want_stop_event">আপুনি অনুষ্ঠানটো বন্ধ কৰিব বিচাৰে বুলি নিশ্চিতনে?</string>
     <string name="download_certificate">আপুনি ২৬ নৱেম্বৰৰ পৰা ৩০ নৱেম্বৰ ২০২১ ৰ ভিতৰত প্ৰমাণপত্ৰ ডাউনলোড কৰিব পাৰে।</string>
     <string name="thank_you_for_using_app">কদম ফৰ কুৰিয়েন অনুষ্ঠান সফলতাৰে সম্পূৰ্ণ হৈছে। এতিয়া আপুনি এই এপ্লিকেচনটো সুৰক্ষিতভাৱে আনইনষ্টল কৰিব পাৰে।</string>
+    <string name="please_enter_valid_count">অনুগ্ৰহ কৰি বৈধ গণনা প্ৰবিষ্ট কৰক</string>
 
 
     <string-array name="user_type_array">
