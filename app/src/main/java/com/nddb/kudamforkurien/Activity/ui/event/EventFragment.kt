@@ -169,6 +169,7 @@ class EventFragment : Fragment() {
                     binding.tvStart.text = activity?.getString(R.string.stop)
                     binding.relStartService.setBackgroundResource(R.drawable.stop_ring)
                     binding?.tvTotalSteps?.text= "0"
+                    binding.circularProgressBar.setProgressWithAnimation(0f, 1000); // =1s
                     startAlarm()
                     MySharedPreferences.getMySharedPreferences()!!.keySteps=0
                     binding.textViewStopWatch.visibility = View.VISIBLE
@@ -181,6 +182,7 @@ class EventFragment : Fragment() {
                     //activity?.startService(intent)
                     ContextCompat.startForegroundService(requireContext(), intent)
                     binding?.tvTotalSteps?.text= "0"
+                    binding.circularProgressBar.setProgressWithAnimation(0f, 1000); // =1s
                     binding.relStartService.setBackgroundResource(R.drawable.start_ring)
                    // isServiceStart = false
                     binding.tvStart.text = activity?.getString(R.string.start)

@@ -4,11 +4,11 @@ object RestConstant {
     //https://fov9ery3oh.execute-api.ap-south-1.amazonaws.com/staging/api/v1/district/getDistrict/12
 
 
-    const val BASE_URLS = "https://cyuf04pc69.execute-api.ap-south-1.amazonaws.com/productions/"
-//   const val BASE_URLS = "https://fov9ery3oh.execute-api.ap-south-1.amazonaws.com/staging/"
+//    const val BASE_URLS = "https://cyuf04pc69.execute-api.ap-south-1.amazonaws.com/productions/"
+   const val BASE_URLS = "https://fov9ery3oh.execute-api.ap-south-1.amazonaws.com/staging/"
 
-//    const val CERTIFICATE_URL = "https://staging.kadamforkurien.com/certificate?id=" // STAGING
-    const val CERTIFICATE_URL = "https://kadamforkurien.com/certificate?id=" // LIVE
+    const val CERTIFICATE_URL = "https://staging.kadamforkurien.com/certificate?id=" // STAGING
+//    const val CERTIFICATE_URL = "https://kadamforkurien.com/certificate?id=" // LIVE
 
     const val IS_LOGIN = "isLogin"
     const val IS_REGISTERED = "is_Registered"

@@ -45,7 +45,7 @@ class ChooseLanguageActivity : BaseActivity() {
         "ਪੰਜਾਬੀ", //=> Punjabi
         "বাংলা ", // bengali
         "தமிழ் ", // tamil
-        "தெலுங்கு  ",//telugu
+        "తెలుగు  ",//telugu
         "ಕನ್ನಡ  ", //kannad
         "മലയാളം ", // malayalam
         "অসমীয়া ", //assamee
