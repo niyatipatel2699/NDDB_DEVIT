@@ -1,11 +1,13 @@
 package com.nddb.kudamforkurien.data.remote.responses.Language
 
+import com.nddb.kudamforkurien.data.remote.responses.BaseResponse
+
 data class LanguageResponse (
 
-    var items: List<LanguageData>? = null,
-    var totalCount : Int = 0,
-    var status : Int = 0,
-    var status_code : Int = 0,
-    var message: String? = null
+    var items: BaseResponse.Items? = null,
+    var status: Int? = null,
+    var statusCode: Int? = null,
+    var message: String? = null,
+    var eventStatus: String? = null
 
 )
