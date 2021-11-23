@@ -344,7 +344,7 @@ internal class MotionServiceNew : Service(), SensorEventListener {
         internal const val KEY_DATE = "DATE"
         private const val FOREGROUND_ID = 3843
         internal const val KEY_TIMER = "TIMER"
-        const val CHANNEL_ID = "com.tiefensuche.motionmate.CHANNEL_ID"
+        const val CHANNEL_ID = "com.nddb.kudamforkurien.CHANNEL_ID"
     }
 
     override fun onSensorChanged(p0: SensorEvent?) {
