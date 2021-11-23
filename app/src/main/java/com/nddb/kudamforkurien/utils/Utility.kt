@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.nddb.kudamforkurien.Activity.DrawerActivity
+import com.nddb.kudamforkurien.Activity.SplashActivity
 import com.nddb.kudamforkurien.R
 import com.nddb.kudamforkurien.backgroundservice.MotionService
 
@@ -19,7 +20,7 @@ object Utility {
     fun NotificationManager.sendNotification(messageBody: String, applicationContext: Context) {
 
 
-        val contentIntent = Intent(applicationContext, DrawerActivity::class.java)
+        val contentIntent = Intent(applicationContext, SplashActivity::class.java)
 
         val contentPendingIntent = PendingIntent.getActivity(
             applicationContext,
