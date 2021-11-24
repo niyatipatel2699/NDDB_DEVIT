@@ -6,7 +6,9 @@ import androidx.core.content.ContextCompat
 import com.nddb.kudamforkurien.MySharedPreferences
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.nddb.kudamforkurien.utils.AlarmUtils
 import com.nddb.kudamforkurien.utils.Utility.sendNotification
+import java.util.*
 
 class FirebaseMessagingService : FirebaseMessagingService() {
 
@@ -31,6 +33,9 @@ class FirebaseMessagingService : FirebaseMessagingService() {
             Log.d(TAG, "Message Notification Body: ${it.body}")
             sendNotification(it.body!!)
         }
+        val calendar = Calendar.getInstance()
+        val alarmUtils = AlarmUtils(applicationContext)
+        alarmUtils.initRepeatingAlarm(calendar)
 
     }
 

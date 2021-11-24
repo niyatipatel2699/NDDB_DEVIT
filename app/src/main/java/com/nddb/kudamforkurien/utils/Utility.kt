@@ -34,7 +34,7 @@ object Utility {
             applicationContext,
             MotionService.CHANNEL_ID
         )
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.app_icon)
             .setContentTitle(applicationContext.getString(R.string.app_name))
             .setContentText(messageBody)
             .setContentIntent(contentPendingIntent)

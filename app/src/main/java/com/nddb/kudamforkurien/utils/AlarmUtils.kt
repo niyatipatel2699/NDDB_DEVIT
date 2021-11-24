@@ -20,6 +20,9 @@ class AlarmUtils(context: Context) {
         alarmIntent = Intent(mContext, AlarmReceiver::class.java).let { mIntent ->
             // if you want more than one notification use different requestCode
             // every notification need different requestCode
+            if(mContext.javaClass.simpleName.equals("NDDBApp"))
+            mIntent.putExtra("notify","sendData")
+
             PendingIntent.getBroadcast(mContext, 100, mIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         }
     }

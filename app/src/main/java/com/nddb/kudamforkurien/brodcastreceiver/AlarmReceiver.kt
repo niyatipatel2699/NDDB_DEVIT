@@ -29,21 +29,19 @@ class AlarmReceiver: BroadcastReceiver(){
     @set:Inject
     lateinit var apiService: LoginApiService
 
-    private lateinit var dbHelper: DatabaseHelper
     var context:Context?=null
      override fun onReceive(context: Context, intent: Intent) {
       this.context=context
 
-        dbHelper = DatabaseHelperImpl(DatabaseBuilder.getInstance(context))
-        sendFitDataToServer()
-        var nextTime= Calendar.getInstance()
-        nextTime.add(Calendar.MINUTE, 10);
-        val alarmUtils = AlarmUtils(context)
-        alarmUtils.initRepeatingAlarm(nextTime)
+        sendFitDataToServer(context,intent)
+
     }
 
-    fun sendFitDataToServer() {
+    fun sendFitDataToServer(context: Context, intent: Intent) {
         var steps=MySharedPreferences.getMySharedPreferences()!!.keySteps
+        if (intent.hasExtra("notify")) {
+            steps=MySharedPreferences.getMySharedPreferences()!!.keyStepsHome
+        }
         //var sdf = SimpleDateFormat("dd MMM yyyy")
         var sdf = SimpleDateFormat("dd MMM yyyy" , Locale.US)
         var currentDate = sdf.format(Date())
@@ -58,5 +56,12 @@ class AlarmReceiver: BroadcastReceiver(){
             apiService.stepCount(jsonObject)
         }
 
+        if (!intent.hasExtra("notify"))
+        {
+            var nextTime= Calendar.getInstance()
+            nextTime.add(Calendar.MINUTE, 10);
+            val alarmUtils = AlarmUtils(context)
+            alarmUtils.initRepeatingAlarm(nextTime)
+        }
     }
 }
