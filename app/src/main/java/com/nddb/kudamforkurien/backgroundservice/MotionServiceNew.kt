@@ -183,7 +183,8 @@ internal class MotionServiceNew : Service(), SensorEventListener {
                 MySharedPreferences.getMySharedPreferences()!!.keyStepsHome = mTodaysSteps
                 dbHelper.updateSteps(step.id, mTodaysSteps, address, lat, lng, false)
             } else {
-              //  mTodaysSteps = 0
+                mTodaysSteps = 0
+                MySharedPreferences.getMySharedPreferences()!!.keyStepsHome = mTodaysSteps
                 mCurrentDate = com.nddb.kudamforkurien.utils.Util.calendar.timeInMillis
                 //sharedPreferences.edit().putLong(KEY_DATE, mCurrentDate).apply()
                 MySharedPreferences.getMySharedPreferences()!!.keyDate = mCurrentDate
